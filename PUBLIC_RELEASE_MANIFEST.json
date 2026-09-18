@@ -9,8 +9,8 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-09-18T20:34:35.886Z",
-    "file_count": 106,
+    "generated_utc": "2026-09-18T20:47:49.822Z",
+    "file_count": 105,
     "files": [
         {
             "path": ".github/workflows/ci.yml",
@@ -51,11 +51,6 @@
             "path": "harness/analysis/analyze_v061_isolation.py",
             "size_bytes": 9540,
             "sha256": "4661B67995231CA81E7C0A15C8117C7F3006067D4DB9EA59D66C41A22DEAD937"
-        },
-        {
-            "path": "harness/analysis/inspect_v053_probe.py",
-            "size_bytes": 2204,
-            "sha256": "403BF33B547D955BE6DA1DD3AE7FFD61C73C24F1526A3E3364A42BE68FF2932C"
         },
         {
             "path": "harness/analysis/t003_forensic_analyzer.py",
@@ -414,8 +409,8 @@
         },
         {
             "path": "pyproject.toml",
-            "size_bytes": 369,
-            "sha256": "86710CAE9CD114532DAD236CA75A47EABA5EEFCE4314DAAC04C65AC2143D96D5"
+            "size_bytes": 357,
+            "sha256": "FCBE21E6E1D098078A0F2F0BF71B92180C32EAB239B38896C691580E29ABC9D8"
         },
         {
             "path": "README.md",
