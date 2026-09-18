@@ -99,6 +99,40 @@ def _public_result(
     }
 
 
+
+def _prepare_minimal(task: dict[str, Any]) -> dict[str, Any]:
+    compiled_candidates: list[dict[str, Any]] = []
+
+    for arm_id in ARM_ORDER:
+        if arm_id not in V06_ARM_SEQUENCES:
+            raise ValueError(
+                "agent facade references unknown arm: " + arm_id
+            )
+
+        compiled_candidates.append(
+            compile_for_agent(task, arm_id)
+        )
+
+    selected = min(
+        enumerate(compiled_candidates),
+        key=lambda item: (
+            item[1]["context_chars"],
+            item[0],
+        ),
+    )[1]
+
+    candidates = [
+        _candidate_summary(compiled)
+        for compiled in compiled_candidates
+    ]
+
+    return _public_result(
+        selected,
+        policy=POLICY_MINIMAL_SERIALIZED_CONTEXT,
+        candidates=candidates,
+    )
+
+
 def _prepare_task(
     task: dict[str, Any],
     *,
