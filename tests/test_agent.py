@@ -1,6 +1,11 @@
 import unittest
 
-from harness.agent import prepare, prepare_context
+from harness.agent import (
+    POLICY_BUDGET_CONSTRAINED,
+    inspect,
+    prepare,
+    prepare_context,
+)
 
 
 class AgentFacadeTests(unittest.TestCase):
@@ -123,6 +128,149 @@ class AgentFacadeTests(unittest.TestCase):
     def test_prepare_context_rejects_non_string_requirements(self):
         with self.assertRaises(TypeError):
             prepare_context({"a": 1}, ["a", 2])
+
+    def test_nested_context_selection_preserves_only_required_paths(self):
+        result = prepare_context(
+            {
+                "user": {
+                    "id": "U-7",
+                    "name": "Ada",
+                    "metadata": {
+                        "noise": True,
+                    },
+                },
+                "task": {
+                    "action": "review",
+                    "commentary": "noise",
+                },
+            },
+            ["user.id", "task.action"],
+        )
+
+        self.assertEqual(
+            result["context"],
+            {
+                "user": {"id": "U-7"},
+                "task": {"action": "review"},
+            },
+        )
+        self.assertEqual(
+            result["required_paths"],
+            ["user.id", "task.action"],
+        )
+        self.assertTrue(result["required_values_preserved"])
+        self.assertTrue(result["validation"]["passed"])
+        self.assertIn("user.metadata.noise", result["excluded_paths"])
+
+    def test_schema_validation_is_part_of_the_contract(self):
+        result = prepare_context(
+            {
+                "user": {
+                    "id": "U-7",
+                },
+                "score": 0.87,
+            },
+            ["user.id"],
+            schema={
+                "user.id": str,
+                "score": float,
+            },
+        )
+
+        self.assertTrue(result["schema_validation"]["passed"])
+        self.assertEqual(
+            result["required_paths"],
+            ["user.id", "score"],
+        )
+
+        with self.assertRaises(ValueError):
+            prepare_context(
+                {
+                    "score": "not-a-number",
+                },
+                ["score"],
+                schema={"score": float},
+            )
+
+    def test_budget_policy_selects_feasible_candidate(self):
+        result = prepare_context(
+            {
+                "entity": "A-17",
+                "score": 0.87,
+                "status": "stable",
+                "trace": "noise",
+                "commentary": "noise",
+            },
+            ["entity", "score", "status"],
+            policy=POLICY_BUDGET_CONSTRAINED,
+            budget_tokens=12,
+        )
+
+        self.assertEqual(
+            result["policy"],
+            POLICY_BUDGET_CONSTRAINED,
+        )
+        self.assertTrue(result["budget_satisfied"])
+        self.assertLessEqual(
+            result["estimated_tokens"],
+            12,
+        )
+
+    def test_budget_can_turn_default_minimal_policy_into_constraint(self):
+        result = prepare_context(
+            {"a": 1, "noise": "xxxxxxxx"},
+            ["a"],
+            budget_tokens=2,
+        )
+
+        self.assertEqual(
+            result["policy"],
+            POLICY_BUDGET_CONSTRAINED,
+        )
+        self.assertTrue(result["budget_satisfied"])
+
+    def test_budget_failure_is_explicit(self):
+        with self.assertRaises(ValueError):
+            prepare_context(
+                {"a": "this is definitely larger than one token"},
+                ["a"],
+                policy=POLICY_BUDGET_CONSTRAINED,
+                budget_tokens=1,
+            )
+
+    def test_inspect_is_non_mutating_and_provider_agnostic(self):
+        context = {
+            "user": {
+                "id": "U-7",
+                "name": "Ada",
+            },
+            "noise": "x",
+        }
+        report = inspect(context, ["user.id"])
+
+        self.assertEqual(report["required_count"], 1)
+        self.assertEqual(report["required_present"], 1)
+        self.assertEqual(report["required_missing"], [])
+        self.assertGreater(report["estimated_tokens"], 0)
+        self.assertEqual(
+            context,
+            {
+                "user": {
+                    "id": "U-7",
+                    "name": "Ada",
+                },
+                "noise": "x",
+            },
+        )
+
+    def test_unknown_generic_policy_fails_even_when_budget_is_present(self):
+        with self.assertRaises(ValueError):
+            prepare_context(
+                {"a": 1},
+                ["a"],
+                policy="not-a-policy",
+                budget_tokens=10,
+            )
 
     def test_prepare_works_for_every_public_task(self):
         for task_id in ("T001", "T002", "T003", "T004"):
