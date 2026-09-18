@@ -48,74 +48,79 @@ Reuse validated machinery first. Change the smallest surface necessary. Keep exe
 
 Do not read the entire repository before deciding what you need.
 
-1. Read `README.md`.
-2. Use `harness.agent.prepare_context()` when you have real task data.
-3. Use `harness.agent.prepare()` only for the public fixture tasks.
-4. Inspect `harness/runner/transforms.py` when you need to understand or modify transformation semantics.
-5. Inspect preregistration, runners, reports, and providers only when the task actually concerns experiments or provider execution.
+1. Read `README.md` and this file.
+2. For real task data, use `harness.agent.prepare_context()` or the installed `promptforge` API.
+3. Use `harness.agent.prepare()` only for the public deterministic fixtures.
+4. Use `inspect()` when you need a non-mutating context-size and requirement report.
+5. Inspect `harness/runner/transforms.py` when transformation semantics matter.
+6. Read preregistration, runners, reports, and providers only when the request actually concerns experiments or provider execution.
 
-The core agent-context API is provider-agnostic. It does not require OpenAI, DeepSeek, Gemini, or any other API configuration.
+## Public agent contract
 
-## Agent-facing contract
-
-For arbitrary task context:
+For arbitrary provider-agnostic context:
 
 ```python
-from harness.agent import prepare_context
+from promptforge import prepare_context
 
 prepared = prepare_context(
     data={
-        "case_id": "C-001",
-        "customer": "Ana",
-        "priority": "high",
-        "deadline": "2026-09-20",
+        "case": {
+            "id": "C-001",
+            "priority": "high",
+        },
         "notes": "noise",
     },
-    required=["case_id", "customer", "priority", "deadline"],
+    required=["case.id", "case.priority"],
 )
 ```
 
-The returned object is the handoff artifact. Inspect:
+Important result fields:
 
-- `serialized_context`: the compact context to use.
-- `selected_arm`: the transformation selected.
-- `included` / `excluded`: what was retained or removed.
-- `required_values_preserved` and `validation`: semantic safety checks.
-- `context_chars_saved` / `context_reduction_ratio`: reduction against the `noop` baseline.
-- `candidates`: the alternatives considered.
+- `serialized_context`: compact downstream context.
+- `required_paths`: semantic requirements.
+- `included_paths` / `excluded_paths`: field-level accounting.
+- `required_values_preserved` / `validation`: preservation contract.
+- `estimated_tokens`: provider-independent planning estimate.
+- `context_chars_saved` / `estimated_tokens_saved`: reduction from `noop`.
+- `candidates`: alternatives considered.
+- `provenance`: required-field inclusion metadata.
 
-Do not treat the minimum-size policy as a model-quality guarantee. It is a deterministic selection rule over the currently exposed arms.
+`budget_tokens=` enables the deterministic `budget_constrained` policy. With the default `minimal` policy, supplying a budget automatically activates that constraint.
 
-## Repository navigation rule
+Schema validation is dependency-free and uses a mapping of field paths to Python types. Schema paths become required paths automatically.
 
-The repository contains both current agent-facing infrastructure and historical experimental infrastructure. Prefer the current facade first.
+Do not interpret `estimated_tokens` as an exact provider tokenizer measurement.
 
-Do not start by reading large retained JSON reports or provider adapters unless the request requires them. The reports and adapters exist for reproducibility and historical evidence, not because every agent task needs them.
+## Provider boundary
 
-## Direct agent usage
+The core agent API must remain independent of provider configuration. Do not add OpenAI, DeepSeek, Gemini, or other API requirements to `promptforge` core.
 
-Use the public agent-context bridge when an agent needs a compiled task context rather than raw task data.
+Provider adapters belong to the research/experimental surface. Credentials must come from environment variables or explicitly injected provider objects. Never commit API keys, tokens, `.env` files, or provider secrets.
 
-```python
-from harness.agent_context import compile_task_by_id
+## Research boundary
 
-compiled = compile_task_by_id("T003", "selection_only")
-```
+The repository contains current agent infrastructure and historical experimental infrastructure.
 
-The bridge loads the public task suite, applies a validated V0.6 transform arm, exposes included and excluded context, serializes the result, and validates that required values survive decoding.
+Preregistration is the experimental contract. Schedules, task snapshots, protected hashes, reports, and tests are part of the research definition.
 
-This is additive infrastructure. Do not alter the frozen V0.9.3 experimental machinery to implement agent-facing access.
+Historical results are evidence for tested conditions. Do not silently turn one task, provider, model, or representation result into a universal claim.
 
-## Preferred agent entry point
+## Release integrity
 
-For ordinary agent-facing context preparation, prefer the facade before using lower-level modules:
+After changing public files:
 
-```python
-from harness.agent import prepare
+1. Run the full test suite.
+2. Run the package installation smoke test.
+3. Refresh `PUBLIC_RELEASE_MANIFEST.json`.
 
-prepared = prepare("T003")
-```
+The manifest records SHA-256 values for every tracked public file except itself.
 
-The default policy is deterministic minimal_serialized_context: it compiles the public arms, validates required values, and selects the smallest serialized context. Use arm_id= only when an explicit representation is required.
+## Frozen V0.9.3 surface
 
-Treat the returned candidate audit as evidence of what PromptForge considered. Do not convert the minimal-size policy into a claim about model quality.
+The public release preserves the validated V0.9.3 transformation, executor, provider adapter, policy runner, task suite, schedule, variant snapshot, preregistration, and regression test.
+
+Agent-facing infrastructure is additive. Do not alter frozen V0.9.3 experimental machinery merely to expose a new public API.
+
+## Core rule
+
+Reuse validated machinery first. Change the smallest surface necessary. Keep executable infrastructure, the installable agent API, experimental design, empirical evidence, and interpretation clearly separated.
