@@ -1,64 +1,44 @@
-﻿# PromptForge — Agent Entry Point
+# PromptForge - Agent Entry Point
 
-PromptForge is agent-native infrastructure for prompting and context engineering.
+PromptForge is agent-native context engineering and experimental infrastructure.
 
-An AI agent should begin by inspecting this repository rather than expecting a human
-to operate a specialized CLI.
+An AI agent should inspect and reuse the existing repository machinery instead of expecting a human to operate a specialized CLI.
 
-## Repository map
+## First inspection
 
-- `README.md`
-  Project entry point.
+1. README.md
+2. harness/runner/transforms.py
+3. Relevant runner under harness/runner/
+4. Relevant task in tasks/suite.json
+5. Corresponding preregistration under harness/prereg/
+6. Corresponding tests under tests/
 
-- `harness/runner/`
-  Execution, transformations, experiment runners, schedules, and validated runner
-  implementations.
+## Context transformation
 
-- `harness/providers/`
-  Provider adapter layer.
+Start with harness/runner/transforms.py.
 
-- `harness/analysis/`
-  Analysis tooling used by the experiment harness.
+Use the task required fields as the semantic boundary. Do not invent requirements not encoded by the task.
 
-- `harness/prereg/`
-  Preregistration and experimental design documents.
+## Experiment discipline
 
-- `tasks/suite.json`
-  Task suite definition.
+Preregistration is the experimental contract. Schedules, task snapshots, protected hashes, and tests are part of the experiment definition.
 
-- `tests/`
-  Test suite for the harness and experiment components.
+Historical results are evidence for the tested conditions. Do not silently generalize one task, provider, model, or representation result into a universal claim.
 
-- `harness/reports/`
-  Selected experimental outputs retained as research evidence.
+## Frozen V0.9.3 surface
 
-## Important distinction
+The public release preserves the validated V0.9.3 transformation, executor, provider adapter, policy runner, task suite, schedule, variant snapshot, preregistration, and regression test.
 
-Historical experiment results are evidence about the tested conditions. They are
-not universal guarantees about every model, task, provider, or prompting strategy.
+Their SHA-256 values are recorded in PUBLIC_RELEASE_MANIFEST.json.
 
-A policy or representation should not be treated as globally validated merely because
-one experiment produced a positive local result.
+## Provider boundary
 
-## Frozen material
+Credentials must come from environment variables or explicitly injected provider objects. Never commit API keys, tokens, .env files, or provider secrets.
 
-The public release preserves the currently validated V0.9.3 experiment artifacts
-and their source files. SHA-256 values are recorded in
-`PUBLIC_RELEASE_MANIFEST.json`.
+## Release integrity
 
-## Excluded material
+After changing public files, verify PUBLIC_RELEASE_MANIFEST.json.
 
-Backups, repair logs, temporary provider probes, invalid/quarantined laboratory
-outputs, and the previously generated V0.9.3 forensic/analysis outputs that were
-not considered reliable are intentionally excluded from the public release.
+## Core rule
 
-## Agent behavior
-
-When using PromptForge:
-
-1. Read `README.md`.
-2. Inspect the relevant runner/provider/task/test files.
-3. Treat preregistrations as the experimental contract.
-4. Treat frozen hashes and manifests as integrity information.
-5. Distinguish executable infrastructure from empirical conclusions.
-6. Reuse existing validated machinery before inventing replacement tooling.
+Reuse validated machinery first. Change the smallest surface necessary. Keep executable infrastructure, experimental design, empirical evidence, and interpretation clearly separated.

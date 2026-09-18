@@ -1,51 +1,36 @@
-﻿# PromptForge — Public Release Scope
-
-## Source
-
-$SourceRoot
-
-## Curated destination
-
-$PublicRoot
-
-## Source revision used
-
-- HEAD: $SourceHead
-- Branch: $SourceBranch
-- Commit: $SourceMessage
-
-## Included
-
-- Core execution infrastructure
-- Prompt/context transformation machinery
-- Provider adapters
-- Experiment runners and schedules
-- Analysis source code
-- Preregistration documents
-- Task suite
-- Test suite
-- Selected validated research reports
-- AGENTS.md
-- Machine-readable SHA-256 manifest
-
-## Excluded
-
-- ackups/
-- harness/backups/
-- repair/debug .log files
-- temporary provider bridge probes
-- invalid/quarantined/rate-limit-aborted reports
-- 093_deep_*
-- 093_scientific_analysis.*
-
-## Important scientific boundary
-
-The inclusion of an experimental report means the artifact is retained as evidence
-and provenance. It does not mean the measured prompting/policy effect is universal,
-economically optimal, or frozen for every model or task.
+# PromptForge - Public Release Scope
 
 ## Publication state
 
-This directory is a curated PUBLIC RELEASE STAGING TREE.
+Repository: Aevumard/PromptForge
+Default branch: main
+Visibility: public
+Release type: curated public GitHub release
 
-It has NOT been pushed to GitHub by this script.
+## Research provenance
+
+The public release was curated from a private laboratory tree.
+
+Source branch: experiment/v0.9.3-size-matched-control
+Source commit: 433e6d3f0d9b599e604bea74efb1f52082db2841
+Source commit message: fix(experiment): make v0.9.3 padding size matched per variant
+
+The private local filesystem path is intentionally not published here.
+
+## Included
+
+Execution infrastructure, context transformation machinery, provider adapters, experiment runners, schedules, analysis source, preregistration documents, task suite, tests, selected retained research reports, agent documentation, and CI.
+
+## Excluded
+
+Backups, repair logs, temporary provider probes, invalid or quarantined reports, rate-limit-aborted outputs, and untrusted V0.9.3 forensic artifacts.
+
+## Scientific boundary
+
+Retained experiments are evidence for the tested conditions. They are not universal guarantees across all tasks, models, providers, prompts, or representations.
+
+V0.9.3 is specifically a size-matched control study intended to isolate structural representation from serialized context size.
+
+## Integrity boundary
+
+PUBLIC_RELEASE_MANIFEST.json records SHA-256 values for every tracked public file except the manifest itself.

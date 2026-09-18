@@ -1,0 +1,979 @@
+{
+    "schema_version":  "0.9.1",
+    "experiment_id":  "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+    "task_id":  "T003",
+    "model_id":  "deepseek",
+    "conditions":  [
+                       "noop_compact",
+                       "pairs_compact",
+                       "pairs_bare_compact"
+                   ],
+    "repetitions":  40,
+    "scheduled_runs":  120,
+    "pairing":  "exact_paired_by_repetition",
+    "primary_condition":  "pairs_compact",
+    "baseline_condition":  "noop_compact",
+    "negative_control":  "pairs_bare_compact",
+    "rows":  [
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  0
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  1
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  2
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  3
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  4
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  5
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  6
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  7
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  8
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  9
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  10
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  11
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  12
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  13
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  14
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  15
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  16
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  17
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  18
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  19
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  20
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  21
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  22
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  23
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  24
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  25
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  26
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  27
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  28
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  29
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  30
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  31
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  32
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  33
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  34
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  35
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  36
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  37
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  38
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  39
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  40
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  41
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  42
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  43
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  44
+                 },
+                 {
+                     "repetition":  16,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  45
+                 },
+                 {
+                     "repetition":  16,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  46
+                 },
+                 {
+                     "repetition":  16,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  47
+                 },
+                 {
+                     "repetition":  17,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  48
+                 },
+                 {
+                     "repetition":  17,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  49
+                 },
+                 {
+                     "repetition":  17,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  50
+                 },
+                 {
+                     "repetition":  18,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  51
+                 },
+                 {
+                     "repetition":  18,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  52
+                 },
+                 {
+                     "repetition":  18,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  53
+                 },
+                 {
+                     "repetition":  19,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  54
+                 },
+                 {
+                     "repetition":  19,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  55
+                 },
+                 {
+                     "repetition":  19,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  56
+                 },
+                 {
+                     "repetition":  20,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  57
+                 },
+                 {
+                     "repetition":  20,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  58
+                 },
+                 {
+                     "repetition":  20,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  59
+                 },
+                 {
+                     "repetition":  21,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  60
+                 },
+                 {
+                     "repetition":  21,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  61
+                 },
+                 {
+                     "repetition":  21,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  62
+                 },
+                 {
+                     "repetition":  22,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  63
+                 },
+                 {
+                     "repetition":  22,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  64
+                 },
+                 {
+                     "repetition":  22,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  65
+                 },
+                 {
+                     "repetition":  23,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  66
+                 },
+                 {
+                     "repetition":  23,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  67
+                 },
+                 {
+                     "repetition":  23,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  68
+                 },
+                 {
+                     "repetition":  24,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  69
+                 },
+                 {
+                     "repetition":  24,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  70
+                 },
+                 {
+                     "repetition":  24,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  71
+                 },
+                 {
+                     "repetition":  25,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  72
+                 },
+                 {
+                     "repetition":  25,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  73
+                 },
+                 {
+                     "repetition":  25,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  74
+                 },
+                 {
+                     "repetition":  26,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  75
+                 },
+                 {
+                     "repetition":  26,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  76
+                 },
+                 {
+                     "repetition":  26,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  77
+                 },
+                 {
+                     "repetition":  27,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  78
+                 },
+                 {
+                     "repetition":  27,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  79
+                 },
+                 {
+                     "repetition":  27,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  80
+                 },
+                 {
+                     "repetition":  28,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  81
+                 },
+                 {
+                     "repetition":  28,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  82
+                 },
+                 {
+                     "repetition":  28,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  83
+                 },
+                 {
+                     "repetition":  29,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  84
+                 },
+                 {
+                     "repetition":  29,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  85
+                 },
+                 {
+                     "repetition":  29,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  86
+                 },
+                 {
+                     "repetition":  30,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  87
+                 },
+                 {
+                     "repetition":  30,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  88
+                 },
+                 {
+                     "repetition":  30,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  89
+                 },
+                 {
+                     "repetition":  31,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  90
+                 },
+                 {
+                     "repetition":  31,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  91
+                 },
+                 {
+                     "repetition":  31,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  92
+                 },
+                 {
+                     "repetition":  32,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  93
+                 },
+                 {
+                     "repetition":  32,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  94
+                 },
+                 {
+                     "repetition":  32,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  95
+                 },
+                 {
+                     "repetition":  33,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  96
+                 },
+                 {
+                     "repetition":  33,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  97
+                 },
+                 {
+                     "repetition":  33,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  98
+                 },
+                 {
+                     "repetition":  34,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  99
+                 },
+                 {
+                     "repetition":  34,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  100
+                 },
+                 {
+                     "repetition":  34,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  101
+                 },
+                 {
+                     "repetition":  35,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  102
+                 },
+                 {
+                     "repetition":  35,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  103
+                 },
+                 {
+                     "repetition":  35,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  104
+                 },
+                 {
+                     "repetition":  36,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  105
+                 },
+                 {
+                     "repetition":  36,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  106
+                 },
+                 {
+                     "repetition":  36,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  107
+                 },
+                 {
+                     "repetition":  37,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  108
+                 },
+                 {
+                     "repetition":  37,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  109
+                 },
+                 {
+                     "repetition":  37,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  110
+                 },
+                 {
+                     "repetition":  38,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  111
+                 },
+                 {
+                     "repetition":  38,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  112
+                 },
+                 {
+                     "repetition":  38,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  113
+                 },
+                 {
+                     "repetition":  39,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  114
+                 },
+                 {
+                     "repetition":  39,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  115
+                 },
+                 {
+                     "repetition":  39,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  116
+                 },
+                 {
+                     "repetition":  40,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "position_within_repetition":  0,
+                     "global_execution_position":  117
+                 },
+                 {
+                     "repetition":  40,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "position_within_repetition":  1,
+                     "global_execution_position":  118
+                 },
+                 {
+                     "repetition":  40,
+                     "task_id":  "T003",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "position_within_repetition":  2,
+                     "global_execution_position":  119
+                 }
+             ]
+}
