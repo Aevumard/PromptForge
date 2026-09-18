@@ -278,7 +278,7 @@ def _compile_generic_arm(
             "source": "input",
             "required": True,
             "included": path in included_paths
-            or any(path.startswith(item + ".") for item in included_paths),
+            or any(item.startswith(path + ".") for item in included_paths),
         }
         for path in required_paths
     ]
