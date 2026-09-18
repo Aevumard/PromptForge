@@ -1,26 +1,18 @@
-﻿__pycache__/
-*.py[cod]
-.pytest_cache/
-.venv/
-venv/
-harness/reports/latest.json
-
-# PromptForge local statistical analysis artifacts
-
-# ------------------------------------------------------------
-# PromptForge public-release exclusions
-# ------------------------------------------------------------
-
-backups/
-harness/backups/
-
-*.log
-
+# Python caches and local environments
 __pycache__/
+*.py[cod]
 .pytest_cache/
 .mypy_cache/
 .venv/
 venv/
+
+# Local PromptForge artifacts
+harness/reports/latest.json
+*.log
+
+# PromptForge public-release exclusions
+backups/
+harness/backups/
 
 # Laboratory-generated V0.9.3 forensic artifacts
 harness/reports/v093_deep_*
