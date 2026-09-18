@@ -9,7 +9,7 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-09-18T20:20:50.455Z",
+    "generated_utc": "2026-09-18T20:21:14.411Z",
     "file_count": 103,
     "files": [
         {
@@ -20,7 +20,7 @@
         {
             "path": ".gitignore",
             "size_bytes": 588,
-            "sha256": "969EEECFCF90830FB6727BF9FB787D006A64ED04E31221DCC201CB652D95C182"
+            "sha256": "3BD43635FC4B4DCF5D76445C875FC2638714A0B86571F2F2DDD40D4338C6FC61"
         },
         {
             "path": "AGENTS.md",
