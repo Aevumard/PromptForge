@@ -413,7 +413,7 @@ def _prepare_generic(
             )
 
         schema_validation = (
-            validate_field_schema(compiled["value"], schema)
+            validate_field_schema(_decode_value(compiled), schema)
             if schema is not None
             else None
         )
@@ -431,6 +431,14 @@ def _prepare_generic(
             budget_tokens=budget_tokens,
             schema_validation=schema_validation,
             inspection=inspection,
+        )
+
+    if policy not in {
+        POLICY_MINIMAL,
+        POLICY_BUDGET_CONSTRAINED,
+    }:
+        raise ValueError(
+            "unknown agent policy: " + repr(policy)
         )
 
     effective_policy = policy
