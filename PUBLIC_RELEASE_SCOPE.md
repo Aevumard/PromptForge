@@ -31,6 +31,17 @@ Retained experiments are evidence for the tested conditions. They are not univer
 
 V0.9.3 is specifically a size-matched control study intended to isolate structural representation from serialized context size.
 
+## Agent-facing public surface
+
+The current public agent surface is provider-agnostic:
+
+- `harness/agent.py` exposes the direct facade.
+- `prepare_context(data, required)` supports arbitrary task context without relying on the public fixture suite.
+- Provider credentials are not required for context preparation.
+- Provider adapters remain available for historical and experimental execution.
+
+This additive agent surface does not change the frozen V0.9.3 experimental machinery.
+
 ## Integrity boundary
 
 PUBLIC_RELEASE_MANIFEST.json records SHA-256 values for every tracked public file except the manifest itself.
