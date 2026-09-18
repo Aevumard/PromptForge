@@ -15,7 +15,7 @@ class AgentFacadeTests(unittest.TestCase):
 
         self.assertEqual(
             result["schema_version"],
-            "agent-prepare.v1",
+            "agent-prepare.v2",
         )
         self.assertEqual(result["task_id"], "T003")
         self.assertEqual(
@@ -279,7 +279,7 @@ class AgentFacadeTests(unittest.TestCase):
             self.assertEqual(result["task_id"], task_id)
             self.assertEqual(
                 result["schema_version"],
-                "agent-prepare.v1",
+                "agent-prepare.v2",
             )
             self.assertEqual(
                 result["policy"],
