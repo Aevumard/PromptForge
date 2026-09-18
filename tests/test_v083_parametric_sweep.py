@@ -2,7 +2,11 @@
 import json
 from pathlib import Path
 
-ROOT = Path(r"D:\PROMPTFORGE\promptforge-harness-v0.1")
+ROOT = (
+    Path(__file__)
+    .resolve()
+    .parents[1]
+  )
 schedule = json.loads((
     ROOT / "harness" / "runner" / "v083_schedule.json"
 ).read_text(encoding="utf-8"))
