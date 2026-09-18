@@ -68,6 +68,6 @@ from harness.agent import prepare
 prepared = prepare("T003")
 ```
 
-The default policy is deterministic minimal_serialized_context: it compiles the public arms, validates required values, and selects the smallest serialized context. Use rm_id= only when an explicit representation is required.
+The default policy is deterministic minimal_serialized_context: it compiles the public arms, validates required values, and selects the smallest serialized context. Use arm_id= only when an explicit representation is required.
 
 Treat the returned candidate audit as evidence of what PromptForge considered. Do not convert the minimal-size policy into a claim about model quality.
