@@ -1,6 +1,6 @@
 import unittest
 
-from harness.agent import prepare
+from harness.agent import prepare, prepare_context
 
 
 class AgentFacadeTests(unittest.TestCase):
@@ -22,6 +22,12 @@ class AgentFacadeTests(unittest.TestCase):
             "selection_only",
         )
         self.assertEqual(result["context_chars"], 48)
+        self.assertEqual(result["baseline_context_chars"], 85)
+        self.assertEqual(result["context_chars_saved"], 37)
+        self.assertAlmostEqual(
+            result["context_reduction_ratio"],
+            37 / 85,
+        )
         self.assertEqual(
             result["context"],
             {
@@ -72,6 +78,51 @@ class AgentFacadeTests(unittest.TestCase):
             ),
         )
 
+
+    def test_prepare_context_works_without_public_fixture(self):
+        data = {
+            "entity": "A-17",
+            "score": 0.87,
+            "status": "stable",
+            "trace": "noise",
+            "commentary": "noise",
+        }
+
+        result = prepare_context(
+            data,
+            ["entity", "score", "status"],
+            task_id="LOCAL-001",
+            task_family="local_analysis",
+        )
+
+        self.assertEqual(result["task_id"], "LOCAL-001")
+        self.assertEqual(result["task_family"], "local_analysis")
+        self.assertEqual(result["selected_arm"], "selection_only")
+        self.assertEqual(
+            result["context"],
+            {
+                "entity": "A-17",
+                "score": 0.87,
+                "status": "stable",
+            },
+        )
+        self.assertEqual(result["context_chars_saved"], 37)
+        self.assertTrue(result["required_values_preserved"])
+        self.assertTrue(result["validation"]["passed"])
+
+    def test_prepare_context_does_not_require_provider_configuration(self):
+        result = prepare_context(
+            {"a": 1, "noise": "x"},
+            ["a"],
+        )
+
+        self.assertEqual(result["context"], {"a": 1})
+        self.assertEqual(result["baseline_arm"], "noop")
+        self.assertGreaterEqual(result["context_reduction_ratio"], 0.0)
+
+    def test_prepare_context_rejects_non_string_requirements(self):
+        with self.assertRaises(TypeError):
+            prepare_context({"a": 1}, ["a", 2])
 
     def test_prepare_works_for_every_public_task(self):
         for task_id in ("T001", "T002", "T003", "T004"):
