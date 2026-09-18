@@ -58,3 +58,18 @@ python -m unittest discover -s tests -p test_*.py
 ## Scientific boundary
 
 PromptForge makes context transformations explicit, testable, reproducible, and comparable. Historical results are evidence about the tested conditions, not universal guarantees across every task, model, provider, or prompting strategy.
+
+
+## Agent Context API
+
+PromptForge also exposes a direct agent-facing context compilation API.
+
+```python
+from harness.agent_context import compile_task_by_id
+
+compiled = compile_task_by_id("T003", "selection_only")
+```
+
+The returned artifact records the selected and excluded fields, the transform sequence, the compiled representation, serialized context, context size, required-value preservation, and validation metadata.
+
+This API is additive to the public harness and does not modify the frozen V0.9.3 experimental surface.

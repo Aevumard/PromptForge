@@ -42,3 +42,18 @@ After changing public files, verify PUBLIC_RELEASE_MANIFEST.json.
 ## Core rule
 
 Reuse validated machinery first. Change the smallest surface necessary. Keep executable infrastructure, experimental design, empirical evidence, and interpretation clearly separated.
+
+
+## Direct agent usage
+
+Use the public agent-context bridge when an agent needs a compiled task context rather than raw task data.
+
+```python
+from harness.agent_context import compile_task_by_id
+
+compiled = compile_task_by_id("T003", "selection_only")
+```
+
+The bridge loads the public task suite, applies a validated V0.6 transform arm, exposes included and excluded context, serializes the result, and validates that required values survive decoding.
+
+This is additive infrastructure. Do not alter the frozen V0.9.3 experimental machinery to implement agent-facing access.
