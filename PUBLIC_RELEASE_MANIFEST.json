@@ -9,13 +9,13 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-09-18T20:21:56.838Z",
-    "file_count": 103,
+    "generated_utc": "2026-09-18T20:34:35.886Z",
+    "file_count": 106,
     "files": [
         {
             "path": ".github/workflows/ci.yml",
-            "size_bytes": 509,
-            "sha256": "35112D258266DA29FC2290ADE9DA575EF9EEDD142C130F58E49897BE9FBE4E1B"
+            "size_bytes": 858,
+            "sha256": "45E5A7EF59B0A22616828D00FA0D97622369000595300FF2776422EE09E84626"
         },
         {
             "path": ".gitignore",
@@ -24,18 +24,18 @@
         },
         {
             "path": "AGENTS.md",
-            "size_bytes": 4848,
-            "sha256": "05C34D070347193D30BE29F7CD251FA272440C4D345942ADF52906553D5AB580"
-        },
-        {
-            "path": "harness/agent.py",
-            "size_bytes": 5462,
-            "sha256": "65610DA80788739AFF5BC25E4633FD8DD640368DBA4630E5CC59A2A5C11ED76F"
+            "size_bytes": 5038,
+            "sha256": "C30BE9AFB93E483BED439A62D5E8388443768898582E11A67250D0559360CED0"
         },
         {
             "path": "harness/agent_context.py",
             "size_bytes": 4467,
             "sha256": "F9289B5CBFAAC89C1A1B803F2EC1F062574DBAEC577567EC3EE8FFB7968DB593"
+        },
+        {
+            "path": "harness/agent.py",
+            "size_bytes": 20494,
+            "sha256": "7B9E53EC483FB070841FDC7988689410FF59F0D180E5CFB93BD0D735254627C0"
         },
         {
             "path": "harness/analysis/analyze_v053.py",
@@ -86,6 +86,11 @@
             "path": "harness/analysis/v07_confirmatory_analysis.py",
             "size_bytes": 24074,
             "sha256": "E5B0FBF259424BADB1B172FD96D2433F5C8085EDA74CB7799A75F718BEA0D9E3"
+        },
+        {
+            "path": "harness/context.py",
+            "size_bytes": 5522,
+            "sha256": "391626C78B93DC644A5CD9C055399FF0CCE17A1823371ECF07F2F9433AC9032D"
         },
         {
             "path": "harness/evaluators/__init__.py",
@@ -153,14 +158,14 @@
             "sha256": "6F57BB115FA4CC4B6CB84BC6476A67B5D18DB6190282E36903F6E3F496E699B8"
         },
         {
-            "path": "harness/providers/deepseek.py",
-            "size_bytes": 3187,
-            "sha256": "F76B7A313626215DFACECCBC53F211F673731BCDA295D2D41A649D451DDF36BE"
-        },
-        {
             "path": "harness/providers/deepseek_adapter.py",
             "size_bytes": 2272,
             "sha256": "4913395597AFAB924A8FB8927CB61288603B4B87A5B1B0BC47F6959707D0E614"
+        },
+        {
+            "path": "harness/providers/deepseek.py",
+            "size_bytes": 3187,
+            "sha256": "F76B7A313626215DFACECCBC53F211F673731BCDA295D2D41A649D451DDF36BE"
         },
         {
             "path": "harness/providers/gemini_adapter.py",
@@ -398,14 +403,24 @@
             "sha256": "8C072CBB8E1F764C7E9A60C3EE1CB4758CB2E4621C3E23BD12EB91ED5AB70CAC"
         },
         {
+            "path": "promptforge/__init__.py",
+            "size_bytes": 362,
+            "sha256": "F189CEF85060470BB46EA4EB52C964E7856F429EF46A23B9ECC7C7C7B8DCA166"
+        },
+        {
             "path": "PUBLIC_RELEASE_SCOPE.md",
-            "size_bytes": 1880,
-            "sha256": "788A8BA67E5D877277384BBC79C8F028E986BBCA9D298AD600CC1E248851494B"
+            "size_bytes": 2124,
+            "sha256": "9A71B06E92F9C385DECEDF31C73415EBA76FABD54C5CEC80E0E175616761BD2A"
+        },
+        {
+            "path": "pyproject.toml",
+            "size_bytes": 369,
+            "sha256": "86710CAE9CD114532DAD236CA75A47EABA5EEFCE4314DAAC04C65AC2143D96D5"
         },
         {
             "path": "README.md",
-            "size_bytes": 6270,
-            "sha256": "F064CA08BC325D68684AA9AA856CD3027CCA409456EF992E3449E742857ADBA0"
+            "size_bytes": 7950,
+            "sha256": "DB8C5507BA4747CABAEFAB3BFB2763B2E170CAEEC3B3878E9BB644883E26F2AD"
         },
         {
             "path": "schemas/run.schema.json",
@@ -418,14 +433,14 @@
             "sha256": "12FA0D70631609B231400CEEAF727C1A22AF87334A0075148CF9C66F8C5BDEF3"
         },
         {
-            "path": "tests/test_agent.py",
-            "size_bytes": 6279,
-            "sha256": "1BC1029E59E9656608934B10F9661D737EA6002BC47835AFDA44896088655673"
-        },
-        {
             "path": "tests/test_agent_context.py",
             "size_bytes": 3657,
             "sha256": "859C07D09B9EB8240B7DC84E18B436B9D5AA433ED01288BB49F50A2A5348F0B3"
+        },
+        {
+            "path": "tests/test_agent.py",
+            "size_bytes": 10494,
+            "sha256": "3A7E2B8DA8A4CC3C92E1798AEB7941BB451042574F015341AAA6D13B8598D867"
         },
         {
             "path": "tests/test_provider_adapters.py",
@@ -498,14 +513,14 @@
             "sha256": "B7EEDFCB2C082FFAD00031EF0639F93E3C0D4594DDCD5971A72EBB18F6411E65"
         },
         {
-            "path": "tests/test_v084_zoom.py",
-            "size_bytes": 1889,
-            "sha256": "7FFD8711B725890F5DE54FC408939EAEBCF2B326AC6334473DB5CA5F497815E0"
-        },
-        {
             "path": "tests/test_v084_zoom_runner.py",
             "size_bytes": 1778,
             "sha256": "93BC53578D158075AA7A2DC13C301FE59183749F2D8A4782F15DF877FF89F585"
+        },
+        {
+            "path": "tests/test_v084_zoom.py",
+            "size_bytes": 1889,
+            "sha256": "7FFD8711B725890F5DE54FC408939EAEBCF2B326AC6334473DB5CA5F497815E0"
         },
         {
             "path": "tests/test_v09_policy_search.py",
