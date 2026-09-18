@@ -49,13 +49,10 @@ def utc_now():
 
 
 def sha256_file(path):
-    h = hashlib.sha256()
-
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            h.update(block)
-
-    return h.hexdigest().upper()
+    data = path.read_bytes()
+    data = data.replace(b"\r\n", b"\n")
+    data = data.replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest().upper()
 
 
 def atomic_write(path, payload):
