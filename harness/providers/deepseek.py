@@ -1,9 +1,6 @@
 import os
 import time
 
-from openai import OpenAI
-from openai import APITimeoutError, APIConnectionError, APIStatusError
-
 
 class DeepSeekProvider:
     def __init__(self):
@@ -11,20 +8,42 @@ class DeepSeekProvider:
             'DEEPSEEK_MODEL',
             'deepseek-v4-flash'
         )
+        self.client = None
+
+    def _build_client(self):
+        if self.client is not None:
+            return self.client
+
+        api_key = os.environ.get('DEEPSEEK_API_KEY')
+
+        if not api_key:
+            raise RuntimeError(
+                'DEEPSEEK_API_KEY is not configured'
+            )
+
+        from openai import OpenAI
 
         self.client = OpenAI(
-            api_key=os.environ['DEEPSEEK_API_KEY'],
+            api_key=api_key,
             base_url='https://api.deepseek.com',
             timeout=45.0,
             max_retries=0
         )
+
+        return self.client
 
 
     def generate(self, prompt):
         started = time.perf_counter()
 
         try:
-            response = self.client.responses.create(
+            client = self._build_client()
+            from openai import (
+                APITimeoutError,
+                APIConnectionError,
+                APIStatusError,
+            )
+            response = client.responses.create(
                 model=self.model,
                 input=prompt,
                 reasoning={'effort': 'low'},
