@@ -9,7 +9,7 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-09-18T20:47:49.822Z",
+    "generated_utc": "2026-09-18T20:48:50.449Z",
     "file_count": 105,
     "files": [
         {
@@ -409,8 +409,8 @@
         },
         {
             "path": "pyproject.toml",
-            "size_bytes": 357,
-            "sha256": "FCBE21E6E1D098078A0F2F0BF71B92180C32EAB239B38896C691580E29ABC9D8"
+            "size_bytes": 369,
+            "sha256": "86710CAE9CD114532DAD236CA75A47EABA5EEFCE4314DAAC04C65AC2143D96D5"
         },
         {
             "path": "README.md",
