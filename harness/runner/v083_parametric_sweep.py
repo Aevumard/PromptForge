@@ -362,7 +362,7 @@ def real_run():
         repetition = int(row["repetition"])
 
         print(
-            f"START position={position} condition={row["condition_id"]} rep={repetition}",
+            f"START position={position} condition={row['condition_id']} rep={repetition}",
             flush=True
         )
 
@@ -379,14 +379,14 @@ def real_run():
         m = result["metrics"]
 
         print(
-            f"DONE position={position} condition={row["condition_id"]} "
-            f"rep={repetition} status={result["status"]} "
-            f"quality={result["quality_pass"]} "
-            f"input={m["input_tokens"]} "
-            f"reasoning={m["reasoning_tokens"]} "
-            f"output={m["output_tokens"]} "
-            f"total={m["total_tokens"]} "
-            f"latency_ms={m["latency_ms"]}",
+            f"DONE position={position} condition={row['condition_id']} "
+            f"rep={repetition} status={result['status']} "
+            f"quality={result['quality_pass']} "
+            f"input={m['input_tokens']} "
+            f"reasoning={m['reasoning_tokens']} "
+            f"output={m['output_tokens']} "
+            f"total={m['total_tokens']} "
+            f"latency_ms={m['latency_ms']}",
             flush=True
         )
 

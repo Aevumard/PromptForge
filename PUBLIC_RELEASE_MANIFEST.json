@@ -9,7 +9,7 @@
     "source_branch":  "experiment/v0.9.3-size-matched-control",
     "source_commit_message":  "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy":  "All tracked public files except this manifest itself",
-    "generated_utc":  "2026-09-18T19:17:34.9687821Z",
+    "generated_utc":  "2026-09-18T19:22:46.9584011Z",
     "file_count":  103,
     "files":  [
                   {
@@ -325,7 +325,7 @@
                   {
                       "path":  "harness/runner/v083_parametric_sweep.py",
                       "size_bytes":  14700,
-                      "sha256":  "6577C0C3D1A0936A1A90FF8336EFB314EC4DBFA1952CD13C46781EF7AE103A5D"
+                      "sha256":  "C390B35E9B55740487CB866214BD6B851978F4ED345DE4670E5C1ADA5848EF7D"
                   },
                   {
                       "path":  "harness/runner/v083_schedule.json",
