@@ -47,7 +47,7 @@ EXPERIMENT_ID = (
 SCHEMA_VERSION = "0.8.2"
 
 EXPECTED_EXECUTOR_SHA256 = (
-    "5589F8C777A594E81BBBFA15D14BF181B141957825DB176EAEA1ABB5DD2D9842"
+    "456AFC36D1D43185C05F531E99964AD01B52E0F46EBA9375D172795E4DF7886B"
 )
 
 
@@ -288,9 +288,13 @@ def validate_environment(
         / "real_executor.py"
     )
 
+    executor_bytes = executor.read_bytes()
+    executor_bytes = executor_bytes.replace(b"\r\n", b"\n")
+    executor_bytes = executor_bytes.replace(b"\r", b"\n")
+
     executor_hash = (
         hashlib.sha256(
-            executor.read_bytes()
+            executor_bytes
         )
         .hexdigest()
         .upper()
