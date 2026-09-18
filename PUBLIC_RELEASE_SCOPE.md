@@ -33,14 +33,18 @@ V0.9.3 is specifically a size-matched control study intended to isolate structur
 
 ## Agent-facing public surface
 
-The current public agent surface is provider-agnostic:
+The public release exposes an installable, provider-agnostic agent core:
 
-- `harness/agent.py` exposes the direct facade.
-- `prepare_context(data, required)` supports arbitrary task context without relying on the public fixture suite.
-- Provider credentials are not required for context preparation.
+- `promptforge` provides the end-user import surface.
+- `prepare_context(data, required)` supports arbitrary task context.
+- Nested mapping paths are supported for required fields.
+- `budget_tokens=` enables deterministic budget-constrained preparation.
+- Lightweight field-type schema validation is dependency-free.
+- `inspect()` provides non-mutating context planning metadata.
+- Provider credentials and network access are not required for the core API.
 - Provider adapters remain available for historical and experimental execution.
 
-This additive agent surface does not change the frozen V0.9.3 experimental machinery.
+The installable package is additive to the frozen V0.9.3 experimental machinery.
 
 ## Integrity boundary
 
