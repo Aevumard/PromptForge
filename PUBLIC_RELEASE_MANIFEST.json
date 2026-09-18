@@ -9,7 +9,7 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-09-18T20:21:14.411Z",
+    "generated_utc": "2026-09-18T20:21:56.838Z",
     "file_count": 103,
     "files": [
         {
@@ -25,12 +25,12 @@
         {
             "path": "AGENTS.md",
             "size_bytes": 4848,
-            "sha256": "FDC389CB1F386D761A4BE863E5980EA056FD8359BFBB892D134EFD2FF9AEA023"
+            "sha256": "05C34D070347193D30BE29F7CD251FA272440C4D345942ADF52906553D5AB580"
         },
         {
             "path": "harness/agent.py",
             "size_bytes": 5462,
-            "sha256": "D6F3276C5FE8341EA112E1DE5DD4C33B9CED513F2E293B5696CF71A05CC28925"
+            "sha256": "65610DA80788739AFF5BC25E4633FD8DD640368DBA4630E5CC59A2A5C11ED76F"
         },
         {
             "path": "harness/agent_context.py",
@@ -400,12 +400,12 @@
         {
             "path": "PUBLIC_RELEASE_SCOPE.md",
             "size_bytes": 1880,
-            "sha256": "7AB0AE5CD236772F55A11CADA54C3B683065B2E8FD2B60E84729B728C7D3DF73"
+            "sha256": "788A8BA67E5D877277384BBC79C8F028E986BBCA9D298AD600CC1E248851494B"
         },
         {
             "path": "README.md",
             "size_bytes": 6270,
-            "sha256": "7683738F380C056353D5B45A67A08CFB3D6E0DE58BFEAD898DF4AECDEF292B79"
+            "sha256": "F064CA08BC325D68684AA9AA856CD3027CCA409456EF992E3449E742857ADBA0"
         },
         {
             "path": "schemas/run.schema.json",
@@ -420,7 +420,7 @@
         {
             "path": "tests/test_agent.py",
             "size_bytes": 6279,
-            "sha256": "ABA14B12E4C68F52641AF33DDA29F6F9039E717FCD0C30100142F8679CB26E26"
+            "sha256": "1BC1029E59E9656608934B10F9661D737EA6002BC47835AFDA44896088655673"
         },
         {
             "path": "tests/test_agent_context.py",
