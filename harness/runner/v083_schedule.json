@@ -1,0 +1,1010 @@
+{
+  "schema_version": "0.8.3",
+  "experiment_id": "PROMPTFORGE_V0.8.3_PARAMETRIC_SWEEP",
+  "task_id": "T003",
+  "model_id": "deepseek",
+  "repetitions": 20,
+  "conditions": [
+    {
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop"
+    },
+    {
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop"
+    },
+    {
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A"
+    },
+    {
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A"
+    },
+    {
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B"
+    },
+    {
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B"
+    }
+  ],
+  "scheduled_runs": 120,
+  "scheme": "six-condition cyclic rotation with alternating reversal",
+  "runs": [
+    {
+      "repetition": 1,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 0
+    },
+    {
+      "repetition": 1,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 1
+    },
+    {
+      "repetition": 1,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 2
+    },
+    {
+      "repetition": 1,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 3
+    },
+    {
+      "repetition": 1,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 4
+    },
+    {
+      "repetition": 1,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 5
+    },
+    {
+      "repetition": 2,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 6
+    },
+    {
+      "repetition": 2,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 7
+    },
+    {
+      "repetition": 2,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 8
+    },
+    {
+      "repetition": 2,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 9
+    },
+    {
+      "repetition": 2,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 10
+    },
+    {
+      "repetition": 2,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 11
+    },
+    {
+      "repetition": 3,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 12
+    },
+    {
+      "repetition": 3,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 13
+    },
+    {
+      "repetition": 3,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 14
+    },
+    {
+      "repetition": 3,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 15
+    },
+    {
+      "repetition": 3,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 16
+    },
+    {
+      "repetition": 3,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 17
+    },
+    {
+      "repetition": 4,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 18
+    },
+    {
+      "repetition": 4,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 19
+    },
+    {
+      "repetition": 4,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 20
+    },
+    {
+      "repetition": 4,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 21
+    },
+    {
+      "repetition": 4,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 22
+    },
+    {
+      "repetition": 4,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 23
+    },
+    {
+      "repetition": 5,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 24
+    },
+    {
+      "repetition": 5,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 25
+    },
+    {
+      "repetition": 5,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 26
+    },
+    {
+      "repetition": 5,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 27
+    },
+    {
+      "repetition": 5,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 28
+    },
+    {
+      "repetition": 5,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 29
+    },
+    {
+      "repetition": 6,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 30
+    },
+    {
+      "repetition": 6,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 31
+    },
+    {
+      "repetition": 6,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 32
+    },
+    {
+      "repetition": 6,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 33
+    },
+    {
+      "repetition": 6,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 34
+    },
+    {
+      "repetition": 6,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 35
+    },
+    {
+      "repetition": 7,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 36
+    },
+    {
+      "repetition": 7,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 37
+    },
+    {
+      "repetition": 7,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 38
+    },
+    {
+      "repetition": 7,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 39
+    },
+    {
+      "repetition": 7,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 40
+    },
+    {
+      "repetition": 7,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 41
+    },
+    {
+      "repetition": 8,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 42
+    },
+    {
+      "repetition": 8,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 43
+    },
+    {
+      "repetition": 8,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 44
+    },
+    {
+      "repetition": 8,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 45
+    },
+    {
+      "repetition": 8,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 46
+    },
+    {
+      "repetition": 8,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 47
+    },
+    {
+      "repetition": 9,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 48
+    },
+    {
+      "repetition": 9,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 49
+    },
+    {
+      "repetition": 9,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 50
+    },
+    {
+      "repetition": 9,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 51
+    },
+    {
+      "repetition": 9,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 52
+    },
+    {
+      "repetition": 9,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 53
+    },
+    {
+      "repetition": 10,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 54
+    },
+    {
+      "repetition": 10,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 55
+    },
+    {
+      "repetition": 10,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 56
+    },
+    {
+      "repetition": 10,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 57
+    },
+    {
+      "repetition": 10,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 58
+    },
+    {
+      "repetition": 10,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 59
+    },
+    {
+      "repetition": 11,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 60
+    },
+    {
+      "repetition": 11,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 61
+    },
+    {
+      "repetition": 11,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 62
+    },
+    {
+      "repetition": 11,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 63
+    },
+    {
+      "repetition": 11,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 64
+    },
+    {
+      "repetition": 11,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 65
+    },
+    {
+      "repetition": 12,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 66
+    },
+    {
+      "repetition": 12,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 67
+    },
+    {
+      "repetition": 12,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 68
+    },
+    {
+      "repetition": 12,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 69
+    },
+    {
+      "repetition": 12,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 70
+    },
+    {
+      "repetition": 12,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 71
+    },
+    {
+      "repetition": 13,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 72
+    },
+    {
+      "repetition": 13,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 73
+    },
+    {
+      "repetition": 13,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 74
+    },
+    {
+      "repetition": 13,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 75
+    },
+    {
+      "repetition": 13,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 76
+    },
+    {
+      "repetition": 13,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 77
+    },
+    {
+      "repetition": 14,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 78
+    },
+    {
+      "repetition": 14,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 79
+    },
+    {
+      "repetition": 14,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 80
+    },
+    {
+      "repetition": 14,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 81
+    },
+    {
+      "repetition": 14,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 82
+    },
+    {
+      "repetition": 14,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 83
+    },
+    {
+      "repetition": 15,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 84
+    },
+    {
+      "repetition": 15,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 85
+    },
+    {
+      "repetition": 15,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 86
+    },
+    {
+      "repetition": 15,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 87
+    },
+    {
+      "repetition": 15,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 88
+    },
+    {
+      "repetition": 15,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 89
+    },
+    {
+      "repetition": 16,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 90
+    },
+    {
+      "repetition": 16,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 91
+    },
+    {
+      "repetition": 16,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 92
+    },
+    {
+      "repetition": 16,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 93
+    },
+    {
+      "repetition": 16,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 94
+    },
+    {
+      "repetition": 16,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 95
+    },
+    {
+      "repetition": 17,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 96
+    },
+    {
+      "repetition": 17,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 97
+    },
+    {
+      "repetition": 17,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 98
+    },
+    {
+      "repetition": 17,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 99
+    },
+    {
+      "repetition": 17,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 100
+    },
+    {
+      "repetition": 17,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 101
+    },
+    {
+      "repetition": 18,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 102
+    },
+    {
+      "repetition": 18,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 103
+    },
+    {
+      "repetition": 18,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 104
+    },
+    {
+      "repetition": 18,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 105
+    },
+    {
+      "repetition": 18,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 106
+    },
+    {
+      "repetition": 18,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 107
+    },
+    {
+      "repetition": 19,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 108
+    },
+    {
+      "repetition": 19,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 109
+    },
+    {
+      "repetition": 19,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 110
+    },
+    {
+      "repetition": 19,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 111
+    },
+    {
+      "repetition": 19,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 112
+    },
+    {
+      "repetition": 19,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 113
+    },
+    {
+      "repetition": 20,
+      "condition_id": "noop_pretty",
+      "structure": "noop",
+      "serialization": "pretty",
+      "arm_id": "noop",
+      "global_execution_position": 114
+    },
+    {
+      "repetition": 20,
+      "condition_id": "representation_B_compact",
+      "structure": "representation_B",
+      "serialization": "compact",
+      "arm_id": "representation_B",
+      "global_execution_position": 115
+    },
+    {
+      "repetition": 20,
+      "condition_id": "representation_B_pretty",
+      "structure": "representation_B",
+      "serialization": "pretty",
+      "arm_id": "representation_B",
+      "global_execution_position": 116
+    },
+    {
+      "repetition": 20,
+      "condition_id": "representation_A_compact",
+      "structure": "representation_A",
+      "serialization": "compact",
+      "arm_id": "representation_A",
+      "global_execution_position": 117
+    },
+    {
+      "repetition": 20,
+      "condition_id": "representation_A_pretty",
+      "structure": "representation_A",
+      "serialization": "pretty",
+      "arm_id": "representation_A",
+      "global_execution_position": 118
+    },
+    {
+      "repetition": 20,
+      "condition_id": "noop_compact",
+      "structure": "noop",
+      "serialization": "compact",
+      "arm_id": "noop",
+      "global_execution_position": 119
+    }
+  ],
+  "schedule_sha256": "a0f4c4f3aaaf466fb4356d97914d33c7cd8c6b1d550031a4fd9953d7fd96f3bd"
+}

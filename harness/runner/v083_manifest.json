@@ -1,0 +1,61 @@
+{
+    "schema_version":  "0.8.3",
+    "experiment_id":  "PROMPTFORGE_V0.8.3_PARAMETRIC_SWEEP",
+    "task_id":  "T003",
+    "model_id":  "deepseek",
+    "repetitions":  20,
+    "conditions":  [
+                       {
+                           "condition_id":  "noop_pretty",
+                           "structure":  "noop",
+                           "serialization":  "pretty",
+                           "arm_id":  "noop"
+                       },
+                       {
+                           "condition_id":  "noop_compact",
+                           "structure":  "noop",
+                           "serialization":  "compact",
+                           "arm_id":  "noop"
+                       },
+                       {
+                           "condition_id":  "representation_A_pretty",
+                           "structure":  "representation_A",
+                           "serialization":  "pretty",
+                           "arm_id":  "representation_A"
+                       },
+                       {
+                           "condition_id":  "representation_A_compact",
+                           "structure":  "representation_A",
+                           "serialization":  "compact",
+                           "arm_id":  "representation_A"
+                       },
+                       {
+                           "condition_id":  "representation_B_pretty",
+                           "structure":  "representation_B",
+                           "serialization":  "pretty",
+                           "arm_id":  "representation_B"
+                       },
+                       {
+                           "condition_id":  "representation_B_compact",
+                           "structure":  "representation_B",
+                           "serialization":  "compact",
+                           "arm_id":  "representation_B"
+                       }
+                   ],
+    "scheduled_runs":  120,
+    "schedule_sha256":  "a0f4c4f3aaaf466fb4356d97914d33c7cd8c6b1d550031a4fd9953d7fd96f3bd",
+    "task_snapshot_sha256":  "b0f6ae4af9f85611602687299036fb1352deee31664445e0518447a2c8e8bc3b",
+    "protected_sha256":  {
+                             "transforms.py":  "d851443f75b02876def4a971b0c97b0a34a6de044ed49326e133a1d421ec8e4a",
+                             "v082_hotspot_replication.py":  "3fe7fb524feb1e553ce118ff8c13cc1ed8020784de6cf50df2c430a4be530fc6",
+                             "deepseek_adapter.py":  "4913395597afab924a8fb8927cb61288603b4b87a5b1b0bc47f6959707d0e614",
+                             "real_executor.py":  "5589F8C777A594E81BBBFA15D14BF181B141957825DB176EAEA1ABB5DD2D9842"
+                         },
+    "rules":  {
+                  "provider_calls_during_prep":  0,
+                  "automatic_retry":  false,
+                  "adaptive_repetition":  false,
+                  "post_outcome_changes":  false,
+                  "untracked_artifacts_allowed":  true
+              }
+}

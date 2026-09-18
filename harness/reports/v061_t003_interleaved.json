@@ -1,0 +1,2417 @@
+{
+  "schema_version": "0.6.1",
+  "status": "COMPLETE",
+  "started_utc": "2026-09-16T16:35:23.316876+00:00",
+  "provider": "deepseek",
+  "task_id": "T003",
+  "task_family": "structured_analysis",
+  "scheme": "interleaved",
+  "seed": 6101,
+  "repetitions": 10,
+  "arms": [
+    "selection_representation",
+    "selection_representation_A",
+    "selection_representation_B",
+    "selection_only"
+  ],
+  "arm_count": 4,
+  "scheduled_runs": 40,
+  "schedule_row_schema": [
+    "repetition",
+    "arm_id",
+    "global_execution_position"
+  ],
+  "runs": [
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:23.335876+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 1,
+      "scheme": "interleaved",
+      "global_execution_position": 0,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:23.335876+00:00",
+      "end_utc": "2026-09-16T16:35:25.250964+00:00",
+      "start_monotonic": 280835.39,
+      "end_monotonic": 280837.312,
+      "monotonic_elapsed_ms": 1921.9999999622814,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 80,
+        "output_tokens": 98,
+        "total_tokens": 253,
+        "latency_ms": 1915.028999967035
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "9480e821-6785-46f3-b964-eaafec9c9031",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:25.252963+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 1,
+      "scheme": "interleaved",
+      "global_execution_position": 1,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:25.252963+00:00",
+      "end_utc": "2026-09-16T16:35:26.539159+00:00",
+      "start_monotonic": 280837.312,
+      "end_monotonic": 280838.593,
+      "monotonic_elapsed_ms": 1281.0000000172295,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 58,
+        "output_tokens": 76,
+        "total_tokens": 231,
+        "latency_ms": 1286.6069999872707
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "454e9291-9fa2-41e7-a0ec-dbb2a829978e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:26.541160+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 1,
+      "scheme": "interleaved",
+      "global_execution_position": 2,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:26.541160+00:00",
+      "end_utc": "2026-09-16T16:35:28.210865+00:00",
+      "start_monotonic": 280838.593,
+      "end_monotonic": 280840.265,
+      "monotonic_elapsed_ms": 1672.000000020489,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 95,
+        "output_tokens": 113,
+        "total_tokens": 250,
+        "latency_ms": 1670.1925999950618
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "59c4e711-3fd7-4fba-845e-a73106556c89",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:28.212868+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 1,
+      "scheme": "interleaved",
+      "global_execution_position": 3,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:28.212868+00:00",
+      "end_utc": "2026-09-16T16:35:29.635473+00:00",
+      "start_monotonic": 280840.265,
+      "end_monotonic": 280841.703,
+      "monotonic_elapsed_ms": 1437.999999965541,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 93,
+        "output_tokens": 111,
+        "total_tokens": 226,
+        "latency_ms": 1423.2388999662362
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "b58f4ba0-7082-4750-a702-dca83e9f2dd1",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:29.637475+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 2,
+      "scheme": "interleaved",
+      "global_execution_position": 4,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:29.637475+00:00",
+      "end_utc": "2026-09-16T16:35:31.080223+00:00",
+      "start_monotonic": 280841.703,
+      "end_monotonic": 280843.14,
+      "monotonic_elapsed_ms": 1437.000000034459,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 84,
+        "output_tokens": 102,
+        "total_tokens": 257,
+        "latency_ms": 1442.6440999959596
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "62cc5b7f-feff-47d8-be2f-92e1d974c93e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:31.081221+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 2,
+      "scheme": "interleaved",
+      "global_execution_position": 5,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:31.081221+00:00",
+      "end_utc": "2026-09-16T16:35:32.338444+00:00",
+      "start_monotonic": 280843.14,
+      "end_monotonic": 280844.406,
+      "monotonic_elapsed_ms": 1266.0000000032596,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 66,
+        "output_tokens": 84,
+        "total_tokens": 239,
+        "latency_ms": 1256.4142000046559
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "1a3f1389-7f07-434e-89b7-30f3b86b1421",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:32.340445+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 2,
+      "scheme": "interleaved",
+      "global_execution_position": 6,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:32.340445+00:00",
+      "end_utc": "2026-09-16T16:35:33.918212+00:00",
+      "start_monotonic": 280844.406,
+      "end_monotonic": 280845.984,
+      "monotonic_elapsed_ms": 1577.999999979511,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 84,
+        "output_tokens": 102,
+        "total_tokens": 239,
+        "latency_ms": 1577.6944999815896
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "58ad664a-4e38-4648-ab3e-ca71b8e16c0b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:33.920211+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 2,
+      "scheme": "interleaved",
+      "global_execution_position": 7,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:33.920211+00:00",
+      "end_utc": "2026-09-16T16:35:35.622932+00:00",
+      "start_monotonic": 280845.984,
+      "end_monotonic": 280847.687,
+      "monotonic_elapsed_ms": 1702.999999979511,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 191,
+        "output_tokens": 209,
+        "total_tokens": 324,
+        "latency_ms": 1703.305300034117
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "87aa92a2-e5ee-4772-972e-05edbfb27f8c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:35.624933+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 3,
+      "scheme": "interleaved",
+      "global_execution_position": 8,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:35.624933+00:00",
+      "end_utc": "2026-09-16T16:35:36.934445+00:00",
+      "start_monotonic": 280847.687,
+      "end_monotonic": 280849.0,
+      "monotonic_elapsed_ms": 1313.0000000237487,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 114,
+        "output_tokens": 132,
+        "total_tokens": 287,
+        "latency_ms": 1308.7637999560684
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "bfc8315c-33bb-4ba2-9cf8-32091f496330",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:36.935443+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 3,
+      "scheme": "interleaved",
+      "global_execution_position": 9,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:36.935443+00:00",
+      "end_utc": "2026-09-16T16:35:38.263440+00:00",
+      "start_monotonic": 280849.0,
+      "end_monotonic": 280850.328,
+      "monotonic_elapsed_ms": 1327.999999979511,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 56,
+        "output_tokens": 74,
+        "total_tokens": 229,
+        "latency_ms": 1327.9482999932952
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "69c5ae6c-a6e5-46f7-8169-392145c8cf79",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:38.266441+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 3,
+      "scheme": "interleaved",
+      "global_execution_position": 10,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:38.266441+00:00",
+      "end_utc": "2026-09-16T16:35:40.125394+00:00",
+      "start_monotonic": 280850.328,
+      "end_monotonic": 280852.187,
+      "monotonic_elapsed_ms": 1858.9999999967404,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 131,
+        "output_tokens": 149,
+        "total_tokens": 286,
+        "latency_ms": 1858.4953999961726
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "f2c9aa84-a062-4cc6-bc73-619b20b379cb",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:40.127394+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 3,
+      "scheme": "interleaved",
+      "global_execution_position": 11,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:40.127394+00:00",
+      "end_utc": "2026-09-16T16:35:41.596368+00:00",
+      "start_monotonic": 280852.187,
+      "end_monotonic": 280853.656,
+      "monotonic_elapsed_ms": 1469.0000000409782,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 141,
+        "output_tokens": 159,
+        "total_tokens": 274,
+        "latency_ms": 1468.7192999990657
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "8aa6239e-8f85-495b-8585-fa62857f2a4c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:41.599368+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 4,
+      "scheme": "interleaved",
+      "global_execution_position": 12,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:41.599368+00:00",
+      "end_utc": "2026-09-16T16:35:42.931038+00:00",
+      "start_monotonic": 280853.656,
+      "end_monotonic": 280854.984,
+      "monotonic_elapsed_ms": 1327.999999979511,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 126,
+        "output_tokens": 144,
+        "total_tokens": 299,
+        "latency_ms": 1332.1164000080898
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "5816aac0-9e25-4f42-bbfd-68dff86d35a0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:42.933038+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 4,
+      "scheme": "interleaved",
+      "global_execution_position": 13,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:42.933038+00:00",
+      "end_utc": "2026-09-16T16:35:44.037456+00:00",
+      "start_monotonic": 280855.0,
+      "end_monotonic": 280856.093,
+      "monotonic_elapsed_ms": 1092.9999999934807,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 66,
+        "output_tokens": 84,
+        "total_tokens": 239,
+        "latency_ms": 1104.390799999237
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "debd56cd-8a72-47fc-9699-8e0bc361f710",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:44.039458+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 4,
+      "scheme": "interleaved",
+      "global_execution_position": 14,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:44.039458+00:00",
+      "end_utc": "2026-09-16T16:35:45.473417+00:00",
+      "start_monotonic": 280856.093,
+      "end_monotonic": 280857.531,
+      "monotonic_elapsed_ms": 1438.0000000237487,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 96,
+        "output_tokens": 114,
+        "total_tokens": 251,
+        "latency_ms": 1433.979699970223
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "62277f80-5f6c-42f7-86cb-f6c6da425507",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:45.487416+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 4,
+      "scheme": "interleaved",
+      "global_execution_position": 15,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:45.487416+00:00",
+      "end_utc": "2026-09-16T16:35:47.170089+00:00",
+      "start_monotonic": 280857.546,
+      "end_monotonic": 280859.234,
+      "monotonic_elapsed_ms": 1688.0000000237487,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 103,
+        "output_tokens": 121,
+        "total_tokens": 236,
+        "latency_ms": 1682.492199994158
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "0a18bd9a-2128-44a5-8921-9ea888b38126",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:47.171095+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 5,
+      "scheme": "interleaved",
+      "global_execution_position": 16,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:47.171095+00:00",
+      "end_utc": "2026-09-16T16:35:48.402044+00:00",
+      "start_monotonic": 280859.234,
+      "end_monotonic": 280860.468,
+      "monotonic_elapsed_ms": 1233.9999999967404,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 107,
+        "output_tokens": 125,
+        "total_tokens": 280,
+        "latency_ms": 1230.4432999808341
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "084df3cb-abe9-4b5e-8768-51dcbd05db4c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:48.405047+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 5,
+      "scheme": "interleaved",
+      "global_execution_position": 17,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:48.405047+00:00",
+      "end_utc": "2026-09-16T16:35:49.690004+00:00",
+      "start_monotonic": 280860.468,
+      "end_monotonic": 280861.75,
+      "monotonic_elapsed_ms": 1282.0000000065193,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 56,
+        "output_tokens": 74,
+        "total_tokens": 229,
+        "latency_ms": 1285.3381999884732
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "d18adf4c-01b0-4402-b9df-9a526fdf6e4d",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:49.692001+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 5,
+      "scheme": "interleaved",
+      "global_execution_position": 18,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:49.692001+00:00",
+      "end_utc": "2026-09-16T16:35:50.793463+00:00",
+      "start_monotonic": 280861.75,
+      "end_monotonic": 280862.859,
+      "monotonic_elapsed_ms": 1108.9999999967404,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 61,
+        "output_tokens": 79,
+        "total_tokens": 216,
+        "latency_ms": 1101.1758000240661
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "447c48d1-dbef-4faa-ab32-2f1ca9340e1f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:50.802461+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 5,
+      "scheme": "interleaved",
+      "global_execution_position": 19,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:50.802461+00:00",
+      "end_utc": "2026-09-16T16:35:52.174104+00:00",
+      "start_monotonic": 280862.859,
+      "end_monotonic": 280864.234,
+      "monotonic_elapsed_ms": 1375.0,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 93,
+        "output_tokens": 111,
+        "total_tokens": 226,
+        "latency_ms": 1371.1747999768704
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "6b1d5d7a-fe24-4c6b-a579-265efaf5d837",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:52.176104+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 6,
+      "scheme": "interleaved",
+      "global_execution_position": 20,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:52.176104+00:00",
+      "end_utc": "2026-09-16T16:35:53.493024+00:00",
+      "start_monotonic": 280864.234,
+      "end_monotonic": 280865.546,
+      "monotonic_elapsed_ms": 1311.9999999762513,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 89,
+        "output_tokens": 107,
+        "total_tokens": 262,
+        "latency_ms": 1317.0812000171281
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "6cfa7215-6719-46e5-9593-ad269b1d32fb",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:53.496024+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 6,
+      "scheme": "interleaved",
+      "global_execution_position": 21,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:53.496024+00:00",
+      "end_utc": "2026-09-16T16:35:54.805579+00:00",
+      "start_monotonic": 280865.562,
+      "end_monotonic": 280866.859,
+      "monotonic_elapsed_ms": 1297.000000020489,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 100,
+        "output_tokens": 118,
+        "total_tokens": 273,
+        "latency_ms": 1308.9944000239484
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "cf5d0c92-da6f-41d0-b3d6-a334310f8f1a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:54.807576+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 6,
+      "scheme": "interleaved",
+      "global_execution_position": 22,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:54.807576+00:00",
+      "end_utc": "2026-09-16T16:35:56.321355+00:00",
+      "start_monotonic": 280866.875,
+      "end_monotonic": 280868.375,
+      "monotonic_elapsed_ms": 1500.0,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 87,
+        "output_tokens": 105,
+        "total_tokens": 242,
+        "latency_ms": 1514.1737000085413
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "60fd1f69-b32c-44c7-9075-8a94e9bebe31",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:56.480392+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 6,
+      "scheme": "interleaved",
+      "global_execution_position": 23,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:56.480392+00:00",
+      "end_utc": "2026-09-16T16:35:58.121397+00:00",
+      "start_monotonic": 280868.546,
+      "end_monotonic": 280870.187,
+      "monotonic_elapsed_ms": 1641.0000000032596,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 118,
+        "output_tokens": 136,
+        "total_tokens": 251,
+        "latency_ms": 1640.1687000179663
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "2622f96d-e859-4c58-9613-1d7029ca8a40",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:58.123396+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 7,
+      "scheme": "interleaved",
+      "global_execution_position": 24,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:58.123396+00:00",
+      "end_utc": "2026-09-16T16:35:59.537468+00:00",
+      "start_monotonic": 280870.187,
+      "end_monotonic": 280871.593,
+      "monotonic_elapsed_ms": 1406.0000000172295,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 114,
+        "output_tokens": 132,
+        "total_tokens": 287,
+        "latency_ms": 1414.2194999731146
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "75f2b1f1-1bf0-4325-9089-ce55e6906774",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:35:59.540472+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 7,
+      "scheme": "interleaved",
+      "global_execution_position": 25,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:35:59.540472+00:00",
+      "end_utc": "2026-09-16T16:36:00.511421+00:00",
+      "start_monotonic": 280871.593,
+      "end_monotonic": 280872.578,
+      "monotonic_elapsed_ms": 984.9999999860302,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 59,
+        "output_tokens": 77,
+        "total_tokens": 232,
+        "latency_ms": 971.4386999839917
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "f4a546e7-c392-4f28-9395-84632b84fce9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:00.514422+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 7,
+      "scheme": "interleaved",
+      "global_execution_position": 26,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:00.514422+00:00",
+      "end_utc": "2026-09-16T16:36:02.161498+00:00",
+      "start_monotonic": 280872.578,
+      "end_monotonic": 280874.218,
+      "monotonic_elapsed_ms": 1640.0000000139698,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 150,
+        "output_tokens": 168,
+        "total_tokens": 305,
+        "latency_ms": 1646.7146999784745
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "2da41499-74f3-4b67-9b53-4eacd33eba3c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:02.164493+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 7,
+      "scheme": "interleaved",
+      "global_execution_position": 27,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:02.164493+00:00",
+      "end_utc": "2026-09-16T16:36:05.143197+00:00",
+      "start_monotonic": 280874.218,
+      "end_monotonic": 280877.203,
+      "monotonic_elapsed_ms": 2984.99999998603,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 452,
+        "output_tokens": 470,
+        "total_tokens": 585,
+        "latency_ms": 2979.0954000200145
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "e3f3d582-c255-4696-904a-c8f13e11253b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:05.146199+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 8,
+      "scheme": "interleaved",
+      "global_execution_position": 28,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:05.146199+00:00",
+      "end_utc": "2026-09-16T16:36:06.700772+00:00",
+      "start_monotonic": 280877.203,
+      "end_monotonic": 280878.765,
+      "monotonic_elapsed_ms": 1562.000000034459,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 107,
+        "output_tokens": 125,
+        "total_tokens": 280,
+        "latency_ms": 1554.2777000227943
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "feb656fe-28af-44a5-95a3-b55640e773a6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:06.703769+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 8,
+      "scheme": "interleaved",
+      "global_execution_position": 29,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:06.703769+00:00",
+      "end_utc": "2026-09-16T16:36:07.930597+00:00",
+      "start_monotonic": 280878.765,
+      "end_monotonic": 280879.984,
+      "monotonic_elapsed_ms": 1218.9999999827705,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 56,
+        "output_tokens": 74,
+        "total_tokens": 229,
+        "latency_ms": 1226.2455999734811
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "977bce08-fd63-43c8-968f-b352e0a14f34",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:07.933601+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 8,
+      "scheme": "interleaved",
+      "global_execution_position": 30,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:07.933601+00:00",
+      "end_utc": "2026-09-16T16:36:09.460811+00:00",
+      "start_monotonic": 280880.0,
+      "end_monotonic": 280881.515,
+      "monotonic_elapsed_ms": 1515.0000000139698,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 109,
+        "output_tokens": 127,
+        "total_tokens": 264,
+        "latency_ms": 1526.4526000246406
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "0a118cd8-3f28-4ebb-aaf7-141e433986e6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:09.463815+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 8,
+      "scheme": "interleaved",
+      "global_execution_position": 31,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:09.463815+00:00",
+      "end_utc": "2026-09-16T16:36:11.689926+00:00",
+      "start_monotonic": 280881.531,
+      "end_monotonic": 280883.75,
+      "monotonic_elapsed_ms": 2218.9999999827705,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 244,
+        "output_tokens": 262,
+        "total_tokens": 377,
+        "latency_ms": 2226.009599980898
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "82685dcd-0bcc-4fb0-92bb-cf0bca89cc10",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:11.692927+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 9,
+      "scheme": "interleaved",
+      "global_execution_position": 32,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:11.692927+00:00",
+      "end_utc": "2026-09-16T16:36:13.218174+00:00",
+      "start_monotonic": 280883.75,
+      "end_monotonic": 280885.281,
+      "monotonic_elapsed_ms": 1531.0000000172295,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 149,
+        "output_tokens": 167,
+        "total_tokens": 322,
+        "latency_ms": 1524.8758000088856
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "81f69f36-59d2-4f92-8a39-239893f143b6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:13.221174+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 9,
+      "scheme": "interleaved",
+      "global_execution_position": 33,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:13.221174+00:00",
+      "end_utc": "2026-09-16T16:36:14.965613+00:00",
+      "start_monotonic": 280885.281,
+      "end_monotonic": 280887.031,
+      "monotonic_elapsed_ms": 1750.0,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 125,
+        "output_tokens": 143,
+        "total_tokens": 298,
+        "latency_ms": 1743.933100020513
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "a6d2d679-7e80-4be1-84b9-b2d4e39f0ef0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:14.968612+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 9,
+      "scheme": "interleaved",
+      "global_execution_position": 34,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:14.968612+00:00",
+      "end_utc": "2026-09-16T16:36:16.386139+00:00",
+      "start_monotonic": 280887.031,
+      "end_monotonic": 280888.453,
+      "monotonic_elapsed_ms": 1421.9999999622814,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 114,
+        "output_tokens": 132,
+        "total_tokens": 269,
+        "latency_ms": 1417.7638000110164
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "a3fbe6bc-2762-41f9-84d3-c63b9c80709c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:16.389139+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 9,
+      "scheme": "interleaved",
+      "global_execution_position": 35,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:16.389139+00:00",
+      "end_utc": "2026-09-16T16:36:17.753232+00:00",
+      "start_monotonic": 280888.453,
+      "end_monotonic": 280889.812,
+      "monotonic_elapsed_ms": 1358.9999999967404,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 93,
+        "output_tokens": 111,
+        "total_tokens": 226,
+        "latency_ms": 1364.0684999991208
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "f96aeda3-1bec-489c-bd9f-119f4c7b08de",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:17.777241+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation",
+      "transform_id": "selection|representation",
+      "transform_sequence": [
+        "selection",
+        "representation"
+      ],
+      "repetition": 10,
+      "scheme": "interleaved",
+      "global_execution_position": 36,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:17.777241+00:00",
+      "end_utc": "2026-09-16T16:36:18.807866+00:00",
+      "start_monotonic": 280889.843,
+      "end_monotonic": 280890.875,
+      "monotonic_elapsed_ms": 1032.0000000065193,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 60,
+        "output_tokens": 78,
+        "total_tokens": 233,
+        "latency_ms": 1030.238300038036
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "4885d63b-87ab-4178-83e7-bf0a07d7cbd7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:18.810861+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_A",
+      "transform_id": "selection|representation_A",
+      "transform_sequence": [
+        "selection",
+        "representation_A"
+      ],
+      "repetition": 10,
+      "scheme": "interleaved",
+      "global_execution_position": 37,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:18.810861+00:00",
+      "end_utc": "2026-09-16T16:36:20.644748+00:00",
+      "start_monotonic": 280890.875,
+      "end_monotonic": 280892.703,
+      "monotonic_elapsed_ms": 1827.999999979511,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 155,
+        "reasoning_tokens": 144,
+        "output_tokens": 162,
+        "total_tokens": 317,
+        "latency_ms": 1833.6784999701194
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "4638ef68-2bc4-43c2-b3fa-edd02a9ecb5a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:20.648746+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_representation_B",
+      "transform_id": "selection|representation_B",
+      "transform_sequence": [
+        "selection",
+        "representation_B"
+      ],
+      "repetition": 10,
+      "scheme": "interleaved",
+      "global_execution_position": 38,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:20.648746+00:00",
+      "end_utc": "2026-09-16T16:36:22.144022+00:00",
+      "start_monotonic": 280892.703,
+      "end_monotonic": 280894.203,
+      "monotonic_elapsed_ms": 1500.0,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 137,
+        "reasoning_tokens": 121,
+        "output_tokens": 139,
+        "total_tokens": 276,
+        "latency_ms": 1495.3428999870084
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "a5347f8f-0462-46da-8525-9361f2ed54c2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    },
+    {
+      "schema_version": "0.6.1",
+      "timestamp_utc": "2026-09-16T16:36:22.147025+00:00",
+      "task_id": "T003",
+      "task_family": "structured_analysis",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "arm_id": "selection_only",
+      "transform_id": "selection",
+      "transform_sequence": [
+        "selection"
+      ],
+      "repetition": 10,
+      "scheme": "interleaved",
+      "global_execution_position": 39,
+      "seed": 6101,
+      "start_utc": "2026-09-16T16:36:22.147025+00:00",
+      "end_utc": "2026-09-16T16:36:23.465359+00:00",
+      "start_monotonic": 280894.203,
+      "end_monotonic": 280895.531,
+      "monotonic_elapsed_ms": 1328.0000000377186,
+      "context_change": {
+        "included": [
+          "entity",
+          "score",
+          "status"
+        ],
+        "excluded": [
+          "trace",
+          "commentary"
+        ]
+      },
+      "metrics": {
+        "input_tokens": 115,
+        "reasoning_tokens": 79,
+        "output_tokens": 97,
+        "total_tokens": 212,
+        "latency_ms": 1317.9685999639332
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": "completed",
+        "response_id": "7db286b2-18df-4958-90e1-ab6f93b69418",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS"
+    }
+  ],
+  "finished_utc": "2026-09-16T16:36:23.468362+00:00"
+}

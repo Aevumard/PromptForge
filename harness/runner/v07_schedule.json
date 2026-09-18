@@ -1,0 +1,1281 @@
+{
+  "status": "VALID",
+  "tasks": [
+    "T001",
+    "T002",
+    "T003",
+    "T004"
+  ],
+  "arms": [
+    "selection_only",
+    "selection_representation",
+    "selection_representation_A"
+  ],
+  "repetitions": 15,
+  "runs_per_task": 45,
+  "total_runs": 180,
+  "scheme": "latin_square",
+  "api_calls": 0,
+  "rows": [
+    {
+      "task": "T001",
+      "repetition": 1,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 0
+    },
+    {
+      "task": "T001",
+      "repetition": 1,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 1
+    },
+    {
+      "task": "T001",
+      "repetition": 1,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 2
+    },
+    {
+      "task": "T001",
+      "repetition": 2,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 3
+    },
+    {
+      "task": "T001",
+      "repetition": 2,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 4
+    },
+    {
+      "task": "T001",
+      "repetition": 2,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 5
+    },
+    {
+      "task": "T001",
+      "repetition": 3,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 6
+    },
+    {
+      "task": "T001",
+      "repetition": 3,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 7
+    },
+    {
+      "task": "T001",
+      "repetition": 3,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 8
+    },
+    {
+      "task": "T001",
+      "repetition": 4,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 9
+    },
+    {
+      "task": "T001",
+      "repetition": 4,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 10
+    },
+    {
+      "task": "T001",
+      "repetition": 4,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 11
+    },
+    {
+      "task": "T001",
+      "repetition": 5,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 12
+    },
+    {
+      "task": "T001",
+      "repetition": 5,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 13
+    },
+    {
+      "task": "T001",
+      "repetition": 5,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 14
+    },
+    {
+      "task": "T001",
+      "repetition": 6,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 15
+    },
+    {
+      "task": "T001",
+      "repetition": 6,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 16
+    },
+    {
+      "task": "T001",
+      "repetition": 6,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 17
+    },
+    {
+      "task": "T001",
+      "repetition": 7,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 18
+    },
+    {
+      "task": "T001",
+      "repetition": 7,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 19
+    },
+    {
+      "task": "T001",
+      "repetition": 7,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 20
+    },
+    {
+      "task": "T001",
+      "repetition": 8,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 21
+    },
+    {
+      "task": "T001",
+      "repetition": 8,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 22
+    },
+    {
+      "task": "T001",
+      "repetition": 8,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 23
+    },
+    {
+      "task": "T001",
+      "repetition": 9,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 24
+    },
+    {
+      "task": "T001",
+      "repetition": 9,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 25
+    },
+    {
+      "task": "T001",
+      "repetition": 9,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 26
+    },
+    {
+      "task": "T001",
+      "repetition": 10,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 27
+    },
+    {
+      "task": "T001",
+      "repetition": 10,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 28
+    },
+    {
+      "task": "T001",
+      "repetition": 10,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 29
+    },
+    {
+      "task": "T001",
+      "repetition": 11,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 30
+    },
+    {
+      "task": "T001",
+      "repetition": 11,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 31
+    },
+    {
+      "task": "T001",
+      "repetition": 11,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 32
+    },
+    {
+      "task": "T001",
+      "repetition": 12,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 33
+    },
+    {
+      "task": "T001",
+      "repetition": 12,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 34
+    },
+    {
+      "task": "T001",
+      "repetition": 12,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 35
+    },
+    {
+      "task": "T001",
+      "repetition": 13,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 36
+    },
+    {
+      "task": "T001",
+      "repetition": 13,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 37
+    },
+    {
+      "task": "T001",
+      "repetition": 13,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 38
+    },
+    {
+      "task": "T001",
+      "repetition": 14,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 39
+    },
+    {
+      "task": "T001",
+      "repetition": 14,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 40
+    },
+    {
+      "task": "T001",
+      "repetition": 14,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 41
+    },
+    {
+      "task": "T001",
+      "repetition": 15,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 42
+    },
+    {
+      "task": "T001",
+      "repetition": 15,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 43
+    },
+    {
+      "task": "T001",
+      "repetition": 15,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 44
+    },
+    {
+      "task": "T002",
+      "repetition": 1,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 45
+    },
+    {
+      "task": "T002",
+      "repetition": 1,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 46
+    },
+    {
+      "task": "T002",
+      "repetition": 1,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 47
+    },
+    {
+      "task": "T002",
+      "repetition": 2,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 48
+    },
+    {
+      "task": "T002",
+      "repetition": 2,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 49
+    },
+    {
+      "task": "T002",
+      "repetition": 2,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 50
+    },
+    {
+      "task": "T002",
+      "repetition": 3,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 51
+    },
+    {
+      "task": "T002",
+      "repetition": 3,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 52
+    },
+    {
+      "task": "T002",
+      "repetition": 3,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 53
+    },
+    {
+      "task": "T002",
+      "repetition": 4,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 54
+    },
+    {
+      "task": "T002",
+      "repetition": 4,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 55
+    },
+    {
+      "task": "T002",
+      "repetition": 4,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 56
+    },
+    {
+      "task": "T002",
+      "repetition": 5,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 57
+    },
+    {
+      "task": "T002",
+      "repetition": 5,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 58
+    },
+    {
+      "task": "T002",
+      "repetition": 5,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 59
+    },
+    {
+      "task": "T002",
+      "repetition": 6,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 60
+    },
+    {
+      "task": "T002",
+      "repetition": 6,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 61
+    },
+    {
+      "task": "T002",
+      "repetition": 6,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 62
+    },
+    {
+      "task": "T002",
+      "repetition": 7,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 63
+    },
+    {
+      "task": "T002",
+      "repetition": 7,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 64
+    },
+    {
+      "task": "T002",
+      "repetition": 7,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 65
+    },
+    {
+      "task": "T002",
+      "repetition": 8,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 66
+    },
+    {
+      "task": "T002",
+      "repetition": 8,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 67
+    },
+    {
+      "task": "T002",
+      "repetition": 8,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 68
+    },
+    {
+      "task": "T002",
+      "repetition": 9,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 69
+    },
+    {
+      "task": "T002",
+      "repetition": 9,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 70
+    },
+    {
+      "task": "T002",
+      "repetition": 9,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 71
+    },
+    {
+      "task": "T002",
+      "repetition": 10,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 72
+    },
+    {
+      "task": "T002",
+      "repetition": 10,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 73
+    },
+    {
+      "task": "T002",
+      "repetition": 10,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 74
+    },
+    {
+      "task": "T002",
+      "repetition": 11,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 75
+    },
+    {
+      "task": "T002",
+      "repetition": 11,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 76
+    },
+    {
+      "task": "T002",
+      "repetition": 11,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 77
+    },
+    {
+      "task": "T002",
+      "repetition": 12,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 78
+    },
+    {
+      "task": "T002",
+      "repetition": 12,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 79
+    },
+    {
+      "task": "T002",
+      "repetition": 12,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 80
+    },
+    {
+      "task": "T002",
+      "repetition": 13,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 81
+    },
+    {
+      "task": "T002",
+      "repetition": 13,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 82
+    },
+    {
+      "task": "T002",
+      "repetition": 13,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 83
+    },
+    {
+      "task": "T002",
+      "repetition": 14,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 84
+    },
+    {
+      "task": "T002",
+      "repetition": 14,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 85
+    },
+    {
+      "task": "T002",
+      "repetition": 14,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 86
+    },
+    {
+      "task": "T002",
+      "repetition": 15,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 87
+    },
+    {
+      "task": "T002",
+      "repetition": 15,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 88
+    },
+    {
+      "task": "T002",
+      "repetition": 15,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 89
+    },
+    {
+      "task": "T003",
+      "repetition": 1,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 90
+    },
+    {
+      "task": "T003",
+      "repetition": 1,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 91
+    },
+    {
+      "task": "T003",
+      "repetition": 1,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 92
+    },
+    {
+      "task": "T003",
+      "repetition": 2,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 93
+    },
+    {
+      "task": "T003",
+      "repetition": 2,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 94
+    },
+    {
+      "task": "T003",
+      "repetition": 2,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 95
+    },
+    {
+      "task": "T003",
+      "repetition": 3,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 96
+    },
+    {
+      "task": "T003",
+      "repetition": 3,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 97
+    },
+    {
+      "task": "T003",
+      "repetition": 3,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 98
+    },
+    {
+      "task": "T003",
+      "repetition": 4,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 99
+    },
+    {
+      "task": "T003",
+      "repetition": 4,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 100
+    },
+    {
+      "task": "T003",
+      "repetition": 4,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 101
+    },
+    {
+      "task": "T003",
+      "repetition": 5,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 102
+    },
+    {
+      "task": "T003",
+      "repetition": 5,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 103
+    },
+    {
+      "task": "T003",
+      "repetition": 5,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 104
+    },
+    {
+      "task": "T003",
+      "repetition": 6,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 105
+    },
+    {
+      "task": "T003",
+      "repetition": 6,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 106
+    },
+    {
+      "task": "T003",
+      "repetition": 6,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 107
+    },
+    {
+      "task": "T003",
+      "repetition": 7,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 108
+    },
+    {
+      "task": "T003",
+      "repetition": 7,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 109
+    },
+    {
+      "task": "T003",
+      "repetition": 7,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 110
+    },
+    {
+      "task": "T003",
+      "repetition": 8,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 111
+    },
+    {
+      "task": "T003",
+      "repetition": 8,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 112
+    },
+    {
+      "task": "T003",
+      "repetition": 8,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 113
+    },
+    {
+      "task": "T003",
+      "repetition": 9,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 114
+    },
+    {
+      "task": "T003",
+      "repetition": 9,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 115
+    },
+    {
+      "task": "T003",
+      "repetition": 9,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 116
+    },
+    {
+      "task": "T003",
+      "repetition": 10,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 117
+    },
+    {
+      "task": "T003",
+      "repetition": 10,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 118
+    },
+    {
+      "task": "T003",
+      "repetition": 10,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 119
+    },
+    {
+      "task": "T003",
+      "repetition": 11,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 120
+    },
+    {
+      "task": "T003",
+      "repetition": 11,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 121
+    },
+    {
+      "task": "T003",
+      "repetition": 11,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 122
+    },
+    {
+      "task": "T003",
+      "repetition": 12,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 123
+    },
+    {
+      "task": "T003",
+      "repetition": 12,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 124
+    },
+    {
+      "task": "T003",
+      "repetition": 12,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 125
+    },
+    {
+      "task": "T003",
+      "repetition": 13,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 126
+    },
+    {
+      "task": "T003",
+      "repetition": 13,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 127
+    },
+    {
+      "task": "T003",
+      "repetition": 13,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 128
+    },
+    {
+      "task": "T003",
+      "repetition": 14,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 129
+    },
+    {
+      "task": "T003",
+      "repetition": 14,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 130
+    },
+    {
+      "task": "T003",
+      "repetition": 14,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 131
+    },
+    {
+      "task": "T003",
+      "repetition": 15,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 132
+    },
+    {
+      "task": "T003",
+      "repetition": 15,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 133
+    },
+    {
+      "task": "T003",
+      "repetition": 15,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 134
+    },
+    {
+      "task": "T004",
+      "repetition": 1,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 135
+    },
+    {
+      "task": "T004",
+      "repetition": 1,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 136
+    },
+    {
+      "task": "T004",
+      "repetition": 1,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 137
+    },
+    {
+      "task": "T004",
+      "repetition": 2,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 138
+    },
+    {
+      "task": "T004",
+      "repetition": 2,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 139
+    },
+    {
+      "task": "T004",
+      "repetition": 2,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 140
+    },
+    {
+      "task": "T004",
+      "repetition": 3,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 141
+    },
+    {
+      "task": "T004",
+      "repetition": 3,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 142
+    },
+    {
+      "task": "T004",
+      "repetition": 3,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 143
+    },
+    {
+      "task": "T004",
+      "repetition": 4,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 144
+    },
+    {
+      "task": "T004",
+      "repetition": 4,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 145
+    },
+    {
+      "task": "T004",
+      "repetition": 4,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 146
+    },
+    {
+      "task": "T004",
+      "repetition": 5,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 147
+    },
+    {
+      "task": "T004",
+      "repetition": 5,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 148
+    },
+    {
+      "task": "T004",
+      "repetition": 5,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 149
+    },
+    {
+      "task": "T004",
+      "repetition": 6,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 150
+    },
+    {
+      "task": "T004",
+      "repetition": 6,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 151
+    },
+    {
+      "task": "T004",
+      "repetition": 6,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 152
+    },
+    {
+      "task": "T004",
+      "repetition": 7,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 153
+    },
+    {
+      "task": "T004",
+      "repetition": 7,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 154
+    },
+    {
+      "task": "T004",
+      "repetition": 7,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 155
+    },
+    {
+      "task": "T004",
+      "repetition": 8,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 156
+    },
+    {
+      "task": "T004",
+      "repetition": 8,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 157
+    },
+    {
+      "task": "T004",
+      "repetition": 8,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 158
+    },
+    {
+      "task": "T004",
+      "repetition": 9,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 159
+    },
+    {
+      "task": "T004",
+      "repetition": 9,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 160
+    },
+    {
+      "task": "T004",
+      "repetition": 9,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 161
+    },
+    {
+      "task": "T004",
+      "repetition": 10,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 162
+    },
+    {
+      "task": "T004",
+      "repetition": 10,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 163
+    },
+    {
+      "task": "T004",
+      "repetition": 10,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 164
+    },
+    {
+      "task": "T004",
+      "repetition": 11,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 165
+    },
+    {
+      "task": "T004",
+      "repetition": 11,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 166
+    },
+    {
+      "task": "T004",
+      "repetition": 11,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 167
+    },
+    {
+      "task": "T004",
+      "repetition": 12,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 168
+    },
+    {
+      "task": "T004",
+      "repetition": 12,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 169
+    },
+    {
+      "task": "T004",
+      "repetition": 12,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 170
+    },
+    {
+      "task": "T004",
+      "repetition": 13,
+      "arm_id": "selection_only",
+      "relative_position": 0,
+      "global_execution_position": 171
+    },
+    {
+      "task": "T004",
+      "repetition": 13,
+      "arm_id": "selection_representation",
+      "relative_position": 1,
+      "global_execution_position": 172
+    },
+    {
+      "task": "T004",
+      "repetition": 13,
+      "arm_id": "selection_representation_A",
+      "relative_position": 2,
+      "global_execution_position": 173
+    },
+    {
+      "task": "T004",
+      "repetition": 14,
+      "arm_id": "selection_representation",
+      "relative_position": 0,
+      "global_execution_position": 174
+    },
+    {
+      "task": "T004",
+      "repetition": 14,
+      "arm_id": "selection_representation_A",
+      "relative_position": 1,
+      "global_execution_position": 175
+    },
+    {
+      "task": "T004",
+      "repetition": 14,
+      "arm_id": "selection_only",
+      "relative_position": 2,
+      "global_execution_position": 176
+    },
+    {
+      "task": "T004",
+      "repetition": 15,
+      "arm_id": "selection_representation_A",
+      "relative_position": 0,
+      "global_execution_position": 177
+    },
+    {
+      "task": "T004",
+      "repetition": 15,
+      "arm_id": "selection_only",
+      "relative_position": 1,
+      "global_execution_position": 178
+    },
+    {
+      "task": "T004",
+      "repetition": 15,
+      "arm_id": "selection_representation",
+      "relative_position": 2,
+      "global_execution_position": 179
+    }
+  ]
+}

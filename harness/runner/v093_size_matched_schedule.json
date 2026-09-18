@@ -1,0 +1,2190 @@
+{
+    "schema_version":  "0.9.3",
+    "experiment_id":  "PROMPTFORGE_V0.9.3_SIZE_MATCHED_CONTROL",
+    "task_id":  "T003",
+    "task_family":  "structured_analysis",
+    "model_id":  "deepseek",
+    "variants":  [
+                     "canonical_t003",
+                     "noise_long",
+                     "key_order",
+                     "content_shift"
+                 ],
+    "conditions":  [
+                       "noop_compact",
+                       "noop_padded",
+                       "pairs_compact",
+                       "pairs_bare_compact"
+                   ],
+    "repetitions":  15,
+    "scheduled_runs":  240,
+    "primary_endpoint":  "pooled_delta_total_pairs_compact_minus_noop_padded",
+    "secondary_endpoints":  [
+                                "pooled_delta_total_noop_padded_minus_noop_compact",
+                                "pooled_delta_total_pairs_compact_minus_pairs_bare_compact"
+                            ],
+    "rotation":  "deterministic_variant_condition_cyclic",
+    "even_repetition_transform":  "reverse",
+    "rows":  [
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  0
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  1
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  2
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  3
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  4
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  5
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  6
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  7
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  8
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  9
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  10
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  11
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  12
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  13
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  14
+                 },
+                 {
+                     "repetition":  1,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  15
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  16
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  17
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  18
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  19
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  20
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  21
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  22
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  23
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  24
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  25
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  26
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  27
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  28
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  29
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  30
+                 },
+                 {
+                     "repetition":  2,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  31
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  32
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  33
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  34
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  35
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  36
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  37
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  38
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  39
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  40
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  41
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  42
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  43
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  44
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  45
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  46
+                 },
+                 {
+                     "repetition":  3,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  47
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  48
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  49
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  50
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  51
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  52
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  53
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  54
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  55
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  56
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  57
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  58
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  59
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  60
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  61
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  62
+                 },
+                 {
+                     "repetition":  4,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  63
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  64
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  65
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  66
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  67
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  68
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  69
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  70
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  71
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  72
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  73
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  74
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  75
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  76
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  77
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  78
+                 },
+                 {
+                     "repetition":  5,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  79
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  80
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  81
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  82
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  83
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  84
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  85
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  86
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  87
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  88
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  89
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  90
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  91
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  92
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  93
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  94
+                 },
+                 {
+                     "repetition":  6,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  95
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  96
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  97
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  98
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  99
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  100
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  101
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  102
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  103
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  104
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  105
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  106
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  107
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  108
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  109
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  110
+                 },
+                 {
+                     "repetition":  7,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  111
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  112
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  113
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  114
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  115
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  116
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  117
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  118
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  119
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  120
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  121
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  122
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  123
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  124
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  125
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  126
+                 },
+                 {
+                     "repetition":  8,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  127
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  128
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  129
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  130
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  131
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  132
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  133
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  134
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  135
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  136
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  137
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  138
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  139
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  140
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  141
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  142
+                 },
+                 {
+                     "repetition":  9,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  143
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  144
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  145
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  146
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  147
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  148
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  149
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  150
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  151
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  152
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  153
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  154
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  155
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  156
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  157
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  158
+                 },
+                 {
+                     "repetition":  10,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  159
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  160
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  161
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  162
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  163
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  164
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  165
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  166
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  167
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  168
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  169
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  170
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  171
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  172
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  173
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  174
+                 },
+                 {
+                     "repetition":  11,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  175
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  176
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  177
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  178
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  179
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  180
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  181
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  182
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  183
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  184
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  185
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  186
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  187
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  188
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  189
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  190
+                 },
+                 {
+                     "repetition":  12,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  191
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  192
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  2,
+                     "global_execution_position":  193
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  194
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  4,
+                     "global_execution_position":  195
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  196
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  6,
+                     "global_execution_position":  197
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  198
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  8,
+                     "global_execution_position":  199
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  200
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  10,
+                     "global_execution_position":  201
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  202
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  12,
+                     "global_execution_position":  203
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  204
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  14,
+                     "global_execution_position":  205
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  206
+                 },
+                 {
+                     "repetition":  13,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  16,
+                     "global_execution_position":  207
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  208
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  209
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  210
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  211
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  212
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  213
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  214
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  215
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  216
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  217
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  218
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  219
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  220
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  221
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  222
+                 },
+                 {
+                     "repetition":  14,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  223
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  1,
+                     "global_execution_position":  224
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  2,
+                     "global_execution_position":  225
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  3,
+                     "global_execution_position":  226
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "key_order",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  4,
+                     "global_execution_position":  227
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  5,
+                     "global_execution_position":  228
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  6,
+                     "global_execution_position":  229
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  7,
+                     "global_execution_position":  230
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "content_shift",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  8,
+                     "global_execution_position":  231
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  9,
+                     "global_execution_position":  232
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  10,
+                     "global_execution_position":  233
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  11,
+                     "global_execution_position":  234
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "canonical_t003",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  12,
+                     "global_execution_position":  235
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_compact",
+                     "arm_id":  "pairs_compact",
+                     "position_within_rep":  13,
+                     "global_execution_position":  236
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "pairs_bare_compact",
+                     "arm_id":  "pairs_bare_compact",
+                     "position_within_rep":  14,
+                     "global_execution_position":  237
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_compact",
+                     "arm_id":  "noop_compact",
+                     "position_within_rep":  15,
+                     "global_execution_position":  238
+                 },
+                 {
+                     "repetition":  15,
+                     "task_id":  "T003",
+                     "variant_id":  "noise_long",
+                     "condition_id":  "noop_padded",
+                     "arm_id":  "noop_padded",
+                     "position_within_rep":  16,
+                     "global_execution_position":  239
+                 }
+             ]
+}

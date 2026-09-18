@@ -1,0 +1,2549 @@
+{
+  "experiment_id": "PROMPTFORGE_V0.8_HETEROGENEITY",
+  "version": "v0.8",
+  "scheme": "cyclic_balanced_factorial",
+  "tasks": [
+    "T001",
+    "T002",
+    "T003",
+    "T004"
+  ],
+  "models": [
+    "deepseek",
+    "openai_gpt5_mini",
+    "gemini_3_6_flash"
+  ],
+  "arms": [
+    "noop",
+    "representation"
+  ],
+  "excluded_arms": [
+    "representation_A",
+    "representation_B"
+  ],
+  "repetitions": 15,
+  "total_runs": 360,
+  "schedule_sha256": "ae909249485308bb6b63596a9875868c80caa7483990ac2ea0ce7d2e61515f5e",
+  "positions": [
+    {
+      "global_execution_position": 0,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 1,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 2,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 3,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 4,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 5,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 6,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 7,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 8,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 9,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 10,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 11,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 12,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 13,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 14,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 15,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 16,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 17,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 18,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 19,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 20,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 21,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 22,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 23,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 1
+    },
+    {
+      "global_execution_position": 24,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 25,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 26,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 27,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 28,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 29,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 30,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 31,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 32,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 33,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 34,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 35,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 36,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 37,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 38,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 39,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 40,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 41,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 42,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 43,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 44,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 45,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 46,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 47,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 2
+    },
+    {
+      "global_execution_position": 48,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 49,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 50,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 51,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 52,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 53,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 54,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 55,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 56,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 57,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 58,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 59,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 60,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 61,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 62,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 63,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 64,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 65,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 66,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 67,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 68,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 69,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 70,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 71,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 3
+    },
+    {
+      "global_execution_position": 72,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 73,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 74,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 75,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 76,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 77,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 78,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 79,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 80,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 81,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 82,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 83,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 84,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 85,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 86,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 87,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 88,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 89,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 90,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 91,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 92,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 93,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 94,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 95,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 4
+    },
+    {
+      "global_execution_position": 96,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 97,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 98,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 99,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 100,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 101,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 102,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 103,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 104,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 105,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 106,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 107,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 108,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 109,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 110,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 111,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 112,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 113,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 114,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 115,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 116,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 117,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 118,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 119,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 5
+    },
+    {
+      "global_execution_position": 120,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 121,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 122,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 123,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 124,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 125,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 126,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 127,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 128,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 129,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 130,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 131,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 132,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 133,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 134,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 135,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 136,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 137,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 138,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 139,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 140,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 141,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 142,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 143,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 6
+    },
+    {
+      "global_execution_position": 144,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 145,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 146,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 147,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 148,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 149,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 150,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 151,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 152,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 153,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 154,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 155,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 156,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 157,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 158,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 159,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 160,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 161,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 162,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 163,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 164,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 165,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 166,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 167,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 7
+    },
+    {
+      "global_execution_position": 168,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 169,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 170,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 171,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 172,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 173,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 174,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 175,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 176,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 177,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 178,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 179,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 180,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 181,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 182,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 183,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 184,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 185,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 186,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 187,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 188,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 189,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 190,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 191,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 8
+    },
+    {
+      "global_execution_position": 192,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 193,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 194,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 195,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 196,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 197,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 198,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 199,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 200,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 201,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 202,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 203,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 204,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 205,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 206,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 207,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 208,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 209,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 210,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 211,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 212,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 213,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 214,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 215,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 9
+    },
+    {
+      "global_execution_position": 216,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 217,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 218,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 219,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 220,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 221,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 222,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 223,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 224,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 225,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 226,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 227,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 228,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 229,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 230,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 231,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 232,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 233,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 234,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 235,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 236,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 237,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 238,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 239,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 10
+    },
+    {
+      "global_execution_position": 240,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 241,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 242,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 243,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 244,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 245,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 246,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 247,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 248,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 249,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 250,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 251,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 252,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 253,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 254,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 255,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 256,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 257,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 258,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 259,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 260,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 261,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 262,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 263,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 11
+    },
+    {
+      "global_execution_position": 264,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 265,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 266,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 267,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 268,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 269,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 270,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 271,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 272,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 273,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 274,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 275,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 276,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 277,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 278,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 279,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 280,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 281,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 282,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 283,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 284,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 285,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 286,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 287,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 12
+    },
+    {
+      "global_execution_position": 288,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 289,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 290,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 291,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 292,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 293,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 294,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 295,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 296,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 297,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 298,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 299,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 300,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 301,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 302,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 303,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 304,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 305,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 306,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 307,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 308,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 309,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 310,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 311,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 13
+    },
+    {
+      "global_execution_position": 312,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 313,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 314,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 315,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 316,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 317,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 318,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 319,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 320,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 321,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 322,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 323,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 324,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 325,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 326,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 327,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 328,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 329,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 330,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 331,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 332,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 333,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 334,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 335,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 14
+    },
+    {
+      "global_execution_position": 336,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 337,
+      "task_id": "T004",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 338,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 339,
+      "task_id": "T001",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 340,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 341,
+      "task_id": "T001",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 342,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 343,
+      "task_id": "T001",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 344,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 345,
+      "task_id": "T002",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 346,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 347,
+      "task_id": "T002",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 348,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 349,
+      "task_id": "T002",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 350,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 351,
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 352,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 353,
+      "task_id": "T003",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 354,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 355,
+      "task_id": "T003",
+      "model_id": "gemini_3_6_flash",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 356,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 357,
+      "task_id": "T004",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 358,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "noop",
+      "repetition": 15
+    },
+    {
+      "global_execution_position": 359,
+      "task_id": "T004",
+      "model_id": "openai_gpt5_mini",
+      "arm_id": "representation",
+      "repetition": 15
+    }
+  ]
+}

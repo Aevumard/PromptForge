@@ -1,0 +1,72 @@
+{
+    "schema_version":  "0.9.2",
+    "experiment_id":  "PROMPTFORGE_V0.9.2_PERTURBATION_VALIDATION",
+    "source_task":  "T003",
+    "task_family":  "structured_analysis",
+    "variants":  [
+                     {
+                         "variant_id":  "canonical_t003",
+                         "description":  "Exact frozen T003 task data",
+                         "required":  [
+                                          "entity",
+                                          "score",
+                                          "status"
+                                      ],
+                         "data":  {
+                                      "entity":  "A-17",
+                                      "score":  0.87,
+                                      "status":  "stable",
+                                      "trace":  "noise",
+                                      "commentary":  "noise"
+                                  }
+                     },
+                     {
+                         "variant_id":  "noise_long",
+                         "description":  "Same required values with longer irrelevant noise",
+                         "required":  [
+                                          "entity",
+                                          "score",
+                                          "status"
+                                      ],
+                         "data":  {
+                                      "entity":  "A-17",
+                                      "score":  0.87,
+                                      "status":  "stable",
+                                      "trace":  "telemetry-trace-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                                      "commentary":  "analysis-commentary-yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+                                  }
+                     },
+                     {
+                         "variant_id":  "key_order",
+                         "description":  "Same values with reordered context keys",
+                         "required":  [
+                                          "entity",
+                                          "score",
+                                          "status"
+                                      ],
+                         "data":  {
+                                      "trace":  "noise",
+                                      "entity":  "A-17",
+                                      "commentary":  "noise",
+                                      "score":  0.87,
+                                      "status":  "stable"
+                                  }
+                     },
+                     {
+                         "variant_id":  "content_shift",
+                         "description":  "Same schema with held-out required values",
+                         "required":  [
+                                          "entity",
+                                          "score",
+                                          "status"
+                                      ],
+                         "data":  {
+                                      "entity":  "B-42",
+                                      "score":  0.42,
+                                      "status":  "stable",
+                                      "trace":  "noise-b",
+                                      "commentary":  "noise-c"
+                                  }
+                     }
+                 ]
+}

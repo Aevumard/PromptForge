@@ -1,0 +1,5908 @@
+{
+  "schema_version": "0.8.4",
+  "experiment_id": "PROMPTFORGE_V0.8.4_ZOOM",
+  "status": "COMPLETE",
+  "provider_phase": "REAL_COLLECTION",
+  "task_id": "T003",
+  "model_id": "deepseek",
+  "conditions": [
+    "noop_compact",
+    "pairs_compact",
+    "pairs_bare_compact",
+    "flat_compact"
+  ],
+  "repetitions": 30,
+  "scheduled_runs": 120,
+  "schedule_sha256": "4D6B9B81CB2C2B10126E549469616539342CC7FCC3ADF40C83158E4989EDB23F",
+  "preregistration_sha256": "B6FC77D94087EFBBEFFA0EB3EB83B5F9091E9A71CCECCC9B60CB7B9EB5E03E05",
+  "protected_sha256": {
+    "transforms.py": "D851443F75B02876DEF4A971B0C97B0A34A6DE044ED49326E133A1D421EC8E4A",
+    "real_executor.py": "5589F8C777A594E81BBBFA15D14BF181B141957825DB176EAEA1ABB5DD2D9842",
+    "deepseek_adapter.py": "4913395597AFAB924A8FB8927CB61288603B4B87A5B1B0BC47F6959707D0E614"
+  },
+  "runs": [
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_001",
+      "timestamp_utc": "2026-09-17T16:12:43.312520+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 1,
+      "global_execution_position": 0,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 123,
+        "output_tokens": 141,
+        "total_tokens": 258,
+        "latency_ms": 2003.4897000005003
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "05c1c462-3004-4705-9604-82e4c23da37c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:43.312520+00:00",
+      "end_utc": "2026-09-17T16:12:45.315943+00:00",
+      "monotonic_elapsed_ms": 2000.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_001",
+      "timestamp_utc": "2026-09-17T16:12:45.352306+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 1,
+      "global_execution_position": 1,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 104,
+        "output_tokens": 122,
+        "total_tokens": 248,
+        "latency_ms": 1403.8774000000558
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "2fbb4f25-046c-4c94-9c2c-b08fccaecf71",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:45.352306+00:00",
+      "end_utc": "2026-09-17T16:12:46.756340+00:00",
+      "monotonic_elapsed_ms": 1406.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_001",
+      "timestamp_utc": "2026-09-17T16:12:46.784342+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 1,
+      "global_execution_position": 2,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 116,
+        "output_tokens": 134,
+        "total_tokens": 256,
+        "latency_ms": 1729.9703000026057
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "8f013782-296e-46e4-8390-22a6cc7a1761",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:46.784342+00:00",
+      "end_utc": "2026-09-17T16:12:48.514917+00:00",
+      "monotonic_elapsed_ms": 1735.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_001",
+      "timestamp_utc": "2026-09-17T16:12:48.533941+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 1,
+      "global_execution_position": 3,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 112,
+        "output_tokens": 130,
+        "total_tokens": 247,
+        "latency_ms": 1644.5191999955568
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "09d5fee5-8022-40d4-b7bb-63cf8c3e0696",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:48.533941+00:00",
+      "end_utc": "2026-09-17T16:12:50.178948+00:00",
+      "monotonic_elapsed_ms": 1656.9999999992433
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_002",
+      "timestamp_utc": "2026-09-17T16:12:50.208914+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 2,
+      "global_execution_position": 4,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 119,
+        "output_tokens": 137,
+        "total_tokens": 254,
+        "latency_ms": 1556.1902999979793
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "da5048a4-1f90-4ed8-9f41-cd8aff4904f5",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:50.208914+00:00",
+      "end_utc": "2026-09-17T16:12:51.764678+00:00",
+      "monotonic_elapsed_ms": 1547.0000000059372
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_002",
+      "timestamp_utc": "2026-09-17T16:12:51.790678+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 2,
+      "global_execution_position": 5,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 69,
+        "output_tokens": 87,
+        "total_tokens": 204,
+        "latency_ms": 1526.011699999799
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "1f0cb40f-dce7-4f7d-a686-e4d045ce530c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:51.790678+00:00",
+      "end_utc": "2026-09-17T16:12:53.316961+00:00",
+      "monotonic_elapsed_ms": 1516.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_002",
+      "timestamp_utc": "2026-09-17T16:12:53.343137+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 2,
+      "global_execution_position": 6,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 107,
+        "output_tokens": 125,
+        "total_tokens": 247,
+        "latency_ms": 1552.8071000007913
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "0a5ba598-fd52-4eec-bb94-450098defe9c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:53.343137+00:00",
+      "end_utc": "2026-09-17T16:12:54.896427+00:00",
+      "monotonic_elapsed_ms": 1562.000000005355
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_002",
+      "timestamp_utc": "2026-09-17T16:12:55.108679+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 2,
+      "global_execution_position": 7,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 204,
+        "output_tokens": 222,
+        "total_tokens": 348,
+        "latency_ms": 1890.2928000024986
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "6d089d84-fe84-49a1-95de-96d86d13d44a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:55.108679+00:00",
+      "end_utc": "2026-09-17T16:12:56.999632+00:00",
+      "monotonic_elapsed_ms": 1889.999999999418
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_003",
+      "timestamp_utc": "2026-09-17T16:12:57.023972+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 3,
+      "global_execution_position": 8,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 279,
+        "output_tokens": 297,
+        "total_tokens": 419,
+        "latency_ms": 1965.3164999981527
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "1b10c21a-81be-4452-9346-f741c91708ab",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:57.023972+00:00",
+      "end_utc": "2026-09-17T16:12:58.988117+00:00",
+      "monotonic_elapsed_ms": 1953.9999999979045
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_003",
+      "timestamp_utc": "2026-09-17T16:12:59.013661+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 3,
+      "global_execution_position": 9,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 89,
+        "output_tokens": 107,
+        "total_tokens": 224,
+        "latency_ms": 1458.9832999990904
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "5955329c-a72d-41fd-996c-49d1b907b0c0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:12:59.013661+00:00",
+      "end_utc": "2026-09-17T16:13:00.473256+00:00",
+      "monotonic_elapsed_ms": 1452.9999999940628
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_003",
+      "timestamp_utc": "2026-09-17T16:13:00.675162+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 3,
+      "global_execution_position": 10,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 135,
+        "output_tokens": 153,
+        "total_tokens": 270,
+        "latency_ms": 1355.9977000040817
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "6eca1446-9953-4af6-ac0d-2b7420f3bffe",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:00.675162+00:00",
+      "end_utc": "2026-09-17T16:13:02.030522+00:00",
+      "monotonic_elapsed_ms": 1359.0000000040163
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_003",
+      "timestamp_utc": "2026-09-17T16:13:02.062139+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 3,
+      "global_execution_position": 11,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 124,
+        "output_tokens": 142,
+        "total_tokens": 268,
+        "latency_ms": 1352.8495999998995
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "3ef6a218-8977-4501-a19e-c31d8c2ff3fe",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:02.062139+00:00",
+      "end_utc": "2026-09-17T16:13:03.414897+00:00",
+      "monotonic_elapsed_ms": 1358.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_004",
+      "timestamp_utc": "2026-09-17T16:13:03.438433+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 4,
+      "global_execution_position": 12,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 168,
+        "output_tokens": 186,
+        "total_tokens": 308,
+        "latency_ms": 1474.294200001168
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "d7001984-8a78-44e2-a540-9dd0c260f1bc",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:03.438433+00:00",
+      "end_utc": "2026-09-17T16:13:04.913159+00:00",
+      "monotonic_elapsed_ms": 1483.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_004",
+      "timestamp_utc": "2026-09-17T16:13:05.121540+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 4,
+      "global_execution_position": 13,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 104,
+        "output_tokens": 122,
+        "total_tokens": 248,
+        "latency_ms": 1244.2787999971188
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "3c1a0203-ed9a-442a-87c9-40864d0b7ffd",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:05.121540+00:00",
+      "end_utc": "2026-09-17T16:13:06.366722+00:00",
+      "monotonic_elapsed_ms": 1250.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_004",
+      "timestamp_utc": "2026-09-17T16:13:06.393783+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 4,
+      "global_execution_position": 14,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 107,
+        "output_tokens": 125,
+        "total_tokens": 242,
+        "latency_ms": 1290.4321000023629
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "4d1e66a9-aba1-4c7f-972c-e7f95c20e176",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:06.393783+00:00",
+      "end_utc": "2026-09-17T16:13:07.684589+00:00",
+      "monotonic_elapsed_ms": 1296.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_004",
+      "timestamp_utc": "2026-09-17T16:13:07.718119+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 4,
+      "global_execution_position": 15,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 117,
+        "output_tokens": 135,
+        "total_tokens": 252,
+        "latency_ms": 1400.5450999975437
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "702e9824-2288-4bd5-84de-93b02ae9e650",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:07.718119+00:00",
+      "end_utc": "2026-09-17T16:13:09.119931+00:00",
+      "monotonic_elapsed_ms": 1406.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_005",
+      "timestamp_utc": "2026-09-17T16:13:09.142958+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 5,
+      "global_execution_position": 16,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 113,
+        "output_tokens": 131,
+        "total_tokens": 248,
+        "latency_ms": 1352.6712999955635
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "b0877e06-43fe-4c2e-a4a8-b2270e985566",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:09.142958+00:00",
+      "end_utc": "2026-09-17T16:13:10.495707+00:00",
+      "monotonic_elapsed_ms": 1358.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_005",
+      "timestamp_utc": "2026-09-17T16:13:10.711405+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 5,
+      "global_execution_position": 17,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 132,
+        "output_tokens": 150,
+        "total_tokens": 276,
+        "latency_ms": 1627.6646999976947
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "88380443-a0ce-4a51-8a6b-df6ea5a5eb5e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:10.711405+00:00",
+      "end_utc": "2026-09-17T16:13:12.339485+00:00",
+      "monotonic_elapsed_ms": 1625.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_005",
+      "timestamp_utc": "2026-09-17T16:13:12.375579+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 5,
+      "global_execution_position": 18,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 184,
+        "output_tokens": 202,
+        "total_tokens": 324,
+        "latency_ms": 1669.7438999981387
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "c05140d9-2247-437b-96d1-514728d788f7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:12.375579+00:00",
+      "end_utc": "2026-09-17T16:13:14.044984+00:00",
+      "monotonic_elapsed_ms": 1671.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_005",
+      "timestamp_utc": "2026-09-17T16:13:14.074518+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 5,
+      "global_execution_position": 19,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 122,
+        "output_tokens": 140,
+        "total_tokens": 257,
+        "latency_ms": 1436.1611000058474
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "c2da07ea-fa47-433e-af16-0a47ffaffd96",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:14.074518+00:00",
+      "end_utc": "2026-09-17T16:13:15.510962+00:00",
+      "monotonic_elapsed_ms": 1438.0000000019209
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_006",
+      "timestamp_utc": "2026-09-17T16:13:15.709749+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 6,
+      "global_execution_position": 20,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 79,
+        "output_tokens": 97,
+        "total_tokens": 214,
+        "latency_ms": 1281.7941999965115
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "2605722f-63e3-4c9c-b9a8-d8519eaa70d1",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:15.709749+00:00",
+      "end_utc": "2026-09-17T16:13:16.991129+00:00",
+      "monotonic_elapsed_ms": 1281.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_006",
+      "timestamp_utc": "2026-09-17T16:13:17.023669+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 6,
+      "global_execution_position": 21,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 246,
+        "output_tokens": 264,
+        "total_tokens": 381,
+        "latency_ms": 2157.0907999994233
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "969bc869-1265-4d9a-b912-993b01623918",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:17.023669+00:00",
+      "end_utc": "2026-09-17T16:13:19.180614+00:00",
+      "monotonic_elapsed_ms": 2156.9999999992433
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_006",
+      "timestamp_utc": "2026-09-17T16:13:19.205637+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 6,
+      "global_execution_position": 22,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 58,
+        "output_tokens": 76,
+        "total_tokens": 198,
+        "latency_ms": 918.6262000002898
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "238176d4-df3b-43a0-b7bd-a18e38a09635",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:19.205637+00:00",
+      "end_utc": "2026-09-17T16:13:20.124218+00:00",
+      "monotonic_elapsed_ms": 921.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_006",
+      "timestamp_utc": "2026-09-17T16:13:20.334190+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 6,
+      "global_execution_position": 23,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 218,
+        "output_tokens": 236,
+        "total_tokens": 362,
+        "latency_ms": 2041.0065000032773
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "15eb3f2a-64d6-4cc3-9237-01f879640e11",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:20.334190+00:00",
+      "end_utc": "2026-09-17T16:13:22.374428+00:00",
+      "monotonic_elapsed_ms": 2031.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_007",
+      "timestamp_utc": "2026-09-17T16:13:23.381434+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 7,
+      "global_execution_position": 24,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 205,
+        "output_tokens": 223,
+        "total_tokens": 345,
+        "latency_ms": 1724.5980000006966
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "173a33c0-0624-47c2-b7b7-e5bab2e308d1",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:23.381434+00:00",
+      "end_utc": "2026-09-17T16:13:25.106229+00:00",
+      "monotonic_elapsed_ms": 1718.9999999973224
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_007",
+      "timestamp_utc": "2026-09-17T16:13:25.339812+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 7,
+      "global_execution_position": 25,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 124,
+        "output_tokens": 142,
+        "total_tokens": 259,
+        "latency_ms": 1294.6343000003253
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "efe76c2a-e28a-476e-b67c-3d661b9a4073",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:25.339812+00:00",
+      "end_utc": "2026-09-17T16:13:26.634561+00:00",
+      "monotonic_elapsed_ms": 1297.0000000059372
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_007",
+      "timestamp_utc": "2026-09-17T16:13:26.653597+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 7,
+      "global_execution_position": 26,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 85,
+        "output_tokens": 103,
+        "total_tokens": 220,
+        "latency_ms": 1261.3339000017731
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "d9d99d63-4def-4742-a6b9-51a8bc00dcae",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:26.653597+00:00",
+      "end_utc": "2026-09-17T16:13:27.914774+00:00",
+      "monotonic_elapsed_ms": 1265.9999999959837
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_007",
+      "timestamp_utc": "2026-09-17T16:13:27.944304+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 7,
+      "global_execution_position": 27,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 56,
+        "output_tokens": 74,
+        "total_tokens": 200,
+        "latency_ms": 1212.8360999995493
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "8a08f15b-79c5-4694-9fc9-79981e071c6a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:27.944304+00:00",
+      "end_utc": "2026-09-17T16:13:29.157182+00:00",
+      "monotonic_elapsed_ms": 1203.0000000013388
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_008",
+      "timestamp_utc": "2026-09-17T16:13:29.185267+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 8,
+      "global_execution_position": 28,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 217,
+        "output_tokens": 235,
+        "total_tokens": 357,
+        "latency_ms": 1669.0190000008442
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "d923f2be-e976-44db-a9d1-07ebcf8977ef",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:29.185267+00:00",
+      "end_utc": "2026-09-17T16:13:30.854512+00:00",
+      "monotonic_elapsed_ms": 1671.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_008",
+      "timestamp_utc": "2026-09-17T16:13:31.062016+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 8,
+      "global_execution_position": 29,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 232,
+        "output_tokens": 250,
+        "total_tokens": 376,
+        "latency_ms": 1826.0721000042395
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "8a9c408e-ae39-4bca-9264-d5b02137583c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:31.062016+00:00",
+      "end_utc": "2026-09-17T16:13:32.888067+00:00",
+      "monotonic_elapsed_ms": 1828.0000000013388
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_008",
+      "timestamp_utc": "2026-09-17T16:13:32.933633+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 8,
+      "global_execution_position": 30,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 150,
+        "output_tokens": 168,
+        "total_tokens": 285,
+        "latency_ms": 1496.4340000005905
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "ff67fb88-1959-4fab-9b92-28399811cb25",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:32.933633+00:00",
+      "end_utc": "2026-09-17T16:13:34.430517+00:00",
+      "monotonic_elapsed_ms": 1500.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_008",
+      "timestamp_utc": "2026-09-17T16:13:34.459049+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 8,
+      "global_execution_position": 31,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 333,
+        "output_tokens": 351,
+        "total_tokens": 468,
+        "latency_ms": 2457.606799995119
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e1cb3926-8646-4c74-a6d2-cd75f2d8cf92",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:34.459049+00:00",
+      "end_utc": "2026-09-17T16:13:36.916494+00:00",
+      "monotonic_elapsed_ms": 2453.000000001339
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_009",
+      "timestamp_utc": "2026-09-17T16:13:37.126572+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 9,
+      "global_execution_position": 32,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 121,
+        "output_tokens": 139,
+        "total_tokens": 256,
+        "latency_ms": 1323.1009999944945
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "b175ffd9-7bbd-4f36-a2e8-db259fea56c6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:37.126572+00:00",
+      "end_utc": "2026-09-17T16:13:38.449226+00:00",
+      "monotonic_elapsed_ms": 1328.0000000013388
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_009",
+      "timestamp_utc": "2026-09-17T16:13:38.473409+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 9,
+      "global_execution_position": 33,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 150,
+        "output_tokens": 168,
+        "total_tokens": 294,
+        "latency_ms": 1585.4470999984187
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "601a247a-13eb-49f1-afd3-31797b4cc2a0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:38.473409+00:00",
+      "end_utc": "2026-09-17T16:13:40.058947+00:00",
+      "monotonic_elapsed_ms": 1594.0000000045984
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_009",
+      "timestamp_utc": "2026-09-17T16:13:40.275480+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 9,
+      "global_execution_position": 34,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 94,
+        "output_tokens": 112,
+        "total_tokens": 234,
+        "latency_ms": 1351.1835000026622
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "39d4703a-a10b-4fa8-8886-ababfb8d316a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:40.275480+00:00",
+      "end_utc": "2026-09-17T16:13:41.626442+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_009",
+      "timestamp_utc": "2026-09-17T16:13:41.655571+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 9,
+      "global_execution_position": 35,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 114,
+        "output_tokens": 132,
+        "total_tokens": 249,
+        "latency_ms": 1405.263399996329
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "db2d2989-775f-4ac6-9876-28d60700204b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:41.655571+00:00",
+      "end_utc": "2026-09-17T16:13:43.060907+00:00",
+      "monotonic_elapsed_ms": 1406.9999999992433
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_010",
+      "timestamp_utc": "2026-09-17T16:13:43.079948+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 10,
+      "global_execution_position": 36,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 161,
+        "output_tokens": 179,
+        "total_tokens": 296,
+        "latency_ms": 1587.2988000046462
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "5d0cccb6-2fb4-44d4-95af-a2de39cd457a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:43.079948+00:00",
+      "end_utc": "2026-09-17T16:13:44.666834+00:00",
+      "monotonic_elapsed_ms": 1593.9999999973224
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_010",
+      "timestamp_utc": "2026-09-17T16:13:44.881328+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 10,
+      "global_execution_position": 37,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 193,
+        "output_tokens": 211,
+        "total_tokens": 328,
+        "latency_ms": 1709.373300000152
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e820a438-1640-4e82-b386-d9a0ad2ac02f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:44.881328+00:00",
+      "end_utc": "2026-09-17T16:13:46.590688+00:00",
+      "monotonic_elapsed_ms": 1702.9999999940628
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_010",
+      "timestamp_utc": "2026-09-17T16:13:46.612704+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 10,
+      "global_execution_position": 38,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 146,
+        "output_tokens": 164,
+        "total_tokens": 286,
+        "latency_ms": 1415.5643999984022
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "5e51ff1a-427b-48dc-a7fb-2c6556262c69",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:46.612704+00:00",
+      "end_utc": "2026-09-17T16:13:48.028162+00:00",
+      "monotonic_elapsed_ms": 1421.0000000020955
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_010",
+      "timestamp_utc": "2026-09-17T16:13:48.053688+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 10,
+      "global_execution_position": 39,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 116,
+        "output_tokens": 134,
+        "total_tokens": 260,
+        "latency_ms": 1498.238299995137
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "935e2596-a797-410f-82ed-317618d5c716",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:48.053688+00:00",
+      "end_utc": "2026-09-17T16:13:49.552908+00:00",
+      "monotonic_elapsed_ms": 1500.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_011",
+      "timestamp_utc": "2026-09-17T16:13:49.577003+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 11,
+      "global_execution_position": 40,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 138,
+        "output_tokens": 156,
+        "total_tokens": 278,
+        "latency_ms": 1233.8964000009582
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "b9dbccd5-b322-45ad-9cf4-46ed365d006e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:49.577003+00:00",
+      "end_utc": "2026-09-17T16:13:50.811397+00:00",
+      "monotonic_elapsed_ms": 1235.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_011",
+      "timestamp_utc": "2026-09-17T16:13:51.023425+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 11,
+      "global_execution_position": 41,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 134,
+        "output_tokens": 152,
+        "total_tokens": 269,
+        "latency_ms": 1434.8700000045937
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "61c56e76-1723-4a9e-b465-6ed9af4b9548",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:51.023425+00:00",
+      "end_utc": "2026-09-17T16:13:52.458789+00:00",
+      "monotonic_elapsed_ms": 1437.999999994645
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_011",
+      "timestamp_utc": "2026-09-17T16:13:52.476587+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 11,
+      "global_execution_position": 42,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 116,
+        "output_tokens": 134,
+        "total_tokens": 251,
+        "latency_ms": 1299.2919999960577
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "80e59173-12f9-43cf-9af1-4087e8208be3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:52.476587+00:00",
+      "end_utc": "2026-09-17T16:13:53.775099+00:00",
+      "monotonic_elapsed_ms": 1296.0000000020955
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_011",
+      "timestamp_utc": "2026-09-17T16:13:53.801203+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 11,
+      "global_execution_position": 43,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 128,
+        "output_tokens": 146,
+        "total_tokens": 272,
+        "latency_ms": 1377.4397000015597
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "a14baad5-fc44-4253-9764-fab1e082f457",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:53.801203+00:00",
+      "end_utc": "2026-09-17T16:13:55.179174+00:00",
+      "monotonic_elapsed_ms": 1391.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_012",
+      "timestamp_utc": "2026-09-17T16:13:55.403238+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 12,
+      "global_execution_position": 44,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 169,
+        "output_tokens": 187,
+        "total_tokens": 309,
+        "latency_ms": 1744.6555999995326
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "156aede3-f4a7-4a86-a5e6-1f48021298c9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:55.403238+00:00",
+      "end_utc": "2026-09-17T16:13:57.148096+00:00",
+      "monotonic_elapsed_ms": 1750.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_012",
+      "timestamp_utc": "2026-09-17T16:13:57.174806+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 12,
+      "global_execution_position": 45,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 147,
+        "output_tokens": 165,
+        "total_tokens": 291,
+        "latency_ms": 1585.5873000036809
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "c583fd01-29e0-4a26-8ee1-0396ad061bf7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:57.174806+00:00",
+      "end_utc": "2026-09-17T16:13:58.759771+00:00",
+      "monotonic_elapsed_ms": 1594.0000000045984
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_012",
+      "timestamp_utc": "2026-09-17T16:13:58.801326+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 12,
+      "global_execution_position": 46,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 141,
+        "output_tokens": 159,
+        "total_tokens": 276,
+        "latency_ms": 1638.7807999999495
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "34617b61-5c83-4f2c-b381-f343a9c8acc2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:13:58.801326+00:00",
+      "end_utc": "2026-09-17T16:14:00.439718+00:00",
+      "monotonic_elapsed_ms": 1641.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_012",
+      "timestamp_utc": "2026-09-17T16:14:00.651377+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 12,
+      "global_execution_position": 47,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 117,
+        "output_tokens": 135,
+        "total_tokens": 252,
+        "latency_ms": 1412.777300000016
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "488939fc-d6a9-48e9-bf1a-b6063e0e013f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:00.651377+00:00",
+      "end_utc": "2026-09-17T16:14:02.063934+00:00",
+      "monotonic_elapsed_ms": 1406.9999999992433
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_013",
+      "timestamp_utc": "2026-09-17T16:14:02.098044+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 13,
+      "global_execution_position": 48,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 101,
+        "output_tokens": 119,
+        "total_tokens": 236,
+        "latency_ms": 1155.9156000002986
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "506b24bd-4911-45f4-9ca3-01bd3fd56dfe",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:02.098044+00:00",
+      "end_utc": "2026-09-17T16:14:03.253419+00:00",
+      "monotonic_elapsed_ms": 1156.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_013",
+      "timestamp_utc": "2026-09-17T16:14:03.305332+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 13,
+      "global_execution_position": 49,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 177,
+        "output_tokens": 195,
+        "total_tokens": 321,
+        "latency_ms": 1781.708399998024
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "8f40b777-8b9e-48f9-943b-f4c4ddcfb0b9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:03.305332+00:00",
+      "end_utc": "2026-09-17T16:14:05.087640+00:00",
+      "monotonic_elapsed_ms": 1780.9999999954016
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_013",
+      "timestamp_utc": "2026-09-17T16:14:05.290760+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 13,
+      "global_execution_position": 50,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 196,
+        "output_tokens": 214,
+        "total_tokens": 336,
+        "latency_ms": 1890.510400000494
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "ea46d3fa-9c00-4988-8758-af3d7888e420",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:05.290760+00:00",
+      "end_utc": "2026-09-17T16:14:07.180954+00:00",
+      "monotonic_elapsed_ms": 1891.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_013",
+      "timestamp_utc": "2026-09-17T16:14:07.214870+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 13,
+      "global_execution_position": 51,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 115,
+        "output_tokens": 133,
+        "total_tokens": 250,
+        "latency_ms": 1309.244399999443
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "f47f4898-4e53-4f35-a457-627080283c1a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:07.214870+00:00",
+      "end_utc": "2026-09-17T16:14:08.524159+00:00",
+      "monotonic_elapsed_ms": 1312.000000005355
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_014",
+      "timestamp_utc": "2026-09-17T16:14:08.545187+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 14,
+      "global_execution_position": 52,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 100,
+        "output_tokens": 118,
+        "total_tokens": 235,
+        "latency_ms": 1311.6215000045486
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "28e9c4fd-7361-47a3-b669-7c899ecbdb84",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:08.545187+00:00",
+      "end_utc": "2026-09-17T16:14:09.857791+00:00",
+      "monotonic_elapsed_ms": 1313.0000000019209
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_014",
+      "timestamp_utc": "2026-09-17T16:14:10.064591+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 14,
+      "global_execution_position": 53,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 124,
+        "output_tokens": 142,
+        "total_tokens": 259,
+        "latency_ms": 1358.2945999951335
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "fab089b7-e4c6-4d3f-99db-5c4512ce5f8d",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:10.064591+00:00",
+      "end_utc": "2026-09-17T16:14:11.422697+00:00",
+      "monotonic_elapsed_ms": 1358.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_014",
+      "timestamp_utc": "2026-09-17T16:14:11.452744+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 14,
+      "global_execution_position": 54,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 118,
+        "output_tokens": 136,
+        "total_tokens": 258,
+        "latency_ms": 1479.1175999998813
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "07f2cb08-d4c3-46e8-9da3-fc3ae9c3feaf",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:11.452744+00:00",
+      "end_utc": "2026-09-17T16:14:12.931216+00:00",
+      "monotonic_elapsed_ms": 1485.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_014",
+      "timestamp_utc": "2026-09-17T16:14:12.960135+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 14,
+      "global_execution_position": 55,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 32,
+        "output_tokens": 50,
+        "total_tokens": 176,
+        "latency_ms": 1096.1930999983451
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "00f244f1-a870-4985-a8d4-695923316554",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:12.960135+00:00",
+      "end_utc": "2026-09-17T16:14:14.057030+00:00",
+      "monotonic_elapsed_ms": 1094.0000000045984
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_015",
+      "timestamp_utc": "2026-09-17T16:14:14.077564+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 15,
+      "global_execution_position": 56,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 153,
+        "output_tokens": 171,
+        "total_tokens": 293,
+        "latency_ms": 1346.2690000014845
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "ff04da17-6b4e-44b7-a200-ab3a60e78223",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:14.077564+00:00",
+      "end_utc": "2026-09-17T16:14:15.424209+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_015",
+      "timestamp_utc": "2026-09-17T16:14:15.636549+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 15,
+      "global_execution_position": 57,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 133,
+        "output_tokens": 151,
+        "total_tokens": 268,
+        "latency_ms": 1684.626299997035
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "c2c9c776-0c05-4fc7-a2fd-5eb785e8becd",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:15.636549+00:00",
+      "end_utc": "2026-09-17T16:14:17.320910+00:00",
+      "monotonic_elapsed_ms": 1686.9999999980791
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_015",
+      "timestamp_utc": "2026-09-17T16:14:17.341930+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 15,
+      "global_execution_position": 58,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 58,
+        "output_tokens": 76,
+        "total_tokens": 193,
+        "latency_ms": 1326.527500001248
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "71c32fff-bf2e-4645-8f22-203122b29a4b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:17.341930+00:00",
+      "end_utc": "2026-09-17T16:14:18.668929+00:00",
+      "monotonic_elapsed_ms": 1328.0000000013388
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_015",
+      "timestamp_utc": "2026-09-17T16:14:18.699927+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 15,
+      "global_execution_position": 59,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 117,
+        "output_tokens": 135,
+        "total_tokens": 261,
+        "latency_ms": 1264.0336000040406
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "03e24a8c-c33e-42fd-a7ce-516718693b43",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:18.699927+00:00",
+      "end_utc": "2026-09-17T16:14:19.964580+00:00",
+      "monotonic_elapsed_ms": 1265.9999999959837
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_016",
+      "timestamp_utc": "2026-09-17T16:14:20.168610+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 16,
+      "global_execution_position": 60,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 115,
+        "output_tokens": 133,
+        "total_tokens": 255,
+        "latency_ms": 1354.0702000027522
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "ec8ae71e-b88a-43b9-95b0-4545a15fa6ff",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:20.168610+00:00",
+      "end_utc": "2026-09-17T16:14:21.522911+00:00",
+      "monotonic_elapsed_ms": 1359.0000000040163
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_016",
+      "timestamp_utc": "2026-09-17T16:14:21.542916+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 16,
+      "global_execution_position": 61,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 101,
+        "output_tokens": 119,
+        "total_tokens": 245,
+        "latency_ms": 1580.7558000014978
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "725339da-0309-402f-9121-76c04d45a416",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:21.542916+00:00",
+      "end_utc": "2026-09-17T16:14:23.123912+00:00",
+      "monotonic_elapsed_ms": 1578.0000000013388
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_016",
+      "timestamp_utc": "2026-09-17T16:14:23.147923+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 16,
+      "global_execution_position": 62,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 90,
+        "output_tokens": 108,
+        "total_tokens": 225,
+        "latency_ms": 1076.7011999996612
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "ac9d4196-40c5-46ab-81dc-fe5fa7702820",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:23.147923+00:00",
+      "end_utc": "2026-09-17T16:14:24.224933+00:00",
+      "monotonic_elapsed_ms": 1078.9999999979045
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_016",
+      "timestamp_utc": "2026-09-17T16:14:24.257451+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 16,
+      "global_execution_position": 63,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 121,
+        "output_tokens": 139,
+        "total_tokens": 256,
+        "latency_ms": 1771.208400001342
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "040ca6ce-59ce-4cd4-acbf-065c68eb153b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:24.257451+00:00",
+      "end_utc": "2026-09-17T16:14:26.027931+00:00",
+      "monotonic_elapsed_ms": 1764.999999999418
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_017",
+      "timestamp_utc": "2026-09-17T16:14:26.240912+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 17,
+      "global_execution_position": 64,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 88,
+        "output_tokens": 106,
+        "total_tokens": 223,
+        "latency_ms": 1266.2089000004926
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "1ce33e3a-4221-409d-b823-db1e672c85d2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:26.240912+00:00",
+      "end_utc": "2026-09-17T16:14:27.506907+00:00",
+      "monotonic_elapsed_ms": 1266.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_017",
+      "timestamp_utc": "2026-09-17T16:14:27.537911+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 17,
+      "global_execution_position": 65,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 72,
+        "output_tokens": 90,
+        "total_tokens": 216,
+        "latency_ms": 1197.4881000060122
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "d3839003-6e05-47d7-85ba-62e4d63f0c4c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:27.537911+00:00",
+      "end_utc": "2026-09-17T16:14:28.735908+00:00",
+      "monotonic_elapsed_ms": 1188.0000000019209
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_017",
+      "timestamp_utc": "2026-09-17T16:14:28.761909+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 17,
+      "global_execution_position": 66,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 126,
+        "output_tokens": 144,
+        "total_tokens": 266,
+        "latency_ms": 1490.4444000057993
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "17cf4bed-4a62-48cd-b019-86b8337ee5ff",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:28.761909+00:00",
+      "end_utc": "2026-09-17T16:14:30.252764+00:00",
+      "monotonic_elapsed_ms": 1483.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_017",
+      "timestamp_utc": "2026-09-17T16:14:30.464830+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 17,
+      "global_execution_position": 67,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 472,
+        "output_tokens": 490,
+        "total_tokens": 607,
+        "latency_ms": 2863.8361000048462
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "7ffdb612-ffed-4997-ada3-d799b1aa01c0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:30.464830+00:00",
+      "end_utc": "2026-09-17T16:14:33.328420+00:00",
+      "monotonic_elapsed_ms": 2859.0000000040163
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_018",
+      "timestamp_utc": "2026-09-17T16:14:33.507501+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 18,
+      "global_execution_position": 68,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 43,
+        "output_tokens": 61,
+        "total_tokens": 178,
+        "latency_ms": 965.1238000005833
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "237fca48-e644-4621-93fd-e25ca679c56d",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:33.507501+00:00",
+      "end_utc": "2026-09-17T16:14:34.473002+00:00",
+      "monotonic_elapsed_ms": 952.9999999940628
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_018",
+      "timestamp_utc": "2026-09-17T16:14:34.494002+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 18,
+      "global_execution_position": 69,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 179,
+        "output_tokens": 197,
+        "total_tokens": 314,
+        "latency_ms": 1668.8173999937135
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "cfa82fd3-cc23-4db3-9140-e4218eadd70c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:34.494002+00:00",
+      "end_utc": "2026-09-17T16:14:36.163344+00:00",
+      "monotonic_elapsed_ms": 1671.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_018",
+      "timestamp_utc": "2026-09-17T16:14:36.379394+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 18,
+      "global_execution_position": 70,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 195,
+        "output_tokens": 213,
+        "total_tokens": 335,
+        "latency_ms": 1756.0000000012224
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "c47df72d-70c9-4fff-9b65-16b696e0fc5b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:36.379394+00:00",
+      "end_utc": "2026-09-17T16:14:38.134947+00:00",
+      "monotonic_elapsed_ms": 1766.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_018",
+      "timestamp_utc": "2026-09-17T16:14:38.159472+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 18,
+      "global_execution_position": 71,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 121,
+        "output_tokens": 139,
+        "total_tokens": 265,
+        "latency_ms": 1585.9523999970406
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "bf3be0e3-129d-4327-a4ea-66a603f1da42",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:38.159472+00:00",
+      "end_utc": "2026-09-17T16:14:39.744649+00:00",
+      "monotonic_elapsed_ms": 1593.9999999973224
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_019",
+      "timestamp_utc": "2026-09-17T16:14:39.783168+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 19,
+      "global_execution_position": 72,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 192,
+        "output_tokens": 210,
+        "total_tokens": 332,
+        "latency_ms": 1479.7790000011446
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "88432c50-3ed0-4004-b4c2-431256996f7b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:39.783168+00:00",
+      "end_utc": "2026-09-17T16:14:41.263000+00:00",
+      "monotonic_elapsed_ms": 1485.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_019",
+      "timestamp_utc": "2026-09-17T16:14:41.469499+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 19,
+      "global_execution_position": 73,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 103,
+        "output_tokens": 121,
+        "total_tokens": 238,
+        "latency_ms": 1615.1947000034852
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "87e4f4ec-8b43-4db2-8e3c-b82ea282b538",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:41.469499+00:00",
+      "end_utc": "2026-09-17T16:14:43.084556+00:00",
+      "monotonic_elapsed_ms": 1625.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_019",
+      "timestamp_utc": "2026-09-17T16:14:43.115558+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 19,
+      "global_execution_position": 74,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 100,
+        "output_tokens": 118,
+        "total_tokens": 235,
+        "latency_ms": 1382.097400004568
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "c7016a19-64ac-4f2c-bdca-df63fa79e241",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:43.115558+00:00",
+      "end_utc": "2026-09-17T16:14:44.497909+00:00",
+      "monotonic_elapsed_ms": 1375.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_019",
+      "timestamp_utc": "2026-09-17T16:14:44.531909+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 19,
+      "global_execution_position": 75,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 131,
+        "output_tokens": 149,
+        "total_tokens": 275,
+        "latency_ms": 1234.5730000015465
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "cc4fbd81-81ac-494a-b94f-cfc969227524",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:44.531909+00:00",
+      "end_utc": "2026-09-17T16:14:45.766386+00:00",
+      "monotonic_elapsed_ms": 1235.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_020",
+      "timestamp_utc": "2026-09-17T16:14:45.983466+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 20,
+      "global_execution_position": 76,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 55,
+        "output_tokens": 73,
+        "total_tokens": 195,
+        "latency_ms": 1022.5632000001497
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "b41701e9-b7f9-4859-8ace-fbaaaedf9bee",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:45.983466+00:00",
+      "end_utc": "2026-09-17T16:14:47.005971+00:00",
+      "monotonic_elapsed_ms": 1031.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_020",
+      "timestamp_utc": "2026-09-17T16:14:47.030932+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 20,
+      "global_execution_position": 77,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 96,
+        "output_tokens": 114,
+        "total_tokens": 240,
+        "latency_ms": 1241.0820000004605
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "f37f7dd8-442d-4078-bc13-d592c36f9e6c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:47.030932+00:00",
+      "end_utc": "2026-09-17T16:14:48.271766+00:00",
+      "monotonic_elapsed_ms": 1250.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_020",
+      "timestamp_utc": "2026-09-17T16:14:48.305360+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 20,
+      "global_execution_position": 78,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 105,
+        "output_tokens": 123,
+        "total_tokens": 240,
+        "latency_ms": 1425.377200001094
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e1f17396-1de6-4a07-b98b-0b0d11021eeb",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:48.305360+00:00",
+      "end_utc": "2026-09-17T16:14:49.730613+00:00",
+      "monotonic_elapsed_ms": 1421.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_020",
+      "timestamp_utc": "2026-09-17T16:14:49.755645+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 20,
+      "global_execution_position": 79,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 104,
+        "output_tokens": 122,
+        "total_tokens": 239,
+        "latency_ms": 1310.092399995483
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e9c481e2-6c28-4c4d-8e94-5bb78c799e8f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:49.755645+00:00",
+      "end_utc": "2026-09-17T16:14:51.066624+00:00",
+      "monotonic_elapsed_ms": 1296.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_021",
+      "timestamp_utc": "2026-09-17T16:14:51.265525+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 21,
+      "global_execution_position": 80,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 187,
+        "output_tokens": 205,
+        "total_tokens": 322,
+        "latency_ms": 1887.4199999991106
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "48018081-cce8-4b02-8021-4298950f92e0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:51.265525+00:00",
+      "end_utc": "2026-09-17T16:14:53.152757+00:00",
+      "monotonic_elapsed_ms": 1889.999999999418
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_021",
+      "timestamp_utc": "2026-09-17T16:14:53.181281+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 21,
+      "global_execution_position": 81,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 108,
+        "output_tokens": 126,
+        "total_tokens": 252,
+        "latency_ms": 1372.495199997502
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "93c688c5-e75d-4fa6-83c2-04b92ea3a241",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:53.181281+00:00",
+      "end_utc": "2026-09-17T16:14:54.553969+00:00",
+      "monotonic_elapsed_ms": 1375.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_021",
+      "timestamp_utc": "2026-09-17T16:14:54.577986+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 21,
+      "global_execution_position": 82,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 122,
+        "output_tokens": 140,
+        "total_tokens": 262,
+        "latency_ms": 1731.7965000038384
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e4634c8e-9b72-461d-b8fa-9661733a480f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:54.577986+00:00",
+      "end_utc": "2026-09-17T16:14:56.308884+00:00",
+      "monotonic_elapsed_ms": 1735.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_021",
+      "timestamp_utc": "2026-09-17T16:14:56.484641+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 21,
+      "global_execution_position": 83,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 141,
+        "output_tokens": 159,
+        "total_tokens": 276,
+        "latency_ms": 1506.7100999949616
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "72a24e8f-5480-4ca4-8c1c-f45c567b1487",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:56.484641+00:00",
+      "end_utc": "2026-09-17T16:14:57.990931+00:00",
+      "monotonic_elapsed_ms": 1514.999999999418
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_022",
+      "timestamp_utc": "2026-09-17T16:14:58.018448+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 22,
+      "global_execution_position": 84,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 98,
+        "output_tokens": 116,
+        "total_tokens": 233,
+        "latency_ms": 1277.8423999989172
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "5d209529-45e9-4771-8e1b-f3b5267645be",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:58.018448+00:00",
+      "end_utc": "2026-09-17T16:14:59.296649+00:00",
+      "monotonic_elapsed_ms": 1280.9999999954016
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_022",
+      "timestamp_utc": "2026-09-17T16:14:59.325729+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 22,
+      "global_execution_position": 85,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 91,
+        "output_tokens": 109,
+        "total_tokens": 226,
+        "latency_ms": 1260.6482000046526
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "52031a05-4edf-419e-884c-98de49e9b28d",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:14:59.325729+00:00",
+      "end_utc": "2026-09-17T16:15:00.586944+00:00",
+      "monotonic_elapsed_ms": 1265.9999999959837
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_022",
+      "timestamp_utc": "2026-09-17T16:15:00.803548+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 22,
+      "global_execution_position": 86,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 125,
+        "output_tokens": 143,
+        "total_tokens": 265,
+        "latency_ms": 1350.8699000012712
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "180a6db9-96f8-42f4-bd8f-e9920a2e90b6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:00.803548+00:00",
+      "end_utc": "2026-09-17T16:15:02.153163+00:00",
+      "monotonic_elapsed_ms": 1343.0000000007567
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_022",
+      "timestamp_utc": "2026-09-17T16:15:02.509886+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 22,
+      "global_execution_position": 87,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 130,
+        "output_tokens": 148,
+        "total_tokens": 274,
+        "latency_ms": 1317.6233999984106
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "472345fd-e753-4988-a824-6457d11f9422",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:02.509886+00:00",
+      "end_utc": "2026-09-17T16:15:03.828153+00:00",
+      "monotonic_elapsed_ms": 1311.9999999980791
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_023",
+      "timestamp_utc": "2026-09-17T16:15:03.867317+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 23,
+      "global_execution_position": 88,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 204,
+        "output_tokens": 222,
+        "total_tokens": 344,
+        "latency_ms": 1773.7764000048628
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "91cf04f2-e327-4c83-a127-d447b127efd8",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:03.867317+00:00",
+      "end_utc": "2026-09-17T16:15:05.640937+00:00",
+      "monotonic_elapsed_ms": 1766.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_023",
+      "timestamp_utc": "2026-09-17T16:15:05.850984+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 23,
+      "global_execution_position": 89,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 99,
+        "output_tokens": 117,
+        "total_tokens": 234,
+        "latency_ms": 1618.8330000004498
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "9626996c-3b1c-41c8-b66b-437318340320",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:05.850984+00:00",
+      "end_utc": "2026-09-17T16:15:07.469303+00:00",
+      "monotonic_elapsed_ms": 1608.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_023",
+      "timestamp_utc": "2026-09-17T16:15:07.498348+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 23,
+      "global_execution_position": 90,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 85,
+        "output_tokens": 103,
+        "total_tokens": 220,
+        "latency_ms": 1478.9219000012963
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "dcda8865-6053-42e4-9184-bb9c7bda03ac",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:07.498348+00:00",
+      "end_utc": "2026-09-17T16:15:08.976908+00:00",
+      "monotonic_elapsed_ms": 1485.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_023",
+      "timestamp_utc": "2026-09-17T16:15:09.005449+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 23,
+      "global_execution_position": 91,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 101,
+        "output_tokens": 119,
+        "total_tokens": 245,
+        "latency_ms": 1397.1997000044212
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "1b251de2-25d8-41ac-82fe-723e4c42e2b3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:09.005449+00:00",
+      "end_utc": "2026-09-17T16:15:10.402583+00:00",
+      "monotonic_elapsed_ms": 1389.999999999418
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_024",
+      "timestamp_utc": "2026-09-17T16:15:10.616677+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 24,
+      "global_execution_position": 92,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 211,
+        "output_tokens": 229,
+        "total_tokens": 351,
+        "latency_ms": 1657.2102999998606
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "4fe12d43-8a71-41eb-ad61-8c9ffc9aff23",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:10.616677+00:00",
+      "end_utc": "2026-09-17T16:15:12.273636+00:00",
+      "monotonic_elapsed_ms": 1656.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_024",
+      "timestamp_utc": "2026-09-17T16:15:12.304692+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 24,
+      "global_execution_position": 93,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 117,
+        "output_tokens": 135,
+        "total_tokens": 261,
+        "latency_ms": 1420.1861000037752
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "4a17d722-63e4-4f48-a8d0-103af41c4a49",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:12.304692+00:00",
+      "end_utc": "2026-09-17T16:15:13.724841+00:00",
+      "monotonic_elapsed_ms": 1421.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_024",
+      "timestamp_utc": "2026-09-17T16:15:13.754366+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 24,
+      "global_execution_position": 94,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 227,
+        "output_tokens": 245,
+        "total_tokens": 362,
+        "latency_ms": 1781.674900004873
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e6c8104a-5963-47ef-8664-18ecc7b5da35",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:13.754366+00:00",
+      "end_utc": "2026-09-17T16:15:15.535892+00:00",
+      "monotonic_elapsed_ms": 1781.0000000026776
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_024",
+      "timestamp_utc": "2026-09-17T16:15:15.755489+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 24,
+      "global_execution_position": 95,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 86,
+        "output_tokens": 104,
+        "total_tokens": 221,
+        "latency_ms": 1282.0584000000963
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "057736b7-e14e-47ad-8173-602ef587a557",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:15.755489+00:00",
+      "end_utc": "2026-09-17T16:15:17.037228+00:00",
+      "monotonic_elapsed_ms": 1280.9999999954016
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_025",
+      "timestamp_utc": "2026-09-17T16:15:17.069282+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 25,
+      "global_execution_position": 96,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 271,
+        "output_tokens": 289,
+        "total_tokens": 406,
+        "latency_ms": 2007.9447000025539
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "78cdbdcd-0b7a-4ece-b970-6fb85305bf7c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:17.069282+00:00",
+      "end_utc": "2026-09-17T16:15:19.076614+00:00",
+      "monotonic_elapsed_ms": 2000.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_025",
+      "timestamp_utc": "2026-09-17T16:15:19.101684+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 25,
+      "global_execution_position": 97,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 160,
+        "output_tokens": 178,
+        "total_tokens": 304,
+        "latency_ms": 1500.2830000012182
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "85ed30bf-4b78-44c6-92a7-a706e76b0fc4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:19.101684+00:00",
+      "end_utc": "2026-09-17T16:15:20.602155+00:00",
+      "monotonic_elapsed_ms": 1500.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_025",
+      "timestamp_utc": "2026-09-17T16:15:20.820571+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 25,
+      "global_execution_position": 98,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 119,
+        "output_tokens": 137,
+        "total_tokens": 259,
+        "latency_ms": 1371.209100005217
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "51aa3326-4e82-426d-8b4b-123fbcc592e5",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:20.820571+00:00",
+      "end_utc": "2026-09-17T16:15:22.191819+00:00",
+      "monotonic_elapsed_ms": 1360.000000000582
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_025",
+      "timestamp_utc": "2026-09-17T16:15:22.217635+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 25,
+      "global_execution_position": 99,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 94,
+        "output_tokens": 112,
+        "total_tokens": 229,
+        "latency_ms": 1224.3738999968627
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "51ba77e9-e9ba-44b1-bb8e-1da1189cbd57",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:22.217635+00:00",
+      "end_utc": "2026-09-17T16:15:23.441608+00:00",
+      "monotonic_elapsed_ms": 1219.0000000045984
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_026",
+      "timestamp_utc": "2026-09-17T16:15:23.475847+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 26,
+      "global_execution_position": 100,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 76,
+        "output_tokens": 94,
+        "total_tokens": 211,
+        "latency_ms": 1721.282099999371
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "1c38a10c-d53d-4882-a6e2-baa418085ba1",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:23.475847+00:00",
+      "end_utc": "2026-09-17T16:15:25.196864+00:00",
+      "monotonic_elapsed_ms": 1718.0000000007567
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_026",
+      "timestamp_utc": "2026-09-17T16:15:25.409194+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 26,
+      "global_execution_position": 101,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 93,
+        "output_tokens": 111,
+        "total_tokens": 228,
+        "latency_ms": 1590.0274000014178
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "2854eaaf-2100-41fc-8b75-b643ac3c24c9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:25.409194+00:00",
+      "end_utc": "2026-09-17T16:15:26.999533+00:00",
+      "monotonic_elapsed_ms": 1593.9999999973224
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_026",
+      "timestamp_utc": "2026-09-17T16:15:27.032070+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 26,
+      "global_execution_position": 102,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 187,
+        "output_tokens": 205,
+        "total_tokens": 327,
+        "latency_ms": 1810.7251999972505
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "59a3171a-ba40-436e-ba0a-b72ba3d4f2b1",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:27.032070+00:00",
+      "end_utc": "2026-09-17T16:15:28.842477+00:00",
+      "monotonic_elapsed_ms": 1812.999999994645
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_026",
+      "timestamp_utc": "2026-09-17T16:15:28.873079+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 26,
+      "global_execution_position": 103,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 99,
+        "output_tokens": 117,
+        "total_tokens": 243,
+        "latency_ms": 1372.2221000061836
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "30effc0d-e886-4310-bc4e-cd8267f151ae",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:28.873079+00:00",
+      "end_utc": "2026-09-17T16:15:30.246141+00:00",
+      "monotonic_elapsed_ms": 1375.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_027",
+      "timestamp_utc": "2026-09-17T16:15:30.458062+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 27,
+      "global_execution_position": 104,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 171,
+        "output_tokens": 189,
+        "total_tokens": 311,
+        "latency_ms": 1642.3692000025767
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "6aba6876-743a-4d0e-a1c1-e2129305399e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:30.458062+00:00",
+      "end_utc": "2026-09-17T16:15:32.100646+00:00",
+      "monotonic_elapsed_ms": 1656.9999999992433
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_027",
+      "timestamp_utc": "2026-09-17T16:15:32.133172+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 27,
+      "global_execution_position": 105,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 112,
+        "output_tokens": 130,
+        "total_tokens": 247,
+        "latency_ms": 1339.674200004083
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "64be971c-8d3d-44d8-9bbf-6910ca348737",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:32.133172+00:00",
+      "end_utc": "2026-09-17T16:15:33.473091+00:00",
+      "monotonic_elapsed_ms": 1327.9999999940628
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_027",
+      "timestamp_utc": "2026-09-17T16:15:33.504395+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 27,
+      "global_execution_position": 106,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 105,
+        "output_tokens": 123,
+        "total_tokens": 240,
+        "latency_ms": 1379.7812999982852
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "5cbcfe34-121c-4e05-bf9b-9165ebcabf4b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:33.504395+00:00",
+      "end_utc": "2026-09-17T16:15:34.884287+00:00",
+      "monotonic_elapsed_ms": 1391.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_027",
+      "timestamp_utc": "2026-09-17T16:15:34.912812+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 27,
+      "global_execution_position": 107,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 97,
+        "output_tokens": 115,
+        "total_tokens": 241,
+        "latency_ms": 1404.0040000036242
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "8e6e4b70-30be-4ca3-9ff3-0397b95cbdaa",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:34.912812+00:00",
+      "end_utc": "2026-09-17T16:15:36.316535+00:00",
+      "monotonic_elapsed_ms": 1391.0000000032596
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_028",
+      "timestamp_utc": "2026-09-17T16:15:36.540233+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 28,
+      "global_execution_position": 108,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 193,
+        "output_tokens": 211,
+        "total_tokens": 333,
+        "latency_ms": 1673.499600001378
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "4c7b9cb3-4979-4aad-98af-b53fd77ebbf7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:36.540233+00:00",
+      "end_utc": "2026-09-17T16:15:38.213314+00:00",
+      "monotonic_elapsed_ms": 1671.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_028",
+      "timestamp_utc": "2026-09-17T16:15:38.244304+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 28,
+      "global_execution_position": 109,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 62,
+        "output_tokens": 80,
+        "total_tokens": 206,
+        "latency_ms": 1059.5568000062485
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "739d5e2b-84a0-454b-80a0-0fa619f139e5",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:38.244304+00:00",
+      "end_utc": "2026-09-17T16:15:39.304478+00:00",
+      "monotonic_elapsed_ms": 1063.0000000019209
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_028",
+      "timestamp_utc": "2026-09-17T16:15:39.335527+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 28,
+      "global_execution_position": 110,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 81,
+        "output_tokens": 99,
+        "total_tokens": 216,
+        "latency_ms": 1261.3332999972044
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "44079cb1-1c32-470d-986e-b6db0cbf5061",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:39.335527+00:00",
+      "end_utc": "2026-09-17T16:15:40.596945+00:00",
+      "monotonic_elapsed_ms": 1250.0
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_028",
+      "timestamp_utc": "2026-09-17T16:15:40.804434+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 28,
+      "global_execution_position": 111,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 106,
+        "output_tokens": 124,
+        "total_tokens": 241,
+        "latency_ms": 1557.390400004806
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "6fbee17e-40a1-4fa9-98d0-eb909e4848d7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:40.804434+00:00",
+      "end_utc": "2026-09-17T16:15:42.361907+00:00",
+      "monotonic_elapsed_ms": 1546.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_029",
+      "timestamp_utc": "2026-09-17T16:15:42.393445+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 29,
+      "global_execution_position": 112,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 91,
+        "output_tokens": 109,
+        "total_tokens": 226,
+        "latency_ms": 1256.3527999955113
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "199e6cd9-da89-48cd-9ffb-661551b7482d",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:42.393445+00:00",
+      "end_utc": "2026-09-17T16:15:43.649082+00:00",
+      "monotonic_elapsed_ms": 1264.999999999418
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_029",
+      "timestamp_utc": "2026-09-17T16:15:43.676251+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 29,
+      "global_execution_position": 113,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 105,
+        "output_tokens": 123,
+        "total_tokens": 249,
+        "latency_ms": 1432.3616999972728
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "2b776264-09c5-4598-8eeb-6254b46a07db",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:43.676251+00:00",
+      "end_utc": "2026-09-17T16:15:45.108266+00:00",
+      "monotonic_elapsed_ms": 1438.0000000019209
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_029",
+      "timestamp_utc": "2026-09-17T16:15:45.141909+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 29,
+      "global_execution_position": 114,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 153,
+        "output_tokens": 171,
+        "total_tokens": 293,
+        "latency_ms": 1567.5908000048366
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "d18066c5-40e7-42a5-82f4-442808eebfd7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:45.141909+00:00",
+      "end_utc": "2026-09-17T16:15:46.710227+00:00",
+      "monotonic_elapsed_ms": 1577.9999999940628
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_029",
+      "timestamp_utc": "2026-09-17T16:15:46.741789+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 29,
+      "global_execution_position": 115,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 113,
+        "output_tokens": 131,
+        "total_tokens": 248,
+        "latency_ms": 1429.982599998766
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "f1c39746-7d2f-4f9b-9d2b-85b281d961a4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:46.741789+00:00",
+      "end_utc": "2026-09-17T16:15:48.171911+00:00",
+      "monotonic_elapsed_ms": 1421.9999999986612
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::noop_compact::rep_030",
+      "timestamp_utc": "2026-09-17T16:15:48.207953+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "noop",
+      "repetition": 30,
+      "global_execution_position": 116,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 200,
+        "output_tokens": 218,
+        "total_tokens": 335,
+        "latency_ms": 1776.8106999938027
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "01ece5be-620e-427c-bd97-8421bb30a7ef",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:48.207953+00:00",
+      "end_utc": "2026-09-17T16:15:49.985161+00:00",
+      "monotonic_elapsed_ms": 1781.9999999992433
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::flat_compact::rep_030",
+      "timestamp_utc": "2026-09-17T16:15:50.015230+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "flat_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "serialization": "compact",
+      "representation_payload": "flat",
+      "repetition": 30,
+      "global_execution_position": 117,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 95,
+        "output_tokens": 113,
+        "total_tokens": 230,
+        "latency_ms": 1278.7379999936093
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "4a582751-3606-4e88-8d1a-1c23498dbf00",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:50.015230+00:00",
+      "end_utc": "2026-09-17T16:15:51.293879+00:00",
+      "monotonic_elapsed_ms": 1280.9999999954016
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_bare_compact::rep_030",
+      "timestamp_utc": "2026-09-17T16:15:51.508987+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs_bare",
+      "repetition": 30,
+      "global_execution_position": 118,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 57,
+        "output_tokens": 75,
+        "total_tokens": 197,
+        "latency_ms": 1116.379399994912
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "794925ea-fc61-4546-b02a-26f29c8fe372",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:51.508987+00:00",
+      "end_utc": "2026-09-17T16:15:52.624860+00:00",
+      "monotonic_elapsed_ms": 1108.9999999967404
+    },
+    {
+      "schema_version": "0.8.4",
+      "run_id": "T003::deepseek::pairs_compact::rep_030",
+      "timestamp_utc": "2026-09-17T16:15:52.656899+00:00",
+      "task_id": "T003",
+      "provider": "deepseek",
+      "model_id": "deepseek",
+      "model": "deepseek-v4-flash",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "serialization": "compact",
+      "representation_payload": "pairs",
+      "repetition": 30,
+      "global_execution_position": 119,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 375,
+        "output_tokens": 393,
+        "total_tokens": 519,
+        "latency_ms": 2281.1288999946555
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_status": null,
+        "response_id": "e5f6a71f-e67f-411d-a227-a8b60ee10dd1",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T16:15:52.656899+00:00",
+      "end_utc": "2026-09-17T16:15:54.938106+00:00",
+      "monotonic_elapsed_ms": 2281.9999999992433
+    }
+  ],
+  "completed_runs": 120,
+  "last_completed_position": 119,
+  "finished_utc": "2026-09-17T16:15:55.075921+00:00"
+}

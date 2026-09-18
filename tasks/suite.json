@@ -1,0 +1,8 @@
+{
+  "tasks": [
+    {"task_id":"T001","task_family":"extraction","required":["case_id","customer","priority","deadline"],"data":{"case_id":"C-001","customer":"Ana","priority":"high","deadline":"2026-09-20","notes":"noise","internal":"noise"}},
+    {"task_id":"T002","task_family":"classification","required":["ticket_id","category","severity"],"data":{"ticket_id":"TK-77","category":"billing","severity":"medium","history":"noise","metadata":"noise"}},
+    {"task_id":"T003","task_family":"structured_analysis","required":["entity","score","status"],"data":{"entity":"A-17","score":0.87,"status":"stable","trace":"noise","commentary":"noise"}},
+    {"task_id":"T004","task_family":"reference_use","required":["source_id","claim","confidence"],"data":{"source_id":"REF-9","claim":"Example claim","confidence":"high","provenance":"noise","unused":"noise"}}
+  ]
+}

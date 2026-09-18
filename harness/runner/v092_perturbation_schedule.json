@@ -1,0 +1,1646 @@
+{
+    "schema_version":  "0.9.2",
+    "experiment_id":  "PROMPTFORGE_V0.9.2_PERTURBATION_VALIDATION",
+    "task_id":  "T003",
+    "task_family":  "structured_analysis",
+    "model_id":  "deepseek",
+    "variants":  [
+                     "canonical_t003",
+                     "noise_long",
+                     "key_order",
+                     "content_shift"
+                 ],
+    "conditions":  [
+                       "noop_compact",
+                       "pairs_compact",
+                       "pairs_bare_compact"
+                   ],
+    "repetitions":  15,
+    "scheduled_runs":  180,
+    "primary_condition":  "pairs_compact",
+    "baseline_condition":  "noop_compact",
+    "negative_control":  "pairs_bare_compact",
+    "primary_endpoint":  "pooled_delta_total_pairs_compact_minus_noop_compact",
+    "rows":  [
+                 {
+                     "repetition":  1,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  0
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  1
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  2
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  3
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  4
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  5
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  6
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  7
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  8
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  9
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  10
+                 },
+                 {
+                     "repetition":  1,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  11
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  12
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  13
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  14
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  15
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  16
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  17
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  18
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  19
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  20
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  21
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  22
+                 },
+                 {
+                     "repetition":  2,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  23
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  24
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  25
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  26
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  27
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  28
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  29
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  30
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  31
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  32
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  33
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  34
+                 },
+                 {
+                     "repetition":  3,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  35
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  36
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  37
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  38
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  39
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  40
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  41
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  42
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  43
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  44
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  45
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  46
+                 },
+                 {
+                     "repetition":  4,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  47
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  48
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  49
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  50
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  51
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  52
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  53
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  54
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  55
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  56
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  57
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  58
+                 },
+                 {
+                     "repetition":  5,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  59
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  60
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  61
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  62
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  63
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  64
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  65
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  66
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  67
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  68
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  69
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  70
+                 },
+                 {
+                     "repetition":  6,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  71
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  72
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  73
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  74
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  75
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  76
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  77
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  78
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  79
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  80
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  81
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  82
+                 },
+                 {
+                     "repetition":  7,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  83
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  84
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  85
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  86
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  87
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  88
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  89
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  90
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  91
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  92
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  93
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  94
+                 },
+                 {
+                     "repetition":  8,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  95
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  96
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  97
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  98
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  99
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  100
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  101
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  102
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  103
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  104
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  105
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  106
+                 },
+                 {
+                     "repetition":  9,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  107
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  108
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  109
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  110
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  111
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  112
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  113
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  114
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  115
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  116
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  117
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  118
+                 },
+                 {
+                     "repetition":  10,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  119
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  120
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  121
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  122
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  123
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  124
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  125
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  126
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  127
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  128
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  129
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  130
+                 },
+                 {
+                     "repetition":  11,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  131
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  132
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  133
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  134
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  135
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  136
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  137
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  138
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  139
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  140
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  141
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  142
+                 },
+                 {
+                     "repetition":  12,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  143
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  144
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  145
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  146
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  147
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  148
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  149
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  150
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  151
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  152
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  153
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  154
+                 },
+                 {
+                     "repetition":  13,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  155
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  156
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  157
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  158
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  159
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  160
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  161
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  162
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  163
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  164
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  165
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  166
+                 },
+                 {
+                     "repetition":  14,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  167
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  168
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  169
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "key_order",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  170
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  171
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  172
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "content_shift",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  173
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  174
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  175
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "canonical_t003",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  176
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_bare_compact",
+                     "global_execution_position":  177
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "noop_compact",
+                     "global_execution_position":  178
+                 },
+                 {
+                     "repetition":  15,
+                     "variant_id":  "noise_long",
+                     "task_id":  "T003",
+                     "task_family":  "structured_analysis",
+                     "model_id":  "deepseek",
+                     "condition_id":  "pairs_compact",
+                     "global_execution_position":  179
+                 }
+             ]
+}

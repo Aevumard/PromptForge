@@ -1,0 +1,5310 @@
+{
+  "schema_version": "0.9.1",
+  "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+  "status": "COMPLETE",
+  "provider_phase": "REAL_COLLECTION",
+  "task_id": "T003",
+  "model_id": "deepseek",
+  "conditions": [
+    "noop_compact",
+    "pairs_compact",
+    "pairs_bare_compact"
+  ],
+  "repetitions": 40,
+  "scheduled_runs": 120,
+  "schedule_sha256": "B365DA2E348ABE3CD028E2BB78FD5372C2918A633CC4450A55FA53B28870CBFB",
+  "preregistration_sha256": "47E1874D001973E621F8291D9F0DCBD27EB24734CC44A629F58938FA77F6782D",
+  "v09_source_sha256": "353EA5B6D91F4653C659B299A276A369B6396BF915F8496AF0BC7819446E1E38",
+  "task_suite_sha256": "12FA0D70631609B231400CEEAF727C1A22AF87334A0075148CF9C66F8C5BDEF3",
+  "protected_sha256": {
+    "transforms.py": "D851443F75B02876DEF4A971B0C97B0A34A6DE044ED49326E133A1D421EC8E4A",
+    "real_executor.py": "5589F8C777A594E81BBBFA15D14BF181B141957825DB176EAEA1ABB5DD2D9842",
+    "deepseek_adapter.py": "4913395597AFAB924A8FB8927CB61288603B4B87A5B1B0BC47F6959707D0E614"
+  },
+  "runs": [
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:21.602596+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 1,
+      "global_execution_position": 0,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 260,
+        "output_tokens": 278,
+        "total_tokens": 395,
+        "latency_ms": 2833.202400004666
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "aa6b9ad6-43a3-4ad3-9823-e7c66ca25db6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:21.602596+00:00",
+      "end_utc": "2026-09-17T17:34:24.435517+00:00",
+      "monotonic_elapsed_ms": 2828.000000001339,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:24.459516+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 1,
+      "global_execution_position": 1,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 54,
+        "output_tokens": 72,
+        "total_tokens": 198,
+        "latency_ms": 1344.0801000033389
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b5fa2861-9141-4f18-90e6-409a5cbdc756",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:24.459516+00:00",
+      "end_utc": "2026-09-17T17:34:25.803473+00:00",
+      "monotonic_elapsed_ms": 1344.0000000045984,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:25.831986+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 1,
+      "global_execution_position": 2,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 124,
+        "output_tokens": 142,
+        "total_tokens": 264,
+        "latency_ms": 1542.1628000040073
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "43b9ff08-188a-4c27-8ff3-5b36d85fc5e9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:25.831986+00:00",
+      "end_utc": "2026-09-17T17:34:27.373699+00:00",
+      "monotonic_elapsed_ms": 1546.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:27.399699+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 2,
+      "global_execution_position": 3,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 185,
+        "output_tokens": 203,
+        "total_tokens": 320,
+        "latency_ms": 1678.525700001046
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d4f3684e-c078-40e7-a965-e3ed3020f73e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:27.399699+00:00",
+      "end_utc": "2026-09-17T17:34:29.078037+00:00",
+      "monotonic_elapsed_ms": 1671.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:29.124553+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 2,
+      "global_execution_position": 4,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 95,
+        "output_tokens": 113,
+        "total_tokens": 235,
+        "latency_ms": 1299.1795999987517
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "5dd53d09-74b8-4821-86a0-10906dc5835f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:29.124553+00:00",
+      "end_utc": "2026-09-17T17:34:30.423768+00:00",
+      "monotonic_elapsed_ms": 1296.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:30.634929+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 2,
+      "global_execution_position": 5,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 120,
+        "output_tokens": 138,
+        "total_tokens": 264,
+        "latency_ms": 1411.8576999971992
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d4458ad6-f913-469a-9301-12feaafa00d3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:30.634929+00:00",
+      "end_utc": "2026-09-17T17:34:32.046247+00:00",
+      "monotonic_elapsed_ms": 1405.9999999954016,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:32.072782+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 3,
+      "global_execution_position": 6,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 279,
+        "output_tokens": 297,
+        "total_tokens": 419,
+        "latency_ms": 2157.5646999990568
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "f45ddfa0-668a-43c8-be84-2d77aa2ed356",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:32.072782+00:00",
+      "end_utc": "2026-09-17T17:34:34.230010+00:00",
+      "monotonic_elapsed_ms": 2156.9999999992433,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:35.225187+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 3,
+      "global_execution_position": 7,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 99,
+        "output_tokens": 117,
+        "total_tokens": 234,
+        "latency_ms": 1382.702100003371
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "20f79a3d-18a8-4cf3-bb34-b4fbb7d4d8c7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:35.225187+00:00",
+      "end_utc": "2026-09-17T17:34:36.607421+00:00",
+      "monotonic_elapsed_ms": 1375.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:36.807453+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 3,
+      "global_execution_position": 8,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 166,
+        "output_tokens": 184,
+        "total_tokens": 310,
+        "latency_ms": 1784.770700003719
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b97017c0-2242-4ed6-912f-5f0dd7c8b128",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:36.807453+00:00",
+      "end_utc": "2026-09-17T17:34:38.591783+00:00",
+      "monotonic_elapsed_ms": 1780.9999999954016,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:38.628785+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 4,
+      "global_execution_position": 9,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 93,
+        "output_tokens": 111,
+        "total_tokens": 233,
+        "latency_ms": 1293.4950000053504
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "54ca0363-7a6a-4b88-bb26-860868a9f338",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:38.628785+00:00",
+      "end_utc": "2026-09-17T17:34:39.921936+00:00",
+      "monotonic_elapsed_ms": 1296.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:39.961448+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 4,
+      "global_execution_position": 10,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 113,
+        "output_tokens": 131,
+        "total_tokens": 257,
+        "latency_ms": 1440.8046000025934
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "2f1f6407-3e29-4c54-aa19-9c00d32b244f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:39.961448+00:00",
+      "end_utc": "2026-09-17T17:34:41.402199+00:00",
+      "monotonic_elapsed_ms": 1437.000000005355,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:41.614232+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 4,
+      "global_execution_position": 11,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 268,
+        "output_tokens": 286,
+        "total_tokens": 403,
+        "latency_ms": 1855.286400001205
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d9056771-40ca-48d2-b998-1d0169e40afa",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:41.614232+00:00",
+      "end_utc": "2026-09-17T17:34:43.469618+00:00",
+      "monotonic_elapsed_ms": 1858.9999999967404,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:43.495621+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 5,
+      "global_execution_position": 12,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 113,
+        "output_tokens": 131,
+        "total_tokens": 257,
+        "latency_ms": 1322.2448999949847
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "41b8da9d-4404-43d0-b31d-c563b74f01b6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:43.495621+00:00",
+      "end_utc": "2026-09-17T17:34:44.817863+00:00",
+      "monotonic_elapsed_ms": 1328.0000000013388,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:44.842868+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 5,
+      "global_execution_position": 13,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 245,
+        "output_tokens": 263,
+        "total_tokens": 385,
+        "latency_ms": 2069.2531000022427
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "857fc472-8f9c-46f1-b101-1232e2ceb064",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:44.842868+00:00",
+      "end_utc": "2026-09-17T17:34:46.912267+00:00",
+      "monotonic_elapsed_ms": 2078.000000001339,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:46.933267+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 5,
+      "global_execution_position": 14,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 214,
+        "output_tokens": 232,
+        "total_tokens": 349,
+        "latency_ms": 1933.6065000024973
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d79bf1b0-8149-4690-9be1-b0826556bbe6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:46.933267+00:00",
+      "end_utc": "2026-09-17T17:34:48.867365+00:00",
+      "monotonic_elapsed_ms": 1936.9999999980791,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:48.880364+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 6,
+      "global_execution_position": 15,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 129,
+        "output_tokens": 147,
+        "total_tokens": 273,
+        "latency_ms": 1468.1514999974752
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "db623c10-5c46-4865-a090-d1082125c1f2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:48.880364+00:00",
+      "end_utc": "2026-09-17T17:34:50.348973+00:00",
+      "monotonic_elapsed_ms": 1452.9999999940628,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:50.367021+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 6,
+      "global_execution_position": 16,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 114,
+        "output_tokens": 132,
+        "total_tokens": 249,
+        "latency_ms": 1349.0327000035904
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b6ae81c8-b5fc-464c-8a5d-08ae8c88b6d2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:50.367021+00:00",
+      "end_utc": "2026-09-17T17:34:51.715707+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:51.910024+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 6,
+      "global_execution_position": 17,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 86,
+        "output_tokens": 104,
+        "total_tokens": 226,
+        "latency_ms": 1072.6991999981692
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "8baa5bac-328a-44ae-b9e7-b4e68fbf318e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:51.910024+00:00",
+      "end_utc": "2026-09-17T17:34:52.982402+00:00",
+      "monotonic_elapsed_ms": 1078.9999999979045,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:53.018347+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 7,
+      "global_execution_position": 18,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 123,
+        "output_tokens": 141,
+        "total_tokens": 258,
+        "latency_ms": 1241.3888000010047
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "78197cd1-d8e5-45d4-8451-0f834d3d42f3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:53.018347+00:00",
+      "end_utc": "2026-09-17T17:34:54.259748+00:00",
+      "monotonic_elapsed_ms": 1250.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:54.273286+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 7,
+      "global_execution_position": 19,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 177,
+        "output_tokens": 195,
+        "total_tokens": 321,
+        "latency_ms": 1573.3773000029032
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "bc94be16-b79f-49c6-b551-3b2174b4599b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:54.273286+00:00",
+      "end_utc": "2026-09-17T17:34:55.846689+00:00",
+      "monotonic_elapsed_ms": 1562.999999994645,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:55.888266+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 7,
+      "global_execution_position": 20,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 92,
+        "output_tokens": 110,
+        "total_tokens": 232,
+        "latency_ms": 1440.1590000052238
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "eeddfd65-a7e1-4f32-aa7f-0eda788d6e6a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:55.888266+00:00",
+      "end_utc": "2026-09-17T17:34:57.328495+00:00",
+      "monotonic_elapsed_ms": 1436.9999999980791,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:57.355030+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 8,
+      "global_execution_position": 21,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 45,
+        "output_tokens": 63,
+        "total_tokens": 180,
+        "latency_ms": 1151.8374000006588
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "1d60c42a-bb48-479f-a62f-1caf44ecf439",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:57.355030+00:00",
+      "end_utc": "2026-09-17T17:34:58.506653+00:00",
+      "monotonic_elapsed_ms": 1156.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:34:58.526675+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 8,
+      "global_execution_position": 22,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 146,
+        "output_tokens": 164,
+        "total_tokens": 286,
+        "latency_ms": 1669.1944000049261
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "3507a5e8-3710-43c7-808e-991ed09d0fc2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:34:58.526675+00:00",
+      "end_utc": "2026-09-17T17:35:00.196387+00:00",
+      "monotonic_elapsed_ms": 1671.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:00.212417+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 8,
+      "global_execution_position": 23,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 140,
+        "output_tokens": 158,
+        "total_tokens": 284,
+        "latency_ms": 1518.6132000017096
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b4727e91-d543-40bf-b0b1-64b9b98c1260",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:00.212417+00:00",
+      "end_utc": "2026-09-17T17:35:01.730298+00:00",
+      "monotonic_elapsed_ms": 1516.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:01.753362+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 9,
+      "global_execution_position": 24,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 107,
+        "output_tokens": 125,
+        "total_tokens": 247,
+        "latency_ms": 1377.2441999972216
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "db8fca8e-eac1-4848-ac3f-ddd3096d12e4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:01.753362+00:00",
+      "end_utc": "2026-09-17T17:35:03.129878+00:00",
+      "monotonic_elapsed_ms": 1375.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:03.155900+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 9,
+      "global_execution_position": 25,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 117,
+        "output_tokens": 135,
+        "total_tokens": 252,
+        "latency_ms": 1343.1933999963803
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "71c658c6-b58f-4979-8e86-6ba458847c68",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:03.155900+00:00",
+      "end_utc": "2026-09-17T17:35:04.498949+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:04.509966+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 9,
+      "global_execution_position": 26,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 92,
+        "output_tokens": 110,
+        "total_tokens": 236,
+        "latency_ms": 1347.4162000056822
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "3cb9bac9-3e85-4ca6-a29e-20b3b751b177",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:04.509966+00:00",
+      "end_utc": "2026-09-17T17:35:05.857430+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:05.896979+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 10,
+      "global_execution_position": 27,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 98,
+        "output_tokens": 116,
+        "total_tokens": 238,
+        "latency_ms": 1332.5965000040014
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "cf619532-dce1-426d-b889-5917f496705f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:05.896979+00:00",
+      "end_utc": "2026-09-17T17:35:07.229640+00:00",
+      "monotonic_elapsed_ms": 1328.9999999979045,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:07.251139+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 10,
+      "global_execution_position": 28,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 129,
+        "output_tokens": 147,
+        "total_tokens": 273,
+        "latency_ms": 1394.6742000043741
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "09523b79-d0d3-41cf-8c87-4a3b818647a9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:07.251139+00:00",
+      "end_utc": "2026-09-17T17:35:08.645667+00:00",
+      "monotonic_elapsed_ms": 1391.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:08.667692+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 10,
+      "global_execution_position": 29,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 54,
+        "output_tokens": 72,
+        "total_tokens": 189,
+        "latency_ms": 1021.3449000002583
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "13f1806f-341a-44f8-8cd3-68f70bf45e06",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:08.667692+00:00",
+      "end_utc": "2026-09-17T17:35:09.688143+00:00",
+      "monotonic_elapsed_ms": 1016.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:09.712199+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 11,
+      "global_execution_position": 30,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 210,
+        "output_tokens": 228,
+        "total_tokens": 354,
+        "latency_ms": 1931.4685999997891
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "bee36692-7f3b-4fc8-8024-5b3ddf7afcd8",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:09.712199+00:00",
+      "end_utc": "2026-09-17T17:35:11.643803+00:00",
+      "monotonic_elapsed_ms": 1922.0000000059372,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:11.664358+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 11,
+      "global_execution_position": 31,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 145,
+        "output_tokens": 163,
+        "total_tokens": 285,
+        "latency_ms": 1390.3763000053004
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "309a8a9a-fee4-4bfd-b081-db2161efa176",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:11.664358+00:00",
+      "end_utc": "2026-09-17T17:35:13.054064+00:00",
+      "monotonic_elapsed_ms": 1391.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:13.082590+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 11,
+      "global_execution_position": 32,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 102,
+        "output_tokens": 120,
+        "total_tokens": 237,
+        "latency_ms": 1390.0088000009418
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d49ff350-e2e0-4754-8779-187803e4cc22",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:13.082590+00:00",
+      "end_utc": "2026-09-17T17:35:14.472187+00:00",
+      "monotonic_elapsed_ms": 1390.9999999959837,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:14.494219+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 12,
+      "global_execution_position": 33,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 54,
+        "output_tokens": 72,
+        "total_tokens": 198,
+        "latency_ms": 1343.3616000038455
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "3b444604-4f84-4d64-86fd-02158bf2a07e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:14.494219+00:00",
+      "end_utc": "2026-09-17T17:35:15.837199+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:15.860738+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 12,
+      "global_execution_position": 34,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 86,
+        "output_tokens": 104,
+        "total_tokens": 221,
+        "latency_ms": 1429.4186000042828
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "91a053e9-7358-46b5-9b70-b60113c2b603",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:15.860738+00:00",
+      "end_utc": "2026-09-17T17:35:17.289941+00:00",
+      "monotonic_elapsed_ms": 1436.9999999980791,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:17.303454+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 12,
+      "global_execution_position": 35,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 121,
+        "output_tokens": 139,
+        "total_tokens": 261,
+        "latency_ms": 1266.4369000049192
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "4d7ec899-c494-4080-9449-f96f72c46890",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:17.303454+00:00",
+      "end_utc": "2026-09-17T17:35:18.569422+00:00",
+      "monotonic_elapsed_ms": 1264.999999999418,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:18.591444+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 13,
+      "global_execution_position": 36,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 106,
+        "output_tokens": 124,
+        "total_tokens": 241,
+        "latency_ms": 1413.0168999981834
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "131267a6-6e63-4334-abb4-6ce9f7fc5f17",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:18.591444+00:00",
+      "end_utc": "2026-09-17T17:35:20.004844+00:00",
+      "monotonic_elapsed_ms": 1406.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:20.021121+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 13,
+      "global_execution_position": 37,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 137,
+        "output_tokens": 155,
+        "total_tokens": 281,
+        "latency_ms": 1611.0121000019717
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "90d1b326-61c0-46db-9c7b-501efccf5088",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:20.021121+00:00",
+      "end_utc": "2026-09-17T17:35:21.631632+00:00",
+      "monotonic_elapsed_ms": 1610.000000000582,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:21.688714+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 13,
+      "global_execution_position": 38,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 171,
+        "output_tokens": 189,
+        "total_tokens": 311,
+        "latency_ms": 1522.6104000030318
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "c5af37bd-e186-4887-b0d9-9fc771228cf6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:21.688714+00:00",
+      "end_utc": "2026-09-17T17:35:23.211088+00:00",
+      "monotonic_elapsed_ms": 1530.9999999954016,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:23.240617+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 14,
+      "global_execution_position": 39,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 125,
+        "output_tokens": 143,
+        "total_tokens": 260,
+        "latency_ms": 1248.9694000032614
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "c489c12e-41a1-4c84-aa60-63b9a68dc886",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:23.240617+00:00",
+      "end_utc": "2026-09-17T17:35:24.489527+00:00",
+      "monotonic_elapsed_ms": 1235.000000000582,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:24.502044+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 14,
+      "global_execution_position": 40,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 112,
+        "output_tokens": 130,
+        "total_tokens": 252,
+        "latency_ms": 1317.5651999990805
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "68e96501-1460-4eee-b610-cf9eb1f05d3c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:24.502044+00:00",
+      "end_utc": "2026-09-17T17:35:25.820189+00:00",
+      "monotonic_elapsed_ms": 1328.0000000013388,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:25.831703+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 14,
+      "global_execution_position": 41,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 157,
+        "output_tokens": 175,
+        "total_tokens": 301,
+        "latency_ms": 1456.7632000034791
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "40c47ba1-b018-4450-834a-55accfd1137c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:25.831703+00:00",
+      "end_utc": "2026-09-17T17:35:27.288345+00:00",
+      "monotonic_elapsed_ms": 1468.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:27.310379+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 15,
+      "global_execution_position": 42,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 125,
+        "output_tokens": 143,
+        "total_tokens": 265,
+        "latency_ms": 1341.4572000037879
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "307c24bc-0b39-47ab-b7ee-157ed8927de9",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:27.310379+00:00",
+      "end_utc": "2026-09-17T17:35:28.651741+00:00",
+      "monotonic_elapsed_ms": 1343.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:28.693077+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 15,
+      "global_execution_position": 43,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 278,
+        "output_tokens": 296,
+        "total_tokens": 413,
+        "latency_ms": 2209.3514000007417
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "36ad8fa7-6c1e-4e02-bf54-e3ebfb4ce476",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:28.693077+00:00",
+      "end_utc": "2026-09-17T17:35:30.902360+00:00",
+      "monotonic_elapsed_ms": 2203.000000001339,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:31.042432+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 15,
+      "global_execution_position": 44,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 62,
+        "output_tokens": 80,
+        "total_tokens": 206,
+        "latency_ms": 1159.1905999957817
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "77d13aa9-a4c1-47f1-b2ef-82713260a9ac",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:31.042432+00:00",
+      "end_utc": "2026-09-17T17:35:32.201949+00:00",
+      "monotonic_elapsed_ms": 1156.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:32.231798+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 16,
+      "global_execution_position": 45,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 235,
+        "output_tokens": 253,
+        "total_tokens": 375,
+        "latency_ms": 2212.039600002754
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d00f5dcb-2fb1-45ff-a9d7-7f8361f242c4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:32.231798+00:00",
+      "end_utc": "2026-09-17T17:35:34.443295+00:00",
+      "monotonic_elapsed_ms": 2218.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:35.027238+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 16,
+      "global_execution_position": 46,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 132,
+        "output_tokens": 150,
+        "total_tokens": 276,
+        "latency_ms": 1480.2870999992592
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "f0ed1cc7-0075-4e8f-8886-379017310220",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:35.027238+00:00",
+      "end_utc": "2026-09-17T17:35:36.507798+00:00",
+      "monotonic_elapsed_ms": 1485.000000000582,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:36.544837+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 16,
+      "global_execution_position": 47,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 124,
+        "output_tokens": 142,
+        "total_tokens": 259,
+        "latency_ms": 1231.1262000002898
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "86f0d71d-a8b5-45c7-aaec-e54b6047d4d7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:36.544837+00:00",
+      "end_utc": "2026-09-17T17:35:37.776081+00:00",
+      "monotonic_elapsed_ms": 1234.0000000040163,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:37.976033+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 17,
+      "global_execution_position": 48,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 89,
+        "output_tokens": 107,
+        "total_tokens": 233,
+        "latency_ms": 1416.9031999990693
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "02dc7d99-8d77-4841-bdb1-ac1e021c29d3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:37.976033+00:00",
+      "end_utc": "2026-09-17T17:35:39.392726+00:00",
+      "monotonic_elapsed_ms": 1406.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:39.422264+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 17,
+      "global_execution_position": 49,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 103,
+        "output_tokens": 121,
+        "total_tokens": 243,
+        "latency_ms": 1593.0208999998285
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "223608ff-4f57-41c2-9fd5-3f43d5ddc168",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:39.422264+00:00",
+      "end_utc": "2026-09-17T17:35:41.014573+00:00",
+      "monotonic_elapsed_ms": 1594.0000000045984,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:41.042618+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 17,
+      "global_execution_position": 50,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 108,
+        "output_tokens": 126,
+        "total_tokens": 243,
+        "latency_ms": 1196.700199994666
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "673f2e5b-0042-49cf-8911-8204e884987e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:41.042618+00:00",
+      "end_utc": "2026-09-17T17:35:42.239525+00:00",
+      "monotonic_elapsed_ms": 1188.0000000019209,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:42.440805+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 18,
+      "global_execution_position": 51,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 57,
+        "output_tokens": 75,
+        "total_tokens": 201,
+        "latency_ms": 1249.9262999990606
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b097fc4b-b717-4160-bada-8e4901209cd4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:42.440805+00:00",
+      "end_utc": "2026-09-17T17:35:43.691600+00:00",
+      "monotonic_elapsed_ms": 1250.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:43.728669+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 18,
+      "global_execution_position": 52,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 151,
+        "output_tokens": 169,
+        "total_tokens": 286,
+        "latency_ms": 1661.3373000000138
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b2017168-21db-498c-8109-6e08336f9573",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:43.728669+00:00",
+      "end_utc": "2026-09-17T17:35:45.389837+00:00",
+      "monotonic_elapsed_ms": 1656.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:45.420386+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 18,
+      "global_execution_position": 53,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 234,
+        "output_tokens": 252,
+        "total_tokens": 374,
+        "latency_ms": 2088.8175000000047
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "23066fbe-9128-4483-bfd7-70d9e85763aa",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:45.420386+00:00",
+      "end_utc": "2026-09-17T17:35:47.508854+00:00",
+      "monotonic_elapsed_ms": 2094.0000000045984,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:47.530828+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 19,
+      "global_execution_position": 54,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 189,
+        "output_tokens": 207,
+        "total_tokens": 324,
+        "latency_ms": 1810.111599996162
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "944ab6aa-affa-4b2f-8ac6-feb8040ec1c6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:47.530828+00:00",
+      "end_utc": "2026-09-17T17:35:49.340622+00:00",
+      "monotonic_elapsed_ms": 1812.999999994645,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:49.363650+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 19,
+      "global_execution_position": 55,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 65,
+        "output_tokens": 83,
+        "total_tokens": 209,
+        "latency_ms": 1148.8824999978533
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "f8dc864a-1be7-4761-947a-8b7b2de96553",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:49.363650+00:00",
+      "end_utc": "2026-09-17T17:35:50.512829+00:00",
+      "monotonic_elapsed_ms": 1156.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:50.550892+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 19,
+      "global_execution_position": 56,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 109,
+        "output_tokens": 127,
+        "total_tokens": 249,
+        "latency_ms": 1389.190999994753
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "53e594f4-db8c-4c73-8833-0266f9b47365",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:50.550892+00:00",
+      "end_utc": "2026-09-17T17:35:51.940418+00:00",
+      "monotonic_elapsed_ms": 1391.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:51.967966+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 20,
+      "global_execution_position": 57,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 78,
+        "output_tokens": 96,
+        "total_tokens": 213,
+        "latency_ms": 1116.8877000018256
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "37c255e8-567f-45e1-a7a7-8a4e3dcfb34f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:51.967966+00:00",
+      "end_utc": "2026-09-17T17:35:53.084893+00:00",
+      "monotonic_elapsed_ms": 1125.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:53.114954+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 20,
+      "global_execution_position": 58,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 153,
+        "output_tokens": 171,
+        "total_tokens": 293,
+        "latency_ms": 1435.8888999995543
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "0e17deaa-0ad9-4ebf-a510-c6f142cec34b",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:53.114954+00:00",
+      "end_utc": "2026-09-17T17:35:54.551544+00:00",
+      "monotonic_elapsed_ms": 1421.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:54.577973+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 20,
+      "global_execution_position": 59,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 132,
+        "output_tokens": 150,
+        "total_tokens": 276,
+        "latency_ms": 1311.8146999986493
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "45d550c8-d5af-4125-8b87-0c55a2e606db",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:54.577973+00:00",
+      "end_utc": "2026-09-17T17:35:55.890680+00:00",
+      "monotonic_elapsed_ms": 1313.0000000019209,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:55.907237+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 21,
+      "global_execution_position": 60,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 142,
+        "output_tokens": 160,
+        "total_tokens": 282,
+        "latency_ms": 1548.7601999993785
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "a674d013-3f12-4de2-9cd8-9630008981dd",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:55.907237+00:00",
+      "end_utc": "2026-09-17T17:35:57.456881+00:00",
+      "monotonic_elapsed_ms": 1546.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:57.667885+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 21,
+      "global_execution_position": 61,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 75,
+        "output_tokens": 93,
+        "total_tokens": 210,
+        "latency_ms": 1154.4757000010577
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "10c66482-0455-4429-9a7d-647456a41df6",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:57.667885+00:00",
+      "end_utc": "2026-09-17T17:35:58.822544+00:00",
+      "monotonic_elapsed_ms": 1156.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:35:58.851083+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 21,
+      "global_execution_position": 62,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 106,
+        "output_tokens": 124,
+        "total_tokens": 250,
+        "latency_ms": 1386.3363999989815
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "ee5caf05-9e21-44b6-a21f-9d6be1b010de",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:35:58.851083+00:00",
+      "end_utc": "2026-09-17T17:36:00.237370+00:00",
+      "monotonic_elapsed_ms": 1375.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:00.264909+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 22,
+      "global_execution_position": 63,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 197,
+        "output_tokens": 215,
+        "total_tokens": 337,
+        "latency_ms": 1695.9647000039695
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "2286d900-fec2-4e3e-b9e1-266128d99561",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:00.264909+00:00",
+      "end_utc": "2026-09-17T17:36:01.960646+00:00",
+      "monotonic_elapsed_ms": 1702.9999999940628,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:01.997632+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 22,
+      "global_execution_position": 64,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 78,
+        "output_tokens": 96,
+        "total_tokens": 222,
+        "latency_ms": 1142.0037999996566
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "68ebac28-c8ba-40f2-a78b-1813c664e727",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:01.997632+00:00",
+      "end_utc": "2026-09-17T17:36:03.139700+00:00",
+      "monotonic_elapsed_ms": 1141.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:03.357656+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 22,
+      "global_execution_position": 65,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 127,
+        "output_tokens": 145,
+        "total_tokens": 262,
+        "latency_ms": 1477.7927000031923
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "48d3c733-da44-4e6e-9d6d-dc355bbbc975",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:03.357656+00:00",
+      "end_utc": "2026-09-17T17:36:04.835727+00:00",
+      "monotonic_elapsed_ms": 1483.9999999967404,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:04.862754+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 23,
+      "global_execution_position": 66,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 103,
+        "output_tokens": 121,
+        "total_tokens": 247,
+        "latency_ms": 1463.1491000036476
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "e47ec6bf-74a3-451d-b49a-2b1c4f50a6c8",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:04.862754+00:00",
+      "end_utc": "2026-09-17T17:36:06.326125+00:00",
+      "monotonic_elapsed_ms": 1468.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:06.356662+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 23,
+      "global_execution_position": 67,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 308,
+        "output_tokens": 326,
+        "total_tokens": 448,
+        "latency_ms": 2235.9136999948532
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "0407f4fd-720f-446b-9fa1-a0ca6522f250",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:06.356662+00:00",
+      "end_utc": "2026-09-17T17:36:08.592673+00:00",
+      "monotonic_elapsed_ms": 2233.9999999967404,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:08.797158+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 23,
+      "global_execution_position": 68,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 140,
+        "output_tokens": 158,
+        "total_tokens": 275,
+        "latency_ms": 1617.3717999990913
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "9b43c355-6d27-49bc-9c65-c84a7d607b6e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:08.797158+00:00",
+      "end_utc": "2026-09-17T17:36:10.414492+00:00",
+      "monotonic_elapsed_ms": 1625.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:10.434526+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 24,
+      "global_execution_position": 69,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 58,
+        "output_tokens": 76,
+        "total_tokens": 202,
+        "latency_ms": 1251.191099996504
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "0c2a6d43-ef68-45bc-b927-c0d0a1635d37",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:10.434526+00:00",
+      "end_utc": "2026-09-17T17:36:11.685905+00:00",
+      "monotonic_elapsed_ms": 1250.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:11.705605+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 24,
+      "global_execution_position": 70,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 46,
+        "output_tokens": 64,
+        "total_tokens": 181,
+        "latency_ms": 1081.4374999972642
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "fcf7174c-a67e-4bc7-a809-ffdeb0b79387",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:11.705605+00:00",
+      "end_utc": "2026-09-17T17:36:12.787168+00:00",
+      "monotonic_elapsed_ms": 1093.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:12.987403+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 24,
+      "global_execution_position": 71,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 110,
+        "output_tokens": 128,
+        "total_tokens": 250,
+        "latency_ms": 1368.9367999977549
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "4ca90122-fdd2-4b80-8e91-a141521e0170",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:12.987403+00:00",
+      "end_utc": "2026-09-17T17:36:14.356919+00:00",
+      "monotonic_elapsed_ms": 1375.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:14.392453+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 25,
+      "global_execution_position": 72,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 221,
+        "output_tokens": 239,
+        "total_tokens": 356,
+        "latency_ms": 1804.6215000067605
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "bb000e21-8b0e-41fa-9ccf-a7e90c3ec45f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:14.392453+00:00",
+      "end_utc": "2026-09-17T17:36:16.196903+00:00",
+      "monotonic_elapsed_ms": 1811.9999999980791,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:16.225444+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 25,
+      "global_execution_position": 73,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 105,
+        "output_tokens": 123,
+        "total_tokens": 249,
+        "latency_ms": 1222.8794999973616
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b0109eb1-b654-415a-a76a-99977b6dadf3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:16.225444+00:00",
+      "end_utc": "2026-09-17T17:36:17.448504+00:00",
+      "monotonic_elapsed_ms": 1218.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:17.661998+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 25,
+      "global_execution_position": 74,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 176,
+        "output_tokens": 194,
+        "total_tokens": 316,
+        "latency_ms": 1800.0809000004665
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b9127e13-6336-4d97-9de1-a849cedb5cd3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:17.661998+00:00",
+      "end_utc": "2026-09-17T17:36:19.462418+00:00",
+      "monotonic_elapsed_ms": 1796.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:19.482033+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 26,
+      "global_execution_position": 75,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 118,
+        "output_tokens": 136,
+        "total_tokens": 253,
+        "latency_ms": 1476.364799993462
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "f736d71f-3264-4517-81bb-efe4c38bf03f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:19.482033+00:00",
+      "end_utc": "2026-09-17T17:36:20.958308+00:00",
+      "monotonic_elapsed_ms": 1468.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:20.985333+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 26,
+      "global_execution_position": 76,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 166,
+        "output_tokens": 184,
+        "total_tokens": 306,
+        "latency_ms": 1534.2831000016304
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "a975d987-3a9a-4602-8300-1baa6867894c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:20.985333+00:00",
+      "end_utc": "2026-09-17T17:36:22.519434+00:00",
+      "monotonic_elapsed_ms": 1531.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:22.717004+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 26,
+      "global_execution_position": 77,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 80,
+        "output_tokens": 98,
+        "total_tokens": 224,
+        "latency_ms": 1232.8458999982104
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "f47dba59-4fcf-48da-8437-ed36674f282c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:22.717004+00:00",
+      "end_utc": "2026-09-17T17:36:23.949474+00:00",
+      "monotonic_elapsed_ms": 1234.0000000040163,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:23.980009+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 27,
+      "global_execution_position": 78,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 105,
+        "output_tokens": 123,
+        "total_tokens": 245,
+        "latency_ms": 1629.9053999973694
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "c09a50e9-fbe7-4fa4-9297-d2f0f9df57ce",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:23.980009+00:00",
+      "end_utc": "2026-09-17T17:36:25.609355+00:00",
+      "monotonic_elapsed_ms": 1625.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:25.646959+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 27,
+      "global_execution_position": 79,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 95,
+        "output_tokens": 113,
+        "total_tokens": 230,
+        "latency_ms": 1236.9400999959907
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "0bf82992-dbe9-4c30-972f-1d7035ac9b62",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:25.646959+00:00",
+      "end_utc": "2026-09-17T17:36:26.882600+00:00",
+      "monotonic_elapsed_ms": 1235.000000000582,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:26.913151+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 27,
+      "global_execution_position": 80,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 133,
+        "output_tokens": 151,
+        "total_tokens": 277,
+        "latency_ms": 1556.1060999971232
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b9575f4b-c323-488f-bceb-012b9f96038e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:26.913151+00:00",
+      "end_utc": "2026-09-17T17:36:28.469023+00:00",
+      "monotonic_elapsed_ms": 1546.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:28.681376+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 28,
+      "global_execution_position": 81,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 105,
+        "output_tokens": 123,
+        "total_tokens": 245,
+        "latency_ms": 1470.6703999981983
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "ec5f9599-571d-440b-b452-58da5167b4b5",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:28.681376+00:00",
+      "end_utc": "2026-09-17T17:36:30.152096+00:00",
+      "monotonic_elapsed_ms": 1468.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:30.182633+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 28,
+      "global_execution_position": 82,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 82,
+        "output_tokens": 100,
+        "total_tokens": 226,
+        "latency_ms": 1221.8959000019822
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "5ee53e4e-0b33-4677-90f9-e5499e6c9338",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:30.182633+00:00",
+      "end_utc": "2026-09-17T17:36:31.404808+00:00",
+      "monotonic_elapsed_ms": 1218.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:31.435363+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 28,
+      "global_execution_position": 83,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 124,
+        "output_tokens": 142,
+        "total_tokens": 259,
+        "latency_ms": 1473.4109999990324
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "5ce4d66d-e91a-42b5-961e-1cef9c0a4cfb",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:31.435363+00:00",
+      "end_utc": "2026-09-17T17:36:32.909032+00:00",
+      "monotonic_elapsed_ms": 1468.0000000007567,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:33.138403+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 29,
+      "global_execution_position": 84,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 83,
+        "output_tokens": 101,
+        "total_tokens": 227,
+        "latency_ms": 1217.984000002616
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "448c3d88-a3de-4c77-9ad3-c3031aaf793f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:33.138403+00:00",
+      "end_utc": "2026-09-17T17:36:34.356131+00:00",
+      "monotonic_elapsed_ms": 1218.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:34.401195+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 29,
+      "global_execution_position": 85,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 185,
+        "output_tokens": 203,
+        "total_tokens": 325,
+        "latency_ms": 1764.6001000030083
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "7562dd04-a1b9-4529-80d9-effb1f58a237",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:34.401195+00:00",
+      "end_utc": "2026-09-17T17:36:36.165835+00:00",
+      "monotonic_elapsed_ms": 1765.9999999959837,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:36.195366+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 29,
+      "global_execution_position": 86,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 116,
+        "output_tokens": 134,
+        "total_tokens": 251,
+        "latency_ms": 1558.4509999971488
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "0a6d219a-ec63-4d27-b0d7-af596d53cbf8",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:36.195366+00:00",
+      "end_utc": "2026-09-17T17:36:37.754125+00:00",
+      "monotonic_elapsed_ms": 1546.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:37.960985+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 30,
+      "global_execution_position": 87,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 101,
+        "output_tokens": 119,
+        "total_tokens": 245,
+        "latency_ms": 1363.2988999961526
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "d086a56f-77ae-41b2-b87b-ad55ea0d0e60",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:37.960985+00:00",
+      "end_utc": "2026-09-17T17:36:39.324373+00:00",
+      "monotonic_elapsed_ms": 1359.0000000040163,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:39.354426+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 30,
+      "global_execution_position": 88,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 125,
+        "output_tokens": 143,
+        "total_tokens": 260,
+        "latency_ms": 1436.9653000030667
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "ced161fd-755d-49f7-b96f-bbe0a27bd02f",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:39.354426+00:00",
+      "end_utc": "2026-09-17T17:36:40.791528+00:00",
+      "monotonic_elapsed_ms": 1436.9999999980791,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:40.806555+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 30,
+      "global_execution_position": 89,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 168,
+        "output_tokens": 186,
+        "total_tokens": 308,
+        "latency_ms": 1873.0556000009528
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "a0110bd1-841a-448a-8643-c26d289552dc",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:40.806555+00:00",
+      "end_utc": "2026-09-17T17:36:42.679834+00:00",
+      "monotonic_elapsed_ms": 1875.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:42.908891+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 31,
+      "global_execution_position": 90,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 108,
+        "output_tokens": 126,
+        "total_tokens": 243,
+        "latency_ms": 1438.1305999995675
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "2856300d-b246-4cb4-8542-b9dc0488fddc",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:42.908891+00:00",
+      "end_utc": "2026-09-17T17:36:44.347445+00:00",
+      "monotonic_elapsed_ms": 1437.999999994645,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:44.381509+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 31,
+      "global_execution_position": 91,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 92,
+        "output_tokens": 110,
+        "total_tokens": 236,
+        "latency_ms": 1264.5148000010522
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "50a9a7dd-8a17-4a44-a8a2-c9e4439596e4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:44.381509+00:00",
+      "end_utc": "2026-09-17T17:36:45.645690+00:00",
+      "monotonic_elapsed_ms": 1250.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:45.673142+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 31,
+      "global_execution_position": 92,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 106,
+        "output_tokens": 124,
+        "total_tokens": 246,
+        "latency_ms": 1570.812099998875
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "8837d643-18bb-458a-a1fc-1373d1c30dc5",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:45.673142+00:00",
+      "end_utc": "2026-09-17T17:36:47.244095+00:00",
+      "monotonic_elapsed_ms": 1578.0000000013388,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:47.271178+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 32,
+      "global_execution_position": 93,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 75,
+        "output_tokens": 93,
+        "total_tokens": 210,
+        "latency_ms": 1133.8534999958938
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b62f8dc4-4dda-4a53-bbdf-4346d0dadd52",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": false,
+        "missing_or_incorrect": [
+          "score"
+        ]
+      },
+      "quality_pass": false,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":\"0.87\",\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": "0.87",
+        "status": "stable"
+      },
+      "status": "MODEL_OK",
+      "start_utc": "2026-09-17T17:36:47.271178+00:00",
+      "end_utc": "2026-09-17T17:36:48.405174+00:00",
+      "monotonic_elapsed_ms": 1125.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:48.620976+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 32,
+      "global_execution_position": 94,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 182,
+        "output_tokens": 200,
+        "total_tokens": 322,
+        "latency_ms": 1816.6724999973667
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "be63e5f4-40c4-474b-b9c3-c1e899c018eb",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:48.620976+00:00",
+      "end_utc": "2026-09-17T17:36:50.437711+00:00",
+      "monotonic_elapsed_ms": 1813.0000000019209,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:50.484781+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 32,
+      "global_execution_position": 95,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 118,
+        "output_tokens": 136,
+        "total_tokens": 262,
+        "latency_ms": 1280.4298000046401
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "a986a025-e878-434a-8489-5cbb34f02e04",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:50.484781+00:00",
+      "end_utc": "2026-09-17T17:36:51.765316+00:00",
+      "monotonic_elapsed_ms": 1281.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:51.794700+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 33,
+      "global_execution_position": 96,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 85,
+        "output_tokens": 103,
+        "total_tokens": 225,
+        "latency_ms": 1078.2974000030663
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "9940d69b-eed8-4695-b2b6-d0590ced4af8",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:51.794700+00:00",
+      "end_utc": "2026-09-17T17:36:52.872400+00:00",
+      "monotonic_elapsed_ms": 1078.0000000013388,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:53.088860+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 33,
+      "global_execution_position": 97,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 113,
+        "output_tokens": 131,
+        "total_tokens": 248,
+        "latency_ms": 1093.9847999979975
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "8faf6d95-1003-44c9-97e1-bb03018d320a",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:53.088860+00:00",
+      "end_utc": "2026-09-17T17:36:54.182650+00:00",
+      "monotonic_elapsed_ms": 1094.0000000045984,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:54.214718+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 33,
+      "global_execution_position": 98,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 117,
+        "output_tokens": 135,
+        "total_tokens": 261,
+        "latency_ms": 1266.6729999982635
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "71fcabaf-c56e-4aa8-87f6-fc8913a76a04",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:54.214718+00:00",
+      "end_utc": "2026-09-17T17:36:55.481007+00:00",
+      "monotonic_elapsed_ms": 1266.0000000032596,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:55.510543+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 34,
+      "global_execution_position": 99,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 158,
+        "output_tokens": 176,
+        "total_tokens": 298,
+        "latency_ms": 1509.2339999973774
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "9f0b7e67-5db3-4429-8c80-6e16864269a2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:55.510543+00:00",
+      "end_utc": "2026-09-17T17:36:57.020070+00:00",
+      "monotonic_elapsed_ms": 1500.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:57.050614+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 34,
+      "global_execution_position": 100,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 116,
+        "output_tokens": 134,
+        "total_tokens": 260,
+        "latency_ms": 1399.033399997279
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "91a54c91-1d46-430b-a0e3-2f517b493261",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:57.050614+00:00",
+      "end_utc": "2026-09-17T17:36:58.449975+00:00",
+      "monotonic_elapsed_ms": 1406.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:58.652151+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 34,
+      "global_execution_position": 101,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 94,
+        "output_tokens": 112,
+        "total_tokens": 229,
+        "latency_ms": 1142.5678999949014
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "611670b6-96da-4b6f-9627-e06c7ec32375",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:58.652151+00:00",
+      "end_utc": "2026-09-17T17:36:59.795971+00:00",
+      "monotonic_elapsed_ms": 1140.9999999959837,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:36:59.825517+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 35,
+      "global_execution_position": 102,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 77,
+        "output_tokens": 95,
+        "total_tokens": 221,
+        "latency_ms": 1128.3544000034453
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "bdc479d8-45fe-444c-be1a-a6e43a5c190c",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:36:59.825517+00:00",
+      "end_utc": "2026-09-17T17:37:00.953647+00:00",
+      "monotonic_elapsed_ms": 1125.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:00.982196+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 35,
+      "global_execution_position": 103,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 113,
+        "output_tokens": 131,
+        "total_tokens": 253,
+        "latency_ms": 1317.103200002748
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "fc99449b-f5e4-4720-ab84-8b365de4cdf4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:00.982196+00:00",
+      "end_utc": "2026-09-17T17:37:02.300259+00:00",
+      "monotonic_elapsed_ms": 1311.9999999980791,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:02.332806+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 35,
+      "global_execution_position": 104,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 119,
+        "output_tokens": 137,
+        "total_tokens": 254,
+        "latency_ms": 1393.601600000693
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "ae6bb2f5-0800-4aa6-ad53-54166b324ea0",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:02.332806+00:00",
+      "end_utc": "2026-09-17T17:37:03.726332+00:00",
+      "monotonic_elapsed_ms": 1406.9999999992433,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:03.934718+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 36,
+      "global_execution_position": 105,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 83,
+        "output_tokens": 101,
+        "total_tokens": 227,
+        "latency_ms": 1197.5725000011153
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "f16355f7-b29f-4db9-ac7e-f90476c4a962",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:03.934718+00:00",
+      "end_utc": "2026-09-17T17:37:05.132257+00:00",
+      "monotonic_elapsed_ms": 1203.0000000013388,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:05.155795+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 36,
+      "global_execution_position": 106,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 87,
+        "output_tokens": 105,
+        "total_tokens": 222,
+        "latency_ms": 1039.831599999161
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "94c3af5c-ecea-4d40-9877-8a81873edc2e",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:05.155795+00:00",
+      "end_utc": "2026-09-17T17:37:06.195688+00:00",
+      "monotonic_elapsed_ms": 1046.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:06.217712+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 36,
+      "global_execution_position": 107,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 80,
+        "output_tokens": 98,
+        "total_tokens": 220,
+        "latency_ms": 1234.6623999983422
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "72c6acf5-303e-4e14-a293-a0fa78601ab2",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:06.217712+00:00",
+      "end_utc": "2026-09-17T17:37:07.452781+00:00",
+      "monotonic_elapsed_ms": 1234.0000000040163,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:07.497358+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 37,
+      "global_execution_position": 108,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 129,
+        "output_tokens": 147,
+        "total_tokens": 264,
+        "latency_ms": 1617.2167000040645
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "40d6c5bb-e9b8-4c28-b091-d675501709b7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:07.497358+00:00",
+      "end_utc": "2026-09-17T17:37:09.114525+00:00",
+      "monotonic_elapsed_ms": 1610.000000000582,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:09.332206+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 37,
+      "global_execution_position": 109,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 101,
+        "output_tokens": 119,
+        "total_tokens": 245,
+        "latency_ms": 1277.3556999964057
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "5e57de23-2ee0-461c-a62b-3326a2f289f4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:09.332206+00:00",
+      "end_utc": "2026-09-17T17:37:10.609286+00:00",
+      "monotonic_elapsed_ms": 1281.9999999992433,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:10.636846+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 37,
+      "global_execution_position": 110,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 98,
+        "output_tokens": 116,
+        "total_tokens": 238,
+        "latency_ms": 1338.9937000029022
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "8013e4d4-a790-4d1e-a151-24f2861e22b7",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:10.636846+00:00",
+      "end_utc": "2026-09-17T17:37:11.976534+00:00",
+      "monotonic_elapsed_ms": 1343.9999999973224,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:12.003595+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 38,
+      "global_execution_position": 111,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 111,
+        "output_tokens": 129,
+        "total_tokens": 246,
+        "latency_ms": 1435.3687999973772
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "170b03e4-f958-4014-86db-8403bd417fad",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:12.003595+00:00",
+      "end_utc": "2026-09-17T17:37:13.439680+00:00",
+      "monotonic_elapsed_ms": 1438.0000000019209,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:13.639307+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 38,
+      "global_execution_position": 112,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 236,
+        "output_tokens": 254,
+        "total_tokens": 376,
+        "latency_ms": 1803.135400004976
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "6857f9e3-8808-45ec-bdc3-cbfb483628a4",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:13.639307+00:00",
+      "end_utc": "2026-09-17T17:37:15.442038+00:00",
+      "monotonic_elapsed_ms": 1796.9999999986612,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:15.472582+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 38,
+      "global_execution_position": 113,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 92,
+        "output_tokens": 110,
+        "total_tokens": 236,
+        "latency_ms": 1238.9456000018981
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "24e23635-5b7c-48c4-9345-03cb14c1e350",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:15.472582+00:00",
+      "end_utc": "2026-09-17T17:37:16.711169+00:00",
+      "monotonic_elapsed_ms": 1250.0,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:16.726093+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 39,
+      "global_execution_position": 114,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 92,
+        "output_tokens": 110,
+        "total_tokens": 232,
+        "latency_ms": 1280.1947999978438
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "135557fe-c7a6-400e-abf3-c9eb9b0c69a3",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:16.726093+00:00",
+      "end_utc": "2026-09-17T17:37:18.006707+00:00",
+      "monotonic_elapsed_ms": 1281.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:18.228736+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 39,
+      "global_execution_position": 115,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 171,
+        "output_tokens": 189,
+        "total_tokens": 306,
+        "latency_ms": 1412.1727000019746
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "5da724be-c654-4e92-8c6d-acf8d687b0bd",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:18.228736+00:00",
+      "end_utc": "2026-09-17T17:37:19.640623+00:00",
+      "monotonic_elapsed_ms": 1406.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:19.667173+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 39,
+      "global_execution_position": 116,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 107,
+        "output_tokens": 125,
+        "total_tokens": 251,
+        "latency_ms": 1284.038600002532
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "038809f3-8e8b-4a53-aa17-169bc913747d",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:19.667173+00:00",
+      "end_utc": "2026-09-17T17:37:20.951649+00:00",
+      "monotonic_elapsed_ms": 1281.0000000026776,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:20.983687+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_bare_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 40,
+      "global_execution_position": 117,
+      "prompt_chars": 317,
+      "context_chars": 95,
+      "metrics": {
+        "input_tokens": 122,
+        "reasoning_tokens": 163,
+        "output_tokens": 181,
+        "total_tokens": 303,
+        "latency_ms": 1887.8737999984878
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "7dd1493f-1efa-48ce-9fc9-58a6632f8840",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:20.983687+00:00",
+      "end_utc": "2026-09-17T17:37:22.871982+00:00",
+      "monotonic_elapsed_ms": 1889.999999999418,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "NEGATIVE_CONTROL"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:23.087831+00:00",
+      "task_id": "T003",
+      "condition_id": "pairs_compact",
+      "transform_id": "representation_B",
+      "transform_sequence": [
+        "representation_B"
+      ],
+      "repetition": 40,
+      "global_execution_position": 118,
+      "prompt_chars": 327,
+      "context_chars": 105,
+      "metrics": {
+        "input_tokens": 126,
+        "reasoning_tokens": 149,
+        "output_tokens": 167,
+        "total_tokens": 293,
+        "latency_ms": 1946.3860999967437
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "b32feb49-cfc0-4524-82ca-e26a1d01ff15",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:23.087831+00:00",
+      "end_utc": "2026-09-17T17:37:25.034413+00:00",
+      "monotonic_elapsed_ms": 1937.000000005355,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "PRIMARY"
+    },
+    {
+      "schema_version": "0.9",
+      "timestamp_utc": "2026-09-17T17:37:25.064957+00:00",
+      "task_id": "T003",
+      "condition_id": "noop_compact",
+      "transform_id": "noop",
+      "transform_sequence": [
+        "noop"
+      ],
+      "repetition": 40,
+      "global_execution_position": 119,
+      "prompt_chars": 307,
+      "context_chars": 85,
+      "metrics": {
+        "input_tokens": 117,
+        "reasoning_tokens": 177,
+        "output_tokens": 195,
+        "total_tokens": 312,
+        "latency_ms": 1776.4862999974866
+      },
+      "execution": {
+        "provider_status": "MODEL_OK",
+        "response_id": "a6711db4-5d71-4357-963f-a84c9acba382",
+        "error": null
+      },
+      "verification": {
+        "evaluator": "deterministic_exact_fields",
+        "passed": true,
+        "missing_or_incorrect": []
+      },
+      "quality_pass": true,
+      "raw_text": "{\"entity\":\"A-17\",\"score\":0.87,\"status\":\"stable\"}",
+      "output": {
+        "entity": "A-17",
+        "score": 0.87,
+        "status": "stable"
+      },
+      "status": "PASS",
+      "start_utc": "2026-09-17T17:37:25.064957+00:00",
+      "end_utc": "2026-09-17T17:37:26.842221+00:00",
+      "monotonic_elapsed_ms": 1780.9999999954016,
+      "experiment_id": "PROMPTFORGE_V0.9.1_POLICY_CONFIRMATION",
+      "confirmation_role": "BASELINE"
+    }
+  ],
+  "started_utc": "2026-09-17T17:34:21.324225+00:00",
+  "finished_utc": "2026-09-17T17:37:26.881300+00:00"
+}

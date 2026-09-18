@@ -1,0 +1,436 @@
+{
+  "schema_version": "0.8.2",
+  "experiment_id": "PROMPTFORGE_V0.8.2_HOTSPOT_REPLICATION",
+  "task_id": "T003",
+  "model_id": "deepseek",
+  "arms": [
+    "noop",
+    "representation"
+  ],
+  "repetitions": 30,
+  "scheduled_runs": 60,
+  "scheme": "paired_alternating_order",
+  "runs": [
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 1,
+      "global_execution_position": 0
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 1,
+      "global_execution_position": 1
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 2,
+      "global_execution_position": 2
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 2,
+      "global_execution_position": 3
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 3,
+      "global_execution_position": 4
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 3,
+      "global_execution_position": 5
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 4,
+      "global_execution_position": 6
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 4,
+      "global_execution_position": 7
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 5,
+      "global_execution_position": 8
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 5,
+      "global_execution_position": 9
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 6,
+      "global_execution_position": 10
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 6,
+      "global_execution_position": 11
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 7,
+      "global_execution_position": 12
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 7,
+      "global_execution_position": 13
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 8,
+      "global_execution_position": 14
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 8,
+      "global_execution_position": 15
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 9,
+      "global_execution_position": 16
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 9,
+      "global_execution_position": 17
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 10,
+      "global_execution_position": 18
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 10,
+      "global_execution_position": 19
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 11,
+      "global_execution_position": 20
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 11,
+      "global_execution_position": 21
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 12,
+      "global_execution_position": 22
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 12,
+      "global_execution_position": 23
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 13,
+      "global_execution_position": 24
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 13,
+      "global_execution_position": 25
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 14,
+      "global_execution_position": 26
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 14,
+      "global_execution_position": 27
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 15,
+      "global_execution_position": 28
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 15,
+      "global_execution_position": 29
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 16,
+      "global_execution_position": 30
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 16,
+      "global_execution_position": 31
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 17,
+      "global_execution_position": 32
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 17,
+      "global_execution_position": 33
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 18,
+      "global_execution_position": 34
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 18,
+      "global_execution_position": 35
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 19,
+      "global_execution_position": 36
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 19,
+      "global_execution_position": 37
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 20,
+      "global_execution_position": 38
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 20,
+      "global_execution_position": 39
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 21,
+      "global_execution_position": 40
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 21,
+      "global_execution_position": 41
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 22,
+      "global_execution_position": 42
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 22,
+      "global_execution_position": 43
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 23,
+      "global_execution_position": 44
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 23,
+      "global_execution_position": 45
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 24,
+      "global_execution_position": 46
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 24,
+      "global_execution_position": 47
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 25,
+      "global_execution_position": 48
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 25,
+      "global_execution_position": 49
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 26,
+      "global_execution_position": 50
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 26,
+      "global_execution_position": 51
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 27,
+      "global_execution_position": 52
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 27,
+      "global_execution_position": 53
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 28,
+      "global_execution_position": 54
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 28,
+      "global_execution_position": 55
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 29,
+      "global_execution_position": 56
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 29,
+      "global_execution_position": 57
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "representation",
+      "repetition": 30,
+      "global_execution_position": 58
+    },
+    {
+      "task_id": "T003",
+      "model_id": "deepseek",
+      "arm_id": "noop",
+      "repetition": 30,
+      "global_execution_position": 59
+    }
+  ],
+  "schedule_sha256": "24b69062a93612a73a552dd4bce509c3f150236661c3d495b6a51da97a1d6c2d"
+}

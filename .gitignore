@@ -1,0 +1,35 @@
+﻿__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+harness/reports/latest.json
+
+# PromptForge local statistical analysis artifacts
+
+# ------------------------------------------------------------
+# PromptForge public-release exclusions
+# ------------------------------------------------------------
+
+backups/
+harness/backups/
+
+*.log
+
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Laboratory-generated V0.9.3 forensic artifacts
+harness/reports/v093_deep_*
+harness/reports/v093_scientific_analysis.*
+
+# Invalid/quarantined/rate-limit aborted historical artifacts
+harness/reports/*INVALID_PRE_FIX*
+harness/reports/*QUARANTINED*
+harness/reports/*RATE_LIMIT_ABORTED*
+
+# Temporary bridge probes
+harness/runner/provider_bridge_probe*.py

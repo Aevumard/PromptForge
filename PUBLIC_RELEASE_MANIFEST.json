@@ -1,0 +1,463 @@
+﻿{
+    "project":  "PromptForge",
+    "release_type":  "public-curated-staging",
+    "source":  "D:\\PROMPTFORGE\\promptforge-harness-v0.1",
+    "source_head":  "433e6d3f0d9b599e604bea74efb1f52082db2841",
+    "source_branch":  "experiment/v0.9.3-size-matched-control",
+    "source_commit_message":  "fix(experiment): make v0.9.3 padding size matched per variant",
+    "manifest_policy":  "All public files except this manifest itself",
+    "generated_utc":  "2026-09-18T17:38:39.6246644Z",
+    "file_count":  90,
+    "files":  [
+                  {
+                      "path":  ".gitignore",
+                      "size_bytes":  769,
+                      "sha256":  "F5C346AC5E73B93A28F389862F7D437293ECFEF1A49CA987787F626B1A302BDD"
+                  },
+                  {
+                      "path":  "AGENTS.md",
+                      "size_bytes":  1979,
+                      "sha256":  "84BCD1DF1BB7D3C4D3A115B9EA4B8E1D5C2B0D2D82BBD2675B3F58453566257B"
+                  },
+                  {
+                      "path":  "harness\\analysis\\analyze_v053.py",
+                      "size_bytes":  14384,
+                      "sha256":  "643C380482D9D0231D0D4AE0E5B7C624CEB4F1F9A381357B180928B7147207C0"
+                  },
+                  {
+                      "path":  "harness\\analysis\\analyze_v06_contrasts.py",
+                      "size_bytes":  13717,
+                      "sha256":  "5DD5B1A9AFBC8BC83EAC2FABC0BA9DF87082C90B380D28AAD86667DE4AC4A4B3"
+                  },
+                  {
+                      "path":  "harness\\analysis\\analyze_v061_isolation.py",
+                      "size_bytes":  9540,
+                      "sha256":  "4661B67995231CA81E7C0A15C8117C7F3006067D4DB9EA59D66C41A22DEAD937"
+                  },
+                  {
+                      "path":  "harness\\analysis\\inspect_v053_probe.py",
+                      "size_bytes":  2204,
+                      "sha256":  "403BF33B547D955BE6DA1DD3AE7FFD61C73C24F1526A3E3364A42BE68FF2932C"
+                  },
+                  {
+                      "path":  "harness\\analysis\\t003_forensic_analyzer.py",
+                      "size_bytes":  19732,
+                      "sha256":  "742BDA72A24DFFC30C794F01ADEDF4E832C4E69A8BEA30487B73600F1627D216"
+                  },
+                  {
+                      "path":  "harness\\analysis\\v061_combined_analyzer.py",
+                      "size_bytes":  29352,
+                      "sha256":  "07C954B221456B7628A1527673D5AB71CDAE836A087E733BBF12A9BF022AAAFC"
+                  },
+                  {
+                      "path":  "harness\\analysis\\v062_residual_forensics.py",
+                      "size_bytes":  28682,
+                      "sha256":  "023F5F04E3698E8CFD779EE3376871C3EBF7D811D42137DE45FB5DA0134F32C6"
+                  },
+                  {
+                      "path":  "harness\\analysis\\v063_robust_baseline.py",
+                      "size_bytes":  30752,
+                      "sha256":  "FDAD09898C94F1DA4C4454DC3DB8E9AD5BA93A2C5BDC9033835203F83F94334F"
+                  },
+                  {
+                      "path":  "harness\\analysis\\v064_confirmatory_comparison.py",
+                      "size_bytes":  30906,
+                      "sha256":  "036714ACC409F52E3C2F488087DFB34EF74AFFAD0262A884EF191B948F8BA6E8"
+                  },
+                  {
+                      "path":  "harness\\analysis\\v07_confirmatory_analysis.py",
+                      "size_bytes":  24074,
+                      "sha256":  "E5B0FBF259424BADB1B172FD96D2433F5C8085EDA74CB7799A75F718BEA0D9E3"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v07_preregistration.md",
+                      "size_bytes":  3881,
+                      "sha256":  "8053E49C25127D7C0F9CBB27C04693BB096758D2C00530AD0C3898397AC09357"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v08_preregistration.md",
+                      "size_bytes":  10705,
+                      "sha256":  "A3C4873D52C65F3B1D3EA5D35E6DBF1392B365BC773719D47BDAC9D09E904424"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v081_preregistration.md",
+                      "size_bytes":  2732,
+                      "sha256":  "2FE7395F31BE202C1C49DE4BD9164378AC66C4B96FA328F1131AA1EB07EE4BBB"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v082_hotspot_replication.md",
+                      "size_bytes":  1360,
+                      "sha256":  "EF8A9C6DAF9AD07FA74A7D4BF306617E6FB90DA2152CE5B887D482F5B0580243"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v083_parametric_sweep.md",
+                      "size_bytes":  923,
+                      "sha256":  "61324F36077D20233479ACA0B7E099F263B28AE4CE0F591671281F1DF65D9B69"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v084_zoom_preregistration.md",
+                      "size_bytes":  1574,
+                      "sha256":  "B6FC77D94087EFBBEFFA0EB3EB83B5F9091E9A71CCECCC9B60CB7B9EB5E03E05"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v09_policy_search_preregistration.md",
+                      "size_bytes":  785,
+                      "sha256":  "6DC170AD4B9643198EA77B3179A91D783CA61E0ACADC9D3355E4A24AE0DCF9C8"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v091_policy_confirmation.md",
+                      "size_bytes":  1727,
+                      "sha256":  "47E1874D001973E621F8291D9F0DCBD27EB24734CC44A629F58938FA77F6782D"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v092_perturbation_validation.md",
+                      "size_bytes":  1468,
+                      "sha256":  "1A6451FAE91434E4F18C4D27CC33FC06BBE234A422DEEA0A09DACEA8739E0B3B"
+                  },
+                  {
+                      "path":  "harness\\prereg\\v093_size_matched_control.md",
+                      "size_bytes":  2235,
+                      "sha256":  "EFE3356CF047BDCD892ECDDAADB58185342600B0BE9D778168DA93A5796D4FA6"
+                  },
+                  {
+                      "path":  "harness\\providers\\__init__.py",
+                      "size_bytes":  34,
+                      "sha256":  "6F57BB115FA4CC4B6CB84BC6476A67B5D18DB6190282E36903F6E3F496E699B8"
+                  },
+                  {
+                      "path":  "harness\\providers\\deepseek.py",
+                      "size_bytes":  2848,
+                      "sha256":  "3349E09F5D2E6CC6A912A4DF4E9A4133CECFD8AAEC120E4FB4CD4E7E526EB180"
+                  },
+                  {
+                      "path":  "harness\\providers\\deepseek_adapter.py",
+                      "size_bytes":  2272,
+                      "sha256":  "4913395597AFAB924A8FB8927CB61288603B4B87A5B1B0BC47F6959707D0E614"
+                  },
+                  {
+                      "path":  "harness\\providers\\gemini_adapter.py",
+                      "size_bytes":  4884,
+                      "sha256":  "483EE21F33E13C8257F9652394DAE2956D2D80F90E2980D2CA231127F7732465"
+                  },
+                  {
+                      "path":  "harness\\providers\\openai_adapter.py",
+                      "size_bytes":  5485,
+                      "sha256":  "427C42A55947822569819E5510E495534F881A9E41118455D5A221954CB56E89"
+                  },
+                  {
+                      "path":  "harness\\providers\\provider_adapter.py",
+                      "size_bytes":  5067,
+                      "sha256":  "4BE2F8F985359AA9AEAB13930BBAE38D08820A808018498D9D6355917C7D3723"
+                  },
+                  {
+                      "path":  "harness\\reports\\v06_confirmatory_deepseek.json",
+                      "size_bytes":  724587,
+                      "sha256":  "F5F9CB46131E12039981377E718252871AB412C01EA0EEC86FAEA86FD1A78DFB"
+                  },
+                  {
+                      "path":  "harness\\reports\\v061_t003_blocked.json",
+                      "size_bytes":  71238,
+                      "sha256":  "67A12DBC424207A1149A24E47F336ADB69064D717FE6675B6A2ABF8D0719D6E7"
+                  },
+                  {
+                      "path":  "harness\\reports\\v061_t003_interleaved.json",
+                      "size_bytes":  71429,
+                      "sha256":  "EAA7171A8632186745727E030A916DA0A59CEDA77C838BD83C717151709390A6"
+                  },
+                  {
+                      "path":  "harness\\reports\\v061_t003_latin_square.json",
+                      "size_bytes":  71507,
+                      "sha256":  "D576C2DC2209E022C3F8A9ED3AA2E18F8C85BF1C2344AD412B91765C37104E5E"
+                  },
+                  {
+                      "path":  "harness\\reports\\v061_t003_randomized.json",
+                      "size_bytes":  71394,
+                      "sha256":  "CE610ECB685D195771CD7CB99787E92EA5033A3590AE14E17015578C00445E98"
+                  },
+                  {
+                      "path":  "harness\\reports\\v07_confirmatory_deepseek.json",
+                      "size_bytes":  309509,
+                      "sha256":  "B3B9A4EF8F87C623638B83C588797CD843E3862FB88ACDDA31499E6A9F635194"
+                  },
+                  {
+                      "path":  "harness\\reports\\v081_heterogeneity.json",
+                      "size_bytes":  419513,
+                      "sha256":  "23FB27AA9F7D671FACF075354E5E94B9547659B17566B6B68FD29CC55B3838C1"
+                  },
+                  {
+                      "path":  "harness\\reports\\v082_hotspot_replication_deepseek.json",
+                      "size_bytes":  97307,
+                      "sha256":  "A60E00711002C98622CA03734DED10D1A7C3CCF8781525314B718211B826BD90"
+                  },
+                  {
+                      "path":  "harness\\reports\\v083_parametric_sweep_deepseek.json",
+                      "size_bytes":  223454,
+                      "sha256":  "C3F09178D80ADA0ECF74B218F55B490F05D28119500F0F16C0C324B4ECBE579D"
+                  },
+                  {
+                      "path":  "harness\\reports\\v084_zoom_deepseek.json",
+                      "size_bytes":  183735,
+                      "sha256":  "7B9C1839A28A76EA87525ECE4667E301EC9EFDB18BD8E4B03D41498DE0FB5390"
+                  },
+                  {
+                      "path":  "harness\\reports\\v091_policy_confirmation_deepseek.json",
+                      "size_bytes":  165395,
+                      "sha256":  "3D188E1461775030C9B69B8C050C067192EEE55BE8D047BEEA16C3CD3F8F963D"
+                  },
+                  {
+                      "path":  "harness\\reports\\v092_perturbation_validation_deepseek.json",
+                      "size_bytes":  254766,
+                      "sha256":  "B4E65BCF5C520469BEAADFD2F475F786CE907E1C0AD2C89A9C8593EA5434114C"
+                  },
+                  {
+                      "path":  "harness\\reports\\v093_size_matched_control_deepseek.json",
+                      "size_bytes":  338840,
+                      "sha256":  "13E13C0640635A8C40B9DE49A07DD317DC3894DBF64A93B34890032C94C6BC09"
+                  },
+                  {
+                      "path":  "harness\\runner\\real_executor.py",
+                      "size_bytes":  2125,
+                      "sha256":  "5589F8C777A594E81BBBFA15D14BF181B141957825DB176EAEA1ABB5DD2D9842"
+                  },
+                  {
+                      "path":  "harness\\runner\\transforms.py",
+                      "size_bytes":  4396,
+                      "sha256":  "D851443F75B02876DEF4A971B0C97B0A34A6DE044ED49326E133A1D421EC8E4A"
+                  },
+                  {
+                      "path":  "harness\\runner\\v061_isolation.py",
+                      "size_bytes":  19244,
+                      "sha256":  "19DD537326921B20AF7012B6AC1DFAF2C244137C8B36EEA9C1A7EC465ACB8FFF"
+                  },
+                  {
+                      "path":  "harness\\runner\\v07_plan.py",
+                      "size_bytes":  3680,
+                      "sha256":  "BFBBEFFC57B7FAF3ABF82B005C4E6C1E1F797C2F35CE1700FE7844F601ED983C"
+                  },
+                  {
+                      "path":  "harness\\runner\\v07_runner.py",
+                      "size_bytes":  14267,
+                      "sha256":  "5E256528B0BD62886A2CD79A42D8330D356E7192F8777E90E2EDB05CE2CF2038"
+                  },
+                  {
+                      "path":  "harness\\runner\\v07_schedule.json",
+                      "size_bytes":  31861,
+                      "sha256":  "2B0FBF680F893CFE8508B3B11B6F9CBFA64F80CE06846A5631B0E2EC84CDA49E"
+                  },
+                  {
+                      "path":  "harness\\runner\\v08_plan.py",
+                      "size_bytes":  6476,
+                      "sha256":  "B5383198D8C2B50FD0788F38AE390384E50331BBD61FA96AC36725A7D06C8FA1"
+                  },
+                  {
+                      "path":  "harness\\runner\\v08_runner.py",
+                      "size_bytes":  22215,
+                      "sha256":  "CAD16E80DC57DDB6BB09EE4856EE5AB9FD34404DF3422952F8309A65967D4D22"
+                  },
+                  {
+                      "path":  "harness\\runner\\v08_schedule.json",
+                      "size_bytes":  62283,
+                      "sha256":  "6BED608E2F53012CCCD94173A38623BB61096099073E456F2CAF95A502F9AF29"
+                  },
+                  {
+                      "path":  "harness\\runner\\v081_runner.py",
+                      "size_bytes":  26404,
+                      "sha256":  "B379D3B1FAE224EED2380189661334ABE161448FA389647FC889A77D1569C849"
+                  },
+                  {
+                      "path":  "harness\\runner\\v081_schedule.json",
+                      "size_bytes":  41230,
+                      "sha256":  "A3C631628EC1A2AFD3E8B5A526702A12DE854BD1A8BC0445635C4A4C0B053404"
+                  },
+                  {
+                      "path":  "harness\\runner\\v082_hotspot_replication.py",
+                      "size_bytes":  16537,
+                      "sha256":  "3FE7FB524FEB1E553CE118FF8C13CC1ED8020784DE6CF50DF2C430A4BE530FC6"
+                  },
+                  {
+                      "path":  "harness\\runner\\v082_hotspot_schedule.json",
+                      "size_bytes":  10328,
+                      "sha256":  "AD868850A884F382B3D38BF2755F1EE0988B73F6D8D8A22D26C6B7F0162D4EC1"
+                  },
+                  {
+                      "path":  "harness\\runner\\v083_manifest.json",
+                      "size_bytes":  3018,
+                      "sha256":  "2EDAFF3FEFD301EA9A5A6FA4FDC60D9EF2B0E7D03A402354EB720CA8FBFF06EE"
+                  },
+                  {
+                      "path":  "harness\\runner\\v083_parametric_sweep.py",
+                      "size_bytes":  14700,
+                      "sha256":  "A971519354C0E7169E4C59B7888B25FE4DFBA31A9B9FE3EDFB4D581E480AE3F4"
+                  },
+                  {
+                      "path":  "harness\\runner\\v083_schedule.json",
+                      "size_bytes":  28815,
+                      "sha256":  "0A1AF0334BBF8D1CFD411C74BE9C12AEA4DFC85AE201BE512BABF9C829283BB4"
+                  },
+                  {
+                      "path":  "harness\\runner\\v083_task_snapshot.json",
+                      "size_bytes":  271,
+                      "sha256":  "B0F6AE4AF9F85611602687299036FB1352DEEE31664445E0518447A2C8E8BC3B"
+                  },
+                  {
+                      "path":  "harness\\runner\\v084_zoom_runner.py",
+                      "size_bytes":  17471,
+                      "sha256":  "DA6A123B9CE8F3D6066D6A97E81EEEE3EDAA5CE9B37EF6051CBB5C94A3167C06"
+                  },
+                  {
+                      "path":  "harness\\runner\\v084_zoom_schedule.json",
+                      "size_bytes":  33307,
+                      "sha256":  "4D6B9B81CB2C2B10126E549469616539342CC7FCC3ADF40C83158E4989EDB23F"
+                  },
+                  {
+                      "path":  "harness\\runner\\v09_policy_search_plan.py",
+                      "size_bytes":  3883,
+                      "sha256":  "E2EFB277352436FEB7C111236EF525765353426F8E226DB886E8EE5629EB41B8"
+                  },
+                  {
+                      "path":  "harness\\runner\\v09_policy_search_runner.py",
+                      "size_bytes":  19026,
+                      "sha256":  "353EA5B6D91F4653C659B299A276A369B6396BF915F8496AF0BC7819446E1E38"
+                  },
+                  {
+                      "path":  "harness\\runner\\v09_policy_search_schedule.json",
+                      "size_bytes":  43423,
+                      "sha256":  "8D546259661A215913D32092E4AE598EB072AE9D81EF43E1E7FF35AAFAD34C63"
+                  },
+                  {
+                      "path":  "harness\\runner\\v092_perturbation_schedule.json",
+                      "size_bytes":  72260,
+                      "sha256":  "21203DE648E16BC3AE6E4FB8110DEB51FEC33291C55A8B9B1DF97566D53AD35E"
+                  },
+                  {
+                      "path":  "harness\\runner\\v092_variant_snapshot.json",
+                      "size_bytes":  3646,
+                      "sha256":  "A83422BD2B58DEDE1EC44C0D9F0B040B040F96EC467B4BD23DB161110F781584"
+                  },
+                  {
+                      "path":  "harness\\runner\\v093_size_matched_control.py",
+                      "size_bytes":  21114,
+                      "sha256":  "99041EAD9005DCD541CDAA4E7D3995DE5C13653B6D8D750A5D088BED84B79111"
+                  },
+                  {
+                      "path":  "harness\\runner\\v093_size_matched_schedule.json",
+                      "size_bytes":  94207,
+                      "sha256":  "8C072CBB8E1F764C7E9A60C3EE1CB4758CB2E4621C3E23BD12EB91ED5AB70CAC"
+                  },
+                  {
+                      "path":  "PUBLIC_RELEASE_SCOPE.md",
+                      "size_bytes":  1091,
+                      "sha256":  "C15BA48CEA46F25E3CF99FBE8C10D4D708CFBD508A845AE6A737E2F0641AD19E"
+                  },
+                  {
+                      "path":  "README.md",
+                      "size_bytes":  214,
+                      "sha256":  "2E8AAEEC3B487EF1BC23FE6161BA88B477FF9CEC443C17E9B6C18A1B6E915D7B"
+                  },
+                  {
+                      "path":  "tasks\\suite.json",
+                      "size_bytes":  866,
+                      "sha256":  "12FA0D70631609B231400CEEAF727C1A22AF87334A0075148CF9C66F8C5BDEF3"
+                  },
+                  {
+                      "path":  "tests\\test_provider_adapters.py",
+                      "size_bytes":  5189,
+                      "sha256":  "F66839CC8521352BAF6F548619D4B2F758515428D80691ECD347F1AFC1D252C7"
+                  },
+                  {
+                      "path":  "tests\\test_provider_wiring_gate.py",
+                      "size_bytes":  12275,
+                      "sha256":  "EA36B2E9A8E497A5970B7FFFA308AB6791B074F6F3037655AAC837FE7C1C9A5A"
+                  },
+                  {
+                      "path":  "tests\\test_v03.py",
+                      "size_bytes":  1231,
+                      "sha256":  "E026E518C5AF575B4E14489C8CCF9857083726F7793D9EBDEAE7AACC6E372E89"
+                  },
+                  {
+                      "path":  "tests\\test_v04.py",
+                      "size_bytes":  1612,
+                      "sha256":  "E919F545ABF9FB536696F2BC50992C049B83090F35BFDB308EFB3FE10A277CA6"
+                  },
+                  {
+                      "path":  "tests\\test_v05.py",
+                      "size_bytes":  827,
+                      "sha256":  "5FE1B22900B5B13862EA4E3938DC545D3986B071CC8129C233CB7525BB53BA57"
+                  },
+                  {
+                      "path":  "tests\\test_v051.py",
+                      "size_bytes":  436,
+                      "sha256":  "7108D1EE44494BA86CEC26FCDC20E06C7666C3CC08060E0448C4D17305261D74"
+                  },
+                  {
+                      "path":  "tests\\test_v053.py",
+                      "size_bytes":  436,
+                      "sha256":  "54C645F7A4D4980BBCD05E5AB176E1F2092198D65F45B45A946CB73990290603"
+                  },
+                  {
+                      "path":  "tests\\test_v06.py",
+                      "size_bytes":  4391,
+                      "sha256":  "1042B19FE293BD2AE65826277A1B395E5F421CA1221879F17F0E31EB3DC1DE63"
+                  },
+                  {
+                      "path":  "tests\\test_v061.py",
+                      "size_bytes":  5685,
+                      "sha256":  "935D110AB049F329B6D10CD07C7A0DA9E4D0820F413FBE347427399BF0D8ABF0"
+                  },
+                  {
+                      "path":  "tests\\test_v07_prereg.py",
+                      "size_bytes":  2698,
+                      "sha256":  "7239B471B42EC6F3E706C601E357665CCBD7D965EF66381BD74603417EEF2117"
+                  },
+                  {
+                      "path":  "tests\\test_v07_runner.py",
+                      "size_bytes":  2594,
+                      "sha256":  "AF8BBAC8DDEE43191571411EBE73FF96F7CADE091D14DDB0BBA8E737E0084B30"
+                  },
+                  {
+                      "path":  "tests\\test_v08_prereg.py",
+                      "size_bytes":  3483,
+                      "sha256":  "72EC14C3DBBF52FA8757EBB56329F45DF47BF8F5C5936B871E7A1E82DCCE886E"
+                  },
+                  {
+                      "path":  "tests\\test_v082_hotspot_replication.py",
+                      "size_bytes":  2785,
+                      "sha256":  "7CC27E5B0E70321E81D0BBF4A7929B5A863CB0C4AB9E1AB6CCA8043721C9FE14"
+                  },
+                  {
+                      "path":  "tests\\test_v083_parametric_sweep.py",
+                      "size_bytes":  692,
+                      "sha256":  "C19D6767225529E0196CD47FBF8A576D4B0B1310C8C765E859C6CABBD40750A3"
+                  },
+                  {
+                      "path":  "tests\\test_v084_zoom.py",
+                      "size_bytes":  1889,
+                      "sha256":  "7FFD8711B725890F5DE54FC408939EAEBCF2B326AC6334473DB5CA5F497815E0"
+                  },
+                  {
+                      "path":  "tests\\test_v084_zoom_runner.py",
+                      "size_bytes":  1778,
+                      "sha256":  "93BC53578D158075AA7A2DC13C301FE59183749F2D8A4782F15DF877FF89F585"
+                  },
+                  {
+                      "path":  "tests\\test_v09_policy_search.py",
+                      "size_bytes":  1627,
+                      "sha256":  "B14DE531261DA0CCCF03A9160DCB763A2145FC364F5B3C934F49D925B2F4B81F"
+                  },
+                  {
+                      "path":  "tests\\test_v091_policy_confirmation.py",
+                      "size_bytes":  1838,
+                      "sha256":  "150E729F2D2BC8A703049A5543284A07B8E145E52D0C128FA909FC3984E1B252"
+                  },
+                  {
+                      "path":  "tests\\test_v092_perturbation_validation.py",
+                      "size_bytes":  3676,
+                      "sha256":  "31CA4B609C133287A6907B081E8B226642D81D8837B7D0BA7A829FFE2F2DDD2A"
+                  },
+                  {
+                      "path":  "tests\\test_v093_size_matched_control.py",
+                      "size_bytes":  5288,
+                      "sha256":  "50E39BEC3FAD8D5DF5AB96F095D19A3BCDC40751BB864D9D4A2349FF77F8671C"
+                  }
+              ]
+}
