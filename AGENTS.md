@@ -57,3 +57,17 @@ compiled = compile_task_by_id("T003", "selection_only")
 The bridge loads the public task suite, applies a validated V0.6 transform arm, exposes included and excluded context, serializes the result, and validates that required values survive decoding.
 
 This is additive infrastructure. Do not alter the frozen V0.9.3 experimental machinery to implement agent-facing access.
+
+## Preferred agent entry point
+
+For ordinary agent-facing context preparation, prefer the facade before using lower-level modules:
+
+```python
+from harness.agent import prepare
+
+prepared = prepare("T003")
+```
+
+The default policy is deterministic minimal_serialized_context: it compiles the public arms, validates required values, and selects the smallest serialized context. Use rm_id= only when an explicit representation is required.
+
+Treat the returned candidate audit as evidence of what PromptForge considered. Do not convert the minimal-size policy into a claim about model quality.

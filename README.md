@@ -73,3 +73,17 @@ compiled = compile_task_by_id("T003", "selection_only")
 The returned artifact records the selected and excluded fields, the transform sequence, the compiled representation, serialized context, context size, required-value preservation, and validation metadata.
 
 This API is additive to the public harness and does not modify the frozen V0.9.3 experimental surface.
+
+## Direct Agent Preparation
+
+The simplest public agent-facing entry point is:
+
+```python
+from harness.agent import prepare
+
+prepared = prepare("T003")
+```
+
+With the default minimal policy, PromptForge evaluates the public deterministic arms, preserves required values, and selects the candidate with the smallest serialized context. The result records the selected arm, excluded fields, serialized context, context size, validation, and candidate audit data.
+
+This policy is a mechanical context-size policy. It does not claim that the smallest context is universally better for model quality.

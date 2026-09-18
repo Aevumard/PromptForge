@@ -9,8 +9,8 @@
     "source_branch":  "experiment/v0.9.3-size-matched-control",
     "source_commit_message":  "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy":  "All tracked public files except this manifest itself",
-    "generated_utc":  "2026-09-18T18:57:16.9643191Z",
-    "file_count":  99,
+    "generated_utc":  "2026-09-18T19:13:25.6996250Z",
+    "file_count":  101,
     "files":  [
                   {
                       "path":  ".github/workflows/ci.yml",
@@ -24,8 +24,13 @@
                   },
                   {
                       "path":  "AGENTS.md",
-                      "size_bytes":  2369,
-                      "sha256":  "0D4651A9E7E6E26B5D6A291C81798C5F621969D8FA293291F0E7797F668F9336"
+                      "size_bytes":  2973,
+                      "sha256":  "E3FE7082C4185357DB1ACBCED003C6CD0897BFC9515BF8755DC223AC7DB8F2EE"
+                  },
+                  {
+                      "path":  "harness/agent_context.py",
+                      "size_bytes":  4467,
+                      "sha256":  "F9289B5CBFAAC89C1A1B803F2EC1F062574DBAEC577567EC3EE8FFB7968DB593"
                   },
                   {
                       "path":  "harness/analysis/analyze_v053.py",
@@ -394,8 +399,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "size_bytes":  2597,
-                      "sha256":  "DA029DC3B2EB2B79E31F061444490B34F412E9711FC9BC04F4ABB5C2422F39C4"
+                      "size_bytes":  3206,
+                      "sha256":  "CA86C8EF7CDA3FF15E6C4D8AA20F957F931D5C810FA0F5F0D95E8BCB5044FF93"
                   },
                   {
                       "path":  "schemas/run.schema.json",
@@ -406,6 +411,11 @@
                       "path":  "tasks/suite.json",
                       "size_bytes":  866,
                       "sha256":  "12FA0D70631609B231400CEEAF727C1A22AF87334A0075148CF9C66F8C5BDEF3"
+                  },
+                  {
+                      "path":  "tests/test_agent_context.py",
+                      "size_bytes":  3657,
+                      "sha256":  "859C07D09B9EB8240B7DC84E18B436B9D5AA433ED01288BB49F50A2A5348F0B3"
                   },
                   {
                       "path":  "tests/test_provider_adapters.py",
