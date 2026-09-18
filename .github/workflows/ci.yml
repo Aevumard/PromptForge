@@ -23,4 +23,4 @@ jobs:
       - name: Install package
         run: python -m pip install . --no-deps
       - name: Package smoke test
-        run: python -c "from promptforge import prepare_context; r = prepare_context({'entity': 'A-17', 'noise': 'x'}, ['entity']); assert r['context'] == {'entity': 'A-17'}"
+        run: python -c "import sys; sys.path.pop(0); from promptforge import prepare_context, __version__; r = prepare_context({'entity': 'A-17', 'noise': 'x'}, ['entity']); assert r['context'] == {'entity': 'A-17'}; assert __version__ == '0.1.0'"
