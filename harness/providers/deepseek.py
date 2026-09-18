@@ -38,11 +38,29 @@ class DeepSeekProvider:
 
         try:
             client = self._build_client()
+        except Exception as exc:
+            return {
+                'status': 'CONFIGURATION_ERROR',
+                'error': str(exc),
+                'latency_ms': (time.perf_counter() - started) * 1000.0,
+                'text': ''
+            }
+
+        try:
             from openai import (
                 APITimeoutError,
                 APIConnectionError,
                 APIStatusError,
             )
+        except ImportError as exc:
+            return {
+                'status': 'CONFIGURATION_ERROR',
+                'error': str(exc),
+                'latency_ms': (time.perf_counter() - started) * 1000.0,
+                'text': ''
+            }
+
+        try:
             response = client.responses.create(
                 model=self.model,
                 input=prompt,
