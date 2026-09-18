@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "promptforge"
+version = "0.1.0"
+description = "Agent-native context engineering with deterministic validation and reproducible research tooling."
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.setuptools.packages.find]
+include = ["promptforge*", "harness*"]
