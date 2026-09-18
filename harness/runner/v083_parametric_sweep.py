@@ -250,7 +250,7 @@ def execute_one(task, condition, repetition, position, adapter):
     return {
         "schema_version": "0.8.3",
         "run_id": (
-            f"T003::deepseek::{condition["condition_id"]}::rep_{repetition:03d}"
+            f"T003::deepseek::{condition['condition_id']}::rep_{repetition:03d}"
         ),
         "timestamp_utc": started_utc,
         "task_id": TASK_ID,

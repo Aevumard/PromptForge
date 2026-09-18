@@ -9,8 +9,8 @@
     "source_branch":  "experiment/v0.9.3-size-matched-control",
     "source_commit_message":  "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy":  "All tracked public files except this manifest itself",
-    "generated_utc":  "2026-09-18T19:13:25.6996250Z",
-    "file_count":  101,
+    "generated_utc":  "2026-09-18T19:17:34.9687821Z",
+    "file_count":  103,
     "files":  [
                   {
                       "path":  ".github/workflows/ci.yml",
@@ -26,6 +26,11 @@
                       "path":  "AGENTS.md",
                       "size_bytes":  2973,
                       "sha256":  "E3FE7082C4185357DB1ACBCED003C6CD0897BFC9515BF8755DC223AC7DB8F2EE"
+                  },
+                  {
+                      "path":  "harness/agent.py",
+                      "size_bytes":  3828,
+                      "sha256":  "7C82221B6E5B389A11720A4F697107A5E3E075C5CB09F420763F1CDC14FDCB5A"
                   },
                   {
                       "path":  "harness/agent_context.py",
@@ -320,7 +325,7 @@
                   {
                       "path":  "harness/runner/v083_parametric_sweep.py",
                       "size_bytes":  14700,
-                      "sha256":  "A971519354C0E7169E4C59B7888B25FE4DFBA31A9B9FE3EDFB4D581E480AE3F4"
+                      "sha256":  "6577C0C3D1A0936A1A90FF8336EFB314EC4DBFA1952CD13C46781EF7AE103A5D"
                   },
                   {
                       "path":  "harness/runner/v083_schedule.json",
@@ -411,6 +416,11 @@
                       "path":  "tasks/suite.json",
                       "size_bytes":  866,
                       "sha256":  "12FA0D70631609B231400CEEAF727C1A22AF87334A0075148CF9C66F8C5BDEF3"
+                  },
+                  {
+                      "path":  "tests/test_agent.py",
+                      "size_bytes":  3183,
+                      "sha256":  "70E655D5D1DE2F3705CDC1005930094A36F67233376FD44603CFB8B345881FEE"
                   },
                   {
                       "path":  "tests/test_agent_context.py",
