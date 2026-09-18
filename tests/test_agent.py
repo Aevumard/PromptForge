@@ -72,6 +72,53 @@ class AgentFacadeTests(unittest.TestCase):
             ),
         )
 
+
+    def test_prepare_works_for_every_public_task(self):
+        for task_id in ("T001", "T002", "T003", "T004"):
+            result = prepare(task_id)
+
+            self.assertEqual(result["task_id"], task_id)
+            self.assertEqual(
+                result["schema_version"],
+                "agent-prepare.v1",
+            )
+            self.assertEqual(
+                result["policy"],
+                "minimal_serialized_context",
+            )
+            self.assertTrue(result["required_values_preserved"])
+            self.assertTrue(result["validation"]["passed"])
+            self.assertTrue(result["context"])
+            self.assertEqual(len(result["candidates"]), 8)
+
+    def test_prepare_is_deterministic(self):
+        first = prepare("T003")
+        second = prepare("T003")
+
+        self.assertEqual(first, second)
+
+    def test_selected_candidate_is_the_audited_minimum(self):
+        result = prepare("T003")
+
+        candidates = result["candidates"]
+        selected = next(
+            candidate
+            for candidate in candidates
+            if candidate["arm_id"] == result["selected_arm"]
+        )
+
+        self.assertEqual(
+            selected["context_chars"],
+            result["context_chars"],
+        )
+        self.assertEqual(
+            result["context_chars"],
+            min(
+                candidate["context_chars"]
+                for candidate in candidates
+            ),
+        )
+
     def test_explicit_arm_is_available_without_search(self):
         result = prepare(
             "T003",
