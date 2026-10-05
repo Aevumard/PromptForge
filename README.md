@@ -44,6 +44,7 @@ The public core now includes an optional, provider-agnostic adaptive layer for s
 - `ContextTopologyProfiler` builds a deterministic structural signature from nested mappings and required paths.
 - `HeuristicContextRegimeSelector` exposes transparent regimes such as `hub_dominated`, `deep_hierarchical`, `fragmented`, and `wide_sparse`.
 - `rank_context_candidates()` orders already-evaluated preparation arms for bounded probing without pretending the heuristic is an oracle.
+- `ContextBlockRefiner` performs bounded local add/remove moves over optional context blocks while pinning required fields and enforcing an optional token budget.
 - `ContextTrajectoryMonitor` detects active, stagnating, exploratory, premature-collapse, and extinct search states from observed prefixes.
 - `ContextPortfolioController` decides whether to continue, intensify, switch, or stop using only observed task-level scores and a remaining budget.
 
