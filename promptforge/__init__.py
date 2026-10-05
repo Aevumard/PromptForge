@@ -43,6 +43,11 @@ from .memory import (
     routing_summary,
 )
 
+from .orchestration import (
+    ComplexContextController,
+    ContextAdaptiveDecision,
+)
+
 __all__ = [
     "POLICY_BUDGET_CONSTRAINED",
     "POLICY_MINIMAL",
@@ -75,4 +80,6 @@ __all__ = [
     "evaluate_holdout",
     "leave_one_family_out",
     "routing_summary",
+    "ComplexContextController",
+    "ContextAdaptiveDecision",
 ]
