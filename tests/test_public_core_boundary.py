@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from harness.agent import prepare_context as legacy_prepare_context
 from promptforge import (
     POLICY_BUDGET_CONSTRAINED,
     prepare_context,
@@ -94,6 +95,56 @@ assert importlib.util.find_spec("harness") is None
         self.assertEqual(result["selected_arm"], "selection_only")
         self.assertTrue(result["required_values_preserved"])
         self.assertTrue(result["validation"]["passed"])
+
+    def test_public_core_matches_legacy_generic_contract(self):
+        data = {
+            "user": {
+                "id": "U-7",
+                "name": "Ada",
+            },
+            "task": {
+                "action": "review",
+                "priority": "high",
+                "commentary": "noise",
+            },
+        }
+        required = ["user.id", "task.action", "task.priority"]
+
+        legacy = legacy_prepare_context(
+            data,
+            required,
+            task_id="PARITY-001",
+            task_family="parity",
+        )
+        current = prepare_context(
+            data,
+            required,
+            task_id="PARITY-001",
+            task_family="parity",
+        )
+
+        self.assertEqual(current["task_id"], legacy["task_id"])
+        self.assertEqual(current["task_family"], legacy["task_family"])
+        self.assertEqual(current["policy"], legacy["policy"])
+        self.assertEqual(current["selected_arm"], legacy["selected_arm"])
+        self.assertEqual(current["context"], legacy["context"])
+        self.assertEqual(current["serialized_context"], legacy["serialized_context"])
+        self.assertEqual(current["context_chars"], legacy["context_chars"])
+        self.assertEqual(current["estimated_tokens"], legacy["estimated_tokens"])
+        self.assertEqual(current["included_paths"], legacy["included_paths"])
+        self.assertEqual(current["excluded_paths"], legacy["excluded_paths"])
+        self.assertEqual(current["required_values_preserved"], legacy["required_values_preserved"])
+        self.assertEqual(current["validation"], legacy["validation"])
+        self.assertEqual(
+            [
+                (item["arm_id"], item["context_chars"], item["estimated_tokens"])
+                for item in current["candidates"]
+            ],
+            [
+                (item["arm_id"], item["context_chars"], item["estimated_tokens"])
+                for item in legacy["candidates"]
+            ],
+        )
 
     def test_public_core_retains_budget_contract(self):
         result = prepare_context(
