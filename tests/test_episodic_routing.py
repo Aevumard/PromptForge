@@ -78,7 +78,7 @@ class EpisodicRoutingTests(unittest.TestCase):
         evaluations = leave_one_family_out(self._episodes())[0][1]
         summary = routing_summary(evaluations)
 
-        self.assertEqual(summary["episodes"], float(len(evaluations)))
+        self.assertEqual(summary["episodes"], len(evaluations))
         self.assertGreaterEqual(summary["oracle_agreement_rate"], 0.0)
         self.assertGreaterEqual(summary["mean_relative_regret"], 0.0)
 
