@@ -15,7 +15,7 @@ An AI agent should use the smallest validated surface that solves the task. Do n
 4. For repository fixtures, use `harness.agent.prepare()`.
 5. Inspect `promptforge/core.py` when public core semantics matter.
 6. Inspect `harness/runner/transforms.py` only when historical transformation semantics matter.
-6. Inspect historical experiments, reports, and providers only when the request actually concerns research or provider execution.
+7. Inspect historical experiments, reports, and providers only when the request actually concerns research or provider execution.
 
 ## Public core contract
 
