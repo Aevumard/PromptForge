@@ -1,6 +1,7 @@
 import unittest
 
 from promptforge import (
+    ContextBlockRefiner,
     ContextPortfolioController,
     ContextTopologyProfiler,
     ContextTrajectoryMonitor,
@@ -107,6 +108,38 @@ class AdaptiveContextTests(unittest.TestCase):
 
         self.assertEqual(ranked[0], "selection_only")
         self.assertNotIn("noop", ranked)
+
+    def test_block_refiner_pins_required_fields_and_accepts_improving_move(self):
+        refiner = ContextBlockRefiner(
+            {
+                "task": {
+                    "id": "T-1",
+                    "signal": "keep-me",
+                    "noise": "drop-me",
+                },
+                "metadata": {"trace_id": "R-1"},
+            },
+            ["task.id"],
+            budget_tokens=50,
+        )
+
+        def evaluate(context):
+            serialized_len = len(str(context))
+            return float(
+                serialized_len
+                - (20 if context["task"].get("signal") == "keep-me" else 0)
+            )
+
+        result = refiner.refine(evaluate, max_iterations=4)
+
+        self.assertEqual(result.schema_version, "context-refinement.v1")
+        self.assertIn("task.id", result.selected_paths)
+        self.assertIn("task.signal", result.selected_paths)
+        self.assertNotIn("task.noise", result.selected_paths)
+        self.assertEqual(result.accepted_moves, 1)
+        self.assertLess(result.final_cost, result.initial_cost)
+        self.assertEqual(result.trace[0]["accepted"], 0)
+
 
     def test_trajectory_monitor_detects_stagnation(self):
         monitor = ContextTrajectoryMonitor(stagnation_patience=2)
