@@ -636,6 +636,227 @@ class ContextPortfolioController:
         )
 
 
+
+@dataclass(frozen=True)
+class ContextRefinementResult:
+    """Result of bounded local refinement over optional context blocks."""
+
+    schema_version: str
+    selected_paths: tuple[str, ...]
+    serialized_context: str
+    estimated_tokens: int
+    initial_cost: float
+    final_cost: float
+    iterations: int
+    accepted_moves: int
+    rejected_moves: int
+    trace: tuple[dict[str, Any], ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+class ContextBlockRefiner:
+    """BLOC-inspired local refinement for optional context blocks.
+
+    Required fields are pinned. Optional leaf fields are the movable blocks.
+    A caller-supplied cost function decides whether an add/remove move is an
+    improvement. No model, provider, or hidden oracle is accessed here.
+    """
+
+    def __init__(
+        self,
+        data: Mapping[str, Any],
+        required: Iterable[str],
+        *,
+        budget_tokens: int | None = None,
+        tolerance: float = 1e-12,
+    ) -> None:
+        if not isinstance(data, Mapping):
+            raise TypeError("data must be a mapping")
+        if budget_tokens is not None and budget_tokens <= 0:
+            raise ValueError("budget_tokens must be positive")
+        if tolerance < 0.0:
+            raise ValueError("tolerance must be non-negative")
+
+        self.data = data
+        self.required = normalize_required_paths(required)
+        if not self.required:
+            raise ValueError("required must contain at least one field path")
+        self.budget_tokens = budget_tokens
+        self.tolerance = tolerance
+
+    @staticmethod
+    def _leaf_paths(value: Any, prefix: str = "") -> list[str]:
+        if not isinstance(value, Mapping) or not value:
+            return [prefix] if prefix else []
+
+        paths: list[str] = []
+        for key, child in value.items():
+            path = f"{prefix}.{key}" if prefix else str(key)
+            if isinstance(child, Mapping) and child:
+                paths.extend(ContextBlockRefiner._leaf_paths(child, path))
+            else:
+                paths.append(path)
+        return paths
+
+    @staticmethod
+    def _set_path(target: dict[str, Any], path: str, value: Any) -> None:
+        parts = path.split(".")
+        current = target
+        for segment in parts[:-1]:
+            child = current.get(segment)
+            if not isinstance(child, dict):
+                child = {}
+                current[segment] = child
+            current = child
+        current[parts[-1]] = value
+
+    def _required_leaf_paths(self) -> tuple[str, ...]:
+        leaves = self._leaf_paths(self.data)
+        return tuple(
+            leaf
+            for leaf in leaves
+            if any(
+                leaf == required or leaf.startswith(required + ".")
+                for required in self.required
+            )
+        )
+
+    def _build_context(self, selected_paths: Iterable[str]) -> dict[str, Any]:
+        context: dict[str, Any] = {}
+        for path in sorted(set(selected_paths)):
+            value = get_path(self.data, path)
+            if value is MISSING:
+                continue
+            self._set_path(context, path, value)
+        return context
+
+    def _candidate_leaf_paths(self) -> tuple[str, ...]:
+        return tuple(self._leaf_paths(self.data))
+
+    def _fits_budget(self, context: Mapping[str, Any]) -> bool:
+        if self.budget_tokens is None:
+            return True
+        return estimate_tokens(serialize_context(context)) <= self.budget_tokens
+
+    def refine(
+        self,
+        evaluate: Any,
+        *,
+        max_iterations: int = 25,
+    ) -> ContextRefinementResult:
+        if not callable(evaluate):
+            raise TypeError("evaluate must be callable")
+        if max_iterations < 1:
+            raise ValueError("max_iterations must be at least 1")
+
+        required_leaf_paths = set(self._required_leaf_paths())
+        all_leaf_paths = set(self._candidate_leaf_paths())
+        movable = sorted(all_leaf_paths.difference(required_leaf_paths))
+
+        selected = set(required_leaf_paths)
+        current_context = self._build_context(selected)
+        if not self._fits_budget(current_context):
+            raise ValueError("required context exceeds budget")
+
+        current_cost = float(evaluate(current_context))
+        if not isfinite(current_cost) or current_cost < 0.0:
+            raise ValueError("evaluate must return a finite non-negative cost")
+
+        initial_cost = current_cost
+        accepted_moves = 0
+        rejected_moves = 0
+        trace: list[dict[str, Any]] = [
+            {
+                "iteration": 0,
+                "cost": current_cost,
+                "accepted": 0,
+                "rejected": 0,
+                "selected_blocks": len(selected),
+            }
+        ]
+
+        for iteration in range(1, max_iterations + 1):
+            proposals: list[tuple[float, str, str, set[str]]] = []
+
+            for path in movable:
+                action = "remove" if path in selected else "add"
+                proposal_paths = set(selected)
+                if action == "add":
+                    proposal_paths.add(path)
+                else:
+                    proposal_paths.remove(path)
+
+                proposal_context = self._build_context(proposal_paths)
+                if not self._fits_budget(proposal_context):
+                    continue
+
+                proposal_cost = float(evaluate(proposal_context))
+                if not isfinite(proposal_cost) or proposal_cost < 0.0:
+                    raise ValueError(
+                        "evaluate must return a finite non-negative cost"
+                    )
+
+                proposals.append(
+                    (proposal_cost, path, action, proposal_paths)
+                )
+
+            if not proposals:
+                break
+
+            best_cost, best_path, best_action, best_paths = min(
+                proposals,
+                key=lambda item: (item[0], item[2], item[1]),
+            )
+
+            rejected_this_round = len(proposals) - 1
+            rejected_moves += max(0, rejected_this_round)
+
+            if best_cost >= current_cost - self.tolerance:
+                rejected_moves += 1
+                trace.append(
+                    {
+                        "iteration": iteration,
+                        "cost": current_cost,
+                        "accepted": 0,
+                        "rejected": rejected_moves,
+                        "selected_blocks": len(selected),
+                    }
+                )
+                break
+
+            selected = best_paths
+            current_cost = best_cost
+            accepted_moves += 1
+            trace.append(
+                {
+                    "iteration": iteration,
+                    "cost": current_cost,
+                    "accepted": 1,
+                    "rejected": rejected_moves,
+                    "selected_blocks": len(selected),
+                    "path": best_path,
+                    "action": best_action,
+                }
+            )
+
+        final_context = self._build_context(selected)
+        serialized = serialize_context(final_context)
+
+        return ContextRefinementResult(
+            schema_version="context-refinement.v1",
+            selected_paths=tuple(sorted(selected)),
+            serialized_context=serialized,
+            estimated_tokens=estimate_tokens(serialized),
+            initial_cost=initial_cost,
+            final_cost=current_cost,
+            iterations=len(trace) - 1,
+            accepted_moves=accepted_moves,
+            rejected_moves=rejected_moves,
+            trace=tuple(trace),
+        )
+
 def rank_context_candidates(
     candidates: Sequence[Mapping[str, Any]],
     recommendation: ContextStrategyRecommendation,
@@ -693,6 +914,8 @@ __all__ = [
     "ContextControllerDecision",
     "ContextPortfolioController",
     "ContextRegimeSignature",
+    "ContextRefinementResult",
+    "ContextBlockRefiner",
     "ContextStrategyRecommendation",
     "ContextTopologyProfile",
     "ContextTopologyProfiler",
