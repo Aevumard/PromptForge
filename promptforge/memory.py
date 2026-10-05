@@ -428,7 +428,7 @@ def leave_one_family_out(
 
 def routing_summary(
     evaluations: Sequence[ContextRoutingEvaluation],
-) -> dict[str, float]:
+) -> dict[str, int | float]:
     if not evaluations:
         return {
             "episodes": 0,
@@ -442,7 +442,7 @@ def routing_summary(
         for item in evaluations
     )
     return {
-        "episodes": float(len(evaluations)),
+        "episodes": len(evaluations),
         "oracle_agreement_rate": agreement / len(evaluations),
         "mean_absolute_regret": (
             sum(item.absolute_regret for item in evaluations)
