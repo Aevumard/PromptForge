@@ -56,6 +56,19 @@ The handoff artifact exposes:
 
 `estimated_tokens` is a dependency-free planning heuristic based on UTF-8 byte length divided by four and rounded up. It is not an exact provider tokenizer measurement.
 
+## Complexity-aware control
+
+The optional adaptive layer lives in `promptforge/adaptive.py` and remains provider-agnostic and harness-free.
+
+Its contract is intentionally separated into four concerns:
+
+1. **Structure** — `ContextTopologyProfiler` measures the nested-context topology and the required-field boundary.
+2. **Regime** — `HeuristicContextRegimeSelector` produces transparent descriptive flags and a bounded candidate preference order.
+3. **Trajectory** — `ContextTrajectoryMonitor` consumes only the observed prefix of an external search/evaluation trace.
+4. **Control** — `ContextPortfolioController` can continue, intensify, switch, or stop using observed scores and remaining budget.
+
+This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
+
 ## Policies
 
 The default policy is `minimal`, implemented as deterministic `minimal_serialized_context`.
