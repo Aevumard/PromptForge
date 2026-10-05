@@ -547,11 +547,14 @@ class ContextPortfolioController:
         if current_cost < 0.0:
             raise ValueError("current_cost must be non-negative")
 
-        probes = {
-            str(strategy): float(score)
-            for strategy, score in (probe_scores or {}).items()
-            if isfinite(float(score)) and float(score) >= 0.0
-        }
+        probes: dict[str, float] = {}
+        for strategy, raw_score in (probe_scores or {}).items():
+            try:
+                score = float(raw_score)
+            except (TypeError, ValueError):
+                continue
+            if isfinite(score) and score >= 0.0:
+                probes[str(strategy)] = score
         better = {
             strategy: score
             for strategy, score in probes.items()
