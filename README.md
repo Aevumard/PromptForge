@@ -52,6 +52,21 @@ This architecture is deliberately graph-inspired: it borrows the pattern **struc
 
 The adaptive layer is optional. The default `prepare_context()` contract and the frozen research harness remain unchanged.
 
+## Episodic routing and memory
+
+PromptForge can retain measured context episodes and route a new context toward strategies that performed well on structurally similar prior episodes.
+
+The memory contract is:
+
+`episode = (episode_id, family_id, topology, strategy, observed_cost)`
+
+`NearestEpisodeRouter` performs nearest-case routing in a scaled topology space. The router never receives hidden labels or future results; it only sees supplied historical episodes.
+
+For research, `leave_one_family_out()` removes an entire context family from fitting before prediction. Held-out predictions are then compared against the best observed strategy for that held-out episode. This preserves the same evidence boundary used by the graph-routing work: routing performance is an empirical question, not an assumption.
+
+This layer is intentionally separate from `prepare_context()`: memory can guide strategy selection, but it does not silently become the default policy.
+
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -224,6 +239,7 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/` | Installable public API | End-user integration |
 | `promptforge/core.py` | Standalone provider-agnostic core | Core behavior |
 | `promptforge/adaptive.py` | Complexity-aware structure, local refinement, trajectory, and control | Complex-system orchestration |
+| `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |
