@@ -68,6 +68,7 @@ Its contract is intentionally separated into four concerns:
 4. **Trajectory** — `ContextTrajectoryMonitor` consumes only the observed prefix of an external search/evaluation trace.
 5. **Control** — `ContextPortfolioController` can continue, intensify, switch, or stop using observed scores and remaining budget.
 6. **Memory** — `NearestEpisodeRouter` may route from observed historical episodes; `leave_one_family_out()` is the mandatory research boundary for transfer evaluation.
+7. **Unified orchestration** — `ComplexContextController` may combine structural, episodic, trajectory, and bounded-control signals, but it must preserve the explicit source and novelty boundary in its result.
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
 
