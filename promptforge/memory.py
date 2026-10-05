@@ -54,6 +54,19 @@ class ContextEpisode:
 
 
 @dataclass(frozen=True)
+class ContextRoute:
+    """Observed-case routing result with an explicit novelty signal."""
+
+    strategy: str
+    nearest_distance: float
+    nearest_episode_id: str
+    evidence_count: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class ContextRoutingEvaluation:
     episode_id: str
     family_id: str
@@ -232,8 +245,45 @@ class NearestEpisodeRouter:
                 ranked.append(strategy)
         return tuple(ranked)
 
+    def route(
+        self,
+        topology: Mapping[str, Any] | ContextTopologyProfile,
+    ) -> ContextRoute:
+        if not self._training:
+            raise RuntimeError("router must be fitted before route()")
+
+        vector = topology_vector(topology, self.features)
+        nearest = min(
+            self._training,
+            key=lambda row: (
+                _distance(vector, row[3], self._scale),
+                row[2],
+                row[0],
+            ),
+        )
+        distance = _distance(vector, nearest[3], self._scale)
+        evidence_count = sum(1 for row in self._training if row[2] == nearest[2])
+
+        return ContextRoute(
+            strategy=nearest[2],
+            nearest_distance=distance,
+            nearest_episode_id=nearest[0],
+            evidence_count=evidence_count,
+        )
+
+    def novelty(
+        self,
+        topology: Mapping[str, Any] | ContextTopologyProfile,
+    ) -> float:
+        """Return distance to the nearest observed episode.
+
+        This is a relative structural novelty signal, not a probability or
+        calibrated confidence score.
+        """
+        return self.route(topology).nearest_distance
+
     def predict(self, topology: Mapping[str, Any] | ContextTopologyProfile) -> str:
-        return self.rank(topology)[0]
+        return self.route(topology).strategy
 
 
 def episode_oracle(episodes: Sequence[ContextEpisode]) -> dict[str, str]:
@@ -406,6 +456,7 @@ def routing_summary(
 __all__ = [
     "ContextEpisode",
     "ContextRoutingEvaluation",
+    "ContextRoute",
     "NearestEpisodeRouter",
     "ROUTING_FEATURES",
     "SCALERS",
