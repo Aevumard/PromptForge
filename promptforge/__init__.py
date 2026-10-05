@@ -32,6 +32,16 @@ from .adaptive import (
     rank_context_candidates,
 )
 
+from .memory import (
+    ContextEpisode,
+    ContextRoutingEvaluation,
+    NearestEpisodeRouter,
+    episode_oracle,
+    evaluate_holdout,
+    leave_one_family_out,
+    routing_summary,
+)
+
 __all__ = [
     "POLICY_BUDGET_CONSTRAINED",
     "POLICY_MINIMAL",
@@ -56,4 +66,11 @@ __all__ = [
     "REGIME_HUB_DOMINATED",
     "REGIME_MIXED",
     "REGIME_WIDE_SPARSE",
+    "ContextEpisode",
+    "ContextRoutingEvaluation",
+    "NearestEpisodeRouter",
+    "episode_oracle",
+    "evaluate_holdout",
+    "leave_one_family_out",
+    "routing_summary",
 ]
