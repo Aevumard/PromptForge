@@ -223,6 +223,7 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | --- | --- | --- |
 | `promptforge/` | Installable public API | End-user integration |
 | `promptforge/core.py` | Standalone provider-agnostic core | Core behavior |
+| `promptforge/adaptive.py` | Complexity-aware structure, local refinement, trajectory, and control | Complex-system orchestration |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |
