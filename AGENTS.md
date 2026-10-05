@@ -67,6 +67,7 @@ Its contract is intentionally separated into four concerns:
 3. **Local refinement** — `ContextBlockRefiner` explores bounded add/remove moves over optional blocks while required paths remain pinned.
 4. **Trajectory** — `ContextTrajectoryMonitor` consumes only the observed prefix of an external search/evaluation trace.
 5. **Control** — `ContextPortfolioController` can continue, intensify, switch, or stop using observed scores and remaining budget.
+6. **Memory** — `NearestEpisodeRouter` may route from observed historical episodes; `leave_one_family_out()` is the mandatory research boundary for transfer evaluation.
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
 
