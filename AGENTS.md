@@ -64,8 +64,9 @@ Its contract is intentionally separated into four concerns:
 
 1. **Structure** — `ContextTopologyProfiler` measures the nested-context topology and the required-field boundary.
 2. **Regime** — `HeuristicContextRegimeSelector` produces transparent descriptive flags and a bounded candidate preference order.
-3. **Trajectory** — `ContextTrajectoryMonitor` consumes only the observed prefix of an external search/evaluation trace.
-4. **Control** — `ContextPortfolioController` can continue, intensify, switch, or stop using observed scores and remaining budget.
+3. **Local refinement** — `ContextBlockRefiner` explores bounded add/remove moves over optional blocks while required paths remain pinned.
+4. **Trajectory** — `ContextTrajectoryMonitor` consumes only the observed prefix of an external search/evaluation trace.
+5. **Control** — `ContextPortfolioController` can continue, intensify, switch, or stop using observed scores and remaining budget.
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
 
