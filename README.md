@@ -37,6 +37,20 @@ harness/reports/
 Regression tests:
 tests/
 
+## Complexity-aware control layer
+
+The public core now includes an optional, provider-agnostic adaptive layer for structurally complex contexts:
+
+- `ContextTopologyProfiler` builds a deterministic structural signature from nested mappings and required paths.
+- `HeuristicContextRegimeSelector` exposes transparent regimes such as `hub_dominated`, `deep_hierarchical`, `fragmented`, and `wide_sparse`.
+- `rank_context_candidates()` orders already-evaluated preparation arms for bounded probing without pretending the heuristic is an oracle.
+- `ContextTrajectoryMonitor` detects active, stagnating, exploratory, premature-collapse, and extinct search states from observed prefixes.
+- `ContextPortfolioController` decides whether to continue, intensify, switch, or stop using only observed task-level scores and a remaining budget.
+
+This architecture is deliberately graph-inspired: it borrows the pattern **structure -> regime -> portfolio -> trajectory -> control** that proved useful in the author's graph-optimization work, while keeping the PromptForge implementation domain-specific to context. No graph benchmark result is transferred to language-model quality, and no universal routing claim is implied.
+
+The adaptive layer is optional. The default `prepare_context()` contract and the frozen research harness remain unchanged.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
