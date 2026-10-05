@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import asdict, dataclass
-from math import sqrt
+from math import isfinite, sqrt
 from typing import Any, Mapping, Sequence
 
 from .adaptive import ContextTopologyProfile
@@ -45,7 +45,7 @@ class ContextEpisode:
         if not self.strategy:
             raise ValueError("strategy must not be empty")
         cost = float(self.cost)
-        if not cost == cost or cost < 0.0:
+        if not isfinite(cost) or cost < 0.0:
             raise ValueError("cost must be a finite non-negative number")
 
     def vector(self, features: Sequence[str] | None = None) -> tuple[float, ...]:
