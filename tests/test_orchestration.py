@@ -4,6 +4,7 @@ from promptforge import (
     ComplexContextController,
     ContextEpisode,
     ContextTopologyProfiler,
+    ContextTrajectoryMonitor,
     NearestEpisodeRouter,
 )
 
@@ -113,16 +114,11 @@ class OrchestrationTests(unittest.TestCase):
             features=("node_count", "max_depth", "boundary_pressure"),
         ).fit(episodes).route(self.profile)
 
-        trajectory = {
-            "cost": 10.0,
-            "accepted": 0,
-            "rejected": 1,
-        }
         decision = ComplexContextController().decide(
             profile=self.profile,
             candidates=self._candidates(),
             memory_route=route,
-            trajectory=__import__("promptforge").ContextTrajectoryMonitor().observe(
+            trajectory=ContextTrajectoryMonitor().observe(
                 [
                     {"cost": 10.0, "accepted": 1, "rejected": 0},
                     {"cost": 10.0, "accepted": 0, "rejected": 1},
