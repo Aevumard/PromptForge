@@ -15,9 +15,8 @@ from promptforge import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC_FILES = (
-    ROOT / "promptforge" / "__init__.py",
-    ROOT / "promptforge" / "core.py",
+PUBLIC_FILES = tuple(
+    sorted((ROOT / "promptforge").glob("*.py"))
 )
 
 
