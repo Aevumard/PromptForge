@@ -66,6 +66,17 @@ For research, `leave_one_family_out()` removes an entire context family from fit
 
 This layer is intentionally separate from `prepare_context()`: memory can guide strategy selection, but it does not silently become the default policy.
 
+## Unified adaptive decision
+
+`ComplexContextController` composes the layers into one decision envelope:
+
+`structure -> regime -> candidates -> memory -> trajectory -> control`
+
+A non-novel episodic match may provide the strategy. A novel memory match falls back to structural routing. Observed trajectory/probe evidence has precedence when an active search is already underway.
+
+The returned decision records its source and novelty distance so downstream systems can audit why a strategy was selected.
+
+
 
 ## Public core boundary
 
