@@ -127,7 +127,7 @@ class AdaptiveContextTests(unittest.TestCase):
             serialized_len = len(str(context))
             return float(
                 serialized_len
-                - (20 if context["task"].get("signal") == "keep-me" else 0)
+                - (25 if context["task"].get("signal") == "keep-me" else 0)
             )
 
         result = refiner.refine(evaluate, max_iterations=4)
