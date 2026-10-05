@@ -34,6 +34,7 @@ from .adaptive import (
 
 from .memory import (
     ContextEpisode,
+    ContextRoute,
     ContextRoutingEvaluation,
     NearestEpisodeRouter,
     episode_oracle,
@@ -67,6 +68,7 @@ __all__ = [
     "REGIME_MIXED",
     "REGIME_WIDE_SPARSE",
     "ContextEpisode",
+    "ContextRoute",
     "ContextRoutingEvaluation",
     "NearestEpisodeRouter",
     "episode_oracle",
