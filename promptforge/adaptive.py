@@ -810,17 +810,18 @@ class ContextBlockRefiner:
                 key=lambda item: (item[0], item[2], item[1]),
             )
 
-            rejected_this_round = len(proposals) - 1
-            rejected_moves += max(0, rejected_this_round)
+            rejected_this_round = max(0, len(proposals) - 1)
+            rejected_moves += rejected_this_round
 
             if best_cost >= current_cost - self.tolerance:
+                rejected_this_round += 1
                 rejected_moves += 1
                 trace.append(
                     {
                         "iteration": iteration,
                         "cost": current_cost,
                         "accepted": 0,
-                        "rejected": rejected_moves,
+                        "rejected": rejected_this_round,
                         "selected_blocks": len(selected),
                     }
                 )
@@ -834,7 +835,7 @@ class ContextBlockRefiner:
                     "iteration": iteration,
                     "cost": current_cost,
                     "accepted": 1,
-                    "rejected": rejected_moves,
+                    "rejected": rejected_this_round,
                     "selected_blocks": len(selected),
                     "path": best_path,
                     "action": best_action,
