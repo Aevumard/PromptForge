@@ -2,7 +2,7 @@
 
 __version__ = "0.1.0"
 
-from harness.agent import (
+from .core import (
     POLICY_BUDGET_CONSTRAINED,
     POLICY_MINIMAL,
     POLICY_MINIMAL_SERIALIZED_CONTEXT,
