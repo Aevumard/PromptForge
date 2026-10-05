@@ -233,6 +233,7 @@ class NearestEpisodeRouter:
             self._training,
             key=lambda row: (
                 _distance(vector, row[3], self._scale),
+                row[4],
                 row[2],
                 row[0],
             ),
@@ -257,6 +258,7 @@ class NearestEpisodeRouter:
             self._training,
             key=lambda row: (
                 _distance(vector, row[3], self._scale),
+                row[4],
                 row[2],
                 row[0],
             ),
