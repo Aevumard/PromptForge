@@ -1,4 +1,9 @@
 import ast
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -27,6 +32,42 @@ class PublicCoreBoundaryTests(unittest.TestCase):
                     )
                 elif isinstance(node, ast.ImportFrom):
                     self.assertNotEqual(node.module.split(".")[0], "harness")
+
+    def test_public_core_can_run_without_harness_tree(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            isolated_root = Path(temp_dir) / "isolated"
+            shutil.copytree(ROOT / "promptforge", isolated_root / "promptforge")
+
+            env = os.environ.copy()
+            env["PYTHONPATH"] = str(isolated_root)
+            env.pop("PYTHONSTARTUP", None)
+
+            code = """
+import importlib.util
+from promptforge import prepare_context
+
+result = prepare_context(
+    {"entity": "A-17", "noise": "x"},
+    ["entity"],
+)
+
+assert result["context"] == {"entity": "A-17"}
+assert importlib.util.find_spec("harness") is None
+"""
+            completed = subprocess.run(
+                [sys.executable, "-c", code],
+                cwd=temp_dir,
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(
+                completed.returncode,
+                0,
+                completed.stderr,
+            )
 
     def test_public_core_works_through_top_level_package(self):
         result = prepare_context(
