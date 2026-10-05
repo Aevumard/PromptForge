@@ -5,7 +5,7 @@ from dataclasses import asdict, dataclass
 from math import isfinite, sqrt
 from typing import Any
 
-from .core import estimate_tokens, get_path, normalize_required_paths, serialize_context
+from .core import MISSING, estimate_tokens, get_path, normalize_required_paths, serialize_context
 
 
 REGIME_HUB_DOMINATED = "hub_dominated"
@@ -130,7 +130,7 @@ class ContextTopologyProfiler:
         )
 
         missing = tuple(
-            path for path in required_paths if get_path(data, path) is _MISSING
+            path for path in required_paths if get_path(data, path) is MISSING
         )
         present_required = [path for path in required_paths if path not in missing]
 
@@ -212,9 +212,6 @@ class ContextTopologyProfiler:
             serialized_chars=len(serialized),
             estimated_tokens=estimate_tokens(serialized),
         )
-
-
-_MISSING = object()
 
 
 @dataclass(frozen=True)
