@@ -118,7 +118,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v8")
         self.assertEqual(proposal.memory_routing_mode, "adaptive")
         self.assertEqual(proposal.memory_routing_selected_mode, "credit")
         self.assertEqual(proposal.memory_policy_version, 11)
@@ -198,7 +198,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v8")
         self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
         self.assertEqual(proposal.memory_policy_stability_rate, 0.0)
         self.assertTrue(proposal.memory_policy_refresh_recommended)
@@ -252,12 +252,56 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v8")
         self.assertEqual(proposal.experience_version, 3)
         self.assertEqual(proposal.memory_policy_version, 1)
         self.assertEqual(proposal.memory_policy_freshness_age, 2)
         self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
         self.assertTrue(proposal.memory_policy_refresh_recommended)
+
+    def test_bounded_exploration_selects_unobserved_alternative(self):
+        from promptforge import ContextExplorationController
+
+        controller = ContextExplorationController(
+            novelty_threshold=1.0,
+            min_interval=1,
+            exploration_budget=2,
+        )
+        loop = ContextCognitiveLoop(
+            exploration_controller=controller,
+            routing_features=("node_count", "max_depth"),
+        )
+        first = loop.propose(
+            cycle_id="cycle-explore-1",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(first.schema_version, "context-cognitive-proposal.v8")
+        self.assertTrue(first.exploration_required)
+        self.assertTrue(first.exploration_eligible)
+        self.assertEqual(first.exploration_reason, "coverage_gap")
+        self.assertEqual(first.exploration_target_strategy, "selection_representation_B")
+        self.assertEqual(first.decision.action, "probe")
+        self.assertEqual(first.decision.source, "bounded_exploration")
+        self.assertEqual(first.decision.strategy, "selection_representation_B")
+
+        loop.observe(
+            first,
+            family_id="family-explore",
+            cost=1.0,
+            strategy="selection_representation_B",
+        )
+
+        second = loop.propose(
+            cycle_id="cycle-explore-2",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+        self.assertEqual(second.exploration_reason, "exploration_cooldown")
+        self.assertFalse(second.exploration_eligible)
 
     def test_invalid_memory_routing_mode_is_rejected(self):
         with self.assertRaises(ValueError):
@@ -286,7 +330,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v8")
         self.assertEqual(proposal.experience_version, 0)
         self.assertIsNone(proposal.memory_route)
         self.assertEqual(proposal.decision.source, "structural_regime")
