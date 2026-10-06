@@ -47,6 +47,27 @@ class MemoryAwareRoutingTests(unittest.TestCase):
         self.assertGreater(route.selected_credit, 0.0)
         self.assertEqual(route.strategy_scores[0][0], "dense")
 
+    def test_corroboration_gate_blocks_isolated_strategy(self):
+        episodes = [
+            self.episode("dense-1", "family-a", "dense", 1.0),
+            self.episode("dense-2", "family-a", "dense", 1.0),
+            self.episode("dense-3", "family-a", "dense", 1.0),
+            self.episode("sparse-1", "family-a", "sparse", 2.0),
+            self.episode("sparse-2", "family-b", "sparse", 2.0),
+        ]
+
+        router = ContextMemoryAwareRouter(
+            features=("node_count", "max_depth"),
+            top_k=5,
+            min_family_count=2,
+            min_strategy_evidence=2,
+            credit_policy=ContextMemoryCreditPolicy(half_life=100.0),
+        ).fit(episodes)
+
+        route = router.route(self.profile)
+
+        self.assertEqual(route.strategy, "sparse")
+
     def test_router_is_deterministic(self):
         episodes = [
             self.episode("a1", "family-a", "sparse", 3.0),
