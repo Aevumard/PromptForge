@@ -60,7 +60,7 @@ The handoff artifact exposes:
 
 The optional adaptive layer lives in `promptforge/adaptive.py` and remains provider-agnostic and harness-free.
 
-Its contract is intentionally separated into four concerns:
+Its contract is intentionally separated into seven concerns:
 
 1. **Structure** — `ContextTopologyProfiler` measures the nested-context topology and the required-field boundary.
 2. **Regime** — `HeuristicContextRegimeSelector` produces transparent descriptive flags and a bounded candidate preference order.
@@ -71,6 +71,12 @@ Its contract is intentionally separated into four concerns:
 7. **Unified orchestration** — `ComplexContextController` may combine structural, episodic, trajectory, and bounded-control signals, but it must preserve the explicit source and novelty boundary in its result.
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
+
+## Relational topology
+
+`ContextRelationProfiler` provides an explicit relational layer over context nodes. It may measure supplied cross-links, connected components, degree concentration, density, and relation kinds.
+
+Relations must be supplied by the integration. Do not infer or fabricate semantic edges and then treat them as ground truth. When relational descriptors are stored in episodes, they become part of the observed routing evidence alongside the hierarchical topology.
 
 ## Cognitive loop
 
