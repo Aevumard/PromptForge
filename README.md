@@ -465,6 +465,22 @@ The strengthened boundary is:
 
 `epistemic evidence -> support anchors -> stance -> relevance tags -> quality floors -> feasibility/safety gates -> action ranking`
 
+## Action support provenance diversity
+
+Action support anchors can optionally be subjected to a provenance-structure gate.
+
+1. `ActionPolicy.require_support_provenance_diversity=True` requires an explicit current evidence boundary and support anchors.
+2. `min_distinct_support_sources` defaults to `2` and counts only explicitly declared, non-`unknown` source labels.
+3. Missing source metadata fails closed when the provenance guard is enabled.
+4. `max_support_anchors_per_source` can limit concentration from any one declared source.
+5. `ActionDecision.support_evidence_provenance` preserves the caller-supplied source labels for auditability.
+6. Different source labels do not prove statistical independence, truth, causal sufficiency, or absence of shared upstream dependencies.
+7. The guard is opt-in and remains backward compatible when disabled.
+
+The strengthened boundary is:
+
+`epistemic evidence -> support anchors -> stance -> relevance tags -> quality floors -> provenance diversity -> feasibility/safety gates -> action ranking`
+
 ## Hypothesis evidence corroboration
 
 Hypothesis assessment can optionally cap contribution from the same declared evidence source.
