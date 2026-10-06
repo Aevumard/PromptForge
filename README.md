@@ -163,21 +163,21 @@ The aware router must be fitted only on the intended training snapshot. For tran
 
 ## Cognitive memory mode
 
-\`ContextCognitiveLoop\` now exposes two explicit memory-routing modes:
+`ContextCognitiveLoop` now exposes two explicit memory-routing modes:
 
-- \`nearest\` — the original \`NearestEpisodeRouter\` behavior and the default.
-- \`credit\` — the opt-in \`ContextMemoryAwareRouter\`, with a bounded \`top_k\` neighborhood and explicit memory credit.
+- `nearest` — the original `NearestEpisodeRouter` behavior and the default.
+- `credit` — the opt-in `ContextMemoryAwareRouter`, with a bounded `top_k` neighborhood and explicit memory credit.
 
-The selected mode and \`top_k\` are recorded in \`ContextCognitiveProposal\`. The proposal schema is versioned because the audit envelope now includes routing-mode state.
+The selected mode and `top_k` are recorded in `ContextCognitiveProposal`. The proposal schema is versioned because the audit envelope now includes routing-mode state.
 
-\`\`\`python
+```python
 from promptforge import ContextCognitiveLoop
 
 loop = ContextCognitiveLoop(
     memory_routing_mode="credit",
     memory_top_k=5,
 )
-\`\`\`
+```
 
 This is still provider-agnostic and observational: the credit-aware mode changes how already-observed evidence is aggregated; it does not fabricate outcomes or execute a model.
 
