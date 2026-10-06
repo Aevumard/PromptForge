@@ -169,7 +169,7 @@ The aware router must be fitted only on the intended training snapshot. For tran
 - `credit` — the opt-in `ContextMemoryAwareRouter`, with a bounded `top_k` neighborhood and explicit memory credit.
 - `adaptive` — selects between the two concrete modes using policy evidence that was evaluated before the current proposal.
 
-The selected requested mode, concrete mode, `top_k`, and policy provenance are recorded in `ContextCognitiveProposal`. The proposal schema is now `context-cognitive-proposal.v7`.
+The selected requested mode, concrete mode, `top_k`, and policy provenance are recorded in `ContextCognitiveProposal`. The proposal schema is now `context-cognitive-proposal.v8`.
 
 ```python
 from promptforge import ContextCognitiveLoop
@@ -251,6 +251,26 @@ The resulting lifecycle is:
 `experience -> policy health -> refresh gate -> holdout evaluation -> policy history -> adaptive routing`
 
 A blocked refresh is descriptive rather than an error: insufficient evidence, instability, staleness, cooldown, and exhausted budget are surfaced explicitly. The refresh controller never executes a model and never fabricates evidence.
+
+## Active exploration
+
+`ContextExplorationController` adds a bounded exploration layer above routing and policy refresh. It does not infer that an unexplored strategy is better; its purpose is to collect missing evidence when exploration is operationally useful.
+
+The controller considers:
+
+- alternative strategies already available in the current candidate set;
+- strategy coverage in observed experience;
+- structural novelty;
+- an explicit policy-refresh requirement;
+- exploration cooldown and exploration budget.
+
+When exploration is eligible, `ContextCognitiveLoop.propose()` can emit `action="probe"` with `source="bounded_exploration"` and an explicit target strategy. `observe()` records the measured outcome and advances the exploration budget state only when that probe strategy was actually observed.
+
+The resulting control chain is:
+
+`policy health -> refresh gate -> exploration gate -> probe -> observe -> policy evaluation`
+
+Exploration is an operational data-collection mechanism. It is not a quality oracle, confidence estimate, causal attribution, or automatic provider executor.
 
 ## Public core boundary
 

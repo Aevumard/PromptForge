@@ -140,6 +140,20 @@ Keep these boundaries intact:
 
 Do not turn the refresh controller into an automatic model-quality loop. It schedules an evidence refresh; it does not generate outcomes, causal claims, or hidden labels. Reasons such as `insufficient_evidence`, `unstable_policy`, `stale_policy`, `refresh_cooldown`, and `refresh_budget_exhausted` must remain explicit and auditable.
 
+## Active exploration
+
+`ContextExplorationController` is a bounded data-collection mechanism. Keep exploration separate from claims about strategy quality.
+
+Rules:
+
+1. Explore only among already-available feasible strategies.
+2. Use current observed coverage, novelty, policy-refresh signals, cooldown, and explicit budget as inputs.
+3. Record an exploration only after the corresponding probe outcome is observed.
+4. Do not label an unexplored or probed strategy as better merely because it was selected for exploration.
+5. Preserve the existing temporal/leakage boundary: the current outcome cannot select the policy or exploration decision for the same proposal.
+
+Use `source="bounded_exploration"` and `action="probe"` for proposal provenance when the exploration controller changes the concrete strategy.
+
 ## Policies
 
 The default policy is `minimal`, implemented as deterministic `minimal_serialized_context`.

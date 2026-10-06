@@ -20,6 +20,10 @@ from .routing_refresh import (
     ContextRoutingPolicyRefreshController,
     ContextRoutingPolicyRefreshDecision,
 )
+from .exploration import (
+    ContextExplorationController,
+    ContextExplorationDecision,
+)
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
@@ -64,6 +68,11 @@ class ContextCognitiveProposal:
     memory_policy_refresh_required: bool | None = None
     memory_policy_refresh_reason: str | None = None
     memory_policy_refresh_eligible: bool | None = None
+    exploration_required: bool | None = None
+    exploration_reason: str | None = None
+    exploration_eligible: bool | None = None
+    exploration_target_strategy: str | None = None
+    exploration_count: int | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -114,6 +123,7 @@ class ContextCognitiveLoop:
         memory_policy_min_stability: float | None = None,
         memory_policy_max_age: int | None = None,
         memory_policy_refresh_controller: ContextRoutingPolicyRefreshController | None = None,
+        exploration_controller: ContextExplorationController | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -203,6 +213,14 @@ class ContextCognitiveLoop:
                 max_age=memory_policy_max_age,
             )
         )
+        if exploration_controller is not None and not isinstance(
+            exploration_controller,
+            ContextExplorationController,
+        ):
+            raise TypeError(
+                "exploration_controller must be a ContextExplorationController or None"
+            )
+        self.exploration_controller = exploration_controller
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -240,6 +258,11 @@ class ContextCognitiveLoop:
         policy_refresh_required = None
         policy_refresh_reason = None
         policy_refresh_eligible = None
+        exploration_required = None
+        exploration_reason = None
+        exploration_eligible = None
+        exploration_target_strategy = None
+        exploration_count = None
         if selected_mode == "adaptive":
             if self.memory_routing_policy_evidence is not None:
                 policy_version = self.memory_routing_policy_evidence.version
@@ -324,8 +347,45 @@ class ContextCognitiveLoop:
             budget_tokens=budget_tokens,
         )
 
+        candidate_order = tuple(
+            ranked
+            for ranked in self.controller.regime_selector.recommend(profile).preferred_arms
+            if ranked in {str(candidate.get("arm_id", "")) for candidate in candidates}
+        )
+
+        if self.exploration_controller is not None:
+            observed_strategies = tuple(
+                episode.strategy for episode in evidence.episodes
+            )
+            exploration = self.exploration_controller.decide(
+                experience_version=evidence.version,
+                candidate_order=candidate_order,
+                observed_strategies=observed_strategies,
+                preferred_strategy=decision.strategy,
+                novelty_distance=decision.novelty_distance,
+                policy_refresh_required=bool(policy_refresh_required),
+            )
+            exploration_required = exploration.required
+            exploration_reason = exploration.reason
+            exploration_eligible = exploration.eligible
+            exploration_target_strategy = exploration.target_strategy
+            exploration_count = exploration.exploration_count
+
+            if exploration.eligible and exploration.target_strategy is not None:
+                target = exploration.target_strategy
+                decision = ContextAdaptiveDecision(
+                    schema_version=decision.schema_version,
+                    action="probe",
+                    strategy=target,
+                    source="bounded_exploration",
+                    regime=decision.regime,
+                    regime_flags=decision.regime_flags,
+                    novelty_distance=decision.novelty_distance,
+                    reason=exploration.reason,
+                )
+
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v7",
+            schema_version="context-cognitive-proposal.v8",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
@@ -343,12 +403,13 @@ class ContextCognitiveLoop:
             memory_policy_refresh_required=policy_refresh_required,
             memory_policy_refresh_reason=policy_refresh_reason,
             memory_policy_refresh_eligible=policy_refresh_eligible,
+            exploration_required=exploration_required,
+            exploration_reason=exploration_reason,
+            exploration_eligible=exploration_eligible,
+            exploration_target_strategy=exploration_target_strategy,
+            exploration_count=exploration_count,
             trajectory=trajectory,
-            candidate_order=tuple(
-                ranked
-                for ranked in self.controller.regime_selector.recommend(profile).preferred_arms
-                if ranked in {str(candidate.get("arm_id", "")) for candidate in candidates}
-            ),
+            candidate_order=candidate_order,
         )
 
     def evaluate_memory_routing_policy(
@@ -522,7 +583,7 @@ class ContextCognitiveLoop:
         if not isinstance(proposal, ContextCognitiveProposal):
             raise TypeError("proposal must be a ContextCognitiveProposal")
         selected_strategy = strategy or proposal.decision.strategy
-        return self.experience.record(
+        version = self.experience.record(
             ContextEpisode(
                 episode_id=proposal.cycle_id,
                 family_id=family_id,
@@ -552,6 +613,15 @@ class ContextCognitiveLoop:
                 outcome=dict(outcome or {}),
             )
         )
+        if (
+            self.exploration_controller is not None
+            and proposal.decision.source == "bounded_exploration"
+            and selected_strategy == proposal.exploration_target_strategy
+        ):
+            self.exploration_controller.record_exploration(
+                experience_version=version,
+            )
+        return version
 
 
 __all__ = [
