@@ -54,6 +54,12 @@ from .cognitive import (
     ContextCognitiveProposal,
 )
 
+from .relational import (
+    ContextRelation,
+    ContextRelationalProfile,
+    ContextRelationProfiler,
+)
+
 __all__ = [
     "POLICY_BUDGET_CONSTRAINED",
     "POLICY_MINIMAL",
@@ -92,4 +98,7 @@ __all__ = [
     "ContextExperienceStore",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
+    "ContextRelation",
+    "ContextRelationalProfile",
+    "ContextRelationProfiler",
 ]
