@@ -5,7 +5,14 @@ from dataclasses import asdict, dataclass
 from math import isfinite, sqrt
 from typing import Sequence
 
-from .memory import ContextEpisode
+from .memory import (
+    ContextEpisode,
+    ContextRoute,
+    _distance,
+    _feature_scales,
+    resolve_routing_features,
+    topology_vector,
+)
 
 
 @dataclass(frozen=True)
@@ -188,4 +195,155 @@ class ContextMemoryCreditPolicy:
         )
 
 
-__all__ = ["ContextMemoryCredit", "ContextMemoryCreditPolicy"]
+@dataclass(frozen=True)
+class ContextMemoryAwareRoute(ContextRoute):
+    """Route result with explicit active-memory evidence."""
+
+    selected_credit: float
+    candidate_count: int
+    top_k: int
+    strategy_scores: tuple[tuple[str, float], ...]
+
+    def to_dict(self) -> dict:
+        payload = asdict(self)
+        payload["strategy_scores"] = [list(item) for item in self.strategy_scores]
+        return payload
+
+
+class ContextMemoryAwareRouter:
+    """Route among nearby observed episodes using explicit memory credit.
+
+    Training is always explicit. Structural distance is computed with the
+    same scaling contract as NearestEpisodeRouter. Nearby evidence is then
+    aggregated by strategy using credit-weighted structural similarity.
+
+    This changes strategy preference only when explicitly selected. It is not
+    a confidence estimate and never introduces an unobserved outcome.
+    """
+
+    def __init__(
+        self,
+        *,
+        features: Sequence[str] | None = None,
+        scale_mode: str = "iqr",
+        top_k: int = 5,
+        credit_policy: ContextMemoryCreditPolicy | None = None,
+    ) -> None:
+        if top_k < 1:
+            raise ValueError("top_k must be at least 1")
+        self.features = resolve_routing_features(features)
+        if scale_mode not in {"minmax", "std", "iqr"}:
+            raise ValueError("scale_mode must be one of: minmax, std, iqr")
+        self.scale_mode = scale_mode
+        self.top_k = int(top_k)
+        if credit_policy is not None and not isinstance(
+            credit_policy, ContextMemoryCreditPolicy
+        ):
+            raise TypeError(
+                "credit_policy must be a ContextMemoryCreditPolicy or None"
+            )
+        self.credit_policy = credit_policy
+        self._episodes: tuple[ContextEpisode, ...] = ()
+        self._credits: tuple[ContextMemoryCredit, ...] = ()
+        self._scale: tuple[float, ...] = ()
+
+    @property
+    def training_episode_ids(self) -> tuple[str, ...]:
+        return tuple(sorted({episode.episode_id for episode in self._episodes}))
+
+    @property
+    def strategies(self) -> tuple[str, ...]:
+        return tuple(sorted({episode.strategy for episode in self._episodes}))
+
+    def fit(self, episodes: Sequence[ContextEpisode]) -> "ContextMemoryAwareRouter":
+        values = tuple(episodes)
+        if not values:
+            raise ValueError("episodes must not be empty")
+        if any(not isinstance(item, ContextEpisode) for item in values):
+            raise TypeError("episodes must contain only ContextEpisode values")
+
+        vectors = [topology_vector(item.topology, self.features) for item in values]
+        self._scale = _feature_scales(vectors, self.scale_mode)
+        self._episodes = values
+        policy = self.credit_policy or ContextMemoryCreditPolicy()
+        self._credits = policy.assess(values)
+        return self
+
+    def route(
+        self,
+        topology: Mapping[str, object],
+    ) -> ContextMemoryAwareRoute:
+        if not self._episodes:
+            raise RuntimeError("router must be fitted before route()")
+
+        vector = topology_vector(topology, self.features)
+        credit_by_index = {
+            item.sequence_index: item
+            for item in self._credits
+        }
+        rows = []
+        for index, episode in enumerate(self._episodes):
+            distance = _distance(
+                vector,
+                topology_vector(episode.topology, self.features),
+                self._scale,
+            )
+            credit = credit_by_index[index].credit
+            similarity = 1.0 / (1.0 + distance)
+            rows.append((index, episode, distance, credit, similarity))
+
+        rows.sort(
+            key=lambda row: (
+                row[2],
+                -row[3],
+                row[1].strategy,
+                row[1].episode_id,
+                row[0],
+            )
+        )
+        nearest = rows[0]
+        candidate_rows = rows[: min(self.top_k, len(rows))]
+
+        weighted_scores: dict[str, float] = {}
+        for _index, episode, _distance_value, credit, similarity in candidate_rows:
+            weight = credit * similarity
+            weighted_scores[episode.strategy] = (
+                weighted_scores.get(episode.strategy, 0.0) + weight
+            )
+
+        ranked_strategies = sorted(
+            weighted_scores,
+            key=lambda strategy: (-weighted_scores[strategy], strategy),
+        )
+        strategy = ranked_strategies[0]
+        selected_credit = max(
+            credit_by_index[row[0]].credit
+            for row in candidate_rows
+            if row[1].strategy == strategy
+        )
+
+        return ContextMemoryAwareRoute(
+            strategy=strategy,
+            nearest_distance=nearest[2],
+            nearest_episode_id=nearest[1].episode_id,
+            evidence_count=sum(
+                episode.strategy == strategy for episode in self._episodes
+            ),
+            selected_credit=selected_credit,
+            candidate_count=len(candidate_rows),
+            top_k=self.top_k,
+            strategy_scores=tuple(
+                (name, weighted_scores[name]) for name in ranked_strategies
+            ),
+        )
+
+    def predict(self, topology: Mapping[str, object]) -> str:
+        return self.route(topology).strategy
+
+
+__all__ = [
+    "ContextMemoryCredit",
+    "ContextMemoryCreditPolicy",
+    "ContextMemoryAwareRoute",
+    "ContextMemoryAwareRouter",
+]

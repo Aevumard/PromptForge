@@ -151,6 +151,16 @@ This gives PromptForge an explicit memory lifecycle:
 
 `observe -> store -> assess credit -> consolidate/replay -> route -> decide`
 
+## Credit-aware routing
+
+`ContextMemoryAwareRouter` is an opt-in routing layer above the nearest-case baseline. It keeps the structural distance contract, examines the closest `top_k` observed episodes, and aggregates evidence by:
+
+`strategy score = sum(credit × structural similarity)`
+
+This lets repeated, recent, and stable observations influence a routing decision without pretending that the closest single case is sufficient evidence. The returned `ContextMemoryAwareRoute` exposes the selected credit, candidate count, and per-strategy scores for auditability.
+
+The aware router must be fitted only on the intended training snapshot. For transfer evaluation, preserve the existing whole-family holdout boundary; never calculate credit from held-out outcomes.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -326,7 +336,7 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path, frozen snapshots, and memory credit assessment | Online experience boundary |
 | `promptforge/consolidation.py` | Deterministic replay, bounded retention, and optional credit-aware selection | Memory lifecycle control |
-| `promptforge/credit.py` | Explicit recency decay, evidence/stability bookkeeping, and observed comparison credit | Active memory scoring |
+| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |
 | `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |
 | `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
