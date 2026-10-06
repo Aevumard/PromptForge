@@ -137,6 +137,7 @@ from .temporal import (
 
 from .hypothesis import (
     HYPOTHESIS_STATUSES,
+    HypothesisEvidencePolicy,
     DiscriminatingExperiment,
     HypothesisAssessment,
     HypothesisLedger,
@@ -221,6 +222,7 @@ __all__ = [
     "ActionPolicy",
     "UncertaintyActionGate",
     "HYPOTHESIS_STATUSES",
+    "HypothesisEvidencePolicy",
     "HypothesisRecord",
     "HypothesisAssessment",
     "DiscriminatingExperiment",
