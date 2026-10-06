@@ -49,6 +49,10 @@ class AgentCorpusPolicyTests(unittest.TestCase):
             "ActionExecutionGuard",
             "idempotency key",
             "action-execution.v1",
+            "ContextBudgetPlanner",
+            "utility-aware packing",
+            "reserve headroom",
+            "compact omission manifest",
         ):
             self.assertIn(token, self.agents + "\n" + self.readme)
 
