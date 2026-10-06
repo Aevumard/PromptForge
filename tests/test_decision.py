@@ -201,6 +201,168 @@ class UncertaintyActionGateTests(unittest.TestCase):
             decision.reasons["thin"],
         )
 
+    def test_support_stance_must_be_compatible_with_action(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "support",
+                    "supports the action",
+                    timestamp=10,
+                    stance="supports",
+                ),
+                EvidenceRecord(
+                    "contradiction",
+                    "contradicts the action",
+                    timestamp=11,
+                    stance="contradicts",
+                ),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "supported",
+                "compatible evidence",
+                evidence_support=0.90,
+                reversibility=0.9,
+                downside=0.1,
+                support_evidence_ids=("support",),
+            ),
+            ActionCandidate(
+                "contradictory",
+                "incompatible evidence",
+                evidence_support=0.99,
+                reversibility=0.9,
+                downside=0.1,
+                support_evidence_ids=("contradiction",),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_stance=True)
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "supported")
+        self.assertIn("contradictory", decision.blocked_action_ids)
+        self.assertIn(
+            "support evidence stance incompatible",
+            decision.reasons["contradictory"],
+        )
+        self.assertEqual(
+            decision.support_evidence_stances["supported"],
+            {"support": "supports"},
+        )
+
+    def test_neutral_support_is_blocked_by_default(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "neutral",
+                    "does not establish support",
+                    timestamp=10,
+                    stance="neutral",
+                ),
+                EvidenceRecord(
+                    "safe_support",
+                    "explicit support",
+                    timestamp=11,
+                    stance="supports",
+                ),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "neutral_anchor",
+                "neutral anchor",
+                evidence_support=1.0,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("neutral",),
+            ),
+            ActionCandidate(
+                "supported",
+                "supported action",
+                evidence_support=0.8,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("safe_support",),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_stance=True)
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "supported")
+        self.assertIn("neutral_anchor", decision.blocked_action_ids)
+
+    def test_integrator_can_explicitly_allow_neutral_support(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "neutral",
+                    "neutral but admissible under explicit policy",
+                    timestamp=10,
+                    stance="neutral",
+                ),
+            ]
+        )
+        action = ActionCandidate(
+            "neutral_allowed",
+            "explicit neutral policy",
+            evidence_support=0.8,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("neutral",),
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_stance=True,
+                allowed_support_stances=("supports", "neutral"),
+            )
+        ).decide([action], evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "neutral_allowed")
+        self.assertEqual(
+            decision.support_evidence_stances["neutral_allowed"],
+            {"neutral": "neutral"},
+        )
+
+    def test_support_stance_requires_evidence_boundary(self):
+        action = ActionCandidate(
+            "stance_required",
+            "needs an explicit stance",
+            evidence_support=0.9,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("missing_snapshot",),
+        )
+        fallback = ActionCandidate(
+            "fallback",
+            "unrestricted fallback",
+            evidence_support=0.6,
+            reversibility=1.0,
+            downside=0.2,
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_stance=True)
+        ).decide([action, fallback])
+
+        self.assertEqual(decision.selected_action_id, "fallback")
+        self.assertIn("stance_required", decision.blocked_action_ids)
+        self.assertIn(
+            "support stance boundary was not supplied",
+            decision.reasons["stance_required"],
+        )
+
+    def test_invalid_support_stance_policy_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ActionPolicy(
+                require_support_stance=True,
+                allowed_support_stances=("invalid",),
+            )
+
     def test_causal_dependence_is_a_penalty_not_a_truth_claim(self):
         actions = [
             ActionCandidate(
