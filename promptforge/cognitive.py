@@ -202,7 +202,7 @@ class ContextCognitiveLoop:
         )
 
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v2",
+            schema_version="context-cognitive-proposal.v3",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
@@ -232,7 +232,11 @@ class ContextCognitiveLoop:
         evaluator = ContextRoutingPolicyEvaluator(
             features=self.routing_features,
             scale_mode=self.scale_mode,
-            top_k=top_k or self.memory_top_k,
+            top_k=(
+                self.memory_top_k
+                if top_k is None
+                else top_k
+            ),
             credit_policy=self.memory_credit_policy,
         )
         return evaluator.evaluate(
@@ -344,7 +348,6 @@ class ContextCognitiveLoop:
 
 
 __all__ = [
-    "MEMORY_ROUTING_MODES",
     "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
