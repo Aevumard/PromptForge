@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:06:01.443Z",
-  "file_count": 132,
+  "generated_utc": "2026-10-06T09:16:50.657Z",
+  "file_count": 134,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -24,13 +24,13 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 34441,
-      "sha256": "5c77a6a099649dfbfada55e3b3f07e74d4f5bc8dbc897d66e677ea174d71879e"
+      "size_bytes": 35890,
+      "sha256": "04175fe6bc675ae0844f0a781f47ce331071bae6d9b1f84bf9461cd0c5e6f8b9"
     },
     {
       "path": "docs/agent_corpus_external_patterns.md",
-      "size_bytes": 9819,
-      "sha256": "3b79a0af4aa460c627c567623235662c592c527ddb33a325bbc513d7a16ba4b8"
+      "size_bytes": 11906,
+      "sha256": "5114d8a85a9e404b7d6b351ccf1d14ad3258e19ece2bb4d1f8b54a7d9333d396"
     },
     {
       "path": "harness/agent_context.py",
@@ -404,8 +404,13 @@
     },
     {
       "path": "promptforge/__init__.py",
-      "size_bytes": 6615,
-      "sha256": "3985dbbf583035d3e0d386dc24c0a80af24783cc12d98e6e760d4fce675837fd"
+      "size_bytes": 6870,
+      "sha256": "749106e3485a68555e069cb25d403c08f25e5d9e48f3d0be15716b95553fadd8"
+    },
+    {
+      "path": "promptforge/budget.py",
+      "size_bytes": 15018,
+      "sha256": "b5ef4e01f41c1d0c05d0078531caf2204e56cc7662a0edb49cd38844e4918f5a"
     },
     {
       "path": "promptforge/cognitive.py",
@@ -479,8 +484,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 44538,
-      "sha256": "435d4114bd9c947d8dd25e85249e435b09a99589fa4657b63e48452d99e55898"
+      "size_bytes": 45854,
+      "sha256": "83bb01fdcd51c633ce404b9a87a7908842d65cf3ad2dc92844f241bbb9a48b6e"
     },
     {
       "path": "schemas/action-execution.v1.json",
@@ -514,13 +519,18 @@
     },
     {
       "path": "tests/test_agent_corpus_policy.py",
-      "size_bytes": 1947,
-      "sha256": "d30df55549a227db1bc327aba5b7a18829acbf7e9a82ec445dbfe43d732e85b4"
+      "size_bytes": 2093,
+      "sha256": "c9dcdb87a6157178f0458ae454bade45a0ff867253e4dcfae8f4d0f8b50c0d35"
     },
     {
       "path": "tests/test_agent.py",
       "size_bytes": 10494,
       "sha256": "3A7E2B8DA8A4CC3C92E1798AEB7941BB451042574F015341AAA6D13B8598D867"
+    },
+    {
+      "path": "tests/test_budget.py",
+      "size_bytes": 2624,
+      "sha256": "574870c5d30574c79911a6377c57b283184919324116dbf0c98a67f4a1b2ec15"
     },
     {
       "path": "tests/test_cognitive_loop.py",
