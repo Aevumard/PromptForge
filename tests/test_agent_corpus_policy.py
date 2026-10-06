@@ -55,9 +55,9 @@ class AgentCorpusPolicyTests(unittest.TestCase):
     def test_token_budget_boundary_is_wired(self):
         for token in (
             "ContextBudgetPlanner",
-            "utility-aware packing",
-            "reserve headroom",
-            "compact omission manifest",
+            "utility per token cost",
+            "reserved headroom",
+            "compact_manifest",
         ):
             self.assertIn(token, self.agents + "\n" + self.readme)
 
