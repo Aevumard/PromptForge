@@ -16,6 +16,15 @@ from benchmarks.resumable_model_loop_v27 import run_resumable_model_loop
 from benchmarks.tickets_v27 import generate_ticket_suite
 
 
+@dataclass(frozen=True)
+class ProviderCallTelemetry:
+    elapsed_ms: float
+    attempts: int
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
+    total_tokens: int | None = None
+
+
 DEFAULT_SYSTEM_PROMPT = (
     "You are the classification agent in a controlled support benchmark. "
     "Return exactly one JSON object and no markdown. Use only the enum values "
@@ -97,6 +106,10 @@ class OpenAICompatibleAgentAdapter:
         if not config.model.strip():
             raise ValueError("model must not be empty")
         self.config = config
+        self.last_call_telemetry = ProviderCallTelemetry(
+            elapsed_ms=0.0,
+            attempts=0,
+        )
 
     def predict(self, model_input: Mapping[str, Any]) -> Mapping[str, Any]:
         request_payload: dict[str, Any] = {
@@ -130,6 +143,7 @@ class OpenAICompatibleAgentAdapter:
             headers=headers,
             method="POST",
         )
+        started = time.perf_counter()
         for attempt in range(1, self.config.max_attempts + 1):
             try:
                 with urllib.request.urlopen(
@@ -137,7 +151,15 @@ class OpenAICompatibleAgentAdapter:
                     timeout=self.config.timeout_seconds,
                 ) as response:
                     body = response.read().decode("utf-8")
-                return _extract_prediction(body)
+                prediction, usage = _extract_prediction_and_usage(body)
+                self.last_call_telemetry = ProviderCallTelemetry(
+                    elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                    attempts=attempt,
+                    prompt_tokens=usage.get("prompt_tokens"),
+                    completion_tokens=usage.get("completion_tokens"),
+                    total_tokens=usage.get("total_tokens"),
+                )
+                return prediction
             except urllib.error.HTTPError as exc:
                 if exc.code not in {408, 429, 500, 502, 503, 504}:
                     details = exc.read().decode("utf-8", errors="replace")
@@ -176,7 +198,14 @@ def _retry_delay(
 
 
 def _extract_prediction(response_body: str) -> Mapping[str, Any]:
-    """Extract a prediction from direct JSON or common chat-completion JSON."""
+    prediction, _ = _extract_prediction_and_usage(response_body)
+    return prediction
+
+
+def _extract_prediction_and_usage(
+    response_body: str,
+) -> tuple[Mapping[str, Any], dict[str, int | None]]:
+    """Extract prediction plus optional provider usage metadata."""
     try:
         response = json.loads(response_body)
     except json.JSONDecodeError as exc:
@@ -194,7 +223,7 @@ def _extract_prediction(response_body: str) -> Mapping[str, Any]:
             "contradiction_detected",
         )
     ):
-        return response
+        return response, _extract_usage(response)
 
     if not isinstance(response, Mapping):
         raise ValueError("model response must be a JSON object")
@@ -222,7 +251,33 @@ def _extract_prediction(response_body: str) -> Mapping[str, Any]:
     if not isinstance(content, str) or not content.strip():
         raise ValueError("model response does not contain textual JSON content")
 
-    return _parse_json_object(content)
+    return _parse_json_object(content), _extract_usage(response)
+
+
+def _extract_usage(response: Mapping[str, Any]) -> dict[str, int | None]:
+    usage = response.get("usage")
+    if not isinstance(usage, Mapping):
+        return {
+            "prompt_tokens": None,
+            "completion_tokens": None,
+            "total_tokens": None,
+        }
+
+    def integer_value(name: str) -> int | None:
+        value = usage.get(name)
+        if isinstance(value, bool):
+            return None
+        if isinstance(value, int):
+            return value
+        if isinstance(value, float) and value.is_integer():
+            return int(value)
+        return None
+
+    return {
+        "prompt_tokens": integer_value("prompt_tokens"),
+        "completion_tokens": integer_value("completion_tokens"),
+        "total_tokens": integer_value("total_tokens"),
+    }
 
 
 def _parse_json_object(content: str) -> Mapping[str, Any]:
