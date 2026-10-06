@@ -536,3 +536,19 @@ The corpus is informed by current public architecture patterns from LangGraph, D
 - replayable lineage and leakage-safe learning.
 
 External frameworks are references for architecture patterns, not dependencies and not sources of truth. Do not copy framework-specific claims into PromptForge without verifying their actual semantics.
+
+## Typed triage state boundary
+
+For operational triage, use `promptforge.triage` when the workflow needs explicit lifecycle state.
+
+The public boundary is:
+
+`admitted -> prioritized -> action_gated -> waiting_human/executed -> observed -> closed`
+
+Use `PriorityAssessment` for urgency, importance, priority band, and rationale. Use `ActionDecision` for action feasibility and safety. Do not merge these objects into a single confidence score.
+
+Use `TriageState.transition()` to create immutable successor states. Each successor records the parent decision id so historical states remain replayable.
+
+A high-priority case may legitimately transition to `waiting_human` while retaining its priority. Later observations are stored on successor states and must not mutate the earlier evidence boundary.
+
+The JSON contract is `schemas/triage-state.v1.json`.
