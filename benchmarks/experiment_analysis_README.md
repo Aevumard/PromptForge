@@ -1,4 +1,4 @@
-# V27.11 — sliced experiment analysis + operational telemetry
+# V27.12 — sliced experiment analysis + provider telemetry
 
 The model-loop report contains global raw-vs-guarded metrics. V27.9 adds a
 deterministic analysis layer that slices those same results by:
@@ -11,7 +11,8 @@ deterministic analysis layer that slices those same results by:
 - irrelevant content
 - historical context
 
-The analysis reports classification quality separately from action safety, and now includes total elapsed time plus latency p50/p95 for covered model calls.
+The analysis reports classification quality separately from action safety, and now includes total elapsed time plus end-to-end and provider latency p50/p95,
+retry attempts, and optional provider token counts for covered model calls.
 
 Run:
 
