@@ -71,6 +71,8 @@ class ContextCognitiveProposal:
     memory_routing_mode: str = "nearest"
     memory_routing_selected_mode: str = "nearest"
     memory_top_k: int = 5
+    memory_min_family_count: int = 1
+    memory_min_strategy_evidence: int = 1
     memory_policy_version: int | None = None
     memory_policy_history_version: int | None = None
     memory_policy_stability_rate: float | None = None
@@ -143,6 +145,8 @@ class ContextCognitiveLoop:
         memory_routing_mode: str = "nearest",
         memory_top_k: int = 5,
         memory_credit_policy: ContextMemoryCreditPolicy | None = None,
+        memory_min_family_count: int = 1,
+        memory_min_strategy_evidence: int = 1,
         memory_routing_policy_evidence: ContextRoutingPolicyEvidence | None = None,
         memory_routing_policy_history: ContextRoutingPolicyHistory | None = None,
         memory_policy_history_window: int | None = None,
@@ -172,6 +176,10 @@ class ContextCognitiveLoop:
             )
         if memory_top_k < 1:
             raise ValueError("memory_top_k must be at least 1")
+        if memory_min_family_count < 1:
+            raise ValueError("memory_min_family_count must be at least 1")
+        if memory_min_strategy_evidence < 1:
+            raise ValueError("memory_min_strategy_evidence must be at least 1")
         if memory_credit_policy is not None and not isinstance(
             memory_credit_policy, ContextMemoryCreditPolicy
         ):
@@ -181,6 +189,8 @@ class ContextCognitiveLoop:
         self.scale_mode = scale_mode
         self.memory_routing_mode = memory_routing_mode
         self.memory_top_k = int(memory_top_k)
+        self.memory_min_family_count = int(memory_min_family_count)
+        self.memory_min_strategy_evidence = int(memory_min_strategy_evidence)
         if memory_routing_policy_evidence is not None and not isinstance(
             memory_routing_policy_evidence,
             ContextRoutingPolicyEvidence,
@@ -397,6 +407,8 @@ class ContextCognitiveLoop:
                     scale_mode=self.scale_mode,
                     top_k=self.memory_top_k,
                     policy=self.memory_credit_policy,
+                    min_family_count=self.memory_min_family_count,
+                    min_strategy_evidence=self.memory_min_strategy_evidence,
                 )
             else:
                 memory_route = evidence.route(
@@ -467,6 +479,8 @@ class ContextCognitiveLoop:
             memory_routing_mode=self.memory_routing_mode,
             memory_routing_selected_mode=selected_mode,
             memory_top_k=self.memory_top_k,
+            memory_min_family_count=self.memory_min_family_count,
+            memory_min_strategy_evidence=self.memory_min_strategy_evidence,
             memory_policy_version=policy_version,
             memory_policy_history_version=policy_history_version,
             memory_policy_stability_rate=policy_stability_rate,
