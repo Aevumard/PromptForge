@@ -169,8 +169,18 @@ class TestPolicyRefreshController(unittest.TestCase):
                 data={"task": {"id": index, "action": "select"}},
                 required=["task.id"],
                 candidates=[
-                    {"arm_id": "selection_only", "required": ["task.id"]},
-                    {"arm_id": "selection_representation_B", "required": ["task.id"]},
+                    {
+                        "arm_id": "selection_only",
+                        "context_chars": 80,
+                        "estimated_tokens": 20,
+                        "required_values_preserved": True,
+                    },
+                    {
+                        "arm_id": "selection_representation_B",
+                        "context_chars": 120,
+                        "estimated_tokens": 30,
+                        "required_values_preserved": True,
+                    },
                 ],
             )
             loop.observe(
@@ -178,6 +188,12 @@ class TestPolicyRefreshController(unittest.TestCase):
                 family_id=family_id,
                 cost=float(index),
                 strategy="selection_only",
+            )
+            loop.observe(
+                proposal,
+                family_id=family_id,
+                cost=float(index + 1),
+                strategy="selection_representation_B",
             )
 
         history.record(self.evidence(1))
