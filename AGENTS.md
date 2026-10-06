@@ -645,3 +645,31 @@ Preferred AI path:
 `prepare/admit -> budget -> delivery packet -> model reasons over compact context -> explicit deferred load only when needed`
 
 Do not equate progressive disclosure with autonomous retrieval or factual validation.
+
+## AI-native tool-output trimming
+
+Tool results are part of context and can dominate token usage during long agent runs. Before forwarding historical tool output into another model call, use `promptforge.tool_output`.
+
+Fast path:
+
+```python
+from promptforge import trim_tool_outputs
+
+trimmed = trim_tool_outputs(
+    items,
+    recent_turns=2,
+    max_output_chars=2000,
+    preview_chars=600,
+    eligible_tools={"search", "execute"},
+)
+```
+
+Rules:
+- recent turns are protected;
+- tools can be explicitly allowlisted;
+- old oversized results are replaced by deterministic head/tail previews;
+- the original content is never semantically rewritten by PromptForge;
+- every trimmed result carries an original-content digest for integration-side re-fetch/replay;
+- the audit records characters and estimated tokens saved.
+
+Use this at the model-input boundary, after retrieval/admission and before sending context to the provider. Do not use trimming as evidence admission: a trimmed item can still be important, it is merely represented more cheaply.
