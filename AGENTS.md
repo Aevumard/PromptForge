@@ -376,6 +376,12 @@ historical labeled outcomes -> family scope -> temporal gate -> supported bins -
 
 Family scope is an evidence-admissibility control, not a claim that family labels are causally meaningful.
 
+## Action evidence stance admissibility
+
+`ActionPolicy.require_support_stance` optionally requires action support anchors to carry compatible, explicitly declared evidence stances. The default admissible stance is `supports`; other stances require an explicit policy. Missing stance metadata or a missing evidence boundary fails closed. No stance is inferred from prose. The default remains backward compatible.
+
+Boundary: epistemic evidence -> support anchors -> stance admissibility -> feasibility and safety gates -> action ranking
+
 ## Action evidence anchoring
 
 Action support can be made auditable by declaring support evidence ids on each action. An explicit strict policy can fail closed when support is missing, outside the current evidence snapshot, or below the configured anchor count. Anchor count is not statistical independence. The default remains backward compatible.
