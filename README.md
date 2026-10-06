@@ -789,3 +789,17 @@ The state machine is:
 This makes the intended boundary executable rather than merely documented: a case can remain high priority while an action is blocked or sent to human review. `TriageState.transition()` returns immutable successor states with parent decision lineage for replay.
 
 Schema: `schemas/triage-state.v1.json`.
+
+## Durable human review
+
+Human intervention is a first-class, serializable boundary rather than a free-form note.
+
+`HumanReviewRecord` stores the reviewer, review time, evidence snapshot reviewed, review decision, rationale, declared changes, and resulting policy version.
+
+When a `TriageState` is `waiting_human`, returning to `action_gated` requires both:
+- a completed human review tied to the same evidence snapshot;
+- a new `ActionDecision`.
+
+This prevents a reviewer intervention from being lost in prose and prevents an action decision computed before the intervention from being silently reused afterward.
+
+Schema: `schemas/human-review.v1.json`.
