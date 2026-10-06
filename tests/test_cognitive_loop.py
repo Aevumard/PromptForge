@@ -118,7 +118,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v4")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v5")
         self.assertEqual(proposal.memory_routing_mode, "adaptive")
         self.assertEqual(proposal.memory_routing_selected_mode, "credit")
         self.assertEqual(proposal.memory_policy_version, 11)
@@ -175,6 +175,45 @@ class CognitiveLoopTests(unittest.TestCase):
             loop.policy_history_snapshot().latest.version,
             3,
         )
+
+
+    def test_adaptive_mode_falls_back_when_policy_history_is_unstable(self):
+        from promptforge import ContextRoutingPolicyHistory
+
+        history = ContextRoutingPolicyHistory()
+        for version, mode in (
+            (10, "nearest"),
+            (11, "credit"),
+            (12, "nearest"),
+        ):
+            history.record(
+                ContextRoutingPolicyEvidence(
+                    version=version,
+                    scores=(
+                        ContextRoutingModeScore("nearest", 5, 3, 0.6, 1.0, 0.4),
+                        ContextRoutingModeScore("credit", 5, 3, 0.7, 0.9, 0.3),
+                    ),
+                    selected_mode=mode,
+                )
+            )
+
+        loop = ContextCognitiveLoop(
+            memory_routing_mode="adaptive",
+            memory_routing_policy_history=history,
+            memory_policy_history_min_observations=3,
+            memory_policy_min_stability=0.5,
+        )
+        proposal = loop.propose(
+            cycle_id="cycle-unstable-policy",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v5")
+        self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
+        self.assertEqual(proposal.memory_policy_stability_rate, 0.0)
+        self.assertTrue(proposal.memory_policy_refresh_recommended)
 
     def test_invalid_memory_routing_mode_is_rejected(self):
         with self.assertRaises(ValueError):
