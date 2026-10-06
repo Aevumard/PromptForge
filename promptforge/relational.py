@@ -32,13 +32,13 @@ class ContextRelationalProfile:
 
     schema_version: str
     relation_count: int
-    node_count: int
+    relation_nodes: int
     relation_density: float
-    max_degree: int
-    avg_degree: float
-    degree_std: float
-    hub_ratio: float
-    connected_components: int
+    relation_max_degree: int
+    relation_avg_degree: float
+    relation_degree_std: float
+    relation_hub_ratio: float
+    relation_components: int
     relation_kind_count: int
     relation_kinds: tuple[str, ...]
 
@@ -115,13 +115,13 @@ class ContextRelationProfiler:
         return ContextRelationalProfile(
             schema_version="context-relational.v1",
             relation_count=relation_count,
-            node_count=node_count,
+            relation_nodes=node_count,
             relation_density=relation_density,
-            max_degree=max_degree,
-            avg_degree=avg_degree,
-            degree_std=degree_std,
-            hub_ratio=hub_ratio,
-            connected_components=components,
+            relation_max_degree=max_degree,
+            relation_avg_degree=avg_degree,
+            relation_degree_std=degree_std,
+            relation_hub_ratio=hub_ratio,
+            relation_components=components,
             relation_kind_count=len(kinds),
             relation_kinds=tuple(sorted(kinds)),
         )
