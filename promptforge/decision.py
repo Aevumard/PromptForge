@@ -623,7 +623,7 @@ class UncertaintyActionGate:
         ranked = tuple(action.action_id for _, action in scored)
 
         return ActionDecision(
-            schema_version="uncertainty-action.v5",
+            schema_version="uncertainty-action.v6",
             selected_action_id=ranked[0],
             ranked_action_ids=ranked,
             blocked_action_ids=tuple(blocked),
@@ -634,6 +634,7 @@ class UncertaintyActionGate:
             support_evidence_stances=support_evidence_stances,
             support_evidence_tag_matches=support_evidence_tag_matches,
             support_evidence_quality=support_evidence_quality,
+            support_evidence_provenance=support_evidence_provenance,
         )
 
 
