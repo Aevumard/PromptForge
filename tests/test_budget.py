@@ -11,10 +11,10 @@ from promptforge.budget import (
 class BudgetTests(unittest.TestCase):
     def test_required_blocks_are_pinned_and_optional_blocks_pack_by_density(self):
         blocks = (
-            ContextBlock("system", {"role": "system"}, required=True),
-            ContextBlock("critical", {"id": "A-1", "sla": "2h"}, utility=10.0),
-            ContextBlock("useful", {"history": "relevant"}, utility=4.0),
-            ContextBlock("noise", {"commentary": "x" * 400}, utility=0.1),
+            ContextBlock("system", {"role": "system"}, required=True, token_estimate=2),
+            ContextBlock("critical", {"id": "A-1", "sla": "2h"}, utility=10.0, token_estimate=4),
+            ContextBlock("useful", {"history": "relevant"}, utility=4.0, token_estimate=3),
+            ContextBlock("noise", {"commentary": "x" * 400}, utility=0.1, token_estimate=10),
         )
         plan = plan_context(
             blocks,
@@ -38,8 +38,8 @@ class BudgetTests(unittest.TestCase):
 
     def test_compact_manifest_excludes_content_for_omitted_blocks(self):
         blocks = (
-            ContextBlock("keep", {"id": "T-1"}, required=True, path="task.id"),
-            ContextBlock("omit", {"secret": "large"}, utility=0.1, path="private"),
+            ContextBlock("keep", {"id": "T-1"}, required=True, path="task.id", token_estimate=2),
+            ContextBlock("omit", {"secret": "large"}, utility=0.1, path="private", token_estimate=4),
         )
         plan = plan_context(blocks, budget_tokens=4)
         manifest = plan.compact_manifest(blocks)
@@ -49,8 +49,8 @@ class BudgetTests(unittest.TestCase):
 
     def test_materialize_rebuilds_selected_nested_context(self):
         blocks = (
-            ContextBlock("user", "Ada", required=True, path="user.name"),
-            ContextBlock("task", "review", required=True, path="task.action"),
+            ContextBlock("user", "Ada", required=True, path="user.name", token_estimate=2),
+            ContextBlock("task", "review", required=True, path="task.action", token_estimate=2),
         )
         plan = plan_context(blocks, budget_tokens=4)
         self.assertEqual(
