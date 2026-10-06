@@ -63,7 +63,8 @@ class ExperimentAnalysisTests(TestCase):
         markdown = render_markdown(analyze_report(report, cases))
         self.assertIn("| Slice | Value |", markdown)
         self.assertIn("unsafe", markdown.lower())
-        self.assertIn("Latency p50/p95", markdown)
+        self.assertIn("End-to-end latency p50/p95", markdown)
+        self.assertIn("Provider latency p50/p95", markdown)
 
 
 if __name__ == "__main__":
