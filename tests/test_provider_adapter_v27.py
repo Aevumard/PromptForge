@@ -203,10 +203,20 @@ class ProviderAdapterTests(TestCase):
         analyze.assert_called_once()
         bootstrap.assert_called_once()
 
-    def test_from_env_requires_endpoint_and_model(self) -> None:
+    def test_from_env_autodetects_local_ollama_defaults(self) -> None:
         with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaises(ValueError):
-                OpenAICompatibleConfig.from_env()
+            with patch(
+                "benchmarks.providers.openai_compatible.discover_ollama_model",
+                return_value="qwen3:8b",
+            ):
+                config = OpenAICompatibleConfig.from_env()
+
+        self.assertEqual(
+            config.endpoint_url,
+            "http://localhost:11434/v1/chat/completions",
+        )
+        self.assertEqual(config.model, "qwen3:8b")
+        self.assertEqual(config.api_key, "ollama")
 
 
 if __name__ == "__main__":
