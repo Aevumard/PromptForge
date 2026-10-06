@@ -63,29 +63,29 @@ class ContextMemoryConsolidator:
 
         # Fill remaining capacity by maximizing family/strategy coverage first,
         # then recency. This is deterministic and avoids random replay noise.
-        remaining = [item for item in values if id(item) not in selected_ids]
+        remaining = [(index, item) for index, item in enumerate(values) if id(item) not in selected_ids]
         seen_families = {item.family_id for item in selected}
         seen_strategies = {item.strategy for item in selected}
 
         while len(selected) < limit and remaining:
-            ranked = sorted(
+            index, chosen = min(
                 remaining,
-                key=lambda item: (
-                    -(int(item.family_id not in seen_families)
-                      + int(item.strategy not in seen_strategies)),
-                    -values.index(item),
-                    item.family_id,
-                    item.strategy,
-                    item.episode_id,
+                key=lambda pair: (
+                    -(int(pair[1].family_id not in seen_families)
+                      + int(pair[1].strategy not in seen_strategies)),
+                    -pair[0],
+                    pair[1].family_id,
+                    pair[1].strategy,
+                    pair[1].episode_id,
                 ),
             )
-            chosen = ranked[0]
             selected.append(chosen)
-            remaining.remove(chosen)
+            remaining = [pair for pair in remaining if pair[0] != index]
             seen_families.add(chosen.family_id)
             seen_strategies.add(chosen.strategy)
 
-        selected = sorted(selected, key=lambda item: values.index(item))
+        selected_ids_in_order = {id(item): index for index, item in enumerate(values)}
+        selected = sorted(selected, key=lambda item: selected_ids_in_order[id(item)])
         return ContextReplayBatch(
             episodes=tuple(selected),
             source_size=len(values),
