@@ -68,6 +68,11 @@ from .routing_history import (
     ContextRoutingPolicyStability,
 )
 
+from .routing_refresh import (
+    ContextRoutingPolicyRefreshController,
+    ContextRoutingPolicyRefreshDecision,
+)
+
 from .orchestration import (
     ComplexContextController,
     ContextAdaptiveDecision,
@@ -138,6 +143,8 @@ __all__ = [
     "ContextRoutingPolicyHistory",
     "ContextRoutingPolicyHistorySnapshot",
     "ContextRoutingPolicyStability",
+    "ContextRoutingPolicyRefreshController",
+    "ContextRoutingPolicyRefreshDecision",
     "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
