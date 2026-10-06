@@ -128,6 +128,31 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(episode.regime_flags, proposal.decision.regime_flags)
         self.assertEqual(episode.decision_reason, proposal.decision.reason)
         self.assertEqual(episode.candidate_order, proposal.candidate_order)
+    def test_experience_summary_is_descriptive_and_deterministic(self):
+        from promptforge import experience_summary
+
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-summary",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            proposal,
+            family_id="family-summary",
+            cost=2.0,
+            outcome={"status": "success"},
+        )
+
+        summary = experience_summary(loop.snapshot().episodes)
+        self.assertEqual(summary["episodes"], 1)
+        self.assertEqual(summary["families"], 1)
+        self.assertEqual(summary["strategies"], 1)
+        self.assertEqual(summary["actions"][proposal.decision.action], 1)
+        self.assertEqual(summary["sources"][proposal.decision.source], 1)
+        self.assertEqual(summary["regimes"][proposal.decision.regime], 1)
+        self.assertAlmostEqual(summary["mean_cost"], 2.0)
     def test_episode_state_is_serializable_for_audit(self):
         loop = ContextCognitiveLoop()
         proposal = loop.propose(
