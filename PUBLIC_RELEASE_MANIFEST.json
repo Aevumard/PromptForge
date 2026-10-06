@@ -25,7 +25,7 @@
         {
             "path": "AGENTS.md",
             "size_bytes": 17227,
-            "sha256": "224099E8F433E9F199916400B174B4F30FF2AE82C9D2D60C094BBE46865CFA8F"
+            "sha256": "7CD25B5E469CF87F6ED6C34DF543ED7F43ACA6017F32AB5023E9C08401805842"
         },
         {
             "path": "harness/agent_context.py",
@@ -400,27 +400,27 @@
         {
             "path": "promptforge/__init__.py",
             "size_bytes": 5267,
-            "sha256": "815E02DDF91C27F2BA638953FF4255F5088A96039F371AB4269F1C4E29F8EC7F"
+            "sha256": "43ABE7208D2EA0A00C5BD57AC2F6F68A789560ABF9A9C45495617D01D2D670DC"
         },
         {
             "path": "promptforge/cognitive.py",
             "size_bytes": 30741,
-            "sha256": "D72B211B0C24A48846EA09262725986A814D1806C0CFE1A38590C901683D93CD"
+            "sha256": "7008DD868DE65DF975B3B2E2C649C8F751E20B1076A334D1686DA1C24529483B"
         },
         {
             "path": "promptforge/decision.py",
             "size_bytes": 8461,
-            "sha256": "6E2A8985B7A4225813FFE762544B25EB249BE3D09C4DFD479923A34BD64DA794"
+            "sha256": "B0D87970D01F5B430A74801085517203C0859735F2A89FD4FD37E1148278726D"
         },
         {
             "path": "promptforge/epistemic.py",
             "size_bytes": 18717,
-            "sha256": "700F5E07D696628ECB5DE122B1B38191A804E6DC8E8CEF48426DE6C319AFB3CA"
+            "sha256": "D6EC1483C8B0B0C3A17B83D878D6A66D618C43BA91AAAD45B92DFA62796957A5"
         },
         {
             "path": "promptforge/hypothesis.py",
             "size_bytes": 8389,
-            "sha256": "E1B2C474611B78A48FEDCF62E407DA800325BCFFB37928C6B99A7051684297F9"
+            "sha256": "66B5BAF6713294EFBB2BEBADB53E6D06B8DB1E6EF382DBE054F9FD05770DE5FB"
         },
         {
             "path": "PUBLIC_RELEASE_SCOPE.md",
@@ -435,7 +435,7 @@
         {
             "path": "README.md",
             "size_bytes": 28356,
-            "sha256": "49D3969B6E6472320C55C9221C27D6ACB688E47E706B1A2887E79418EA6C25A2"
+            "sha256": "86E7FE8DB26B5C3255711B583D2FAEAD3087E34D6FD1020718A5F51D2608A702"
         },
         {
             "path": "schemas/run.schema.json",
@@ -460,22 +460,22 @@
         {
             "path": "tests/test_cognitive_loop.py",
             "size_bytes": 25064,
-            "sha256": "90AB004FA190D1B565E7A34E669D51A2888253F57596E9A5ACA6EC6A97CA6DE7"
+            "sha256": "CA28FC88D24A5B9158A40DB3E9D70DA507AF33EAD11A85BFFB342471EF64936B"
         },
         {
             "path": "tests/test_decision.py",
             "size_bytes": 4391,
-            "sha256": "ECDB1E77CF73F34923C268A3E962C70AC9C9CD0C476D2C2AFE2C287DB6D2ED19"
+            "sha256": "60B58CC45886074572B5A4A2618F63DD6394E1EC0F5914C4448126C30553261F"
         },
         {
             "path": "tests/test_epistemic.py",
             "size_bytes": 5554,
-            "sha256": "B74A0E1009ABBA6E2DDAA7970ED506C549CC9BE6838D9D133E0FDC56199002A8"
+            "sha256": "A5957D60ACF1E1599A81FDCC837F1A33F114E7EA7B9E7CB5BCEDA037D5C080D3"
         },
         {
             "path": "tests/test_hypothesis.py",
             "size_bytes": 3913,
-            "sha256": "E314412E9FBAFE9DC7565AE2D7B7CB4DA7173A5589749814A3B5AB3ADC762754"
+            "sha256": "3BE7F2B33722B532F59428DDCB326C9C07C5F98C39E6FF88BE962B0B70EE65F9"
         },
         {
             "path": "tests/test_provider_adapters.py",
