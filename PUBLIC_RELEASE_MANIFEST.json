@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:44:39.728Z",
-  "file_count": 136,
+  "generated_utc": "2026-10-06T09:44:56.293Z",
+  "file_count": 139,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -478,6 +478,11 @@
       "sha256": "FC928F69A9273F9C19EF92A3B05001864474BBFD3FB8715698C1F305E28D4DCC"
     },
     {
+      "path": "promptforge/tool_output.py",
+      "size_bytes": 9732,
+      "sha256": "1a87e85eb88fb541abdc43fd9e1cc5f5f662757e63f7a1830d5f5c5f002c3096"
+    },
+    {
       "path": "promptforge/triage.py",
       "size_bytes": 10713,
       "sha256": "a67cb213df119faf7dca482a4687ba2d44c347aabeaca36d84d4241fa931c77e"
@@ -501,6 +506,16 @@
       "path": "schemas/action-execution.v1.json",
       "size_bytes": 934,
       "sha256": "c79b3df722e7b00f54e6ab94a7e41a4154f87e630ca42c54d23cc2a944e32bd4"
+    },
+    {
+      "path": "schemas/agent-input.v1.json",
+      "size_bytes": 1200,
+      "sha256": "59fe5db849c81d641c4ff1370df969250c60aaf4db7b928f9dd50ec38986619d"
+    },
+    {
+      "path": "schemas/context-catalog.v1.json",
+      "size_bytes": 1168,
+      "sha256": "9de7f11574948e8f1e2fc326bc14d49cd1703780fb38dbf258dec499f5b98685"
     },
     {
       "path": "schemas/human-review.v1.json",
