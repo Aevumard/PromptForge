@@ -113,6 +113,8 @@ class AblationSuiteTests(TestCase):
             self.assertIn("baseline_budget_only", markdown)
             self.assertIn("epistemic_budget_guarded", markdown)
             self.assertIn("unsafe rate", markdown.lower())
+            self.assertIn("p50 ms", markdown.lower())
+            self.assertIn("p95 ms", markdown.lower())
 
     def test_variant_rejects_invalid_budget(self) -> None:
         with self.assertRaises(ValueError):
