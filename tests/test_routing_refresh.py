@@ -1,6 +1,8 @@
 import unittest
 
 from promptforge import (
+    ContextCognitiveLoop,
+    ContextExperienceStore,
     ContextRoutingModeScore,
     ContextRoutingPolicyEvidence,
     ContextRoutingPolicyHistory,
@@ -140,6 +142,59 @@ class TestPolicyRefreshController(unittest.TestCase):
         self.assertEqual(payload["min_interval"], 3)
         self.assertEqual(payload["refresh_budget"], 5)
         self.assertEqual(payload["refresh_count"], 0)
+
+
+
+    def test_cognitive_loop_executes_refresh_only_when_gate_allows(self):
+        history = ContextRoutingPolicyHistory()
+        experience = ContextExperienceStore()
+        controller = ContextRoutingPolicyRefreshController(
+            min_observations=1,
+            min_stability=1.0,
+            max_age=0,
+            min_interval=2,
+            refresh_budget=2,
+        )
+        loop = ContextCognitiveLoop(
+            experience=experience,
+            memory_routing_mode="adaptive",
+            memory_routing_policy_history=history,
+            memory_policy_refresh_controller=controller,
+            routing_features=("node_count", "max_depth", "boundary_pressure"),
+        )
+
+        for index, family_id in enumerate(("family-a", "family-b"), start=1):
+            proposal = loop.propose(
+                cycle_id=f"refresh-cycle-{index}",
+                data={"task": {"id": index, "action": "select"}},
+                required=["task.id"],
+                candidates=[
+                    {"arm_id": "selection_only", "required": ["task.id"]},
+                    {"arm_id": "selection_representation_B", "required": ["task.id"]},
+                ],
+            )
+            loop.observe(
+                proposal,
+                family_id=family_id,
+                cost=float(index),
+                strategy="selection_only",
+            )
+
+        history.record(self.evidence(1))
+        decision = loop.policy_refresh_decision()
+        self.assertTrue(decision.refresh_required)
+        self.assertTrue(decision.eligible)
+
+        refreshed = loop.refresh_memory_routing_policy()
+        self.assertIsNotNone(refreshed)
+        self.assertEqual(refreshed.version, 2)
+        self.assertEqual(history.latest.version, 2)
+        self.assertEqual(controller.refresh_count, 1)
+
+        blocked = loop.policy_refresh_decision()
+        self.assertTrue(blocked.refresh_required)
+        self.assertFalse(blocked.eligible)
+        self.assertEqual(blocked.reason, "refresh_cooldown")
 
 
 if __name__ == "__main__":
