@@ -5,7 +5,12 @@ import json
 from pathlib import Path
 from typing import Any, Callable, Mapping, Protocol, Sequence
 
-from promptforge import ContextBlock, prepare_agent_input
+from promptforge import (
+    ContextBlock,
+    EpistemicContextCompiler,
+    EvidenceRecord,
+    prepare_agent_input,
+)
 
 from .ticket_guard import guard_predictions
 from .tickets_v27 import (
@@ -190,6 +195,53 @@ def parse_prediction(payload: Mapping[str, Any], *, ticket_id: str) -> Predictio
     )
 
 
+def _epistemic_summary(case: TicketCase) -> dict[str, Any]:
+    records = tuple(
+        EvidenceRecord(
+            evidence_id=str(item["evidence_id"]),
+            content=(
+                "Metadata-only evidence record "
+                f"{item['evidence_id']} from source {item['source']}."
+            ),
+            kind=str(item.get("kind", "observation")),
+            stance=str(item["stance"]),
+            source=str(item["source"]),
+            timestamp=float(item["timestamp"]),
+            relevance=float(item["relevance"]),
+            reliability=float(item["reliability"]),
+        )
+        for item in case.evidence
+    )
+    result = EpistemicContextCompiler().compile(records)
+    return {
+        "schema_version": result.schema_version,
+        "included_ids": list(result.included_ids),
+        "excluded_ids": list(result.excluded_ids),
+        "future_excluded_ids": list(result.future_excluded_ids),
+        "unknown_time_excluded_ids": list(result.unknown_time_excluded_ids),
+        "contradiction_ids": list(result.contradiction_ids),
+        "negative_ids": list(result.negative_ids),
+        "hypothesis_ids": list(result.hypothesis_ids),
+        "inference_ids": list(result.inference_ids),
+        "observation_ids": list(result.observation_ids),
+        "compiler_estimated_tokens": result.estimated_tokens,
+        "representation": "metadata_only",
+        "budget_satisfied": result.budget_satisfied,
+        "audit": {
+            "input_count": result.audit["input_count"],
+            "included_count": result.audit["included_count"],
+            "excluded_count": result.audit["excluded_count"],
+            "future_excluded_count": result.audit["future_excluded_count"],
+            "unknown_time_excluded_count": result.audit[
+                "unknown_time_excluded_count"
+            ],
+            "temporal_boundary_enforced": result.audit[
+                "temporal_boundary_enforced"
+            ],
+        },
+    }
+
+
 def build_model_input(
     case: TicketCase,
     *,
@@ -210,6 +262,13 @@ def build_model_input(
             path="ticket",
         ),
         ContextBlock(
+            "epistemic",
+            _epistemic_summary(case),
+            required=True,
+            utility=4.0,
+            path="epistemic",
+        ),
+        ContextBlock(
             "evidence",
             list(case.evidence),
             utility=3.0,
@@ -227,6 +286,10 @@ def build_model_input(
         budget_tokens=budget_tokens,
         reserve_tokens=reserve_tokens,
         descriptions={
+            "epistemic": (
+                "PromptForge epistemic summary: evidence provenance, "
+                "contradiction preservation, exclusions, and selection audit."
+            ),
             "evidence": "Current evidence available for the ticket.",
             "history": "Optional historical customer context.",
         },
