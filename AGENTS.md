@@ -72,6 +72,13 @@ Its contract is intentionally separated into seven concerns:
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
 
+## Cognitive experience records
+
+`ContextEpisode` may retain decision metadata and externally supplied outcome fields in addition to routing topology.
+
+When writing an observation, preserve the selected action, decision source, regime, novelty distance, trajectory state, and measured cost. Optional outcome metadata must remain caller-supplied; do not invent quality or causal labels.
+
+These fields are descriptive state. They can be analyzed later, but they do not become validated causal rules merely because they are stored.
 ## Relational topology
 
 `ContextRelationProfiler` provides an explicit relational layer over context nodes. It may measure supplied cross-links, connected components, degree concentration, density, and relation kinds.
