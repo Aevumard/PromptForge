@@ -9,7 +9,7 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T07:32:53.857Z",
+  "generated_utc": "2026-10-06T07:34:03.126Z",
   "file_count": 122,
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 23292,
-      "sha256": "ae872f684ac6c9064bba534bd82e1a8352fe468fffaf69413f9168eaf9311a98"
+      "size_bytes": 23756,
+      "sha256": "7b2942fd473cd620532f090b6ae935534c40a6564499c13510ff717ee86950fc"
     },
     {
       "path": "harness/agent_context.py",
