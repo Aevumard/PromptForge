@@ -169,7 +169,7 @@ The aware router must be fitted only on the intended training snapshot. For tran
 - `credit` — the opt-in `ContextMemoryAwareRouter`, with a bounded `top_k` neighborhood and explicit memory credit.
 - `adaptive` — selects between the two concrete modes using policy evidence that was evaluated before the current proposal.
 
-The selected requested mode, concrete mode, `top_k`, and policy provenance are recorded in `ContextCognitiveProposal`. The proposal schema is now `context-cognitive-proposal.v4`.
+The selected requested mode, concrete mode, `top_k`, and policy provenance are recorded in `ContextCognitiveProposal`. The proposal schema is now `context-cognitive-proposal.v7`.
 
 ```python
 from promptforge import ContextCognitiveLoop
@@ -231,7 +231,26 @@ This creates the explicit control chain:
 
 The history is operational meta-memory, not a learned model and not a causal oracle.
 
-An adaptive loop can optionally require minimum policy stability and maximum policy age before honoring historical consensus. When either gate fails, the loop falls back to the conservative `nearest` mode and records `memory_policy_refresh_recommended=True`, along with `memory_policy_freshness_age`, in proposal v6.
+An adaptive loop can optionally require minimum policy stability and maximum policy age before honoring historical consensus. When either gate fails, the loop falls back to the conservative `nearest` mode and records `memory_policy_refresh_recommended=True`, along with `memory_policy_freshness_age`, in proposal v7.
+
+## Controlled policy refresh
+
+A policy can be stable enough to use and still become operationally stale as new episodic experience arrives. PromptForge therefore separates **refresh recommendation** from **refresh execution**.
+
+`ContextRoutingPolicyRefreshController` is a bounded gate with four explicit controls:
+
+- minimum policy observations required before a refresh can execute;
+- minimum historical stability;
+- maximum allowed policy age relative to the current experience version;
+- optional cooldown and refresh budget.
+
+`ContextCognitiveLoop.policy_refresh_decision()` exposes the gate without changing memory. `ContextCognitiveLoop.refresh_memory_routing_policy()` evaluates and records a new policy only when the gate says the refresh is eligible. A successful refresh advances the controller cooldown/budget state through `record_refresh()`.
+
+The resulting lifecycle is:
+
+`experience -> policy health -> refresh gate -> holdout evaluation -> policy history -> adaptive routing`
+
+A blocked refresh is descriptive rather than an error: insufficient evidence, instability, staleness, cooldown, and exhausted budget are surfaced explicitly. The refresh controller never executes a model and never fabricates evidence.
 
 ## Public core boundary
 

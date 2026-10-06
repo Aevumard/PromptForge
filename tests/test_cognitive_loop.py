@@ -118,64 +118,52 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.memory_routing_mode, "adaptive")
         self.assertEqual(proposal.memory_routing_selected_mode, "credit")
         self.assertEqual(proposal.memory_policy_version, 11)
         self.assertEqual(proposal.memory_policy_history_version, 2)
 
     def test_policy_evidence_can_be_evaluated_and_recorded(self):
-        from promptforge import ContextRoutingPolicyHistory
+        from promptforge import ContextExperienceStore, ContextRoutingPolicyHistory
 
+        experience = ContextExperienceStore()
         loop = ContextCognitiveLoop(
-            memory_routing_policy_history=ContextRoutingPolicyHistory()
+            experience=experience,
+            memory_routing_policy_history=ContextRoutingPolicyHistory(),
         )
-        first = loop.propose(
-            cycle_id="cycle-meta-1",
-            data=self.data,
-            required=["task.id"],
-            candidates=self.candidates,
-        )
-        loop.observe(
-            first,
-            family_id="family-a",
-            cost=1.0,
-            strategy="selection_only",
-        )
-        second = loop.propose(
-            cycle_id="cycle-meta-2",
-            data=self.data,
-            required=["task.id"],
-            candidates=self.candidates,
-        )
-        loop.observe(
-            second,
-            family_id="family-b",
-            cost=2.0,
-            strategy="selection_representation_B",
-        )
-        third = loop.propose(
-            cycle_id="cycle-meta-3",
-            data=self.data,
-            required=["task.id"],
-            candidates=self.candidates,
-        )
-        loop.observe(
-            third,
-            family_id="family-c",
-            cost=1.5,
-            strategy="selection_only",
-        )
+
+        for family_id, cycle_id in (
+            ("family-a", "cycle-meta-1"),
+            ("family-b", "cycle-meta-2"),
+        ):
+            proposal = loop.propose(
+                cycle_id=cycle_id,
+                data=self.data,
+                required=["task.id"],
+                candidates=self.candidates,
+            )
+            loop.observe(
+                proposal,
+                family_id=family_id,
+                cost=1.0,
+                strategy="selection_only",
+            )
+            loop.observe(
+                proposal,
+                family_id=family_id,
+                cost=2.0,
+                strategy="selection_representation_B",
+            )
 
         evidence = loop.evaluate_and_record_memory_routing_policy()
 
-        self.assertEqual(evidence.version, 3)
+        self.assertEqual(evidence.version, 4)
         self.assertEqual(loop.policy_history_snapshot().version, 1)
         self.assertEqual(
             loop.policy_history_snapshot().latest.version,
-            3,
+            4,
         )
-
 
     def test_adaptive_mode_falls_back_when_policy_history_is_unstable(self):
         from promptforge import ContextRoutingPolicyHistory
@@ -210,7 +198,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
         self.assertEqual(proposal.memory_policy_stability_rate, 0.0)
         self.assertTrue(proposal.memory_policy_refresh_recommended)
@@ -264,7 +252,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.experience_version, 3)
         self.assertEqual(proposal.memory_policy_version, 1)
         self.assertEqual(proposal.memory_policy_freshness_age, 2)
@@ -298,7 +286,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.experience_version, 0)
         self.assertIsNone(proposal.memory_route)
         self.assertEqual(proposal.decision.source, "structural_regime")
