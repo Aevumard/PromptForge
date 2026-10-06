@@ -481,7 +481,7 @@ def analyze_report(
 
 def render_markdown(analysis: ExperimentAnalysis) -> str:
     lines = [
-        "# PromptForge V27.9 experiment analysis",
+        "# PromptForge V27.12 provider telemetry analysis",
         "",
         f"- Total cases: {analysis.total_cases}",
         f"- Failed calls: {analysis.failed_calls}",
