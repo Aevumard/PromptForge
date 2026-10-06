@@ -79,6 +79,19 @@ def guard_prediction(case: TicketCase, prediction: Prediction) -> GuardDecision:
         downside=0.8 if prediction.action in {"refund", "restore_access"} else 0.2,
         support_evidence_ids=support_ids,
     )
+    supporting_ids = tuple(
+        record.evidence_id
+        for record in records
+        if record.stance == "supports"
+    )
+    fallback = ActionCandidate(
+        action_id="human_review",
+        description="Human review fallback.",
+        evidence_support=0.7,
+        reversibility=1.0,
+        downside=0.1,
+        support_evidence_ids=supporting_ids,
+    )
     policy = ActionPolicy(
         require_support_anchors=True,
         require_support_stance=True,
@@ -86,7 +99,7 @@ def guard_prediction(case: TicketCase, prediction: Prediction) -> GuardDecision:
     )
     try:
         decision = UncertaintyActionGate(policy).decide(
-            [candidate],
+            [candidate, fallback],
             evidence=evidence,
         )
     except ValueError as exc:
