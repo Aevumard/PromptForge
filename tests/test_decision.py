@@ -388,6 +388,158 @@ class UncertaintyActionGateTests(unittest.TestCase):
                 allowed_support_stances=("invalid",),
             )
 
+    def test_support_relevance_blocks_matching_stance_with_wrong_tags(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "deploy",
+                    "deployment evidence",
+                    timestamp=10,
+                    stance="supports",
+                    tags=("deployment", "runtime"),
+                ),
+                EvidenceRecord(
+                    "billing",
+                    "billing evidence",
+                    timestamp=11,
+                    stance="supports",
+                    tags=("billing", "finance"),
+                ),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "runtime_action",
+                "runtime action",
+                evidence_support=0.99,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("billing",),
+                support_evidence_tags=("runtime",),
+            ),
+            ActionCandidate(
+                "safe_runtime",
+                "safe runtime fallback",
+                evidence_support=0.80,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("deploy",),
+                support_evidence_tags=("runtime",),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_tag_match=True)
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "safe_runtime")
+        self.assertIn("runtime_action", decision.blocked_action_ids)
+        self.assertIn(
+            "support evidence relevance mismatch",
+            decision.reasons["runtime_action"],
+        )
+
+    def test_support_relevance_passes_and_is_audited(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "e1",
+                    "supports runtime action",
+                    timestamp=10,
+                    stance="supports",
+                    tags=("runtime", "deploy"),
+                ),
+                EvidenceRecord(
+                    "e2",
+                    "supports runtime action via monitoring",
+                    timestamp=11,
+                    stance="supports",
+                    tags=("monitoring", "runtime"),
+                ),
+            ]
+        )
+        action = ActionCandidate(
+            "runtime",
+            "runtime action",
+            evidence_support=0.90,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1", "e2"),
+            support_evidence_tags=("runtime",),
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_tag_match=True)
+        ).decide([action], evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "runtime")
+        self.assertEqual(
+            decision.support_evidence_tag_matches["runtime"],
+            {"e1": ("runtime",), "e2": ("runtime",)},
+        )
+        self.assertEqual(
+            decision.to_dict()["support_evidence_tag_matches"]["runtime"],
+            {"e1": ["runtime"], "e2": ["runtime"]},
+        )
+
+    def test_support_relevance_requires_explicit_scope(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "e1",
+                    "support without declared scope",
+                    timestamp=10,
+                    stance="supports",
+                    tags=("runtime",),
+                ),
+            ]
+        )
+        action = ActionCandidate(
+            "scopeless",
+            "scope missing",
+            evidence_support=0.9,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1",),
+        )
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.7,
+            reversibility=1.0,
+            downside=0.2,
+            support_evidence_ids=("e1",),
+            support_evidence_tags=("runtime",),
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_tag_match=True)
+        ).decide([action, fallback], evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "fallback")
+        self.assertIn("support relevance scope was not declared", decision.reasons["scopeless"])
+
+    def test_invalid_support_evidence_tags_are_rejected(self):
+        with self.assertRaises(ValueError):
+            ActionCandidate(
+                "bad_tags",
+                "invalid tags",
+                evidence_support=0.8,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_tags=("runtime", "runtime"),
+            )
+
+        with self.assertRaises(ValueError):
+            ActionCandidate(
+                "empty_tag",
+                "empty tag",
+                evidence_support=0.8,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_tags=("   ",),
+            )
+
     def test_causal_dependence_is_a_penalty_not_a_truth_claim(self):
         actions = [
             ActionCandidate(
