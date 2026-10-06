@@ -4,6 +4,7 @@ from dataclasses import asdict, dataclass
 from typing import Any
 
 from .decision import ActionDecision
+from .human_review import HumanReviewRecord
 
 
 TRIAGE_STAGES = (
@@ -75,6 +76,7 @@ class TriageState:
     priority: PriorityAssessment | None = None
     action_decision: ActionDecision | None = None
     human_review_reason: str | None = None
+    human_review: HumanReviewRecord | None = None
     outcome: dict[str, Any] | None = None
 
     def __post_init__(self) -> None:
@@ -99,6 +101,13 @@ class TriageState:
         if self.stage == "waiting_human":
             if not self.human_review_reason or not self.human_review_reason.strip():
                 raise ValueError("waiting_human state requires human_review_reason")
+            if self.human_review is not None:
+                raise ValueError("waiting_human state cannot contain a completed human_review")
+        if self.human_review is not None:
+            if self.human_review.evidence_snapshot_id != self.evidence_snapshot_id:
+                raise ValueError(
+                    "human_review evidence_snapshot_id must match triage evidence_snapshot_id"
+                )
 
     @classmethod
     def admitted(
@@ -124,9 +133,11 @@ class TriageState:
         *,
         priority: PriorityAssessment | None = None,
         action_decision: ActionDecision | None = None,
+        human_review: HumanReviewRecord | None = None,
         human_review_reason: str | None = None,
         outcome: dict[str, Any] | None = None,
         decision_id: str | None = None,
+        policy_version: str | None = None,
     ) -> "TriageState":
         allowed = _ALLOWED_TRANSITIONS[self.stage]
         if next_stage not in allowed:
@@ -135,11 +146,44 @@ class TriageState:
             )
 
         next_priority = priority if priority is not None else self.priority
+
+        if self.stage == "waiting_human" and next_stage == "action_gated":
+            if human_review is None:
+                raise ValueError(
+                    "resuming from waiting_human requires human_review"
+                )
+            if action_decision is None:
+                raise ValueError(
+                    "resuming from waiting_human requires a new action_decision"
+                )
+            if human_review.evidence_snapshot_id != self.evidence_snapshot_id:
+                raise ValueError(
+                    "human review must reference the waiting state's evidence snapshot"
+                )
+            next_policy_version = policy_version or human_review.resulting_policy_version
+            if next_policy_version != human_review.resulting_policy_version:
+                raise ValueError(
+                    "resumed policy_version must match human_review.resulting_policy_version"
+                )
+        else:
+            next_policy_version = policy_version or self.policy_version
+
         next_action = (
             action_decision
             if action_decision is not None
             else self.action_decision
         )
+
+        if next_stage == "waiting_human":
+            if human_review is not None:
+                raise ValueError(
+                    "waiting_human transition cannot contain a completed human_review"
+                )
+        elif human_review is not None:
+            if human_review.evidence_snapshot_id != self.evidence_snapshot_id:
+                raise ValueError(
+                    "human review must reference the current evidence snapshot"
+                )
 
         return TriageState(
             schema_version="triage-state.v1",
@@ -147,11 +191,12 @@ class TriageState:
             decision_id=decision_id or self.decision_id,
             parent_decision_id=self.decision_id,
             stage=next_stage,
-            policy_version=self.policy_version,
+            policy_version=next_policy_version,
             evidence_snapshot_id=self.evidence_snapshot_id,
             priority=next_priority,
             action_decision=next_action,
             human_review_reason=human_review_reason,
+            human_review=human_review,
             outcome=outcome,
         )
 
@@ -164,6 +209,11 @@ class TriageState:
             None
             if self.action_decision is None
             else self.action_decision.to_dict()
+        )
+        payload["human_review"] = (
+            None
+            if self.human_review is None
+            else self.human_review.to_dict()
         )
         return payload
 
