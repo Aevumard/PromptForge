@@ -41,6 +41,13 @@ class MemoryCreditTests(unittest.TestCase):
         self.assertGreater(first[1].recency_weight, first[0].recency_weight)
         self.assertGreater(first[1].credit, first[0].credit)
 
+    def test_invalid_credit_policy_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ContextMemoryCreditPolicy(half_life=0.0)
+
+        with self.assertRaises(TypeError):
+            ContextMemoryConsolidator(credit_policy=object())
+
     def test_comparable_observations_reward_lower_observed_cost(self):
         episodes = [
             self.episode("X", "A", "slow", 5.0),
