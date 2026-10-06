@@ -1,0 +1,138 @@
+import unittest
+
+from promptforge import (
+    ActionCandidate,
+    ActionPolicy,
+    EvidenceRecord,
+    EpistemicContextCompiler,
+    EpistemicContextPolicy,
+    UncertaintyActionGate,
+)
+
+
+class UncertaintyActionGateTests(unittest.TestCase):
+    def test_prefers_reversible_low_downside_action_when_support_is_close(self):
+        actions = [
+            ActionCandidate(
+                "rollback",
+                "rollback version",
+                evidence_support=0.92,
+                reversibility=0.25,
+                downside=0.80,
+                operational_cost=0.60,
+            ),
+            ActionCandidate(
+                "reduce_ingress",
+                "reduce ingress",
+                evidence_support=0.84,
+                reversibility=0.95,
+                downside=0.15,
+                operational_cost=0.20,
+            ),
+        ]
+
+        decision = UncertaintyActionGate().decide(actions)
+
+        self.assertEqual(decision.selected_action_id, "reduce_ingress")
+        self.assertEqual(decision.ranked_action_ids[0], "reduce_ingress")
+
+    def test_action_requiring_future_evidence_is_blocked(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("past", "observed", timestamp=10),
+                EvidenceRecord("future", "late observation", timestamp=30),
+            ],
+            policy=EpistemicContextPolicy(cutoff=20),
+        )
+
+        actions = [
+            ActionCandidate(
+                "future_based",
+                "requires future fact",
+                evidence_support=0.95,
+                reversibility=0.9,
+                downside=0.1,
+                required_evidence_ids=("future",),
+            ),
+            ActionCandidate(
+                "past_based",
+                "uses past fact",
+                evidence_support=0.8,
+                reversibility=0.9,
+                downside=0.1,
+                required_evidence_ids=("past",),
+            ),
+        ]
+
+        decision = UncertaintyActionGate().decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "past_based")
+        self.assertIn("future_based", decision.blocked_action_ids)
+
+    def test_causal_dependence_is_a_penalty_not_a_truth_claim(self):
+        actions = [
+            ActionCandidate(
+                "causal",
+                "depends on causal interpretation",
+                evidence_support=0.90,
+                reversibility=0.90,
+                downside=0.20,
+                depends_on_causal_claim=True,
+            ),
+            ActionCandidate(
+                "observational",
+                "works without causal resolution",
+                evidence_support=0.82,
+                reversibility=0.90,
+                downside=0.20,
+                depends_on_causal_claim=False,
+            ),
+        ]
+
+        decision = UncertaintyActionGate().decide(actions)
+
+        self.assertEqual(decision.selected_action_id, "observational")
+        self.assertIn("causal dependence receives a caution penalty", decision.reasons["causal"])
+
+    def test_strict_policy_can_fail_closed_on_irreversible_or_risky_action(self):
+        actions = [
+            ActionCandidate(
+                "dangerous",
+                "irreversible high downside",
+                evidence_support=0.95,
+                reversibility=0.0,
+                downside=0.95,
+            ),
+            ActionCandidate(
+                "safe",
+                "reversible low downside",
+                evidence_support=0.70,
+                reversibility=1.0,
+                downside=0.10,
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_reversible=True, max_downside=0.80)
+        ).decide(actions)
+
+        self.assertEqual(decision.selected_action_id, "safe")
+        self.assertEqual(decision.blocked_action_ids, ("dangerous",))
+
+    def test_decision_is_deterministic(self):
+        action = ActionCandidate(
+            "a",
+            "same",
+            evidence_support=0.8,
+            reversibility=0.7,
+            downside=0.2,
+            operational_cost=0.2,
+        )
+        first = UncertaintyActionGate().decide([action])
+        second = UncertaintyActionGate().decide([action])
+
+        self.assertEqual(first.to_dict(), second.to_dict())
+
+
+if __name__ == "__main__":
+    unittest.main()
