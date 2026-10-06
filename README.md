@@ -898,3 +898,31 @@ result = trim_tool_outputs(
 Recent outputs stay untouched. Older oversized results are replaced by deterministic head/tail previews. The result records `chars_saved`, `estimated_tokens_saved`, and a SHA-256 digest of every original payload that was trimmed.
 
 This is intentionally not semantic summarization. The agent can see that content was trimmed and an integration can use the item identity/digest to fetch the full result when necessary.
+
+## One-call AI preparation
+
+For integrations that want the common path without wiring each layer manually, use `prepare_agent_input()`.
+
+```python
+from promptforge import prepare_agent_input
+
+prepared = prepare_agent_input(
+    blocks,
+    budget_tokens=4000,
+    reserve_ratio=0.10,
+    descriptions=descriptions,
+    tool_outputs=tool_outputs,
+)
+
+packet = prepared.packet.to_dict()
+```
+
+The resulting `AgentInputPacket` combines:
+- selected context inside the token budget;
+- a deferred catalog for context not loaded yet;
+- trimmed historical tool outputs;
+- token savings and omitted-context ids.
+
+`AgentPreparation` remains available when the integration needs the complete audit object behind the packet.
+
+Schema: `schemas/agent-input.v1.json`.
