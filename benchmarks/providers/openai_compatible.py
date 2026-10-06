@@ -29,6 +29,8 @@ class ProviderCallTelemetry:
     total_tokens: int | None = None
 
 
+DEFAULT_OLLAMA_BASE_URL = "http://localhost:11434"
+
 DEFAULT_SYSTEM_PROMPT = (
     "You are the classification agent in a controlled support benchmark. "
     "Return exactly one JSON object and no markdown. Use only the enum values "
@@ -56,10 +58,23 @@ class OpenAICompatibleConfig:
     def from_env(cls) -> "OpenAICompatibleConfig":
         endpoint_url = os.getenv("PROMPTFORGE_MODEL_URL", "").strip()
         model = os.getenv("PROMPTFORGE_MODEL_NAME", "").strip()
+        auto_detected = False
+
+        if endpoint_url.lower() in {"auto", "ollama", "local", "local-ollama"}:
+            endpoint_url = ""
         if not endpoint_url:
-            raise ValueError("PROMPTFORGE_MODEL_URL is required")
+            endpoint_url = (
+                os.getenv("PROMPTFORGE_OLLAMA_BASE_URL", DEFAULT_OLLAMA_BASE_URL)
+                .strip()
+                .rstrip("/")
+            ) + "/v1/chat/completions"
+            auto_detected = True
+            if not model:
+                model = discover_ollama_model(endpoint_url.rsplit("/v1/", 1)[0])
         if not model:
-            raise ValueError("PROMPTFORGE_MODEL_NAME is required")
+            raise ValueError(
+                "PROMPTFORGE_MODEL_NAME is required when no local Ollama model is available"
+            )
 
         timeout_text = os.getenv("PROMPTFORGE_MODEL_TIMEOUT", "60").strip()
         try:
@@ -89,7 +104,10 @@ class OpenAICompatibleConfig:
         return cls(
             endpoint_url=endpoint_url,
             model=model,
-            api_key=os.getenv("PROMPTFORGE_MODEL_API_KEY") or None,
+            api_key=(
+                os.getenv("PROMPTFORGE_MODEL_API_KEY")
+                or ("ollama" if auto_detected else None)
+            ),
             timeout_seconds=timeout_seconds,
             max_attempts=max_attempts,
             retry_backoff_seconds=retry_backoff_seconds,
@@ -99,6 +117,47 @@ class OpenAICompatibleConfig:
                 DEFAULT_SYSTEM_PROMPT,
             ),
         )
+
+
+def discover_ollama_model(
+    base_url: str = DEFAULT_OLLAMA_BASE_URL,
+    *,
+    timeout_seconds: float = 2.0,
+) -> str:
+    """Return a deterministic locally installed Ollama model name."""
+    base = base_url.strip().rstrip("/")
+    if not base:
+        raise ValueError("Ollama base URL must not be empty")
+    request = urllib.request.Request(
+        f"{base}/api/tags",
+        headers={"Accept": "application/json"},
+        method="GET",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.URLError as exc:
+        raise RuntimeError(
+            "Ollama was not reachable at "
+            f"{base}. Start Ollama or set PROMPTFORGE_MODEL_URL."
+        ) from exc
+    except json.JSONDecodeError as exc:
+        raise RuntimeError("Ollama /api/tags returned invalid JSON") from exc
+
+    models = payload.get("models") if isinstance(payload, Mapping) else None
+    if not isinstance(models, list):
+        raise RuntimeError("Ollama /api/tags response has no models list")
+
+    names = sorted(
+        str(item.get("name", "")).strip()
+        for item in models
+        if isinstance(item, Mapping) and str(item.get("name", "")).strip()
+    )
+    if not names:
+        raise RuntimeError(
+            f"Ollama at {base} has no installed models. Pull a model first."
+        )
+    return names[0]
 
 
 class OpenAICompatibleAgentAdapter:
