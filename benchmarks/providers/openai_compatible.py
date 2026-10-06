@@ -155,9 +155,17 @@ class OpenAICompatibleAgentAdapter:
                     timeout=self.config.timeout_seconds,
                 ) as response:
                     body = response.read().decode("utf-8")
-                prediction, usage = _extract_prediction_and_usage(body)
+                elapsed_ms = (time.perf_counter() - started) * 1000.0
+                try:
+                    prediction, usage = _extract_prediction_and_usage(body)
+                except Exception:
+                    self.last_call_telemetry = ProviderCallTelemetry(
+                        elapsed_ms=elapsed_ms,
+                        attempts=attempt,
+                    )
+                    raise
                 self.last_call_telemetry = ProviderCallTelemetry(
-                    elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                    elapsed_ms=elapsed_ms,
                     attempts=attempt,
                     prompt_tokens=usage.get("prompt_tokens"),
                     completion_tokens=usage.get("completion_tokens"),
