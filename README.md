@@ -775,3 +775,17 @@ The agent corpus also distills reusable patterns from mature open-source systems
 See `docs/agent_corpus_external_patterns.md` for the adopted principles and their boundaries.
 
 These references do not become PromptForge dependencies, and their framework-specific semantics are not treated as PromptForge guarantees.
+
+## Typed triage state
+
+The public core now exposes `promptforge.triage` for workflows that need explicit lifecycle state.
+
+The state machine is:
+
+`admitted -> prioritized -> action_gated -> waiting_human/executed -> observed -> closed`
+
+`PriorityAssessment` contains only urgency, importance, priority band, and rationale. `ActionDecision` remains a separate actionability/safety result.
+
+This makes the intended boundary executable rather than merely documented: a case can remain high priority while an action is blocked or sent to human review. `TriageState.transition()` returns immutable successor states with parent decision lineage for replay.
+
+Schema: `schemas/triage-state.v1.json`.
