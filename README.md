@@ -818,7 +818,7 @@ Schema: `schemas/action-execution.v1.json`.
 
 ## Token-efficient context planning
 
-For large or noisy inputs, the public core now includes `promptforge.budget` for deterministic context packing before a model request.
+For large or noisy inputs, the public core now includes `promptforge.budget` for deterministic context packing before a model request. `ContextBudgetPlanner` is the reusable planner, while `plan_context()` is the fast one-call path.
 
 `ContextBudgetPolicy` separates three quantities:
 - total input budget;
