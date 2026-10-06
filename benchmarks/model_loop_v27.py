@@ -386,6 +386,7 @@ def run_model_loop(
 
     for case in cases:
         started = time.perf_counter()
+        adapter_telemetry = None
         try:
             model_input = build_model_input(
                 case,
