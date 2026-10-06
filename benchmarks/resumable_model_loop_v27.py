@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
+import time
 from typing import Any, Mapping, Sequence
 
 from benchmarks.model_loop_v27 import (
@@ -100,6 +101,7 @@ def _record_from_dict(payload: Mapping[str, Any]) -> ModelLoopRecord:
         budget_tokens=int(payload.get("budget_tokens", 0)),
         tokens_saved=int(payload.get("tokens_saved", 0)),
         omitted_context_ids=tuple(omitted),
+        elapsed_ms=float(payload.get("elapsed_ms", 0.0)),
         error=None if payload.get("error") is None else str(payload["error"]),
     )
 
@@ -144,6 +146,7 @@ def run_resumable_model_loop(
             if not retry_failed:
                 continue
 
+        started = time.perf_counter()
         try:
             model_input = build_model_input(
                 case,
@@ -167,6 +170,7 @@ def run_resumable_model_loop(
                 budget_tokens=int(packet["budget_tokens"]),
                 tokens_saved=int(packet["tokens_saved"]),
                 omitted_context_ids=tuple(packet["omitted_context_ids"]),
+                elapsed_ms=(time.perf_counter() - started) * 1000.0,
             )
         except Exception as exc:
             record = ModelLoopRecord(
@@ -177,6 +181,7 @@ def run_resumable_model_loop(
                 budget_tokens=budget_tokens,
                 tokens_saved=0,
                 omitted_context_ids=(),
+                elapsed_ms=(time.perf_counter() - started) * 1000.0,
                 error=f"{type(exc).__name__}: {exc}",
             )
 
