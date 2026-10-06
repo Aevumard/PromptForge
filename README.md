@@ -327,6 +327,20 @@ The intended sequence is:
 
 `evidence boundary -> action feasibility -> risk/reversibility gate -> deterministic ranking -> audited action decision`
 
+## Explicit hypothesis ledger
+
+`HypothesisLedger` keeps hypothesis state separate from the evidence that currently supports or contradicts it.
+
+`HypothesisRecord` requires the integration to declare support, contradiction, and required-evidence relationships. The ledger then reports only descriptive states such as `unresolved`, `supported_by_available_evidence`, `challenged_by_available_evidence`, `contested`, and `insufficient_evidence`.
+
+`DiscriminatingExperiment` provides caller-supplied design attributes and a deterministic prioritization score based on hypothesis coverage, isolation, controls, measurement quality, cost, and operational risk. The score is explicitly a prioritization heuristic, not statistical power and not proof of causal identification.
+
+The important boundary is:
+
+`evidence boundary -> hypothesis state -> competing-explanation visibility -> experiment prioritization`
+
+No hypothesis is treated as disproved merely because supporting evidence is absent from the current boundary.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
