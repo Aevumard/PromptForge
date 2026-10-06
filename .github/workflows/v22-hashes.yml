@@ -1,0 +1,13 @@
+name: V22 Hashes
+on:
+  push:
+    branches:
+      - feature/v22-action-evidence-anchor
+
+jobs:
+  hashes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print SHA-256
+        run: sha256sum tests/test_decision.py && wc -c tests/test_decision.py
