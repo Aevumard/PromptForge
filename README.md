@@ -95,6 +95,14 @@ The loop does not call a model or invent a quality score. Execution remains outs
 
 ContextExperienceSnapshot is immutable. New observations can improve future routing without rewriting the evidence used by an earlier proposal or evaluation.
 
+## Relational context topology
+
+PromptForge can also accept an explicit relation graph over context nodes. `ContextRelationProfiler` measures relation count, connected components, degree concentration, density, and relation kinds without trying to infer semantics from raw text.
+
+These descriptors are added to the routing feature space used by the cognitive loop. When relational evidence is supplied, future experience can therefore be matched using both hierarchical shape and explicit cross-links.
+
+The relation graph is caller-supplied by design. PromptForge does not treat a guessed semantic relationship as ground truth; the integration must provide the relation evidence it wants the adaptive system to use.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -269,7 +277,7 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/adaptive.py` | Complexity-aware structure, local refinement, trajectory, and control | Complex-system orchestration |
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path and frozen evidence snapshots | Online experience boundary |
-| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |
+| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |\n| `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |
