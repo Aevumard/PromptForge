@@ -120,7 +120,7 @@ from .decision import (
     UncertaintyActionGate,
 )
 
-from .hypothesis import (
+from .confidence import (\n    ConfidenceAssessment,\n    ConfidenceCalibrationMetrics,\n    ConfidenceCalibrationModel,\n    ConfidenceCalibrationPolicy,\n    ConfidenceCalibrator,\n    ConfidenceObservation,\n)\n\nfrom .hypothesis import (
     HYPOTHESIS_STATUSES,
     DiscriminatingExperiment,
     HypothesisAssessment,
