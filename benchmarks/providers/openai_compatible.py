@@ -10,7 +10,10 @@ from typing import Any, Mapping
 import urllib.error
 import urllib.request
 
-from benchmarks.analyze_bootstrap_v27 import analyze_bootstrap
+from benchmarks.analyze_bootstrap_v27 import (
+    analyze_bootstrap,
+    render_markdown as render_bootstrap_markdown,
+)
 from benchmarks.analyze_model_run_v27 import analyze_report, render_markdown
 from benchmarks.model_loop_v27 import ModelLoopReport
 from benchmarks.resumable_model_loop_v27 import run_resumable_model_loop
@@ -429,7 +432,6 @@ def main() -> int:
         json.dumps(bootstrap.to_dict(), indent=2, sort_keys=True),
         encoding="utf-8",
     )
-    from benchmarks.analyze_bootstrap_v27 import render_markdown as render_bootstrap_markdown
     Path(args.bootstrap_markdown).write_text(
         render_bootstrap_markdown(bootstrap),
         encoding="utf-8",
