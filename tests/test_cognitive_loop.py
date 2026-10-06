@@ -118,7 +118,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.memory_routing_mode, "adaptive")
         self.assertEqual(proposal.memory_routing_selected_mode, "credit")
         self.assertEqual(proposal.memory_policy_version, 11)
@@ -210,7 +210,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
         self.assertEqual(proposal.memory_policy_stability_rate, 0.0)
         self.assertTrue(proposal.memory_policy_refresh_recommended)
@@ -264,7 +264,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.experience_version, 3)
         self.assertEqual(proposal.memory_policy_version, 1)
         self.assertEqual(proposal.memory_policy_freshness_age, 2)
@@ -298,7 +298,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v7")
         self.assertEqual(proposal.experience_version, 0)
         self.assertIsNone(proposal.memory_route)
         self.assertEqual(proposal.decision.source, "structural_regime")
