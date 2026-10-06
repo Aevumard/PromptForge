@@ -49,6 +49,11 @@ class AgentCorpusPolicyTests(unittest.TestCase):
             "ActionExecutionGuard",
             "idempotency key",
             "action-execution.v1",
+        ):
+            self.assertIn(token, self.agents + "\n" + self.readme)
+
+    def test_token_budget_boundary_is_wired(self):
+        for token in (
             "ContextBudgetPlanner",
             "utility-aware packing",
             "reserve headroom",
