@@ -215,3 +215,31 @@ Retrieval: clear separation between candidate generation and evidence admission.
 Evaluation: metric-first optimization with leakage-safe holdouts and explicit baselines.
 
 These patterns complement PromptForge's existing epistemic, temporal, memory, exploration, confidence, and action-control boundaries. They do not replace them.
+
+## 13. Token-efficient context management
+
+Additional external pattern basis: current Pydantic AI / Harness compaction, LangGraph pre-model context hooks, and LlamaIndex token-window helpers.
+
+Observed external pattern:
+- long-running agents need explicit context-window management before model calls;
+- compaction can trim, clear, or summarize older material while preserving recent/tool-call integrity;
+- load-bearing information can be pinned so compaction cannot silently remove it;
+- compaction receipts can tell the model that older history is secondhand and should be re-verified;
+- token limits belong to the context-management layer rather than being left to a provider failure;
+- retrieval/truncation utilities should expose token limits explicitly.
+
+PromptForge adoption:
+1. `ContextBudgetPolicy` makes the input-token budget and reserved headroom explicit.
+2. `ContextBlock(required=True)` is the pinning boundary: required material cannot be displaced by optional material.
+3. Optional blocks are packed deterministically using caller-supplied utility per token cost. PromptForge does not infer semantic utility from prose.
+4. `ContextBudgetPlan.compact_manifest()` exposes only a small audit/disclosure manifest for omitted blocks instead of re-injecting their full contents.
+5. `ContextBudgetPlan.tokens_saved` and `reduction_ratio` quantify mechanical savings against the supplied baseline.
+6. A caller can inject an exact provider tokenizer; otherwise the existing dependency-free byte-based estimate is used.
+7. Budget overflow of required information fails closed. PromptForge never silently drops a required field to satisfy a token budget.
+8. This layer does not summarize or rewrite evidence. Semantic compression belongs to an explicitly validated upstream/downstream component.
+
+The efficient boundary is:
+
+`inspect -> identify required/pinned blocks -> reserve headroom -> utility-aware packing -> compact omission manifest -> model request`
+
+Token reduction must remain an operational optimization, not a claim that fewer tokens always improves model quality.
