@@ -197,7 +197,19 @@ def parse_prediction(payload: Mapping[str, Any], *, ticket_id: str) -> Predictio
 
 def _epistemic_summary(case: TicketCase) -> dict[str, Any]:
     records = tuple(
-        EvidenceRecord.from_mapping(item)
+        EvidenceRecord(
+            evidence_id=str(item["evidence_id"]),
+            content=(
+                "Metadata-only evidence record "
+                f"{item['evidence_id']} from source {item['source']}."
+            ),
+            kind=str(item.get("kind", "observation")),
+            stance=str(item["stance"]),
+            source=str(item["source"]),
+            timestamp=float(item["timestamp"]),
+            relevance=float(item["relevance"]),
+            reliability=float(item["reliability"]),
+        )
         for item in case.evidence
     )
     result = EpistemicContextCompiler().compile(records)
@@ -212,7 +224,8 @@ def _epistemic_summary(case: TicketCase) -> dict[str, Any]:
         "hypothesis_ids": list(result.hypothesis_ids),
         "inference_ids": list(result.inference_ids),
         "observation_ids": list(result.observation_ids),
-        "estimated_tokens": result.estimated_tokens,
+        "compiler_estimated_tokens": result.estimated_tokens,
+        "representation": "metadata_only",
         "budget_satisfied": result.budget_satisfied,
         "audit": {
             "input_count": result.audit["input_count"],
