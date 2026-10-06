@@ -1,4 +1,4 @@
-# V27.10 — controlled PromptForge ablation
+# V27.11 — controlled PromptForge ablation + operational telemetry
 
 V27.10 turns the 1,200-ticket benchmark into a controlled layer-ablation
 experiment.
@@ -37,8 +37,8 @@ This experiment separates three effects that were previously mixed together:
 - epistemic context control,
 - action safety enforcement.
 
-The report keeps raw model quality and guarded safety metrics separate.
+The report keeps raw model quality and guarded safety metrics separate. It also records per-ticket elapsed time and reports latency p50/p95 so quality gains can be evaluated against operational cost.
 
 This does not establish causal effect in a strict statistical sense. The model
 may still be nondeterministic, and provider-side behavior can vary between calls.
-The result is a controlled engineering ablation over a deterministic benchmark.
+The result is a controlled engineering ablation over a deterministic benchmark. Latency is wall-clock benchmark telemetry, not provider billing or token-usage accounting.
