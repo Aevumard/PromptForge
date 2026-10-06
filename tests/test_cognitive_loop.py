@@ -87,6 +87,41 @@ class CognitiveLoopTests(unittest.TestCase):
             proposal.action_decision.blocked_action_ids,
         )
 
+    def test_credit_memory_can_apply_temporal_guard(self):
+        from promptforge import ContextMemoryTemporalPolicy
+
+        loop = ContextCognitiveLoop(
+            memory_routing_mode="credit",
+            memory_top_k=2,
+            memory_temporal_policy=ContextMemoryTemporalPolicy(
+                blocked_sources=("untrusted",),
+            ),
+        )
+
+        first = loop.propose(
+            cycle_id="cycle-trusted",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            first,
+            family_id="family-a",
+            cost=1.0,
+            strategy="selection_only",
+        )
+
+        second = loop.propose(
+            cycle_id="cycle-trusted-2",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+
+        self.assertIsNotNone(second.memory_route)
+        self.assertTrue(second.memory_route.temporal_policy_applied)
+        self.assertEqual(second.memory_route.temporal_as_of_index, 0)
+
     def test_adaptive_mode_without_policy_falls_back_to_nearest(self):
         loop = ContextCognitiveLoop(memory_routing_mode="adaptive")
         proposal = loop.propose(
