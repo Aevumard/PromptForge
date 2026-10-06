@@ -76,6 +76,9 @@ class ActionPolicy:
     require_support_stance: bool = False
     allowed_support_stances: tuple[str, ...] = ("supports",)
     require_support_tag_match: bool = False
+    require_support_quality: bool = False
+    min_support_relevance: float = 0.50
+    min_support_reliability: float = 0.50
 
     def __post_init__(self) -> None:
         weights = (
@@ -129,6 +132,19 @@ class ActionPolicy:
             raise ValueError("allowed_support_stances must be unique")
         if not isinstance(self.require_support_tag_match, bool):
             raise TypeError("require_support_tag_match must be a bool")
+        if not isinstance(self.require_support_quality, bool):
+            raise TypeError("require_support_quality must be a bool")
+        for name, value in (
+            ("min_support_relevance", self.min_support_relevance),
+            ("min_support_reliability", self.min_support_reliability),
+        ):
+            if (
+                not isinstance(value, (int, float))
+                or isinstance(value, bool)
+                or not isfinite(float(value))
+                or not 0.0 <= float(value) <= 1.0
+            ):
+                raise ValueError(f"{name} must be between 0.0 and 1.0")
 
 
 @dataclass(frozen=True)
@@ -143,6 +159,7 @@ class ActionDecision:
     support_evidence_ids: dict[str, tuple[str, ...]]
     support_evidence_stances: dict[str, dict[str, str]]
     support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]]
+    support_evidence_quality: dict[str, dict[str, dict[str, float]]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -158,6 +175,13 @@ class ActionDecision:
         payload["support_evidence_tag_matches"] = {
             key: {evidence_id: list(tags) for evidence_id, tags in value.items()}
             for key, value in self.support_evidence_tag_matches.items()
+        }
+        payload["support_evidence_quality"] = {
+            key: {
+                evidence_id: dict(metrics)
+                for evidence_id, metrics in value.items()
+            }
+            for key, value in self.support_evidence_quality.items()
         }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
@@ -198,6 +222,7 @@ class UncertaintyActionGate:
         support_evidence_by_action: dict[str, tuple[str, ...]] = {}
         support_evidence_stances: dict[str, dict[str, str]] = {}
         support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]] = {}
+        support_evidence_quality: dict[str, dict[str, dict[str, float]]] = {}
 
         snapshot_items = (
             evidence.context.get("evidence", [])
@@ -217,6 +242,16 @@ class UncertaintyActionGate:
             )
             for item in snapshot_items
             if str(item.get("evidence_id", "")).strip()
+        }
+        support_relevance_by_id = {
+            str(item.get("evidence_id", "")).strip(): float(item["relevance"])
+            for item in snapshot_items
+            if str(item.get("evidence_id", "")).strip() and "relevance" in item
+        }
+        support_reliability_by_id = {
+            str(item.get("evidence_id", "")).strip(): float(item["reliability"])
+            for item in snapshot_items
+            if str(item.get("evidence_id", "")).strip() and "reliability" in item
         }
 
         for action in actions:
@@ -245,6 +280,15 @@ class UncertaintyActionGate:
                     if tag in expected_support_tags
                 )
                 for evidence_id in support_ids
+            }
+            support_evidence_quality[action.action_id] = {
+                evidence_id: {
+                    "relevance": support_relevance_by_id[evidence_id],
+                    "reliability": support_reliability_by_id[evidence_id],
+                }
+                for evidence_id in support_ids
+                if evidence_id in support_relevance_by_id
+                and evidence_id in support_reliability_by_id
             }
 
             if evidence is not None and missing:
@@ -368,6 +412,68 @@ class UncertaintyActionGate:
                     )
                     continue
 
+            if self.policy.require_support_quality:
+                if not support_ids:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support quality cannot be checked without support anchors",
+                    )
+                    continue
+                if evidence is None:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support quality boundary was not supplied",
+                    )
+                    continue
+                missing_quality = sorted(
+                    evidence_id
+                    for evidence_id in support_ids
+                    if evidence_id not in support_evidence_quality[action.action_id]
+                )
+                if missing_quality:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence quality metadata unavailable",
+                        "missing_support_quality:" + ",".join(missing_quality),
+                    )
+                    continue
+                low_relevance = sorted(
+                    evidence_id
+                    for evidence_id in support_ids
+                    if support_relevance_by_id[evidence_id]
+                    < self.policy.min_support_relevance
+                )
+                low_reliability = sorted(
+                    evidence_id
+                    for evidence_id in support_ids
+                    if support_reliability_by_id[evidence_id]
+                    < self.policy.min_support_reliability
+                )
+                if low_relevance or low_reliability:
+                    details: list[str] = []
+                    if low_relevance:
+                        details.append(
+                            "low_support_relevance:"
+                            + ",".join(
+                                f"{evidence_id}={support_relevance_by_id[evidence_id]:.6g}"
+                                for evidence_id in low_relevance
+                            )
+                        )
+                    if low_reliability:
+                        details.append(
+                            "low_support_reliability:"
+                            + ",".join(
+                                f"{evidence_id}={support_reliability_by_id[evidence_id]:.6g}"
+                                for evidence_id in low_reliability
+                            )
+                        )
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence quality below threshold",
+                        *details,
+                    )
+                    continue
+
             if action.evidence_support < self.policy.min_evidence_support:
                 blocked.append(action.action_id)
                 reasons[action.action_id] = ("evidence support below threshold",)
@@ -414,7 +520,7 @@ class UncertaintyActionGate:
         ranked = tuple(action.action_id for _, action in scored)
 
         return ActionDecision(
-            schema_version="uncertainty-action.v4",
+            schema_version="uncertainty-action.v5",
             selected_action_id=ranked[0],
             ranked_action_ids=ranked,
             blocked_action_ids=tuple(blocked),
@@ -424,6 +530,7 @@ class UncertaintyActionGate:
             support_evidence_ids=support_evidence_by_action,
             support_evidence_stances=support_evidence_stances,
             support_evidence_tag_matches=support_evidence_tag_matches,
+            support_evidence_quality=support_evidence_quality,
         )
 
 
