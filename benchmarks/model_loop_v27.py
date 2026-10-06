@@ -247,10 +247,11 @@ def build_model_input(
     *,
     budget_tokens: int = 500,
     reserve_tokens: int = 50,
+    include_epistemic: bool = True,
 ) -> dict[str, Any]:
     """Construct the provider-neutral model packet through PromptForge."""
 
-    blocks = (
+    blocks = [
         ContextBlock(
             "ticket",
             {
@@ -260,13 +261,6 @@ def build_model_input(
             },
             required=True,
             path="ticket",
-        ),
-        ContextBlock(
-            "epistemic",
-            _epistemic_summary(case),
-            required=True,
-            utility=4.0,
-            path="epistemic",
         ),
         ContextBlock(
             "evidence",
@@ -280,9 +274,21 @@ def build_model_input(
             utility=1.0,
             path="history",
         ),
-    )
+    ]
+    if include_epistemic:
+        blocks.insert(
+            1,
+            ContextBlock(
+                "epistemic",
+                _epistemic_summary(case),
+                required=True,
+                utility=4.0,
+                path="epistemic",
+            ),
+        )
+
     preparation = prepare_agent_input(
-        blocks,
+        tuple(blocks),
         budget_tokens=budget_tokens,
         reserve_tokens=reserve_tokens,
         descriptions={
@@ -318,6 +324,7 @@ def run_model_loop(
     budget_tokens: int = 500,
     reserve_tokens: int = 50,
     apply_guard: bool = True,
+    include_epistemic: bool = True,
 ) -> ModelLoopReport:
     """Run an external model adapter through PromptForge and score both stages."""
 
@@ -331,6 +338,7 @@ def run_model_loop(
                 case,
                 budget_tokens=budget_tokens,
                 reserve_tokens=reserve_tokens,
+                include_epistemic=include_epistemic,
             )
             packet = model_input["promptforge"]
             payload = adapter.predict(model_input)
