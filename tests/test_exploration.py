@@ -4,6 +4,102 @@ from promptforge import ContextExplorationController
 
 
 class TestExplorationController(unittest.TestCase):
+    def test_adjudicator_accepts_repeated_challenger_gain(self):
+        from promptforge import (
+            ContextEpisode,
+            ContextExplorationAdjudicator,
+        )
+
+        episodes = []
+        for index, family in enumerate(("family-a", "family-b"), start=1):
+            topology = {"node_count": float(index), "max_depth": 2.0}
+            episodes.extend(
+                (
+                    ContextEpisode(
+                        episode_id=f"episode-{index}",
+                        family_id=family,
+                        strategy="incumbent",
+                        cost=10.0,
+                        topology=topology,
+                    ),
+                    ContextEpisode(
+                        episode_id=f"episode-{index}",
+                        family_id=family,
+                        strategy="challenger",
+                        cost=8.0,
+                        topology=topology,
+                        action="probe",
+                        source="bounded_exploration",
+                    ),
+                )
+            )
+
+        decision = ContextExplorationAdjudicator(
+            min_comparisons=2,
+            min_families=2,
+            min_win_rate=1.0,
+            min_relative_gain=0.10,
+        ).decide(episodes)
+
+        self.assertTrue(decision.eligible)
+        self.assertEqual(decision.strategy, "challenger")
+        self.assertEqual(decision.baseline_strategy, "incumbent")
+        self.assertEqual(decision.comparisons, 2)
+        self.assertEqual(decision.families, 2)
+        self.assertEqual(decision.win_rate, 1.0)
+        self.assertAlmostEqual(decision.mean_relative_gain, 0.2)
+        self.assertEqual(decision.reason, "challenger_meets_evidence_gate")
+
+    def test_adjudicator_rejects_single_family_evidence(self):
+        from promptforge import ContextEpisode, ContextExplorationAdjudicator
+
+        episodes = [
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="incumbent",
+                cost=10.0,
+                topology={"node_count": 1.0},
+            ),
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="challenger",
+                cost=8.0,
+                topology={"node_count": 1.0},
+                action="probe",
+                source="bounded_exploration",
+            ),
+        ]
+
+        decision = ContextExplorationAdjudicator(
+            min_comparisons=2,
+            min_families=2,
+        ).decide(episodes)
+
+        self.assertFalse(decision.eligible)
+        self.assertEqual(decision.reason, "insufficient_comparisons")
+
+    def test_adjudicator_ignores_unpaired_probe(self):
+        from promptforge import ContextEpisode, ContextExplorationAdjudicator
+
+        episodes = [
+            ContextEpisode(
+                episode_id="probe-only",
+                family_id="family-a",
+                strategy="challenger",
+                cost=7.0,
+                topology={"node_count": 1.0},
+                action="probe",
+                source="bounded_exploration",
+            )
+        ]
+
+        decision = ContextExplorationAdjudicator().decide(episodes)
+
+        self.assertFalse(decision.eligible)
+        self.assertEqual(decision.reason, "no_comparable_probe_evidence")
+
     def test_coverage_gap_selects_unobserved_alternative(self):
         controller = ContextExplorationController(
             novelty_threshold=3.0,
