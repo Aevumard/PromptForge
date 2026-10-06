@@ -113,13 +113,13 @@ class ContextMemoryCreditPolicy:
                 for strategy, mean_cost in means.items()
                 if mean_cost == oracle_cost
             }
-            for strategy, mean_cost in means.items():
+            for strategy in means:
                 if strategy in best_strategies and len(best_strategies) > 1:
-                    outcome = 0.0
+                    outcome = 0
                 elif strategy in best_strategies:
-                    outcome = -1.0
+                    outcome = -1
                 else:
-                    outcome = 1.0
+                    outcome = 1
                 comparisons[(family_id, strategy)].append(
                     (outcome, strategy)
                 )
@@ -193,9 +193,6 @@ class ContextMemoryCreditPolicy:
                 ),
             )
         )
-
-
-__all__ = ["ContextMemoryCredit", "ContextMemoryCreditPolicy"]
 
 
 @dataclass(frozen=True)
