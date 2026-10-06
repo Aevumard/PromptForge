@@ -140,7 +140,7 @@ def run_ablation_suite(
         )
 
     return AblationReport(
-        schema_version="promptforge-v27.10-ablation-suite.v1",
+        schema_version="promptforge-v27.11-ablation-suite.v1",
         count=len(cases),
         seed=seed,
         results=tuple(results),
