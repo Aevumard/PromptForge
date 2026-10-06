@@ -51,7 +51,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v1")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v2")
         self.assertEqual(proposal.experience_version, 0)
         self.assertIsNone(proposal.memory_route)
         self.assertEqual(proposal.decision.source, "structural_regime")
