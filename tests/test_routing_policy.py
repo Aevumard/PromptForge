@@ -42,6 +42,21 @@ class RoutingPolicyTests(unittest.TestCase):
 
         self.assertEqual(selected, "credit")
 
+    def test_policy_selector_ties_prefer_nearest_baseline(self):
+        evidence = ContextRoutingPolicyEvidence(
+            version=4,
+            scores=(
+                ContextRoutingModeScore("nearest", 10, 3, 0.6, 1.0, 0.2),
+                ContextRoutingModeScore("credit", 10, 3, 0.6, 1.0, 0.2),
+            ),
+            selected_mode="credit",
+        )
+
+        self.assertEqual(
+            ContextRoutingPolicySelector().select(evidence),
+            "nearest",
+        )
+
     def test_policy_selector_falls_back_when_evidence_is_insufficient(self):
         evidence = ContextRoutingPolicyEvidence(
             version=1,
