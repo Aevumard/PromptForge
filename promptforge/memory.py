@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from math import isfinite, sqrt
 from typing import Any, Mapping, Sequence
 
@@ -44,6 +44,12 @@ class ContextEpisode:
     strategy: str
     cost: float
     topology: Mapping[str, Any]
+    action: str = "select"
+    source: str = "unknown"
+    regime: str = "unknown"
+    novelty_distance: float | None = None
+    trajectory_state: str | None = None
+    outcome: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if not self.episode_id:
@@ -55,6 +61,21 @@ class ContextEpisode:
         cost = float(self.cost)
         if not isfinite(cost) or cost < 0.0:
             raise ValueError("cost must be a finite non-negative number")
+        if not self.action:
+            raise ValueError("action must not be empty")
+        if not self.source:
+            raise ValueError("source must not be empty")
+        if not self.regime:
+            raise ValueError("regime must not be empty")
+        if self.novelty_distance is not None:
+            novelty = float(self.novelty_distance)
+            if not isfinite(novelty) or novelty < 0.0:
+                raise ValueError("novelty_distance must be finite and non-negative")
+        if not isinstance(self.outcome, Mapping):
+            raise TypeError("outcome must be a mapping")
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
     def vector(self, features: Sequence[str] | None = None) -> tuple[float, ...]:
         selected = resolve_routing_features(features)
