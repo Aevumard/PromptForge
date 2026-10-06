@@ -466,6 +466,55 @@ def leave_one_family_out(
     return tuple(folds)
 
 
+def experience_summary(
+    episodes: Sequence[ContextEpisode],
+) -> dict[str, Any]:
+    """Summarize observed experience without inferring causal effects."""
+    if not episodes:
+        return {
+            "episodes": 0,
+            "families": 0,
+            "strategies": 0,
+            "mean_cost": 0.0,
+            "mean_novelty_distance": 0.0,
+            "actions": {},
+            "sources": {},
+            "regimes": {},
+            "trajectory_states": {},
+        }
+
+    def counts(values: Sequence[str]) -> dict[str, int]:
+        result: dict[str, int] = {}
+        for value in values:
+            result[value] = result.get(value, 0) + 1
+        return dict(sorted(result.items()))
+
+    novelty_values = [
+        float(episode.novelty_distance)
+        for episode in episodes
+        if episode.novelty_distance is not None
+    ]
+    trajectory_states = [
+        episode.trajectory_state
+        for episode in episodes
+        if episode.trajectory_state is not None
+    ]
+    return {
+        "episodes": len(episodes),
+        "families": len({episode.family_id for episode in episodes}),
+        "strategies": len({episode.strategy for episode in episodes}),
+        "mean_cost": sum(float(episode.cost) for episode in episodes) / len(episodes),
+        "mean_novelty_distance": (
+            sum(novelty_values) / len(novelty_values)
+            if novelty_values
+            else 0.0
+        ),
+        "actions": counts([episode.action for episode in episodes]),
+        "sources": counts([episode.source for episode in episodes]),
+        "regimes": counts([episode.regime for episode in episodes]),
+        "trajectory_states": counts(trajectory_states),
+    }
+
 def routing_summary(
     evaluations: Sequence[ContextRoutingEvaluation],
 ) -> dict[str, int | float]:
@@ -507,5 +556,6 @@ __all__ = [
     "leave_one_family_out",
     "resolve_routing_features",
     "routing_summary",
+    "experience_summary",
     "topology_vector",
 ]
