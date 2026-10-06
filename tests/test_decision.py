@@ -540,6 +540,208 @@ class UncertaintyActionGateTests(unittest.TestCase):
                 support_evidence_tags=("   ",),
             )
 
+    def test_support_quality_blocks_low_relevance_even_when_stance_and_tags_match(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "weak",
+                    "explicitly supporting but low relevance",
+                    timestamp=10,
+                    stance="supports",
+                    relevance=0.30,
+                    reliability=0.95,
+                    tags=("runtime",),
+                ),
+                EvidenceRecord(
+                    "strong",
+                    "support with adequate metadata",
+                    timestamp=11,
+                    stance="supports",
+                    relevance=0.90,
+                    reliability=0.90,
+                    tags=("runtime",),
+                ),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "weak_action",
+                "high score but weak evidence quality",
+                evidence_support=0.99,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("weak",),
+                support_evidence_tags=("runtime",),
+            ),
+            ActionCandidate(
+                "strong_action",
+                "supported action",
+                evidence_support=0.80,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("strong",),
+                support_evidence_tags=("runtime",),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_quality=True,
+                min_support_relevance=0.70,
+                min_support_reliability=0.70,
+            )
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "strong_action")
+        self.assertIn("weak_action", decision.blocked_action_ids)
+        self.assertIn(
+            "support evidence quality below threshold",
+            decision.reasons["weak_action"],
+        )
+        self.assertIn(
+            "low_support_relevance:weak=0.3",
+            decision.reasons["weak_action"],
+        )
+
+    def test_support_quality_blocks_low_reliability(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "uncertain_source",
+                    "support with low declared reliability",
+                    timestamp=10,
+                    stance="supports",
+                    relevance=0.95,
+                    reliability=0.20,
+                    tags=("runtime",),
+                ),
+                EvidenceRecord(
+                    "trusted_source",
+                    "support with sufficient declared reliability",
+                    timestamp=11,
+                    stance="supports",
+                    relevance=0.95,
+                    reliability=0.95,
+                    tags=("runtime",),
+                ),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "uncertain_action",
+                "low reliability support",
+                evidence_support=0.99,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("uncertain_source",),
+                support_evidence_tags=("runtime",),
+            ),
+            ActionCandidate(
+                "trusted_action",
+                "trusted support",
+                evidence_support=0.80,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("trusted_source",),
+                support_evidence_tags=("runtime",),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_quality=True,
+                min_support_relevance=0.70,
+                min_support_reliability=0.70,
+            )
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "trusted_action")
+        self.assertIn("uncertain_action", decision.blocked_action_ids)
+        self.assertIn(
+            "low_support_reliability:uncertain_source=0.2",
+            decision.reasons["uncertain_action"],
+        )
+
+    def test_support_quality_passes_and_is_audited(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "e1",
+                    "good support",
+                    timestamp=10,
+                    stance="supports",
+                    relevance=0.85,
+                    reliability=0.90,
+                    tags=("runtime",),
+                ),
+                EvidenceRecord(
+                    "e2",
+                    "second good support",
+                    timestamp=11,
+                    stance="supports",
+                    relevance=0.75,
+                    reliability=0.80,
+                    tags=("runtime",),
+                ),
+            ]
+        )
+        action = ActionCandidate(
+            "quality_checked",
+            "quality checked support",
+            evidence_support=0.90,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1", "e2"),
+            support_evidence_tags=("runtime",),
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_quality=True,
+                min_support_relevance=0.70,
+                min_support_reliability=0.70,
+            )
+        ).decide([action], evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "quality_checked")
+        self.assertEqual(
+            decision.support_evidence_quality["quality_checked"],
+            {
+                "e1": {"relevance": 0.85, "reliability": 0.90},
+                "e2": {"relevance": 0.75, "reliability": 0.80},
+            },
+        )
+        self.assertEqual(
+            decision.to_dict()["support_evidence_quality"]["quality_checked"],
+            {
+                "e1": {"relevance": 0.85, "reliability": 0.90},
+                "e2": {"relevance": 0.75, "reliability": 0.80},
+            },
+        )
+
+    def test_support_quality_requires_evidence_boundary(self):
+        action = ActionCandidate(
+            "quality_required",
+            "needs evidence quality boundary",
+            evidence_support=0.9,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1",),
+        )
+
+        with self.assertRaises(ValueError):
+            UncertaintyActionGate(
+                ActionPolicy(require_support_quality=True)
+            ).decide([action])
+
+    def test_invalid_support_quality_policy_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ActionPolicy(min_support_relevance=-0.1)
+        with self.assertRaises(ValueError):
+            ActionPolicy(min_support_reliability=1.1)
+        with self.assertRaises(TypeError):
+            ActionPolicy(require_support_quality="yes")
+
     def test_causal_dependence_is_a_penalty_not_a_truth_claim(self):
         actions = [
             ActionCandidate(

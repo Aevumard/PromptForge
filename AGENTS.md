@@ -396,6 +396,14 @@ Boundary: epistemic evidence -> explicit action support anchors -> feasibility a
 
 Boundary: epistemic evidence -> support anchors -> stance admissibility -> explicit relevance-tag admissibility -> feasibility and safety gates -> action ranking
 
+## Action support quality guard
+
+`ActionPolicy.require_support_quality=True` adds an explicit per-anchor quality gate using the retained evidence's caller-supplied `relevance` and `reliability` metadata. `min_support_relevance` and `min_support_reliability` define the floors. Missing metadata or a value below either floor fails closed. `ActionDecision.support_evidence_quality` preserves the declared values for auditability.
+
+These fields are admissibility metadata only. PromptForge does not independently validate them and does not interpret them as truth, causal strength, or statistical power. The default remains unchanged when the guard is disabled.
+
+Boundary: epistemic evidence -> support anchors -> stance admissibility -> explicit relevance tags -> quality floors -> feasibility and safety gates -> action ranking
+
 ## Hypothesis source cap
 
 HypothesisEvidencePolicy can limit how many support or contradiction records from one declared source contribute to an assessment. Selected and excluded evidence ids remain auditable. Unknown sources can remain isolated per evidence id. This is an operational corroboration safeguard, not a truth claim.
