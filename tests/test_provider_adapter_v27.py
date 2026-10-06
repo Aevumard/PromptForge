@@ -184,8 +184,16 @@ class ProviderAdapterTests(TestCase):
                 "benchmarks.providers.openai_compatible.render_markdown",
                 return_value="# analysis",
             ),
+            patch(
+                "benchmarks.providers.openai_compatible.analyze_bootstrap"
+            ) as bootstrap,
+            patch(
+                "benchmarks.providers.openai_compatible.render_bootstrap_markdown",
+                return_value="# bootstrap",
+            ),
         ):
-            analyze.return_value.to_dict.return_value = {"summary": {}}
+            analyze.return_value.to_dict.return_value = {"summary": {}, "records": []}
+            bootstrap.return_value.to_dict.return_value = {"summary": {}}
             self.assertEqual(main(), 0)
 
         kwargs = run.call_args.kwargs
@@ -193,6 +201,7 @@ class ProviderAdapterTests(TestCase):
         self.assertTrue(kwargs["retry_failed"])
         self.assertTrue(kwargs["fsync_each_record"])
         analyze.assert_called_once()
+        bootstrap.assert_called_once()
 
     def test_from_env_requires_endpoint_and_model(self) -> None:
         with patch.dict(os.environ, {}, clear=True):

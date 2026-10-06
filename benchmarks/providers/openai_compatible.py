@@ -10,6 +10,10 @@ from typing import Any, Mapping
 import urllib.error
 import urllib.request
 
+from benchmarks.analyze_bootstrap_v27 import (
+    analyze_bootstrap,
+    render_markdown as render_bootstrap_markdown,
+)
 from benchmarks.analyze_model_run_v27 import analyze_report, render_markdown
 from benchmarks.model_loop_v27 import ModelLoopReport
 from benchmarks.resumable_model_loop_v27 import run_resumable_model_loop
@@ -360,6 +364,10 @@ def main() -> int:
     parser.add_argument("--report", default="model_report.json")
     parser.add_argument("--analysis-json", default="experiment_analysis.json")
     parser.add_argument("--analysis-markdown", default="experiment_analysis.md")
+    parser.add_argument("--bootstrap-json", default="bootstrap_analysis.json")
+    parser.add_argument("--bootstrap-markdown", default="bootstrap_analysis.md")
+    parser.add_argument("--bootstrap-resamples", type=int, default=2000)
+    parser.add_argument("--bootstrap-confidence", type=float, default=0.95)
     parser.add_argument(
         "--checkpoint",
         default="model_run.checkpoint.jsonl",
@@ -410,6 +418,22 @@ def main() -> int:
     )
     Path(args.analysis_markdown).write_text(
         render_markdown(analysis),
+        encoding="utf-8",
+    )
+
+    bootstrap = analyze_bootstrap(
+        report.to_dict(),
+        cases,
+        seed=args.seed,
+        resamples=args.bootstrap_resamples,
+        confidence_level=args.bootstrap_confidence,
+    )
+    Path(args.bootstrap_json).write_text(
+        json.dumps(bootstrap.to_dict(), indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    Path(args.bootstrap_markdown).write_text(
+        render_bootstrap_markdown(bootstrap),
         encoding="utf-8",
     )
 
