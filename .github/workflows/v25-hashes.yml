@@ -1,0 +1,14 @@
+name: V25 Hashes
+
+on:
+  push:
+    branches: [feature/v25-action-support-quality]
+
+jobs:
+  hashes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SHA256
+        run: |
+          sha256sum AGENTS.md README.md promptforge/decision.py tests/test_decision.py
