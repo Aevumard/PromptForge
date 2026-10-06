@@ -30,6 +30,299 @@ class ContextExplorationDecision:
         return payload
 
 
+@dataclass(frozen=True)
+class ContextExplorationStrategyEvidence:
+    """Aggregated within-episode evidence for one explored challenger."""
+
+    strategy: str
+    baseline_strategy: str | None
+    comparisons: int
+    families: int
+    wins: int
+    losses: int
+    mean_relative_gain: float
+    mean_absolute_gain: float
+
+    @property
+    def win_rate(self) -> float:
+        if self.comparisons <= 0:
+            return 0.0
+        return self.wins / self.comparisons
+
+    def to_dict(self) -> dict:
+        payload = asdict(self)
+        payload["win_rate"] = self.win_rate
+        return payload
+
+
+@dataclass(frozen=True)
+class ContextExplorationAdoptionDecision:
+    """Conservative decision about whether a challenger has enough evidence."""
+
+    strategy: str | None
+    baseline_strategy: str | None
+    eligible: bool
+    comparisons: int
+    families: int
+    win_rate: float
+    mean_relative_gain: float
+    mean_absolute_gain: float
+    min_comparisons: int
+    min_families: int
+    min_win_rate: float
+    min_relative_gain: float
+    reason: str
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+class ContextExplorationAdjudicator:
+    """Compare explored challengers against observed incumbents.
+
+    Only within-episode comparisons are used. A probe with no observed
+    incumbent in the same episode cannot establish a challenger advantage.
+    The adjudicator is descriptive and does not mutate memory or policy.
+    """
+
+    def __init__(
+        self,
+        *,
+        min_comparisons: int = 2,
+        min_families: int = 2,
+        min_win_rate: float = 0.60,
+        min_relative_gain: float = 0.01,
+    ) -> None:
+        if min_comparisons < 1:
+            raise ValueError("min_comparisons must be at least 1")
+        if min_families < 1:
+            raise ValueError("min_families must be at least 1")
+        if not 0.0 <= min_win_rate <= 1.0:
+            raise ValueError("min_win_rate must be between 0.0 and 1.0")
+        if min_relative_gain < 0.0:
+            raise ValueError("min_relative_gain must be non-negative")
+
+        self.min_comparisons = int(min_comparisons)
+        self.min_families = int(min_families)
+        self.min_win_rate = float(min_win_rate)
+        self.min_relative_gain = float(min_relative_gain)
+
+    @staticmethod
+    def _group(
+        episodes: Sequence["ContextEpisode"],
+    ) -> dict[str, list["ContextEpisode"]]:
+        from .memory import ContextEpisode
+
+        grouped: dict[str, list[ContextEpisode]] = {}
+        for episode in episodes:
+            grouped.setdefault(episode.episode_id, []).append(episode)
+        return grouped
+
+    def assess(
+        self,
+        episodes: Sequence["ContextEpisode"],
+    ) -> tuple[ContextExplorationStrategyEvidence, ...]:
+        """Aggregate comparable probe outcomes from an immutable episode set."""
+        grouped = self._group(episodes)
+        evidence: dict[str, list[tuple[str, float, float, bool]]] = {}
+
+        for group in grouped.values():
+            explored = [
+                episode
+                for episode in group
+                if episode.action == "probe"
+                or episode.source == "bounded_exploration"
+            ]
+            if not explored:
+                continue
+
+            incumbents = [
+                episode
+                for episode in group
+                if not (
+                    episode.action == "probe"
+                    or episode.source == "bounded_exploration"
+                )
+            ]
+            if not incumbents:
+                continue
+
+            baseline = min(
+                incumbents,
+                key=lambda episode: (float(episode.cost), episode.strategy),
+            )
+            baseline_cost = float(baseline.cost)
+
+            for challenger in explored:
+                challenger_cost = float(challenger.cost)
+                absolute_gain = baseline_cost - challenger_cost
+                relative_gain = (
+                    absolute_gain / baseline_cost
+                    if baseline_cost > 0.0
+                    else 0.0
+                )
+                evidence.setdefault(challenger.strategy, []).append(
+                    (
+                        challenger.family_id,
+                        absolute_gain,
+                        relative_gain,
+                        absolute_gain >= 0.0,
+                    )
+                )
+
+        results: list[ContextExplorationStrategyEvidence] = []
+        for strategy, rows in sorted(evidence.items()):
+            families = {row[0] for row in rows}
+            wins = sum(row[3] for row in rows)
+            losses = len(rows) - wins
+            baseline_by_row = []
+            for family_id, absolute_gain, relative_gain, _ in rows:
+                baseline_by_row.append((family_id, absolute_gain))
+
+            baseline_strategy = None
+            for group in grouped.values():
+                for challenger in group:
+                    if (
+                        challenger.strategy == strategy
+                        and (
+                            challenger.action == "probe"
+                            or challenger.source == "bounded_exploration"
+                        )
+                    ):
+                        incumbents = [
+                            episode
+                            for episode in group
+                            if not (
+                                episode.action == "probe"
+                                or episode.source == "bounded_exploration"
+                            )
+                        ]
+                        if incumbents:
+                            baseline_strategy = min(
+                                incumbents,
+                                key=lambda episode: (
+                                    float(episode.cost),
+                                    episode.strategy,
+                                ),
+                            ).strategy
+                            break
+                if baseline_strategy is not None:
+                    break
+
+            results.append(
+                ContextExplorationStrategyEvidence(
+                    strategy=strategy,
+                    baseline_strategy=baseline_strategy,
+                    comparisons=len(rows),
+                    families=len(families),
+                    wins=wins,
+                    losses=losses,
+                    mean_relative_gain=(
+                        sum(row[2] for row in rows) / len(rows)
+                        if rows
+                        else 0.0
+                    ),
+                    mean_absolute_gain=(
+                        sum(row[1] for row in rows) / len(rows)
+                        if rows
+                        else 0.0
+                    ),
+                )
+            )
+
+        return tuple(results)
+
+    def decide(
+        self,
+        episodes: Sequence["ContextEpisode"],
+        *,
+        preferred_strategy: str | None = None,
+    ) -> ContextExplorationAdoptionDecision:
+        evidence = self.assess(episodes)
+        eligible = [
+            item
+            for item in evidence
+            if item.comparisons >= self.min_comparisons
+            and item.families >= self.min_families
+            and item.win_rate >= self.min_win_rate
+            and item.mean_relative_gain >= self.min_relative_gain
+            and (
+                preferred_strategy is None
+                or item.strategy != preferred_strategy
+            )
+        ]
+
+        if eligible:
+            selected = max(
+                eligible,
+                key=lambda item: (
+                    item.win_rate,
+                    item.mean_relative_gain,
+                    item.comparisons,
+                    item.strategy,
+                ),
+            )
+            return ContextExplorationAdoptionDecision(
+                strategy=selected.strategy,
+                baseline_strategy=selected.baseline_strategy,
+                eligible=True,
+                comparisons=selected.comparisons,
+                families=selected.families,
+                win_rate=selected.win_rate,
+                mean_relative_gain=selected.mean_relative_gain,
+                mean_absolute_gain=selected.mean_absolute_gain,
+                min_comparisons=self.min_comparisons,
+                min_families=self.min_families,
+                min_win_rate=self.min_win_rate,
+                min_relative_gain=self.min_relative_gain,
+                reason="challenger_meets_evidence_gate",
+            )
+
+        best = (
+            max(
+                evidence,
+                key=lambda item: (
+                    item.win_rate,
+                    item.mean_relative_gain,
+                    item.comparisons,
+                    item.strategy,
+                ),
+            )
+            if evidence
+            else None
+        )
+        if best is None:
+            reason = "no_comparable_probe_evidence"
+        elif best.comparisons < self.min_comparisons:
+            reason = "insufficient_comparisons"
+        elif best.families < self.min_families:
+            reason = "insufficient_families"
+        elif best.win_rate < self.min_win_rate:
+            reason = "win_rate_below_threshold"
+        else:
+            reason = "relative_gain_below_threshold"
+
+        return ContextExplorationAdoptionDecision(
+            strategy=(best.strategy if best is not None else None),
+            baseline_strategy=(best.baseline_strategy if best is not None else None),
+            eligible=False,
+            comparisons=(best.comparisons if best is not None else 0),
+            families=(best.families if best is not None else 0),
+            win_rate=(best.win_rate if best is not None else 0.0),
+            mean_relative_gain=(
+                best.mean_relative_gain if best is not None else 0.0
+            ),
+            mean_absolute_gain=(
+                best.mean_absolute_gain if best is not None else 0.0
+            ),
+            min_comparisons=self.min_comparisons,
+            min_families=self.min_families,
+            min_win_rate=self.min_win_rate,
+            min_relative_gain=self.min_relative_gain,
+            reason=reason,
+        )
+
+
 class ContextExplorationController:
     """Bounded deterministic exploration over already-available strategies.
 
@@ -221,5 +514,8 @@ class ContextExplorationController:
 
 __all__ = [
     "ContextExplorationDecision",
+    "ContextExplorationStrategyEvidence",
+    "ContextExplorationAdoptionDecision",
+    "ContextExplorationAdjudicator",
     "ContextExplorationController",
 ]
