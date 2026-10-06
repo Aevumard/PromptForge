@@ -73,6 +73,41 @@ class RoutingPolicyHistoryTests(unittest.TestCase):
             (("nearest", 2), ("credit", 2)),
         )
 
+
+    def test_health_requires_enough_stable_observations(self):
+        history = ContextRoutingPolicyHistory()
+        history.record(evidence(1, "nearest"))
+        health = history.health(min_observations=2)
+
+        self.assertFalse(health.stable)
+        self.assertTrue(health.refresh_recommended)
+        self.assertEqual(health.mode, "nearest")
+
+    def test_health_detects_policy_oscillation(self):
+        history = ContextRoutingPolicyHistory()
+        history.record(evidence(1, "nearest"))
+        history.record(evidence(2, "credit"))
+        history.record(evidence(3, "nearest"))
+
+        health = history.health(min_observations=3, min_stability=0.5)
+        self.assertFalse(health.stable)
+        self.assertTrue(health.refresh_recommended)
+        self.assertEqual(health.switch_count, 2)
+        self.assertAlmostEqual(health.stability_rate, 0.0)
+
+    def test_health_accepts_stable_recent_window(self):
+        history = ContextRoutingPolicyHistory()
+        history.record(evidence(1, "nearest"))
+        history.record(evidence(2, "credit"))
+        history.record(evidence(3, "credit"))
+        history.record(evidence(4, "credit"))
+
+        health = history.health(window=3, min_observations=2, min_stability=1.0)
+        self.assertTrue(health.stable)
+        self.assertFalse(health.refresh_recommended)
+        self.assertEqual(health.mode, "credit")
+        self.assertEqual(health.stability_rate, 1.0)
+
     def test_backward_policy_versions_are_rejected(self):
         history = ContextRoutingPolicyHistory()
         history.record(evidence(5, "nearest"))
