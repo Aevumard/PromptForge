@@ -37,12 +37,17 @@ class AgentCorpusPolicyTests(unittest.TestCase):
             "later outcomes may improve future policy evidence",
             "metric-first",
             "human intervention",
-            "HumanReviewRecord",
-            "fresh `ActionDecision`",
-            "human-review.v1",
         ]
         for token in checks:
             self.assertIn(token, self.external)
+
+    def test_durable_human_review_boundary_is_wired(self):
+        for token in (
+            "HumanReviewRecord",
+            "fresh `ActionDecision`",
+            "human-review.v1",
+        ):
+            self.assertIn(token, self.agents + "\n" + self.readme)
 
 
 if __name__ == "__main__":
