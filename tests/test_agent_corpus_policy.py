@@ -37,6 +37,9 @@ class AgentCorpusPolicyTests(unittest.TestCase):
             "later outcomes may improve future policy evidence",
             "metric-first",
             "human intervention",
+            "HumanReviewRecord",
+            "fresh `ActionDecision`",
+            "human-review.v1",
         ]
         for token in checks:
             self.assertIn(token, self.external)
