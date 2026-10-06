@@ -417,6 +417,32 @@ def run_model_loop(
                     omitted_context_ids=tuple(
                         packet["omitted_context_ids"]
                     ),
+                    elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                    provider_elapsed_ms=float(
+                        getattr(adapter_telemetry, "elapsed_ms", 0.0)
+                    )
+                    if adapter_telemetry is not None
+                    else 0.0,
+                    provider_attempts=int(
+                        getattr(adapter_telemetry, "attempts", 0)
+                    )
+                    if adapter_telemetry is not None
+                    else 0,
+                    provider_prompt_tokens=getattr(
+                        adapter_telemetry, "prompt_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
+                    provider_completion_tokens=getattr(
+                        adapter_telemetry, "completion_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
+                    provider_total_tokens=getattr(
+                        adapter_telemetry, "total_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
                 )
             )
         except Exception as exc:
@@ -464,7 +490,7 @@ def run_model_loop(
     guarded_metrics = evaluate_predictions(cases, guarded_predictions)
 
     return ModelLoopReport(
-        schema_version="promptforge-v27.11-operational-telemetry.v1",
+        schema_version="promptforge-v27.12-provider-telemetry.v1",
         raw_metrics=raw_metrics,
         guarded_metrics=guarded_metrics,
         records=tuple(records),
