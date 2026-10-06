@@ -108,14 +108,14 @@ class ContextRoutingPolicyRefreshController:
 
         if health.observations < self.min_observations:
             reason = "insufficient_evidence"
-        elif not health.stable:
-            reason = "unstable_policy"
-        elif not health.fresh:
-            reason = "stale_policy"
         elif cooldown_remaining > 0:
             reason = "refresh_cooldown"
         elif not budget_available:
             reason = "refresh_budget_exhausted"
+        elif not health.stable:
+            reason = "unstable_policy"
+        elif not health.fresh:
+            reason = "stale_policy"
         else:
             reason = "healthy"
 
