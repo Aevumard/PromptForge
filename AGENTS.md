@@ -103,6 +103,24 @@ These fields are descriptive state. They can be analyzed later, but they do not 
 
 Relations must be supplied by the integration. Do not infer or fabricate semantic edges and then treat them as ground truth. When relational descriptors are stored in episodes, they become part of the observed routing evidence alongside the hierarchical topology.
 
+
+## Epistemic evidence boundary
+
+For evidence-heavy reasoning where timestamps, contradictions, interventions, or competing claim types matter, use `promptforge.epistemic` as an explicit additive boundary.
+
+1. `EvidenceRecord` is caller-supplied metadata. PromptForge must not infer its epistemic labels.
+2. `EpistemicContextPolicy.cutoff` is a hard exclusion boundary for future evidence.
+3. When a cutoff is active, unknown-time evidence is excluded by default; integrations must explicitly opt in to `allow_unknown_time`.
+4. Required evidence that crosses the temporal boundary must fail closed rather than being silently dropped.
+5. Contradictory evidence and observation/inference/hypothesis coverage can be protected during compression.
+6. Intervention metadata is descriptive only. `multivariable_intervention` and `confounded_intervention` are caution states, not causal conclusions.
+7. Keep evidence selection auditable through `EpistemicContextResult.audit`.
+8. Do not turn relevance, reliability, or causal-status metadata into universal quality or truth claims.
+
+The intended sequence is:
+
+`evidence -> temporal gate -> contradiction/kind preservation -> ranking -> budget -> audited context`
+
 ## Cognitive loop
 
 `ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.
