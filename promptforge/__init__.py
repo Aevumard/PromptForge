@@ -163,6 +163,8 @@ from .tool_output import (
     trim_tool_outputs,
 )
 
+from .agent import AgentInputPacket, AgentPreparation, prepare_agent_input
+
 from .deferred import (
     ContextDeliveryPacket,
     ContextLoadResult,
@@ -289,6 +291,9 @@ __all__ = [
     "ToolOutputTrimResult",
     "ToolOutputTrimmer",
     "trim_tool_outputs",
+    "AgentInputPacket",
+    "AgentPreparation",
+    "prepare_agent_input",
     "ContextDeliveryPacket",
     "ContextLoadResult",
     "DeferredContextCatalog",
