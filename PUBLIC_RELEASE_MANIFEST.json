@@ -9,7 +9,7 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T07:35:57.457Z",
+  "generated_utc": "2026-10-06T07:45:27.758Z",
   "file_count": 122,
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 23756,
-      "sha256": "7b2942fd473cd620532f090b6ae935534c40a6564499c13510ff717ee86950fc"
+      "size_bytes": 24292,
+      "sha256": "daf7ec8f282bd7463961e636b05f847ada6df93670302c98010c768e10f3358b"
     },
     {
       "path": "harness/agent_context.py",
@@ -419,8 +419,8 @@
     },
     {
       "path": "promptforge/decision.py",
-      "size_bytes": 11000,
-      "sha256": "e76d37d7e6b944ebdf4eef6833a435ac285c09289f7f6237689ea6eaf1555934"
+      "size_bytes": 14501,
+      "sha256": "13d60e5eec4a833ba0c654ca5fbb2735349ea5bcd7840a1c5879a06c66e3cb57"
     },
     {
       "path": "promptforge/epistemic.py",
@@ -459,8 +459,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 36008,
-      "sha256": "8b537324e99e410d5590a4bffdaf1f2e62ab640d7e258726df9ebab095820c42"
+      "size_bytes": 37058,
+      "sha256": "cae6ec873747e6ea6eeef9863f05a5744bef99cddf10e446661ef139423402a4"
     },
     {
       "path": "schemas/run.schema.json",
@@ -494,8 +494,8 @@
     },
     {
       "path": "tests/test_decision.py",
-      "size_bytes": 8743,
-      "sha256": "54397bc57943f2ac3914036993782313e8e11f358fb1d788101414944e898904"
+      "size_bytes": 14094,
+      "sha256": "2b6089d8a3c8e01a688c1129e7df5745d4e66fb02afb6ebb84514fdf307aaa42"
     },
     {
       "path": "tests/test_epistemic.py",
