@@ -376,6 +376,12 @@ historical labeled outcomes -> family scope -> temporal gate -> supported bins -
 
 Family scope is an evidence-admissibility control, not a claim that family labels are causally meaningful.
 
+## Action evidence anchoring
+
+Action support can be made auditable by declaring support evidence ids on each action. An explicit strict policy can fail closed when support is missing, outside the current evidence snapshot, or below the configured anchor count. Anchor count is not statistical independence. The default remains backward compatible.
+
+Boundary: epistemic evidence -> explicit action support anchors -> feasibility and safety gates -> action ranking
+
 ## Hypothesis source cap
 
 HypothesisEvidencePolicy can limit how many support or contradiction records from one declared source contribute to an assessment. Selected and excluded evidence ids remain auditable. Unknown sources can remain isolated per evidence id. This is an operational corroboration safeguard, not a truth claim.
