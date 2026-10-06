@@ -120,6 +120,7 @@ def run_resumable_model_loop(
     budget_tokens: int = 500,
     reserve_tokens: int = 50,
     apply_guard: bool = True,
+    include_epistemic: bool = True,
     retry_failed: bool = True,
     fsync_each_record: bool = True,
 ) -> ModelLoopReport:
@@ -148,6 +149,7 @@ def run_resumable_model_loop(
                 case,
                 budget_tokens=budget_tokens,
                 reserve_tokens=reserve_tokens,
+                include_epistemic=include_epistemic,
             )
             packet = model_input["promptforge"]
             payload = adapter.predict(model_input)
