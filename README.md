@@ -286,6 +286,27 @@ This preserves the distinction between:
 
 rather than treating one successful probe as a learned rule.
 
+## Epistemic evidence control
+
+The public core now includes an opt-in `EpistemicContextCompiler` for evidence-heavy tasks where temporal boundaries, contradictory results, provenance, and causal caution matter.
+
+The compiler accepts caller-supplied `EvidenceRecord` items and a deterministic `EpistemicContextPolicy`. It can:
+
+- enforce a hard numeric cutoff and reject required evidence that crosses the boundary;
+- exclude unknown-time evidence by default when a cutoff is active;
+- preserve explicit contradictions and representation coverage while respecting record/token budgets;
+- keep observation, inference, and hypothesis labels separate instead of collapsing them during compression;
+- retain source, timestamp, relevance, reliability, intervention factors, and confounder metadata;
+- expose descriptive causal cautions for multivariable or confounded interventions.
+
+This layer does not infer truth, causality, confidence, or semantic relevance. Those labels are supplied by the integration and remain auditable metadata.
+
+The handoff is:
+
+`records -> temporal gate -> protected evidence -> deterministic ranking -> budget -> audited context`
+
+Use it as an additive evidence-control layer above the existing structural, memory, trajectory, and cognitive orchestration surfaces.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
