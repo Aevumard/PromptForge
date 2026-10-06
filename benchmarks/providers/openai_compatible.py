@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+import time
 from typing import Any, Mapping
 import urllib.error
 import urllib.request
@@ -31,6 +32,8 @@ class OpenAICompatibleConfig:
     model: str
     api_key: str | None = None
     timeout_seconds: float = 60.0
+    max_attempts: int = 3
+    retry_backoff_seconds: float = 1.0
     json_mode: bool = False
     system_prompt: str = DEFAULT_SYSTEM_PROMPT
 
@@ -51,12 +54,30 @@ class OpenAICompatibleConfig:
         if timeout_seconds <= 0:
             raise ValueError("PROMPTFORGE_MODEL_TIMEOUT must be positive")
 
+        max_attempts_text = os.getenv("PROMPTFORGE_MODEL_MAX_ATTEMPTS", "3").strip()
+        try:
+            max_attempts = int(max_attempts_text)
+        except ValueError as exc:
+            raise ValueError("PROMPTFORGE_MODEL_MAX_ATTEMPTS must be an integer") from exc
+        if max_attempts < 1:
+            raise ValueError("PROMPTFORGE_MODEL_MAX_ATTEMPTS must be at least one")
+
+        backoff_text = os.getenv("PROMPTFORGE_MODEL_RETRY_BACKOFF", "1").strip()
+        try:
+            retry_backoff_seconds = float(backoff_text)
+        except ValueError as exc:
+            raise ValueError("PROMPTFORGE_MODEL_RETRY_BACKOFF must be numeric") from exc
+        if retry_backoff_seconds < 0:
+            raise ValueError("PROMPTFORGE_MODEL_RETRY_BACKOFF must be non-negative")
+
         json_mode_text = os.getenv("PROMPTFORGE_MODEL_JSON_MODE", "0").strip().lower()
         return cls(
             endpoint_url=endpoint_url,
             model=model,
             api_key=os.getenv("PROMPTFORGE_MODEL_API_KEY") or None,
             timeout_seconds=timeout_seconds,
+            max_attempts=max_attempts,
+            retry_backoff_seconds=retry_backoff_seconds,
             json_mode=json_mode_text in {"1", "true", "yes", "on"},
             system_prompt=os.getenv(
                 "PROMPTFORGE_MODEL_SYSTEM_PROMPT",
@@ -107,21 +128,49 @@ class OpenAICompatibleAgentAdapter:
             headers=headers,
             method="POST",
         )
-        try:
-            with urllib.request.urlopen(
-                request,
-                timeout=self.config.timeout_seconds,
-            ) as response:
-                body = response.read().decode("utf-8")
-        except urllib.error.HTTPError as exc:
-            details = exc.read().decode("utf-8", errors="replace")
-            raise RuntimeError(
-                f"model endpoint returned HTTP {exc.code}: {details[:1000]}"
-            ) from exc
-        except urllib.error.URLError as exc:
-            raise RuntimeError(f"model endpoint request failed: {exc}") from exc
+        for attempt in range(1, self.config.max_attempts + 1):
+            try:
+                with urllib.request.urlopen(
+                    request,
+                    timeout=self.config.timeout_seconds,
+                ) as response:
+                    body = response.read().decode("utf-8")
+                return _extract_prediction(body)
+            except urllib.error.HTTPError as exc:
+                if exc.code not in {408, 429, 500, 502, 503, 504}:
+                    details = exc.read().decode("utf-8", errors="replace")
+                    raise RuntimeError(
+                        f"model endpoint returned HTTP {exc.code}: {details[:1000]}"
+                    ) from exc
+                if attempt >= self.config.max_attempts:
+                    details = exc.read().decode("utf-8", errors="replace")
+                    raise RuntimeError(
+                        f"model endpoint returned HTTP {exc.code} after "
+                        f"{attempt} attempts: {details[:1000]}"
+                    ) from exc
+                time.sleep(_retry_delay(exc, self.config.retry_backoff_seconds, attempt))
+            except urllib.error.URLError as exc:
+                if attempt >= self.config.max_attempts:
+                    raise RuntimeError(
+                        f"model endpoint request failed after {attempt} attempts: {exc}"
+                    ) from exc
+                time.sleep(self.config.retry_backoff_seconds * (2 ** (attempt - 1)))
 
-        return _extract_prediction(body)
+        raise RuntimeError("model endpoint request exhausted retry loop")
+
+
+def _retry_delay(
+    error: urllib.error.HTTPError,
+    base_delay: float,
+    attempt: int,
+) -> float:
+    retry_after = error.headers.get("Retry-After")
+    if retry_after:
+        try:
+            return max(float(retry_after), 0.0)
+        except ValueError:
+            pass
+    return base_delay * (2 ** (attempt - 1))
 
 
 def _extract_prediction(response_body: str) -> Mapping[str, Any]:

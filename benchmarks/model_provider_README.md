@@ -17,6 +17,8 @@ Optional:
 
 - PROMPTFORGE_MODEL_API_KEY
 - PROMPTFORGE_MODEL_TIMEOUT (default: 60)
+- PROMPTFORGE_MODEL_MAX_ATTEMPTS (default: 3)
+- PROMPTFORGE_MODEL_RETRY_BACKOFF (default: 1 second)
 - PROMPTFORGE_MODEL_JSON_MODE (default: 0)
 - PROMPTFORGE_MODEL_SYSTEM_PROMPT
 
@@ -39,3 +41,19 @@ The same predictions.jsonl can be replayed through:
 
     from benchmarks.model_loop_v27 import run_replay_benchmark
     report = run_replay_benchmark("predictions.jsonl")
+
+## Resumable execution
+
+For a 1,200-ticket live run, use the V27.6 checkpoint runner so an interrupted
+process does not lose completed calls:
+
+    from benchmarks.resumable_model_loop_v27 import run_resumable_model_loop
+
+    report = run_resumable_model_loop(
+        cases,
+        adapter,
+        checkpoint_path="artifacts/tickets.checkpoint.jsonl",
+    )
+
+The checkpoint is append-only. Successful tickets are skipped on resume and
+failed tickets are retried by default.
