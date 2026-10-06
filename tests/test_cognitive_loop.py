@@ -100,6 +100,34 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(result.prepared["task_family"], "agent_request")
         self.assertTrue(result.prepared["required_values_preserved"])
 
+    def test_observation_persists_full_trajectory_and_decision_provenance(self):
+        from promptforge import ContextTrajectoryMonitor
+
+        trajectory = ContextTrajectoryMonitor(stagnation_patience=2).observe([
+            {"cost": 10.0, "accepted": 1, "rejected": 0},
+            {"cost": 9.0, "accepted": 1, "rejected": 0},
+            {"cost": 9.0, "accepted": 0, "rejected": 1},
+            {"cost": 9.0, "accepted": 0, "rejected": 1},
+        ])
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-trace",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+            trajectory=trajectory,
+            current_strategy="selection_only",
+            current_cost=9.0,
+            remaining_budget_fraction=0.5,
+        )
+        loop.observe(proposal, family_id="family-trace", cost=8.5)
+
+        episode = loop.snapshot().episodes[0]
+        self.assertEqual(episode.trajectory_state, trajectory.state)
+        self.assertEqual(episode.trajectory["stagnation_length"], trajectory.stagnation_length)
+        self.assertEqual(episode.regime_flags, proposal.decision.regime_flags)
+        self.assertEqual(episode.decision_reason, proposal.decision.reason)
+        self.assertEqual(episode.candidate_order, proposal.candidate_order)
     def test_episode_state_is_serializable_for_audit(self):
         loop = ContextCognitiveLoop()
         proposal = loop.propose(
