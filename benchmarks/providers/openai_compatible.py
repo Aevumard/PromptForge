@@ -10,7 +10,8 @@ from typing import Any, Mapping
 import urllib.error
 import urllib.request
 
-from benchmarks.model_loop_v27 import ModelLoopReport, run_model_loop
+from benchmarks.model_loop_v27 import ModelLoopReport
+from benchmarks.resumable_model_loop_v27 import run_resumable_model_loop
 from benchmarks.tickets_v27 import generate_ticket_suite
 
 
@@ -277,22 +278,42 @@ def main() -> int:
     )
     parser.add_argument("--output", default="predictions.jsonl")
     parser.add_argument("--report", default="model_report.json")
+    parser.add_argument(
+        "--checkpoint",
+        default="model_run.checkpoint.jsonl",
+        help="Append-only checkpoint used to resume successful tickets.",
+    )
     parser.add_argument("--count", type=int, default=1200)
     parser.add_argument("--seed", type=int, default=271)
     parser.add_argument("--budget-tokens", type=int, default=500)
     parser.add_argument("--reserve-tokens", type=int, default=50)
     parser.add_argument("--no-guard", action="store_true")
+    parser.add_argument(
+        "--no-retry-failed",
+        action="store_false",
+        dest="retry_failed",
+        default=True,
+        help="Do not retry tickets whose previous checkpoint record failed.",
+    )
+    parser.add_argument(
+        "--no-fsync",
+        action="store_true",
+        help="Disable fsync after each checkpoint record.",
+    )
     args = parser.parse_args()
 
     config = OpenAICompatibleConfig.from_env()
     adapter = OpenAICompatibleAgentAdapter(config)
     cases = generate_ticket_suite(count=args.count, seed=args.seed)
-    report = run_model_loop(
+    report = run_resumable_model_loop(
         cases,
         adapter,
+        checkpoint_path=args.checkpoint,
         budget_tokens=args.budget_tokens,
         reserve_tokens=args.reserve_tokens,
         apply_guard=not args.no_guard,
+        retry_failed=args.retry_failed,
+        fsync_each_record=not args.no_fsync,
     )
     write_prediction_jsonl(report, args.output)
     write_report(report, args.report)

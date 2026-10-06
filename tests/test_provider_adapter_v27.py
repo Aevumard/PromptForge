@@ -1,13 +1,14 @@
 import json
 import os
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from benchmarks.model_loop_v27 import parse_prediction
 from benchmarks.providers.openai_compatible import (
     OpenAICompatibleAgentAdapter,
     OpenAICompatibleConfig,
     _extract_prediction,
+    main,
 )
 
 
@@ -125,6 +126,50 @@ class ProviderAdapterTests(TestCase):
         payload["contradiction_detected"] = "true"
         with self.assertRaises(ValueError):
             parse_prediction(payload, ticket_id="T-1")
+
+
+    def test_cli_passes_checkpoint_to_resumable_runner(self) -> None:
+        config = OpenAICompatibleConfig(
+            endpoint_url="http://example.test/v1/chat/completions",
+            model="test-model",
+        )
+        fake_report = MagicMock()
+        fake_report.to_dict.return_value = {"summary": {}}
+        fake_report.raw_metrics.to_dict.return_value = {}
+        fake_report.guarded_metrics.to_dict.return_value = {}
+
+        argv = [
+            "openai_compatible",
+            "--count",
+            "4",
+            "--checkpoint",
+            "run.checkpoint.jsonl",
+            "--output",
+            "predictions.jsonl",
+            "--report",
+            "report.json",
+        ]
+        with (
+            patch("sys.argv", argv),
+            patch(
+                "benchmarks.providers.openai_compatible.OpenAICompatibleConfig.from_env",
+                return_value=config,
+            ),
+            patch(
+                "benchmarks.providers.openai_compatible.run_resumable_model_loop",
+                return_value=fake_report,
+            ) as run,
+            patch(
+                "benchmarks.providers.openai_compatible.write_prediction_jsonl"
+            ),
+            patch("benchmarks.providers.openai_compatible.write_report"),
+        ):
+            self.assertEqual(main(), 0)
+
+        kwargs = run.call_args.kwargs
+        self.assertEqual(kwargs["checkpoint_path"], "run.checkpoint.jsonl")
+        self.assertTrue(kwargs["retry_failed"])
+        self.assertTrue(kwargs["fsync_each_record"])
 
     def test_from_env_requires_endpoint_and_model(self) -> None:
         with patch.dict(os.environ, {}, clear=True):
