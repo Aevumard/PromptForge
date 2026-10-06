@@ -154,6 +154,18 @@ Rules:
 
 Use `source="bounded_exploration"` and `action="probe"` for proposal provenance when the exploration controller changes the concrete strategy.
 
+## Exploration adjudication
+
+`ContextExplorationAdjudicator` is the evidence boundary after a probe.
+
+Do not treat a single successful probe as an adopted strategy. Require the configured comparison and family thresholds, and keep the evidence within the same episode when computing challenger gain.
+
+`ContextCognitiveLoop.exploration_adoption_decision()` is descriptive and conservative. It does not mutate policy, memory routing mode, or strategy preferences.
+
+Keep the sequence explicit:
+
+`probe -> observe -> compare within episode -> aggregate across families -> adoption gate`
+
 ## Policies
 
 The default policy is `minimal`, implemented as deterministic `minimal_serialized_context`.
