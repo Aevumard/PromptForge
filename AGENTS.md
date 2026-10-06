@@ -72,6 +72,20 @@ Its contract is intentionally separated into four concerns:
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
 
+## Cognitive loop
+
+`ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle.
+
+Its boundary is explicit:
+
+1. `propose()` reads a frozen `ContextExperienceSnapshot`, profiles the current context, and produces a `ContextCognitiveProposal`.
+2. The caller executes the selected strategy outside PromptForge.
+3. `observe()` writes the externally measured outcome back as a `ContextEpisode`.
+
+A proposal must retain the experience version it was based on. Do not let later observations mutate the evidence represented by an existing proposal. The loop must never invent model-quality outcomes, provider responses, or hidden labels.
+
+Use the cognitive loop when an integration needs the complete adaptive lifecycle. Use the lower-level adaptive, memory, and orchestration APIs when an experiment needs finer control over individual stages.
+
 ## Policies
 
 The default policy is `minimal`, implemented as deterministic `minimal_serialized_context`.
