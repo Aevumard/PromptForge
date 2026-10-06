@@ -7,12 +7,17 @@ from .adaptive import ContextTopologyProfile, ContextTopologyProfiler, ContextTr
 from .core import POLICY_MINIMAL, prepare_context
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
 from .credit import ContextMemoryCreditPolicy
+from .routing_policy import (
+    ROUTING_POLICY_MODES,
+    ContextRoutingPolicyEvidence,
+    ContextRoutingPolicyEvaluator,
+)
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
 
 
-MEMORY_ROUTING_MODES = ("nearest", "credit")
+MEMORY_ROUTING_MODES = ROUTING_POLICY_MODES
 
 
 @dataclass(frozen=True)
@@ -41,7 +46,9 @@ class ContextCognitiveProposal:
     decision: ContextAdaptiveDecision
     memory_route: ContextRoute | None
     memory_routing_mode: str = "nearest"
+    memory_routing_selected_mode: str = "nearest"
     memory_top_k: int = 5
+    memory_policy_version: int | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -85,6 +92,7 @@ class ContextCognitiveLoop:
         memory_routing_mode: str = "nearest",
         memory_top_k: int = 5,
         memory_credit_policy: ContextMemoryCreditPolicy | None = None,
+        memory_routing_policy_evidence: ContextRoutingPolicyEvidence | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -111,7 +119,16 @@ class ContextCognitiveLoop:
         self.scale_mode = scale_mode
         self.memory_routing_mode = memory_routing_mode
         self.memory_top_k = int(memory_top_k)
+        if memory_routing_policy_evidence is not None and not isinstance(
+            memory_routing_policy_evidence,
+            ContextRoutingPolicyEvidence,
+        ):
+            raise TypeError(
+                "memory_routing_policy_evidence must be "
+                "a ContextRoutingPolicyEvidence or None"
+            )
         self.memory_credit_policy = memory_credit_policy
+        self.memory_routing_policy_evidence = memory_routing_policy_evidence
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -140,8 +157,22 @@ class ContextCognitiveLoop:
         evidence = self.experience.snapshot()
         routing_topology = profile.to_dict()
         routing_topology.update(relational_profile.to_dict())
+        selected_mode = self.memory_routing_mode
+        policy_version = None
+        if selected_mode == "adaptive":
+            policy_version = (
+                self.memory_routing_policy_evidence.version
+                if self.memory_routing_policy_evidence is not None
+                else None
+            )
+            selected_mode = (
+                self.memory_routing_policy_evidence.selected_mode
+                if self.memory_routing_policy_evidence is not None
+                else "nearest"
+            )
+
         if evidence.episodes:
-            if self.memory_routing_mode == "credit":
+            if selected_mode == "credit":
                 memory_route = evidence.memory_aware_route(
                     routing_topology,
                     features=self.routing_features,
@@ -179,13 +210,34 @@ class ContextCognitiveLoop:
             decision=decision,
             memory_route=memory_route,
             memory_routing_mode=self.memory_routing_mode,
+            memory_routing_selected_mode=selected_mode,
             memory_top_k=self.memory_top_k,
+            memory_policy_version=policy_version,
             trajectory=trajectory,
             candidate_order=tuple(
                 ranked
                 for ranked in self.controller.regime_selector.recommend(profile).preferred_arms
                 if ranked in {str(candidate.get("arm_id", "")) for candidate in candidates}
             ),
+        )
+
+    def evaluate_memory_routing_policy(
+        self,
+        *,
+        version: int | None = None,
+        top_k: int | None = None,
+    ) -> ContextRoutingPolicyEvidence:
+        """Evaluate routing modes on a frozen experience snapshot."""
+        snapshot = self.experience.snapshot()
+        evaluator = ContextRoutingPolicyEvaluator(
+            features=self.routing_features,
+            scale_mode=self.scale_mode,
+            top_k=top_k or self.memory_top_k,
+            credit_policy=self.memory_credit_policy,
+        )
+        return evaluator.evaluate(
+            snapshot.episodes,
+            version=version if version is not None else snapshot.version,
         )
 
     def prepare(
@@ -292,6 +344,7 @@ class ContextCognitiveLoop:
 
 
 __all__ = [
+    "MEMORY_ROUTING_MODES",
     "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
