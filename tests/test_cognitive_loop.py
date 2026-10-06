@@ -83,6 +83,23 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(loop.snapshot().version, 1)
         self.assertEqual(len(proposal.to_dict()["profile"]["required_missing"]), 0)
 
+    def test_prepare_materializes_controller_choice_in_one_call(self):
+        loop = ContextCognitiveLoop(
+            routing_features=("node_count", "max_depth"),
+        )
+        result = loop.prepare(
+            cycle_id="cycle-prepare",
+            data=self.data,
+            required=["task.id", "task.action"],
+        )
+
+        self.assertEqual(
+            result.proposal.decision.strategy,
+            result.prepared["selected_arm"],
+        )
+        self.assertEqual(result.prepared["task_family"], "agent_request")
+        self.assertTrue(result.prepared["required_values_preserved"])
+
     def test_relational_topology_is_carried_into_future_experience(self):
         from promptforge import ContextRelation
 
