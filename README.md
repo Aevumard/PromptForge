@@ -404,6 +404,21 @@ historical labeled outcomes -> family scope -> temporal gate -> supported bins -
 
 Family scope is an evidence-admissibility control, not a claim that family labels are causally meaningful.
 
+## Action evidence stance admissibility
+
+Action support anchors can optionally be checked against the stance explicitly declared on each retained `EvidenceRecord`.
+
+1. `ActionPolicy.require_support_stance=True` fails closed unless every declared support anchor has an available epistemic stance compatible with `allowed_support_stances`.
+2. The default allowed stance is `supports`; `neutral` and `contradicts` are not admissible unless the integrator explicitly opts into them.
+3. Missing stance metadata or an absent epistemic boundary fails closed; PromptForge does not infer stance from evidence content.
+4. `ActionDecision.support_evidence_stances` preserves the declared stance mapping for auditability.
+5. This is an evidence-admissibility control, not a semantic or causal interpretation of the underlying claim.
+6. The default remains backward compatible when the explicit stance gate is disabled.
+
+The strengthened boundary is:
+
+`epistemic evidence -> support anchors -> stance admissibility -> feasibility/safety gates -> action ranking`
+
 ## Action evidence anchoring
 
 The uncertainty action gate can require explicit evidence anchors for caller-supplied action support scores.

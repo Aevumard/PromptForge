@@ -4,7 +4,7 @@ from dataclasses import asdict, dataclass
 from math import isfinite
 from typing import Any, Mapping, Sequence
 
-from .epistemic import EpistemicContextResult
+from .epistemic import EVIDENCE_STANCES, EpistemicContextResult
 
 
 @dataclass(frozen=True)
@@ -66,6 +66,8 @@ class ActionPolicy:
     causal_penalty: float = 0.10
     require_support_anchors: bool = False
     min_support_anchors: int = 1
+    require_support_stance: bool = False
+    allowed_support_stances: tuple[str, ...] = ("supports",)
 
     def __post_init__(self) -> None:
         weights = (
@@ -104,6 +106,19 @@ class ActionPolicy:
             or self.min_support_anchors < 1
         ):
             raise ValueError("min_support_anchors must be at least 1")
+        if not isinstance(self.require_support_stance, bool):
+            raise TypeError("require_support_stance must be a bool")
+        if not self.allowed_support_stances:
+            raise ValueError("allowed_support_stances must not be empty")
+        if any(
+            stance not in EVIDENCE_STANCES
+            for stance in self.allowed_support_stances
+        ):
+            raise ValueError(
+                "allowed_support_stances must contain only known evidence stances"
+            )
+        if len(set(self.allowed_support_stances)) != len(self.allowed_support_stances):
+            raise ValueError("allowed_support_stances must be unique")
 
 
 @dataclass(frozen=True)
@@ -116,6 +131,7 @@ class ActionDecision:
     reasons: dict[str, tuple[str, ...]]
     evidence_ids_available: tuple[str, ...]
     support_evidence_ids: dict[str, tuple[str, ...]]
+    support_evidence_stances: dict[str, dict[str, str]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -124,6 +140,9 @@ class ActionDecision:
         payload["evidence_ids_available"] = list(self.evidence_ids_available)
         payload["support_evidence_ids"] = {
             key: list(value) for key, value in self.support_evidence_ids.items()
+        }
+        payload["support_evidence_stances"] = {
+            key: dict(value) for key, value in self.support_evidence_stances.items()
         }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
@@ -162,6 +181,7 @@ class UncertaintyActionGate:
         blocked: list[str] = []
         reasons: dict[str, tuple[str, ...]] = {}
         support_evidence_by_action: dict[str, tuple[str, ...]] = {}
+        support_evidence_stances: dict[str, dict[str, str]] = {}
 
         for action in actions:
             if action.action_id in seen:
@@ -176,6 +196,20 @@ class UncertaintyActionGate:
             support_ids = tuple(action.support_evidence_ids)
             support_evidence_by_action[action.action_id] = support_ids
             missing_support = sorted(set(support_ids).difference(available))
+            stance_by_id = {
+                str(item.get("evidence_id", "")).strip(): str(item.get("stance", "")).strip()
+                for item in (
+                    evidence.context.get("evidence", [])
+                    if evidence is not None
+                    else ()
+                )
+                if str(item.get("evidence_id", "")).strip()
+            }
+            support_evidence_stances[action.action_id] = {
+                evidence_id: stance_by_id[evidence_id]
+                for evidence_id in support_ids
+                if evidence_id in stance_by_id
+            }
 
             if evidence is not None and missing:
                 blocked.append(action.action_id)
@@ -218,6 +252,46 @@ class UncertaintyActionGate:
                     reasons[action.action_id] = (
                         "insufficient support evidence anchors",
                         "support_anchor_count:" + str(len(support_ids)),
+                    )
+                    continue
+
+            if self.policy.require_support_stance:
+                if not support_ids:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support stance cannot be checked without support anchors",
+                    )
+                    continue
+                if evidence is None:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support stance boundary was not supplied",
+                    )
+                    continue
+                missing_stance = sorted(
+                    evidence_id for evidence_id in support_ids
+                    if evidence_id not in stance_by_id
+                )
+                if missing_stance:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support stance unavailable",
+                        "missing_support_stance:" + ",".join(missing_stance),
+                    )
+                    continue
+                incompatible = sorted(
+                    evidence_id for evidence_id in support_ids
+                    if stance_by_id.get(evidence_id)
+                    not in self.policy.allowed_support_stances
+                )
+                if incompatible:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence stance incompatible",
+                        "incompatible_support_stance:" + ",".join(
+                            f"{evidence_id}={stance_by_id[evidence_id]}"
+                            for evidence_id in incompatible
+                        ),
                     )
                     continue
 
@@ -267,7 +341,7 @@ class UncertaintyActionGate:
         ranked = tuple(action.action_id for _, action in scored)
 
         return ActionDecision(
-            schema_version="uncertainty-action.v2",
+            schema_version="uncertainty-action.v3",
             selected_action_id=ranked[0],
             ranked_action_ids=ranked,
             blocked_action_ids=tuple(blocked),
@@ -275,6 +349,7 @@ class UncertaintyActionGate:
             reasons=reasons,
             evidence_ids_available=tuple(sorted(available)),
             support_evidence_ids=support_evidence_by_action,
+            support_evidence_stances=support_evidence_stances,
         )
 
 
