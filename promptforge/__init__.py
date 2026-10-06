@@ -120,6 +120,15 @@ from .decision import (
     UncertaintyActionGate,
 )
 
+from .confidence import (
+    ConfidenceAssessment,
+    ConfidenceCalibrationMetrics,
+    ConfidenceCalibrationModel,
+    ConfidenceCalibrationPolicy,
+    ConfidenceCalibrator,
+    ConfidenceObservation,
+)
+
 from .hypothesis import (
     HYPOTHESIS_STATUSES,
     DiscriminatingExperiment,
@@ -209,5 +218,10 @@ __all__ = [
     "HypothesisRecord",
     "HypothesisAssessment",
     "DiscriminatingExperiment",
-    "HypothesisLedger",
+    "HypothesisLedger",    "ConfidenceObservation",
+    "ConfidenceCalibrationPolicy",
+    "ConfidenceCalibrationMetrics",
+    "ConfidenceAssessment",
+    "ConfidenceCalibrationModel",
+    "ConfidenceCalibrator",
 ]

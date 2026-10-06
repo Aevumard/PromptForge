@@ -9,8 +9,8 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-10-06T06:48:00.000Z",
-    "file_count": 116,
+    "generated_utc": "2026-10-06T06:55:23.259Z",
+    "file_count": 118,
     "files": [
         {
             "path": ".github/workflows/ci.yml",
@@ -24,8 +24,8 @@
         },
         {
             "path": "AGENTS.md",
-            "size_bytes": 17801,
-            "sha256": "DF6F05EA21F56EF20AD3C1C71C6945DED38EBB88BAB3896695252CFC70685FF7"
+            "size_bytes": 19529,
+            "sha256": "D022AB74567E3204A6D22628CDFC441BCE43AFF9DD740204F5465F398B79EF71"
         },
         {
             "path": "harness/agent_context.py",
@@ -399,13 +399,18 @@
         },
         {
             "path": "promptforge/__init__.py",
-            "size_bytes": 5267,
-            "sha256": "43ABE7208D2EA0A00C5BD57AC2F6F68A789560ABF9A9C45495617D01D2D670DC"
+            "size_bytes": 5663,
+            "sha256": "A12D13386B1CCE4DF2676C72055D760FEDEB07AFCCBE1E1D511DC05D11F038F3"
         },
         {
             "path": "promptforge/cognitive.py",
             "size_bytes": 31581,
             "sha256": "3AB1D420808EEB03741893EBCB5212B7DAD6BFEF523733B91026D3E406E090E6"
+        },
+        {
+            "path": "promptforge/confidence.py",
+            "size_bytes": 17550,
+            "sha256": "43850B8BCD103E1349FC0C00FB906AED9C4646186097379254C0F5B7418B6063"
         },
         {
             "path": "promptforge/credit.py",
@@ -444,8 +449,8 @@
         },
         {
             "path": "README.md",
-            "size_bytes": 28925,
-            "sha256": "0AA23DB0DAC8D50EC417E5312AEB4877C1566D7E08659813F571241D2C3288AE"
+            "size_bytes": 30652,
+            "sha256": "03978B73B90C2C2788FB46CCF456ABB86D262AA6BE208834A86A3C211FDBA86C"
         },
         {
             "path": "schemas/run.schema.json",
@@ -471,6 +476,11 @@
             "path": "tests/test_cognitive_loop.py",
             "size_bytes": 25064,
             "sha256": "CA28FC88D24A5B9158A40DB3E9D70DA507AF33EAD11A85BFFB342471EF64936B"
+        },
+        {
+            "path": "tests/test_confidence.py",
+            "size_bytes": 5457,
+            "sha256": "C68A90337A3B49F6D00421D2BEA94EF83AC9BF9FB7931859A3CC50E48475B0D5"
         },
         {
             "path": "tests/test_decision.py",

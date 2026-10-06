@@ -347,6 +347,42 @@ The important boundary is:
 
 No hypothesis is treated as disproved merely because supporting evidence is absent from the current boundary.
 
+
+## Confidence calibration boundary
+
+The public core now includes an opt-in confidence calibration layer in
+promptforge.confidence for integrations that already have externally labeled
+historical outcomes.
+
+Confidence calibration is deliberately separated from action selection:
+
+1. ConfidenceObservation requires the integration to supply both a confidence
+   value and the measured binary outcome.
+2. ConfidenceCalibrator.fit() uses only that explicit historical sample.
+3. An optional cutoff is a hard temporal boundary; future and, by default,
+   unknown-time observations are excluded.
+4. Required calibration observations that cross the boundary fail closed.
+5. Supported confidence bins need a minimum observation count before they can
+   change a live confidence.
+6. A monotone isotonic fit prevents calibration from creating a confidence
+   curve that reverses the observed ordering.
+7. Smoothing limits extreme rates in small supported bins.
+8. max_adjustment bounds the amount of confidence correction.
+9. Sparse bins may fall back to the global historical rate, while insufficient
+   total evidence leaves the current confidence unchanged.
+10. Brier score, expected calibration error, and maximum calibration error are
+    descriptive metrics over the supplied sample. They are not universal
+    truth scores or model-quality guarantees.
+
+The intended control boundary is:
+
+historical labeled outcomes -> temporal gate -> supported bins -> monotone
+calibration -> bounded adjustment -> audited confidence
+
+The calibration model does not consume the outcome of the current confidence
+being assessed. This prevents the calibration layer from silently self-
+validating on the same decision it is supposed to regulate.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -522,7 +558,8 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path, frozen snapshots, and memory credit assessment | Online experience boundary |
 | `promptforge/consolidation.py` | Deterministic replay, bounded retention, and optional credit-aware selection | Memory lifecycle control |
-| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |\n| `promptforge/routing_policy.py` | Leakage-safe comparison and selection of routing modes | Routing policy learning |
+| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |
+| `promptforge/routing_policy.py` | Leakage-safe comparison and selection of routing modes | Routing policy learning |
 | `promptforge/cognitive.py` | Unified observe-decide-learn cycle with explicit memory-routing modes and policy learning | End-to-end adaptive orchestration |
 | `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
