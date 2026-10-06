@@ -10,7 +10,6 @@ from .core import (
     prepare_context,
 )
 
-
 from .adaptive import (
     REGIME_COMPACT,
     REGIME_DEEP_HIERARCHICAL,
@@ -43,9 +42,16 @@ from .memory import (
     routing_summary,
 )
 
-from .experience import ContextExperienceSnapshot, ContextExperienceStore\n\nfrom .orchestration import (
+from .experience import ContextExperienceSnapshot, ContextExperienceStore
+
+from .orchestration import (
     ComplexContextController,
     ContextAdaptiveDecision,
+)
+
+from .cognitive import (
+    ContextCognitiveLoop,
+    ContextCognitiveProposal,
 )
 
 __all__ = [
@@ -81,4 +87,9 @@ __all__ = [
     "leave_one_family_out",
     "routing_summary",
     "ComplexContextController",
-    "ContextAdaptiveDecision",\n    "ContextExperienceSnapshot",\n    "ContextExperienceStore",\n]
+    "ContextAdaptiveDecision",
+    "ContextExperienceSnapshot",
+    "ContextExperienceStore",
+    "ContextCognitiveLoop",
+    "ContextCognitiveProposal",
+]
