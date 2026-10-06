@@ -23,6 +23,7 @@ class ActionCandidate:
     operational_cost: float = 0.0
     required_evidence_ids: tuple[str, ...] = ()
     support_evidence_ids: tuple[str, ...] = ()
+    support_evidence_tags: tuple[str, ...] = ()
     depends_on_causal_claim: bool = False
 
     def __post_init__(self) -> None:
@@ -44,6 +45,12 @@ class ActionCandidate:
             raise ValueError("required_evidence_ids must be unique")
         if len(set(self.support_evidence_ids)) != len(self.support_evidence_ids):
             raise ValueError("support_evidence_ids must be unique")
+        normalized_tags = tuple(tag.strip() for tag in self.support_evidence_tags)
+        if any(not tag for tag in normalized_tags):
+            raise ValueError("support_evidence_tags must contain non-empty strings")
+        if len(set(normalized_tags)) != len(normalized_tags):
+            raise ValueError("support_evidence_tags must be unique")
+        object.__setattr__(self, "support_evidence_tags", normalized_tags)
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -68,6 +75,7 @@ class ActionPolicy:
     min_support_anchors: int = 1
     require_support_stance: bool = False
     allowed_support_stances: tuple[str, ...] = ("supports",)
+    require_support_tag_match: bool = False
 
     def __post_init__(self) -> None:
         weights = (
@@ -119,6 +127,8 @@ class ActionPolicy:
             )
         if len(set(self.allowed_support_stances)) != len(self.allowed_support_stances):
             raise ValueError("allowed_support_stances must be unique")
+        if not isinstance(self.require_support_tag_match, bool):
+            raise TypeError("require_support_tag_match must be a bool")
 
 
 @dataclass(frozen=True)
@@ -132,6 +142,7 @@ class ActionDecision:
     evidence_ids_available: tuple[str, ...]
     support_evidence_ids: dict[str, tuple[str, ...]]
     support_evidence_stances: dict[str, dict[str, str]]
+    support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -143,6 +154,10 @@ class ActionDecision:
         }
         payload["support_evidence_stances"] = {
             key: dict(value) for key, value in self.support_evidence_stances.items()
+        }
+        payload["support_evidence_tag_matches"] = {
+            key: {evidence_id: list(tags) for evidence_id, tags in value.items()}
+            for key, value in self.support_evidence_tag_matches.items()
         }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
@@ -182,6 +197,27 @@ class UncertaintyActionGate:
         reasons: dict[str, tuple[str, ...]] = {}
         support_evidence_by_action: dict[str, tuple[str, ...]] = {}
         support_evidence_stances: dict[str, dict[str, str]] = {}
+        support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]] = {}
+
+        snapshot_items = (
+            evidence.context.get("evidence", [])
+            if evidence is not None
+            else ()
+        )
+        stance_by_id = {
+            str(item.get("evidence_id", "")).strip(): str(item.get("stance", "")).strip()
+            for item in snapshot_items
+            if str(item.get("evidence_id", "")).strip()
+        }
+        tags_by_id = {
+            str(item.get("evidence_id", "")).strip(): tuple(
+                str(tag).strip()
+                for tag in item.get("tags", ())
+                if str(tag).strip()
+            )
+            for item in snapshot_items
+            if str(item.get("evidence_id", "")).strip()
+        }
 
         for action in actions:
             if action.action_id in seen:
@@ -196,19 +232,19 @@ class UncertaintyActionGate:
             support_ids = tuple(action.support_evidence_ids)
             support_evidence_by_action[action.action_id] = support_ids
             missing_support = sorted(set(support_ids).difference(available))
-            stance_by_id = {
-                str(item.get("evidence_id", "")).strip(): str(item.get("stance", "")).strip()
-                for item in (
-                    evidence.context.get("evidence", [])
-                    if evidence is not None
-                    else ()
-                )
-                if str(item.get("evidence_id", "")).strip()
-            }
             support_evidence_stances[action.action_id] = {
                 evidence_id: stance_by_id[evidence_id]
                 for evidence_id in support_ids
                 if evidence_id in stance_by_id
+            }
+            expected_support_tags = action.support_evidence_tags
+            support_evidence_tag_matches[action.action_id] = {
+                evidence_id: tuple(
+                    tag
+                    for tag in tags_by_id.get(evidence_id, ())
+                    if tag in expected_support_tags
+                )
+                for evidence_id in support_ids
             }
 
             if evidence is not None and missing:
@@ -295,6 +331,43 @@ class UncertaintyActionGate:
                     )
                     continue
 
+            if self.policy.require_support_tag_match:
+                if not support_ids:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support relevance cannot be checked without support anchors",
+                    )
+                    continue
+                if evidence is None:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support relevance boundary was not supplied",
+                    )
+                    continue
+                if not expected_support_tags:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support relevance scope was not declared",
+                        "support_evidence_tags required",
+                    )
+                    continue
+                incompatible_relevance = sorted(
+                    evidence_id
+                    for evidence_id in support_ids
+                    if not support_evidence_tag_matches[action.action_id].get(
+                        evidence_id
+                    )
+                )
+                if incompatible_relevance:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence relevance mismatch",
+                        "missing_support_tag_match:" + ",".join(
+                            incompatible_relevance
+                        ),
+                    )
+                    continue
+
             if action.evidence_support < self.policy.min_evidence_support:
                 blocked.append(action.action_id)
                 reasons[action.action_id] = ("evidence support below threshold",)
@@ -341,7 +414,7 @@ class UncertaintyActionGate:
         ranked = tuple(action.action_id for _, action in scored)
 
         return ActionDecision(
-            schema_version="uncertainty-action.v3",
+            schema_version="uncertainty-action.v4",
             selected_action_id=ranked[0],
             ranked_action_ids=ranked,
             blocked_action_ids=tuple(blocked),
@@ -350,6 +423,7 @@ class UncertaintyActionGate:
             evidence_ids_available=tuple(sorted(available)),
             support_evidence_ids=support_evidence_by_action,
             support_evidence_stances=support_evidence_stances,
+            support_evidence_tag_matches=support_evidence_tag_matches,
         )
 
 
