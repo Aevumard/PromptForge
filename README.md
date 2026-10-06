@@ -133,6 +133,10 @@ This separates two kinds of memory:
 - operational memory: what PromptForge decided, why it decided it, and what happened afterward.
 
 The richer metadata is descriptive evidence. It is not automatically treated as causal knowledge. Future research can analyze which states precede lower observed cost while keeping the outcome external and auditable.
+## Experience self-observation
+
+experience_summary() provides a descriptive summary of accumulated episodes: counts by family, strategy, action, decision source, regime, and trajectory state, plus observed mean cost and mean novelty distance. It is an inspection surface only; it does not infer causal effects.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
