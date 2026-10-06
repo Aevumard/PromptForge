@@ -815,3 +815,36 @@ PromptForge does not execute side effects. The public core can, however, make th
 This keeps action selection separate from the fact that an external side effect actually occurred, and it prevents a replay/retry from silently duplicating a successful action.
 
 Schema: `schemas/action-execution.v1.json`.
+
+## Token-efficient context planning
+
+For large or noisy inputs, the public core now includes `promptforge.budget` for deterministic context packing before a model request.
+
+`ContextBudgetPolicy` separates three quantities:
+- total input budget;
+- reserved headroom;
+- usable context budget.
+
+`ContextBlock(required=True)` pins load-bearing data. Optional blocks compete for the remaining budget using caller-supplied utility per token cost. `ContextBudgetPlan` reports selected tokens, tokens saved, excluded blocks, and reasons.
+
+The fast path is:
+
+```python
+from promptforge import ContextBlock, plan_context
+
+plan = plan_context(
+    [
+        ContextBlock("case", case, required=True, path="case"),
+        ContextBlock("history", history, utility=0.6, path="history"),
+        ContextBlock("noise", noise, utility=0.05, path="noise"),
+    ],
+    budget_tokens=2000,
+    reserve_ratio=0.10,
+)
+
+context = plan.materialize(blocks)
+```
+
+Use `plan.compact_manifest(blocks)` when the downstream agent needs to know what was omitted without paying to send the omitted content again.
+
+This layer performs selection, not semantic summarization. Required context overflow fails closed. An exact provider tokenizer can be supplied via `estimator=` when available; otherwise the existing dependency-free estimate is used.
