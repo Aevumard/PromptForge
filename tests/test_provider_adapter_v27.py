@@ -171,6 +171,7 @@ class ProviderAdapterTests(TestCase):
                 return_value="# analysis",
             ),
         ):
+            analyze.return_value.to_dict.return_value = {"summary": {}}
             self.assertEqual(main(), 0)
 
         kwargs = run.call_args.kwargs
