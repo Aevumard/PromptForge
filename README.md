@@ -91,6 +91,24 @@ The resulting state transition is:
 
 context -> topology -> regime -> memory -> control -> proposal -> external execution -> observed outcome -> memory
 
+A minimal one-call integration is available through `ContextCognitiveLoop.prepare()`:
+
+```python
+from promptforge import ContextCognitiveLoop
+
+loop = ContextCognitiveLoop()
+result = loop.prepare(
+    cycle_id="T-001-cycle-1",
+    data={"task": {"id": "T-001", "action": "review"}},
+    required=["task.id", "task.action"],
+)
+
+print(result.proposal.decision.strategy)
+print(result.prepared["serialized_context"])
+```
+
+When relations are supplied, the same call incorporates their structural profile into future experience routing.
+
 The loop does not call a model or invent a quality score. Execution remains outside PromptForge, while the observed outcome is explicitly written back into experience memory. Every proposal records the experience version it was based on, making the online learning boundary auditable.
 
 ContextExperienceSnapshot is immutable. New observations can improve future routing without rewriting the evidence used by an earlier proposal or evaluation.
