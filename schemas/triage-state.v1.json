@@ -11,9 +11,17 @@
     "policy_version"
   ],
   "properties": {
-    "schema_version": {"const": "triage-state.v1"},
-    "case_id": {"type": "string", "minLength": 1},
-    "decision_id": {"type": "string", "minLength": 1},
+    "schema_version": {
+      "const": "triage-state.v1"
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "stage": {
       "enum": [
         "admitted",
@@ -25,28 +33,76 @@
         "closed"
       ]
     },
-    "policy_version": {"type": "string", "minLength": 1},
-    "evidence_snapshot_id": {"type": ["string", "null"]},
-    "parent_decision_id": {"type": ["string", "null"]},
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_snapshot_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_decision_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "priority": {
-      "type": ["object", "null"],
-      "required": ["urgency", "importance", "priority_band", "rationale"],
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "urgency",
+        "importance",
+        "priority_band",
+        "rationale"
+      ],
       "properties": {
-        "urgency": {"type": "number", "minimum": 0, "maximum": 1},
-        "importance": {"type": "number", "minimum": 0, "maximum": 1},
-        "priority_band": {"type": "string", "minLength": 1},
+        "urgency": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "importance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "priority_band": {
+          "type": "string",
+          "minLength": 1
+        },
         "rationale": {
           "type": "array",
           "minItems": 1,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "additionalProperties": false
     },
-    "action_decision": {"type": ["object", "null"]},
-    "human_review_reason": {"type": ["string", "null"]},
+    "action_decision": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "human_review_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "human_review": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "required": [
         "schema_version",
         "review_id",
@@ -59,11 +115,25 @@
         "resulting_policy_version"
       ],
       "properties": {
-        "schema_version": {"const": "human-review.v1"},
-        "review_id": {"type": "string", "minLength": 1},
-        "reviewer_id": {"type": "string", "minLength": 1},
-        "reviewed_at": {"type": "string", "minLength": 1},
-        "evidence_snapshot_id": {"type": "string", "minLength": 1},
+        "schema_version": {
+          "const": "human-review.v1"
+        },
+        "review_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewed_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_snapshot_id": {
+          "type": "string",
+          "minLength": 1
+        },
         "decision": {
           "enum": [
             "allow",
@@ -76,17 +146,92 @@
         "rationale": {
           "type": "array",
           "minItems": 1,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "changes_made": {
           "type": "array",
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
-        "resulting_policy_version": {"type": "string", "minLength": 1}
+        "resulting_policy_version": {
+          "type": "string",
+          "minLength": 1
+        }
       },
       "additionalProperties": false
     },
-    "outcome": {"type": ["object", "null"]}
+    "outcome": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "execution": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "schema_version",
+        "execution_id",
+        "action_id",
+        "idempotency_key",
+        "status",
+        "attempt",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "action-execution.v1"
+        },
+        "execution_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "idempotency_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "started",
+            "succeeded",
+            "failed",
+            "skipped"
+          ]
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "external_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "error_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": false
 }
