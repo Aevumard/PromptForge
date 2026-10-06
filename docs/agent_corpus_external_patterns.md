@@ -280,3 +280,18 @@ The efficient model-call boundary is:
 `tool result -> recent-turn protection -> size/tool eligibility gate -> deterministic preview -> digest/audit -> model input`
 
 This complements progressive disclosure: a trimmed result can be re-fetched from the integration using its item/call identity and digest when the full payload is actually needed.
+
+## 16. One-call agent preparation
+
+Reference pattern: modern agent SDKs push context shaping into a model-input boundary immediately before inference. OpenAI Agents exposes input filters/compaction, Pydantic AI exposes model-agnostic compaction, and the previous PromptForge patterns already separate budget planning, deferred context, and tool-output trimming.
+
+PromptForge adoption:
+- `prepare_agent_input()` is the single-call fast path for the common integration case;
+- it composes context budgeting, progressive disclosure, and tool-output trimming without coupling PromptForge to a provider;
+- it returns a compact `AgentInputPacket` for the model and an `AgentPreparation` audit object for the integration;
+- no provider call, retrieval call, semantic summarization, or side effect occurs inside this helper;
+- the packet exposes total estimated token savings so an integration can inspect the mechanical cost of its context strategy before sending it.
+
+AI-oriented API principle:
+
+`one high-level call for the common path; lower-level deterministic components remain available when the integration needs control.`
