@@ -9,7 +9,7 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:45:25.364Z",
+  "generated_utc": "2026-10-06T09:46:15.725Z",
   "file_count": 145,
   "files": [
     {
@@ -480,7 +480,7 @@
     {
       "path": "promptforge/tool_output.py",
       "size_bytes": 9732,
-      "sha256": "1a87e85eb88fb541abdc43fd9e1cc5f5f662757e63f7a1830d5f5c5f002c3096"
+      "sha256": "a386b52d61a4267cc818fa74ae5dcec342d3b37e2c7fb557cba4c6018d673773"
     },
     {
       "path": "promptforge/triage.py",
