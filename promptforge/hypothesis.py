@@ -190,7 +190,8 @@ class HypothesisLedger:
                 if evidence_id and evidence_id in available:
                     source = str(raw.get("source", "")).strip()
                     if effective_policy is not None and (
-                        effective_policy.isolate_unknown_source and not source
+                        effective_policy.isolate_unknown_source
+                        and source.lower() in {"", "unknown"}
                     ):
                         source = f"__unknown__:{evidence_id}"
                     source_by_id[evidence_id] = source or "__unknown__"
