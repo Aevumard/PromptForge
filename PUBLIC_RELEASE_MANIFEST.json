@@ -9,7 +9,7 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T07:45:27.758Z",
+  "generated_utc": "2026-10-06T07:47:02.536Z",
   "file_count": 122,
   "files": [
     {
@@ -494,8 +494,8 @@
     },
     {
       "path": "tests/test_decision.py",
-      "size_bytes": 14094,
-      "sha256": "2b6089d8a3c8e01a688c1129e7df5745d4e66fb02afb6ebb84514fdf307aaa42"
+      "size_bytes": 14930,
+      "sha256": "4bf87549edc255342254740aa392ff3cf87f6453fb4e15c2b7371095b9541e25"
     },
     {
       "path": "tests/test_epistemic.py",
