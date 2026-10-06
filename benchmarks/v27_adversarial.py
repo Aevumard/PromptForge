@@ -153,7 +153,13 @@ def _case_priority_vs_actionability() -> BenchmarkResult:
             support_evidence_tags=("payment",),
         ),
     ]
-    decision = UncertaintyActionGate(_action_policy()).decide(
+    priority_policy = ActionPolicy(
+        require_support_anchors=True,
+        require_support_stance=True,
+        require_support_tag_match=True,
+        require_support_quality=True,
+    )
+    decision = UncertaintyActionGate(priority_policy).decide(
         actions,
         evidence=evidence,
     )
