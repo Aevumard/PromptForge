@@ -6,7 +6,7 @@ from typing import Any, Mapping, Sequence
 from .adaptive import ContextTopologyProfile, ContextTopologyProfiler, ContextTrajectoryState
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
-from .relational import ContextRelationalProfile, ContextRelationProfiler
+from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
 
 
@@ -78,7 +78,7 @@ class ContextCognitiveLoop:
         data: Mapping[str, Any],
         required: Sequence[str],
         candidates: Sequence[Mapping[str, Any]],
-        relations: Sequence[Mapping[str, Any] | Any] = (),
+        relations: Sequence[ContextRelation | Mapping[str, Any]] = (),
         trajectory: ContextTrajectoryState | None = None,
         current_strategy: str | None = None,
         current_cost: float | None = None,
