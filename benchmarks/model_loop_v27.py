@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import json
 from pathlib import Path
+import time
 from typing import Any, Callable, Mapping, Protocol, Sequence
 
 from promptforge import (
@@ -94,6 +95,7 @@ class ModelLoopRecord:
     budget_tokens: int
     tokens_saved: int
     omitted_context_ids: tuple[str, ...]
+    elapsed_ms: float = 0.0
     error: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -113,6 +115,7 @@ class ModelLoopRecord:
             "budget_tokens": self.budget_tokens,
             "tokens_saved": self.tokens_saved,
             "omitted_context_ids": list(self.omitted_context_ids),
+            "elapsed_ms": self.elapsed_ms,
             "error": self.error,
         }
 
@@ -140,6 +143,10 @@ class ModelLoopReport:
     def total_tokens_saved(self) -> int:
         return sum(record.tokens_saved for record in self.records)
 
+    @property
+    def total_elapsed_ms(self) -> float:
+        return sum(record.elapsed_ms for record in self.records)
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": self.schema_version,
@@ -148,6 +155,7 @@ class ModelLoopReport:
                 "failed_calls": self.failed_calls,
                 "context_tokens": self.total_context_tokens,
                 "tokens_saved": self.total_tokens_saved,
+                "elapsed_ms": self.total_elapsed_ms,
             },
             "raw_metrics": self.raw_metrics.to_dict(),
             "guarded_metrics": self.guarded_metrics.to_dict(),
@@ -333,6 +341,7 @@ def run_model_loop(
     records: list[ModelLoopRecord] = []
 
     for case in cases:
+        started = time.perf_counter()
         try:
             model_input = build_model_input(
                 case,
@@ -374,6 +383,7 @@ def run_model_loop(
                     budget_tokens=budget_tokens,
                     tokens_saved=0,
                     omitted_context_ids=(),
+                    elapsed_ms=(time.perf_counter() - started) * 1000.0,
                     error=f"{type(exc).__name__}: {exc}",
                 )
             )
@@ -382,7 +392,7 @@ def run_model_loop(
     guarded_metrics = evaluate_predictions(cases, guarded_predictions)
 
     return ModelLoopReport(
-        schema_version="promptforge-v27.4-model-loop.v1",
+        schema_version="promptforge-v27.11-operational-telemetry.v1",
         raw_metrics=raw_metrics,
         guarded_metrics=guarded_metrics,
         records=tuple(records),
