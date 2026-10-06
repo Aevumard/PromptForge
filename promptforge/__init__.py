@@ -53,6 +53,14 @@ from .credit import (
     ContextMemoryCreditPolicy,
 )
 
+from .routing_policy import (
+    ROUTING_POLICY_MODES,
+    ContextRoutingModeScore,
+    ContextRoutingPolicyEvidence,
+    ContextRoutingPolicyEvaluator,
+    ContextRoutingPolicySelector,
+)
+
 from .orchestration import (
     ComplexContextController,
     ContextAdaptiveDecision,
@@ -114,6 +122,11 @@ __all__ = [
     "ContextMemoryCreditPolicy",
     "ContextMemoryAwareRoute",
     "ContextMemoryAwareRouter",
+    "ROUTING_POLICY_MODES",
+    "ContextRoutingModeScore",
+    "ContextRoutingPolicyEvidence",
+    "ContextRoutingPolicyEvaluator",
+    "ContextRoutingPolicySelector",
     "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
