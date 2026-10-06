@@ -79,6 +79,9 @@ class ActionPolicy:
     require_support_quality: bool = False
     min_support_relevance: float = 0.50
     min_support_reliability: float = 0.50
+    require_support_provenance_diversity: bool = False
+    min_distinct_support_sources: int = 2
+    max_support_anchors_per_source: int | None = None
 
     def __post_init__(self) -> None:
         weights = (
@@ -134,6 +137,26 @@ class ActionPolicy:
             raise TypeError("require_support_tag_match must be a bool")
         if not isinstance(self.require_support_quality, bool):
             raise TypeError("require_support_quality must be a bool")
+        if not isinstance(self.require_support_provenance_diversity, bool):
+            raise TypeError("require_support_provenance_diversity must be a bool")
+        if (
+            not isinstance(self.min_distinct_support_sources, int)
+            or isinstance(self.min_distinct_support_sources, bool)
+            or self.min_distinct_support_sources < 2
+        ):
+            raise ValueError("min_distinct_support_sources must be at least 2")
+        if isinstance(self.max_support_anchors_per_source, bool):
+            raise TypeError("max_support_anchors_per_source must be an integer or None")
+        if (
+            self.max_support_anchors_per_source is not None
+            and (
+                not isinstance(self.max_support_anchors_per_source, int)
+                or self.max_support_anchors_per_source < 1
+            )
+        ):
+            raise ValueError(
+                "max_support_anchors_per_source must be at least 1 or None"
+            )
         for name, value in (
             ("min_support_relevance", self.min_support_relevance),
             ("min_support_reliability", self.min_support_reliability),
@@ -160,6 +183,7 @@ class ActionDecision:
     support_evidence_stances: dict[str, dict[str, str]]
     support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]]
     support_evidence_quality: dict[str, dict[str, dict[str, float]]]
+    support_evidence_provenance: dict[str, dict[str, str]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -182,6 +206,10 @@ class ActionDecision:
                 for evidence_id, metrics in value.items()
             }
             for key, value in self.support_evidence_quality.items()
+        }
+        payload["support_evidence_provenance"] = {
+            key: dict(value)
+            for key, value in self.support_evidence_provenance.items()
         }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
@@ -223,6 +251,7 @@ class UncertaintyActionGate:
         support_evidence_stances: dict[str, dict[str, str]] = {}
         support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]] = {}
         support_evidence_quality: dict[str, dict[str, dict[str, float]]] = {}
+        support_evidence_provenance: dict[str, dict[str, str]] = {}
 
         snapshot_items = (
             evidence.context.get("evidence", [])
@@ -242,6 +271,11 @@ class UncertaintyActionGate:
             )
             for item in snapshot_items
             if str(item.get("evidence_id", "")).strip()
+        }
+        support_source_by_id = {
+            str(item.get("evidence_id", "")).strip(): str(item["source"]).strip()
+            for item in snapshot_items
+            if str(item.get("evidence_id", "")).strip() and "source" in item
         }
         support_relevance_by_id = {
             str(item.get("evidence_id", "")).strip(): float(item["relevance"])
@@ -289,6 +323,12 @@ class UncertaintyActionGate:
                 for evidence_id in support_ids
                 if evidence_id in support_relevance_by_id
                 and evidence_id in support_reliability_by_id
+            }
+
+            support_evidence_provenance[action.action_id] = {
+                evidence_id: support_source_by_id[evidence_id]
+                for evidence_id in support_ids
+                if evidence_id in support_source_by_id
             }
 
             if evidence is not None and missing:
@@ -474,6 +514,70 @@ class UncertaintyActionGate:
                     )
                     continue
 
+            if self.policy.require_support_provenance_diversity:
+                if not support_ids:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support provenance diversity cannot be checked without support anchors",
+                    )
+                    continue
+                if evidence is None:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support provenance diversity boundary was not supplied",
+                    )
+                    continue
+                missing_provenance = sorted(
+                    evidence_id
+                    for evidence_id in support_ids
+                    if evidence_id not in support_source_by_id
+                    or not support_source_by_id[evidence_id]
+                )
+                if missing_provenance:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence provenance metadata unavailable",
+                        "missing_support_provenance:" + ",".join(
+                            missing_provenance
+                        ),
+                    )
+                    continue
+                distinct_sources = sorted(
+                    {
+                        support_source_by_id[evidence_id]
+                        for evidence_id in support_ids
+                        if support_source_by_id[evidence_id].casefold() != "unknown"
+                    }
+                )
+                if len(distinct_sources) < self.policy.min_distinct_support_sources:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "insufficient distinct support sources",
+                        "distinct_support_source_count:" + str(len(distinct_sources)),
+                    )
+                    continue
+                if self.policy.max_support_anchors_per_source is not None:
+                    source_counts: dict[str, int] = {}
+                    for evidence_id in support_ids:
+                        source = support_source_by_id[evidence_id]
+                        source_counts[source] = source_counts.get(source, 0) + 1
+                    over_limit = sorted(
+                        (source, count)
+                        for source, count in source_counts.items()
+                        if count > self.policy.max_support_anchors_per_source
+                    )
+                    if over_limit:
+                        blocked.append(action.action_id)
+                        reasons[action.action_id] = (
+                            "support source concentration exceeds threshold",
+                            "support_source_anchor_count:"
+                            + ",".join(
+                                f"{source}={count}"
+                                for source, count in over_limit
+                            ),
+                        )
+                        continue
+
             if action.evidence_support < self.policy.min_evidence_support:
                 blocked.append(action.action_id)
                 reasons[action.action_id] = ("evidence support below threshold",)
@@ -520,7 +624,7 @@ class UncertaintyActionGate:
         ranked = tuple(action.action_id for _, action in scored)
 
         return ActionDecision(
-            schema_version="uncertainty-action.v5",
+            schema_version="uncertainty-action.v6",
             selected_action_id=ranked[0],
             ranked_action_ids=ranked,
             blocked_action_ids=tuple(blocked),
@@ -531,6 +635,7 @@ class UncertaintyActionGate:
             support_evidence_stances=support_evidence_stances,
             support_evidence_tag_matches=support_evidence_tag_matches,
             support_evidence_quality=support_evidence_quality,
+            support_evidence_provenance=support_evidence_provenance,
         )
 
 
