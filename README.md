@@ -307,6 +307,26 @@ The handoff is:
 
 Use it as an additive evidence-control layer above the existing structural, memory, trajectory, and cognitive orchestration surfaces.
 
+## Uncertainty-aware action control
+
+`UncertaintyActionGate` adds an opt-in decision boundary for tasks where the best operational action should not be equated with the strongest causal hypothesis.
+
+`ActionCandidate` carries caller-supplied evidence support, reversibility, downside, operational cost, required evidence ids, and an explicit causal-dependence flag.
+
+`UncertaintyActionGate` then:
+
+- fails closed when an action requires evidence outside the current epistemic boundary;
+- can require reversibility and cap downside;
+- trades evidence support against reversibility, downside, and operational cost with transparent deterministic weights;
+- applies only a configurable caution penalty to actions that explicitly depend on an unresolved causal claim;
+- returns the full ranking, blocked actions, scores, and reasons for audit.
+
+The gate is a decision aid, not a causal oracle. Action attributes and support values remain caller-supplied.
+
+The intended sequence is:
+
+`evidence boundary -> action feasibility -> risk/reversibility gate -> deterministic ranking -> audited action decision`
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
