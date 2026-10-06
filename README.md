@@ -849,3 +849,31 @@ context = plan.materialize(blocks)
 Use `plan.compact_manifest(blocks)` when the downstream agent needs to know what was omitted without paying to send the omitted content again.
 
 This layer performs selection, not semantic summarization. Required context overflow fails closed. An exact provider tokenizer can be supplied via `estimator=` when available; otherwise the existing dependency-free estimate is used.
+
+## AI-first progressive disclosure
+
+Large contexts should not be dumped into every model request. PromptForge can now send a single `ContextDeliveryPacket` containing the selected context and a compact catalog of deferred context.
+
+```python
+from promptforge import ContextBlock, build_context_packet, plan_context
+
+blocks = [
+    ContextBlock("case", case, required=True, path="case", token_estimate=120),
+    ContextBlock("history", history, utility=0.7, path="history", token_estimate=600),
+    ContextBlock("logs", logs, utility=0.5, path="logs", token_estimate=900),
+]
+
+plan = plan_context(blocks, budget_tokens=500)
+packet = build_context_packet(
+    plan,
+    blocks,
+    descriptions={
+        "history": "relevant customer history",
+        "logs": "recent incident logs",
+    },
+)
+```
+
+The model-facing packet contains the current context immediately and metadata-only entries for deferred material. The deferred content itself is loaded only through an explicit id request.
+
+This makes the core AI-oriented: **small first response, explicit expansion, deterministic token control, no hidden context injection**.
