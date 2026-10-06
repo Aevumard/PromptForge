@@ -108,6 +108,40 @@ class RoutingPolicyHistoryTests(unittest.TestCase):
         self.assertEqual(health.mode, "credit")
         self.assertEqual(health.stability_rate, 1.0)
 
+
+    def test_health_detects_stale_policy_evidence(self):
+        history = ContextRoutingPolicyHistory()
+        history.record(evidence(5, "credit"))
+
+        health = history.health(
+            min_observations=1,
+            min_stability=0.0,
+            current_experience_version=9,
+            max_age=2,
+        )
+
+        self.assertEqual(health.freshness_age, 4)
+        self.assertEqual(health.max_age, 2)
+        self.assertFalse(health.fresh)
+        self.assertFalse(health.healthy)
+        self.assertTrue(health.refresh_recommended)
+
+    def test_health_accepts_fresh_policy_evidence(self):
+        history = ContextRoutingPolicyHistory()
+        history.record(evidence(7, "credit"))
+
+        health = history.health(
+            min_observations=1,
+            min_stability=0.0,
+            current_experience_version=9,
+            max_age=2,
+        )
+
+        self.assertEqual(health.freshness_age, 2)
+        self.assertTrue(health.fresh)
+        self.assertTrue(health.healthy)
+        self.assertFalse(health.refresh_recommended)
+
     def test_backward_policy_versions_are_rejected(self):
         history = ContextRoutingPolicyHistory()
         history.record(evidence(5, "nearest"))
