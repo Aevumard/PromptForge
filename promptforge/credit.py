@@ -380,9 +380,9 @@ class ContextMemoryAwareRouter:
             _distance_value,
             credit,
             similarity,
-            _freshness_weight,
+            freshness_weight,
         ) in candidate_rows:
-            weight = credit * similarity
+            weight = credit * similarity * freshness_weight
             weighted_scores[episode.strategy] = (
                 weighted_scores.get(episode.strategy, 0.0) + weight
             )
