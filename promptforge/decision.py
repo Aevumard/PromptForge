@@ -145,11 +145,12 @@ class ActionPolicy:
             or self.min_distinct_support_sources < 2
         ):
             raise ValueError("min_distinct_support_sources must be at least 2")
+        if isinstance(self.max_support_anchors_per_source, bool):
+            raise TypeError("max_support_anchors_per_source must be an integer or None")
         if (
             self.max_support_anchors_per_source is not None
             and (
                 not isinstance(self.max_support_anchors_per_source, int)
-                or isinstance(self.max_support_anchors_per_source, bool)
                 or self.max_support_anchors_per_source < 1
             )
         ):
