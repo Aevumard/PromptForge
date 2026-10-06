@@ -52,6 +52,7 @@ from .orchestration import (
 from .cognitive import (
     ContextCognitiveLoop,
     ContextCognitiveProposal,
+    ContextCognitiveResult,
 )
 
 from .relational import (
@@ -98,6 +99,7 @@ __all__ = [
     "ContextExperienceStore",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
+    "ContextCognitiveResult",
     "ContextRelation",
     "ContextRelationalProfile",
     "ContextRelationProfiler",
