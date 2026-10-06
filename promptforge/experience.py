@@ -47,6 +47,10 @@ class ContextExperienceSnapshot:
         policy: ContextMemoryCreditPolicy | None = None,
     ) -> tuple[ContextMemoryCredit, ...]:
         """Assess memory credit inside this frozen evidence boundary."""
+        if policy is not None and not isinstance(policy, ContextMemoryCreditPolicy):
+            raise TypeError(
+                "policy must be a ContextMemoryCreditPolicy or None"
+            )
         assessor = policy or ContextMemoryCreditPolicy()
         return assessor.assess(self.episodes)
 
