@@ -767,3 +767,11 @@ Do not invent precise priority weights or SLA thresholds unless the task or inte
 For model-facing integrations, keep separate audit objects for priority and actionability. The UncertaintyActionGate belongs to the latter: it is not a ticket-priority scorer.
 
 This boundary is deliberate because collapsing priority and actionability can produce the wrong operational behavior: uncertain evidence may justify blocking an automatic action without making an urgent incident less urgent.
+
+## External architecture patterns
+
+The agent corpus also distills reusable patterns from mature open-source systems: LangGraph for explicit state, checkpoints, interruption, replay, and deterministic/agentic boundaries; DSPy for declarative contracts, composable modules, and metric-driven optimization; Pydantic AI and pydantic-graph for typed state and graph control; Guardrails for bounded validation and corrective actions; and LlamaIndex for separating retrieval/context augmentation from downstream decision logic.
+
+See `docs/agent_corpus_external_patterns.md` for the adopted principles and their boundaries.
+
+These references do not become PromptForge dependencies, and their framework-specific semantics are not treated as PromptForge guarantees.
