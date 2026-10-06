@@ -96,6 +96,11 @@ class ModelLoopRecord:
     tokens_saved: int
     omitted_context_ids: tuple[str, ...]
     elapsed_ms: float = 0.0
+    provider_elapsed_ms: float = 0.0
+    provider_attempts: int = 0
+    provider_prompt_tokens: int | None = None
+    provider_completion_tokens: int | None = None
+    provider_total_tokens: int | None = None
     error: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -116,6 +121,11 @@ class ModelLoopRecord:
             "tokens_saved": self.tokens_saved,
             "omitted_context_ids": list(self.omitted_context_ids),
             "elapsed_ms": self.elapsed_ms,
+            "provider_elapsed_ms": self.provider_elapsed_ms,
+            "provider_attempts": self.provider_attempts,
+            "provider_prompt_tokens": self.provider_prompt_tokens,
+            "provider_completion_tokens": self.provider_completion_tokens,
+            "provider_total_tokens": self.provider_total_tokens,
             "error": self.error,
         }
 
@@ -147,6 +157,35 @@ class ModelLoopReport:
     def total_elapsed_ms(self) -> float:
         return sum(record.elapsed_ms for record in self.records)
 
+    @property
+    def total_provider_elapsed_ms(self) -> float:
+        return sum(record.provider_elapsed_ms for record in self.records)
+
+    @property
+    def provider_attempts(self) -> int:
+        return sum(record.provider_attempts for record in self.records)
+
+    @property
+    def provider_prompt_tokens(self) -> int:
+        return sum(
+            record.provider_prompt_tokens or 0
+            for record in self.records
+        )
+
+    @property
+    def provider_completion_tokens(self) -> int:
+        return sum(
+            record.provider_completion_tokens or 0
+            for record in self.records
+        )
+
+    @property
+    def provider_total_tokens(self) -> int:
+        return sum(
+            record.provider_total_tokens or 0
+            for record in self.records
+        )
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": self.schema_version,
@@ -156,6 +195,11 @@ class ModelLoopReport:
                 "context_tokens": self.total_context_tokens,
                 "tokens_saved": self.total_tokens_saved,
                 "elapsed_ms": self.total_elapsed_ms,
+                "provider_elapsed_ms": self.total_provider_elapsed_ms,
+                "provider_attempts": self.provider_attempts,
+                "provider_prompt_tokens": self.provider_prompt_tokens,
+                "provider_completion_tokens": self.provider_completion_tokens,
+                "provider_total_tokens": self.provider_total_tokens,
             },
             "raw_metrics": self.raw_metrics.to_dict(),
             "guarded_metrics": self.guarded_metrics.to_dict(),
@@ -342,6 +386,7 @@ def run_model_loop(
 
     for case in cases:
         started = time.perf_counter()
+        adapter_telemetry = None
         try:
             model_input = build_model_input(
                 case,
@@ -351,6 +396,7 @@ def run_model_loop(
             )
             packet = model_input["promptforge"]
             payload = adapter.predict(model_input)
+            adapter_telemetry = getattr(adapter, "last_call_telemetry", None)
             prediction = parse_prediction(payload, ticket_id=case.ticket_id)
             raw_predictions.append(prediction)
 
@@ -371,9 +417,36 @@ def run_model_loop(
                     omitted_context_ids=tuple(
                         packet["omitted_context_ids"]
                     ),
+                    elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                    provider_elapsed_ms=float(
+                        getattr(adapter_telemetry, "elapsed_ms", 0.0)
+                    )
+                    if adapter_telemetry is not None
+                    else 0.0,
+                    provider_attempts=int(
+                        getattr(adapter_telemetry, "attempts", 0)
+                    )
+                    if adapter_telemetry is not None
+                    else 0,
+                    provider_prompt_tokens=getattr(
+                        adapter_telemetry, "prompt_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
+                    provider_completion_tokens=getattr(
+                        adapter_telemetry, "completion_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
+                    provider_total_tokens=getattr(
+                        adapter_telemetry, "total_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
                 )
             )
         except Exception as exc:
+            adapter_telemetry = getattr(adapter, "last_call_telemetry", None)
             records.append(
                 ModelLoopRecord(
                     ticket_id=case.ticket_id,
@@ -384,6 +457,31 @@ def run_model_loop(
                     tokens_saved=0,
                     omitted_context_ids=(),
                     elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                    provider_elapsed_ms=float(
+                        getattr(adapter_telemetry, "elapsed_ms", 0.0)
+                    )
+                    if adapter_telemetry is not None
+                    else 0.0,
+                    provider_attempts=int(
+                        getattr(adapter_telemetry, "attempts", 0)
+                    )
+                    if adapter_telemetry is not None
+                    else 0,
+                    provider_prompt_tokens=getattr(
+                        adapter_telemetry, "prompt_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
+                    provider_completion_tokens=getattr(
+                        adapter_telemetry, "completion_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
+                    provider_total_tokens=getattr(
+                        adapter_telemetry, "total_tokens", None
+                    )
+                    if adapter_telemetry is not None
+                    else None,
                     error=f"{type(exc).__name__}: {exc}",
                 )
             )
@@ -392,7 +490,7 @@ def run_model_loop(
     guarded_metrics = evaluate_predictions(cases, guarded_predictions)
 
     return ModelLoopReport(
-        schema_version="promptforge-v27.11-operational-telemetry.v1",
+        schema_version="promptforge-v27.12-provider-telemetry.v1",
         raw_metrics=raw_metrics,
         guarded_metrics=guarded_metrics,
         records=tuple(records),

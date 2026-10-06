@@ -77,7 +77,7 @@ class ModelLoopBenchmarkTests(unittest.TestCase):
     def test_demo_runs_1200_calls_and_guard_changes_action_metrics(self) -> None:
         report = demo_baseline_report()
 
-        self.assertEqual(report.schema_version, "promptforge-v27.11-operational-telemetry.v1")
+        self.assertEqual(report.schema_version, "promptforge-v27.12-provider-telemetry.v1")
         self.assertEqual(report.total_calls, 1200)
         self.assertEqual(report.failed_calls, 0)
         self.assertGreater(report.total_context_tokens, 0)
