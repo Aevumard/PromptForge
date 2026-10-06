@@ -742,6 +742,164 @@ class UncertaintyActionGateTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             ActionPolicy(require_support_quality="yes")
 
+
+    def test_provenance_diversity_blocks_repeated_same_source_support(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("a1", "support one", timestamp=10, source="system_a"),
+                EvidenceRecord("a2", "support two", timestamp=11, source="system_a"),
+                EvidenceRecord("b1", "independent source", timestamp=12, source="system_b"),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "concentrated",
+                "repeats one source",
+                evidence_support=0.99,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("a1", "a2"),
+            ),
+            ActionCandidate(
+                "diverse",
+                "uses two sources",
+                evidence_support=0.80,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("a1", "b1"),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_provenance_diversity=True)
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "diverse")
+        self.assertIn("concentrated", decision.blocked_action_ids)
+        self.assertIn(
+            "insufficient distinct support sources",
+            decision.reasons["concentrated"],
+        )
+
+    def test_provenance_diversity_passes_and_is_audited(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("e1", "source alpha", timestamp=10, source="alpha"),
+                EvidenceRecord("e2", "source beta", timestamp=11, source="beta"),
+            ]
+        )
+        action = ActionCandidate(
+            "provenance_checked",
+            "uses distinct provenance",
+            evidence_support=0.90,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1", "e2"),
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_provenance_diversity=True)
+        ).decide([action], evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "provenance_checked")
+        self.assertEqual(
+            decision.support_evidence_provenance["provenance_checked"],
+            {"e1": "alpha", "e2": "beta"},
+        )
+        self.assertEqual(
+            decision.to_dict()["support_evidence_provenance"]["provenance_checked"],
+            {"e1": "alpha", "e2": "beta"},
+        )
+
+    def test_unknown_source_does_not_count_toward_provenance_diversity(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("unknown", "unknown provenance", timestamp=10),
+                EvidenceRecord("known", "one known source", timestamp=11, source="alpha"),
+                EvidenceRecord("beta", "second known source", timestamp=12, source="beta"),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "unknown_pair",
+                "unknown plus one source",
+                evidence_support=0.99,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("unknown", "known"),
+            ),
+            ActionCandidate(
+                "known_pair",
+                "two known sources",
+                evidence_support=0.80,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("known", "beta"),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_provenance_diversity=True)
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "known_pair")
+        self.assertIn("unknown_pair", decision.blocked_action_ids)
+        self.assertIn(
+            "distinct_support_source_count:1",
+            decision.reasons["unknown_pair"],
+        )
+
+    def test_provenance_diversity_can_cap_source_concentration(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("a1", "alpha one", timestamp=10, source="alpha"),
+                EvidenceRecord("a2", "alpha two", timestamp=11, source="alpha"),
+                EvidenceRecord("b1", "beta one", timestamp=12, source="beta"),
+            ]
+        )
+        actions = [
+            ActionCandidate(
+                "too_concentrated",
+                "two anchors from alpha",
+                evidence_support=0.99,
+                reversibility=1.0,
+                downside=0.1,
+                support_evidence_ids=("a1", "a2", "b1"),
+            ),
+            ActionCandidate(
+                "balanced",
+                "one anchor per source",
+                evidence_support=0.80,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("a1", "b1"),
+            ),
+        ]
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_provenance_diversity=True,
+                max_support_anchors_per_source=1,
+            )
+        ).decide(actions, evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "balanced")
+        self.assertIn("too_concentrated", decision.blocked_action_ids)
+        self.assertIn(
+            "support source concentration exceeds threshold",
+            decision.reasons["too_concentrated"],
+        )
+
+    def test_invalid_support_provenance_policy_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ActionPolicy(min_distinct_support_sources=1)
+        with self.assertRaises(ValueError):
+            ActionPolicy(max_support_anchors_per_source=0)
+        with self.assertRaises(TypeError):
+            ActionPolicy(require_support_provenance_diversity="yes")
+        with self.assertRaises(TypeError):
+            ActionPolicy(max_support_anchors_per_source=True)
+
     def test_causal_dependence_is_a_penalty_not_a_truth_claim(self):
         actions = [
             ActionCandidate(
