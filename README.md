@@ -326,6 +326,7 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path, frozen snapshots, and memory credit assessment | Online experience boundary |
 | `promptforge/consolidation.py` | Deterministic replay, bounded retention, and optional credit-aware selection | Memory lifecycle control |
+| `promptforge/credit.py` | Explicit recency decay, evidence/stability bookkeeping, and observed comparison credit | Active memory scoring |
 | `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |
 | `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
