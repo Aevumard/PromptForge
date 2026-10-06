@@ -135,6 +135,8 @@ from .temporal import (
     ContextMemoryTemporalResult,
 )
 
+from .human_review import HUMAN_REVIEW_DECISIONS, HumanReviewRecord
+
 from .triage import (
     TRIAGE_STAGES,
     PriorityAssessment,
@@ -234,6 +236,8 @@ __all__ = [
     "HypothesisAssessment",
     "DiscriminatingExperiment",
     "HypothesisLedger",    "ConfidenceObservation",
+    "HUMAN_REVIEW_DECISIONS",
+    "HumanReviewRecord",
     "TRIAGE_STAGES",
     "PriorityAssessment",
     "TriageEnvelope",
