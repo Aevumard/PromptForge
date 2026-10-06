@@ -4,6 +4,7 @@ from dataclasses import asdict, dataclass
 from typing import Any
 
 from .decision import ActionDecision
+from .execution import ActionExecutionRecord
 from .human_review import HumanReviewRecord
 
 
@@ -77,6 +78,7 @@ class TriageState:
     action_decision: ActionDecision | None = None
     human_review_reason: str | None = None
     human_review: HumanReviewRecord | None = None
+    execution: ActionExecutionRecord | None = None
     outcome: dict[str, Any] | None = None
 
     def __post_init__(self) -> None:
@@ -108,6 +110,19 @@ class TriageState:
                 raise ValueError(
                     "human_review evidence_snapshot_id must match triage evidence_snapshot_id"
                 )
+        if self.stage in {"executed", "observed", "closed"}:
+            if self.execution is None:
+                raise ValueError(f"{self.stage} state requires execution receipt")
+            if self.execution.status != "succeeded":
+                raise ValueError(
+                    f"{self.stage} state requires a successful execution receipt"
+                )
+            if self.action_decision is None:
+                raise ValueError(f"{self.stage} state requires action_decision")
+            if self.execution.action_id != self.action_decision.selected_action_id:
+                raise ValueError(
+                    "execution action_id must match the selected action"
+                )
 
     @classmethod
     def admitted(
@@ -136,6 +151,7 @@ class TriageState:
         human_review: HumanReviewRecord | None = None,
         human_review_reason: str | None = None,
         outcome: dict[str, Any] | None = None,
+        execution: ActionExecutionRecord | None = None,
         decision_id: str | None = None,
         policy_version: str | None = None,
     ) -> "TriageState":
@@ -173,6 +189,25 @@ class TriageState:
             if action_decision is not None
             else self.action_decision
         )
+        next_execution = (
+            execution
+            if execution is not None
+            else self.execution
+        )
+
+        if next_stage == "executed":
+            if next_execution is None:
+                raise ValueError("executed transition requires execution receipt")
+            if next_execution.status != "succeeded":
+                raise ValueError(
+                    "executed transition requires a successful execution receipt"
+                )
+            if next_action is None:
+                raise ValueError("executed transition requires action_decision")
+            if next_execution.action_id != next_action.selected_action_id:
+                raise ValueError(
+                    "execution action_id must match the selected action"
+                )
 
         if next_stage == "waiting_human":
             if human_review is not None:
@@ -197,6 +232,7 @@ class TriageState:
             action_decision=next_action,
             human_review_reason=human_review_reason,
             human_review=human_review,
+            execution=next_execution,
             outcome=outcome,
         )
 
@@ -214,6 +250,11 @@ class TriageState:
             None
             if self.human_review is None
             else self.human_review.to_dict()
+        )
+        payload["execution"] = (
+            None
+            if self.execution is None
+            else self.execution.to_dict()
         )
         return payload
 
