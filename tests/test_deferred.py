@@ -1,7 +1,10 @@
 import unittest
 
 from promptforge.budget import ContextBlock, plan_context
-from promptforge.deferred import DeferredContextCatalog
+from promptforge.deferred import (
+    DeferredContextCatalog,
+    build_context_packet,
+)
 
 
 class DeferredContextTests(unittest.TestCase):
@@ -59,6 +62,42 @@ class DeferredContextTests(unittest.TestCase):
         result = catalog.load(["notes", "logs"], token_budget=4)
         self.assertEqual(result.loaded_ids, ("logs",))
         self.assertEqual(result.omitted_ids, ("notes",))
+
+    def test_delivery_packet_is_model_facing_and_omits_deferred_values(self) -> None:
+        blocks = (
+            ContextBlock(
+                "case",
+                {"id": "T-1"},
+                required=True,
+                path="case",
+                token_estimate=2,
+            ),
+            ContextBlock(
+                "history",
+                {"secret": "large-history"},
+                utility=0.5,
+                path="history",
+                token_estimate=5,
+            ),
+        )
+        plan = plan_context(blocks, budget_tokens=3)
+        packet = build_context_packet(
+            plan,
+            blocks,
+            descriptions={"history": "customer history"},
+        ).to_dict()
+
+        self.assertEqual(packet["context"], {"case": {"id": "T-1"}})
+        self.assertEqual(packet["context_tokens"], 2)
+        self.assertEqual(
+            packet["deferred_catalog"]["items"][0]["block_id"],
+            "history",
+        )
+        self.assertNotIn("large-history", str(packet))
+        self.assertEqual(
+            packet["deferred_catalog"]["items"][0]["description"],
+            "customer history",
+        )
 
     def test_unknown_ids_are_auditable(self) -> None:
         catalog = DeferredContextCatalog.from_blocks(self.blocks)
