@@ -15,7 +15,7 @@ An AI agent should use the smallest validated surface that solves the task. Do n
 4. For repository fixtures, use `harness.agent.prepare()`.
 5. Inspect `promptforge/core.py` when public core semantics matter.
 6. Inspect `harness/runner/transforms.py` only when historical transformation semantics matter.
-6. Inspect historical experiments, reports, and providers only when the request actually concerns research or provider execution.
+7. Inspect historical experiments, reports, and providers only when the request actually concerns research or provider execution.
 
 ## Public core contract
 
@@ -60,15 +60,44 @@ The handoff artifact exposes:
 
 The optional adaptive layer lives in `promptforge/adaptive.py` and remains provider-agnostic and harness-free.
 
-Its contract is intentionally separated into four concerns:
+Its contract is intentionally separated into seven concerns:
 
 1. **Structure** — `ContextTopologyProfiler` measures the nested-context topology and the required-field boundary.
 2. **Regime** — `HeuristicContextRegimeSelector` produces transparent descriptive flags and a bounded candidate preference order.
 3. **Local refinement** — `ContextBlockRefiner` explores bounded add/remove moves over optional blocks while required paths remain pinned.
 4. **Trajectory** — `ContextTrajectoryMonitor` consumes only the observed prefix of an external search/evaluation trace.
 5. **Control** — `ContextPortfolioController` can continue, intensify, switch, or stop using observed scores and remaining budget.
+6. **Memory** — `NearestEpisodeRouter` may route from observed historical episodes; `leave_one_family_out()` is the mandatory research boundary for transfer evaluation.
+7. **Unified orchestration** — `ComplexContextController` may combine structural, episodic, trajectory, and bounded-control signals, but it must preserve the explicit source and novelty boundary in its result.
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
+
+## Cognitive experience records
+
+`ContextEpisode` may retain decision metadata and externally supplied outcome fields in addition to routing topology.
+
+When writing an observation, preserve the selected action, decision source, regime, novelty distance, trajectory state, and measured cost. Optional outcome metadata must remain caller-supplied; do not invent quality or causal labels.
+
+These fields are descriptive state. They can be analyzed later, but they do not become validated causal rules merely because they are stored.
+## Relational topology
+
+`ContextRelationProfiler` provides an explicit relational layer over context nodes. It may measure supplied cross-links, connected components, degree concentration, density, and relation kinds.
+
+Relations must be supplied by the integration. Do not infer or fabricate semantic edges and then treat them as ground truth. When relational descriptors are stored in episodes, they become part of the observed routing evidence alongside the hierarchical topology.
+
+## Cognitive loop
+
+`ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle.
+
+Its boundary is explicit:
+
+1. `propose()` reads a frozen `ContextExperienceSnapshot`, profiles the current context, and produces a `ContextCognitiveProposal`.
+2. The caller executes the selected strategy outside PromptForge.
+3. `observe()` writes the externally measured outcome back as a `ContextEpisode`.
+
+A proposal must retain the experience version it was based on. Do not let later observations mutate the evidence represented by an existing proposal. The loop must never invent model-quality outcomes, provider responses, or hidden labels.
+
+Use the cognitive loop when an integration needs the complete adaptive lifecycle. Use the lower-level adaptive, memory, and orchestration APIs when an experiment needs finer control over individual stages.
 
 ## Policies
 

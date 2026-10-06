@@ -52,6 +52,91 @@ This architecture is deliberately graph-inspired: it borrows the pattern **struc
 
 The adaptive layer is optional. The default `prepare_context()` contract and the frozen research harness remain unchanged.
 
+## Episodic routing and memory
+
+PromptForge can retain measured context episodes and route a new context toward strategies that performed well on structurally similar prior episodes.
+
+The memory contract is:
+
+`episode = (episode_id, family_id, topology, strategy, observed_cost)`
+
+`NearestEpisodeRouter` performs nearest-case routing in a scaled topology space. The router never receives hidden labels or future results; it only sees supplied historical episodes.
+
+For research, `leave_one_family_out()` removes an entire context family from fitting before prediction. Held-out predictions are then compared against the best observed strategy for that held-out episode. This preserves the same evidence boundary used by the graph-routing work: routing performance is an empirical question, not an assumption.
+
+This layer is intentionally separate from `prepare_context()`: memory can guide strategy selection, but it does not silently become the default policy.
+
+## Unified adaptive decision
+
+`ComplexContextController` composes the layers into one decision envelope:
+
+`structure -> regime -> candidates -> memory -> trajectory -> control`
+
+A non-novel episodic match may provide the strategy. A novel memory match falls back to structural routing. Observed trajectory/probe evidence has precedence when an active search is already underway.
+
+The returned decision records its source and novelty distance so downstream systems can audit why a strategy was selected.
+
+
+
+## Cognitive loop
+
+The public API now exposes an explicit observe-decide-learn cycle through ContextCognitiveLoop.
+
+A cycle is deliberately split into two operations:
+
+1. propose() profiles the current context, freezes the current experience snapshot, routes from prior observations when the case is sufficiently familiar, and delegates the final choice to ComplexContextController.
+2. observe() accepts the externally measured outcome and records it as a ContextEpisode for future cycles.
+
+The resulting state transition is:
+
+context -> topology -> regime -> memory -> control -> proposal -> external execution -> observed outcome -> memory
+
+A minimal one-call integration is available through `ContextCognitiveLoop.prepare()`:
+
+```python
+from promptforge import ContextCognitiveLoop
+
+loop = ContextCognitiveLoop()
+result = loop.prepare(
+    cycle_id="T-001-cycle-1",
+    data={"task": {"id": "T-001", "action": "review"}},
+    required=["task.id", "task.action"],
+)
+
+print(result.proposal.decision.strategy)
+print(result.prepared["serialized_context"])
+```
+
+When relations are supplied, the same call incorporates their structural profile into future experience routing.
+
+The loop does not call a model or invent a quality score. Execution remains outside PromptForge, while the observed outcome is explicitly written back into experience memory. Every proposal records the experience version it was based on, making the online learning boundary auditable.
+
+ContextExperienceSnapshot is immutable. New observations can improve future routing without rewriting the evidence used by an earlier proposal or evaluation.
+
+## Relational context topology
+
+PromptForge can also accept an explicit relation graph over context nodes. `ContextRelationProfiler` measures relation count, connected components, degree concentration, density, and relation kinds without trying to infer semantics from raw text.
+
+These descriptors are added to the routing feature space used by the cognitive loop. When relational evidence is supplied, future experience can therefore be matched using both hierarchical shape and explicit cross-links.
+
+The relation graph is caller-supplied by design. PromptForge does not treat a guessed semantic relationship as ground truth; the integration must provide the relation evidence it wants the adaptive system to use.
+
+## Cognitive experience record
+
+Each observed episode now retains both the routing topology and the decision state that produced the outcome:
+
+`episode = (context topology, relational topology, regime, strategy, action, source, novelty, trajectory state, observed cost, outcome)`
+
+This separates two kinds of memory:
+
+- structural memory: what the context looked like and which relationships were present;
+- operational memory: what PromptForge decided, why it decided it, and what happened afterward.
+
+The richer metadata is descriptive evidence. It is not automatically treated as causal knowledge. Future research can analyze which states precede lower observed cost while keeping the outcome external and auditable.
+## Experience self-observation
+
+experience_summary() provides a descriptive summary of accumulated episodes: counts by family, strategy, action, decision source, regime, and trajectory state, plus observed mean cost and mean novelty distance. It is an inspection surface only; it does not infer causal effects.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -224,6 +309,9 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/` | Installable public API | End-user integration |
 | `promptforge/core.py` | Standalone provider-agnostic core | Core behavior |
 | `promptforge/adaptive.py` | Complexity-aware structure, local refinement, trajectory, and control | Complex-system orchestration |
+| `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
+| `promptforge/experience.py` | Mutable write path and frozen evidence snapshots | Online experience boundary |
+| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |\n| `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |

@@ -10,7 +10,6 @@ from .core import (
     prepare_context,
 )
 
-
 from .adaptive import (
     REGIME_COMPACT,
     REGIME_DEEP_HIERARCHICAL,
@@ -30,6 +29,37 @@ from .adaptive import (
     ContextTrajectoryState,
     HeuristicContextRegimeSelector,
     rank_context_candidates,
+)
+
+from .memory import (
+    ContextEpisode,
+    ContextRoute,
+    ContextRoutingEvaluation,
+    NearestEpisodeRouter,
+    episode_oracle,
+    experience_summary,
+    evaluate_holdout,
+    leave_one_family_out,
+    routing_summary,
+)
+
+from .experience import ContextExperienceSnapshot, ContextExperienceStore
+
+from .orchestration import (
+    ComplexContextController,
+    ContextAdaptiveDecision,
+)
+
+from .cognitive import (
+    ContextCognitiveLoop,
+    ContextCognitiveProposal,
+    ContextCognitiveResult,
+)
+
+from .relational import (
+    ContextRelation,
+    ContextRelationalProfile,
+    ContextRelationProfiler,
 )
 
 __all__ = [
@@ -56,4 +86,23 @@ __all__ = [
     "REGIME_HUB_DOMINATED",
     "REGIME_MIXED",
     "REGIME_WIDE_SPARSE",
+    "ContextEpisode",
+    "ContextRoute",
+    "ContextRoutingEvaluation",
+    "NearestEpisodeRouter",
+    "episode_oracle",
+    "experience_summary",
+    "evaluate_holdout",
+    "leave_one_family_out",
+    "routing_summary",
+    "ComplexContextController",
+    "ContextAdaptiveDecision",
+    "ContextExperienceSnapshot",
+    "ContextExperienceStore",
+    "ContextCognitiveLoop",
+    "ContextCognitiveProposal",
+    "ContextCognitiveResult",
+    "ContextRelation",
+    "ContextRelationalProfile",
+    "ContextRelationProfiler",
 ]
