@@ -16,6 +16,10 @@ from .routing_history import (
     ContextRoutingPolicyHistory,
     ContextRoutingPolicyHistorySnapshot,
 )
+from .routing_refresh import (
+    ContextRoutingPolicyRefreshController,
+    ContextRoutingPolicyRefreshDecision,
+)
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
@@ -57,6 +61,9 @@ class ContextCognitiveProposal:
     memory_policy_stability_rate: float | None = None
     memory_policy_refresh_recommended: bool | None = None
     memory_policy_freshness_age: int | None = None
+    memory_policy_refresh_required: bool | None = None
+    memory_policy_refresh_reason: str | None = None
+    memory_policy_refresh_eligible: bool | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -106,6 +113,7 @@ class ContextCognitiveLoop:
         memory_policy_history_min_observations: int = 1,
         memory_policy_min_stability: float | None = None,
         memory_policy_max_age: int | None = None,
+        memory_policy_refresh_controller: ContextRoutingPolicyRefreshController | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -175,6 +183,26 @@ class ContextCognitiveLoop:
         )
         self.memory_policy_min_stability = memory_policy_min_stability
         self.memory_policy_max_age = memory_policy_max_age
+        if memory_policy_refresh_controller is not None and not isinstance(
+            memory_policy_refresh_controller,
+            ContextRoutingPolicyRefreshController,
+        ):
+            raise TypeError(
+                "memory_policy_refresh_controller must be a ContextRoutingPolicyRefreshController or None"
+            )
+        self.memory_policy_refresh_controller = (
+            memory_policy_refresh_controller
+            if memory_policy_refresh_controller is not None
+            else ContextRoutingPolicyRefreshController(
+                min_observations=memory_policy_history_min_observations,
+                min_stability=(
+                    0.0
+                    if memory_policy_min_stability is None
+                    else memory_policy_min_stability
+                ),
+                max_age=memory_policy_max_age,
+            )
+        )
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -209,20 +237,24 @@ class ContextCognitiveLoop:
         policy_stability_rate = None
         policy_refresh_recommended = None
         policy_freshness_age = None
+        policy_refresh_required = None
+        policy_refresh_reason = None
+        policy_refresh_eligible = None
         if selected_mode == "adaptive":
             if self.memory_routing_policy_evidence is not None:
                 policy_version = self.memory_routing_policy_evidence.version
                 selected_mode = self.memory_routing_policy_evidence.selected_mode
-                if self.memory_policy_max_age is not None:
-                    policy_freshness_age = max(
-                        0,
-                        evidence.version - self.memory_routing_policy_evidence.version,
-                    )
-                    policy_refresh_recommended = (
-                        policy_freshness_age > self.memory_policy_max_age
-                    )
-                    if policy_refresh_recommended:
-                        selected_mode = "nearest"
+                refresh_decision = self.memory_policy_refresh_controller.decide_for_policy(
+                    policy_version=policy_version,
+                    experience_version=evidence.version,
+                )
+                policy_freshness_age = refresh_decision.freshness_age
+                policy_refresh_recommended = refresh_decision.refresh_required
+                policy_refresh_required = refresh_decision.refresh_required
+                policy_refresh_reason = refresh_decision.reason
+                policy_refresh_eligible = refresh_decision.eligible
+                if refresh_decision.refresh_required:
+                    selected_mode = "nearest"
             elif self.memory_routing_policy_history is not None:
                 history = self.memory_routing_policy_history.snapshot()
                 selected_mode = history.select_mode(
@@ -250,7 +282,14 @@ class ContextCognitiveLoop:
                     policy_stability_rate = health.stability_rate
                     policy_freshness_age = health.freshness_age
                     policy_refresh_recommended = health.refresh_recommended
-                    if not health.healthy:
+                    refresh_decision = self.memory_policy_refresh_controller.decide(
+                        history,
+                        experience_version=evidence.version,
+                    )
+                    policy_refresh_required = refresh_decision.refresh_required
+                    policy_refresh_reason = refresh_decision.reason
+                    policy_refresh_eligible = refresh_decision.eligible
+                    if not health.healthy or refresh_decision.refresh_required:
                         selected_mode = "nearest"
             else:
                 selected_mode = "nearest"
@@ -286,7 +325,7 @@ class ContextCognitiveLoop:
         )
 
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v6",
+            schema_version="context-cognitive-proposal.v7",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
@@ -301,6 +340,9 @@ class ContextCognitiveLoop:
             memory_policy_stability_rate=policy_stability_rate,
             memory_policy_refresh_recommended=policy_refresh_recommended,
             memory_policy_freshness_age=policy_freshness_age,
+            memory_policy_refresh_required=policy_refresh_required,
+            memory_policy_refresh_reason=policy_refresh_reason,
+            memory_policy_refresh_eligible=policy_refresh_eligible,
             trajectory=trajectory,
             candidate_order=tuple(
                 ranked
@@ -364,6 +406,49 @@ class ContextCognitiveLoop:
             top_k=top_k,
         )
         self.record_memory_routing_policy(evidence)
+        return evidence
+
+    def policy_refresh_decision(
+        self,
+    ) -> ContextRoutingPolicyRefreshDecision | None:
+        """Return the current refresh gate without executing a refresh."""
+        snapshot = self.experience.snapshot()
+        if self.memory_routing_policy_history is not None:
+            return self.memory_policy_refresh_controller.decide(
+                self.memory_routing_policy_history.snapshot(),
+                experience_version=snapshot.version,
+            )
+        if self.memory_routing_policy_evidence is not None:
+            return self.memory_policy_refresh_controller.decide_for_policy(
+                policy_version=self.memory_routing_policy_evidence.version,
+                experience_version=snapshot.version,
+            )
+        return None
+
+    def refresh_memory_routing_policy(
+        self,
+        *,
+        top_k: int | None = None,
+        version: int | None = None,
+    ) -> ContextRoutingPolicyEvidence | None:
+        """Refresh routing policy only when the explicit gate permits it."""
+        if self.memory_routing_policy_history is None:
+            raise ValueError(
+                "memory_routing_policy_history must be configured"
+            )
+        decision = self.policy_refresh_decision()
+        if decision is None or not decision.eligible:
+            return None
+
+        snapshot = self.experience.snapshot()
+        evidence = self.evaluate_memory_routing_policy(
+            version=version if version is not None else snapshot.version,
+            top_k=top_k,
+        )
+        self.record_memory_routing_policy(evidence)
+        self.memory_policy_refresh_controller.record_refresh(
+            experience_version=snapshot.version,
+        )
         return evidence
 
     def prepare(
