@@ -154,6 +154,12 @@ from .budget import (
     plan_context,
 )
 
+from .deferred import (
+    ContextLoadResult,
+    DeferredContextCatalog,
+    DeferredContextItem,
+)
+
 from .triage import (
     TRIAGE_STAGES,
     PriorityAssessment,
@@ -266,6 +272,9 @@ __all__ = [
     "ContextBudgetPlanner",
     "ContextBudgetPolicy",
     "plan_context",
+    "ContextLoadResult",
+    "DeferredContextCatalog",
+    "DeferredContextItem",
     "TRIAGE_STAGES",
     "PriorityAssessment",
     "TriageEnvelope",
