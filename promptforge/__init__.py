@@ -137,6 +137,15 @@ from .temporal import (
 
 from .human_review import HUMAN_REVIEW_DECISIONS, HumanReviewRecord
 
+from .execution import (
+    EXECUTION_DECISIONS,
+    EXECUTION_STATUSES,
+    ActionExecutionGuard,
+    ActionExecutionRecord,
+    ExecutionDecision,
+    ExecutionPolicy,
+)
+
 from .triage import (
     TRIAGE_STAGES,
     PriorityAssessment,
@@ -238,6 +247,12 @@ __all__ = [
     "HypothesisLedger",    "ConfidenceObservation",
     "HUMAN_REVIEW_DECISIONS",
     "HumanReviewRecord",
+    "EXECUTION_DECISIONS",
+    "EXECUTION_STATUSES",
+    "ActionExecutionGuard",
+    "ActionExecutionRecord",
+    "ExecutionDecision",
+    "ExecutionPolicy",
     "TRIAGE_STAGES",
     "PriorityAssessment",
     "TriageEnvelope",
