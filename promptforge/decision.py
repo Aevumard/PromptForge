@@ -182,6 +182,7 @@ class ActionDecision:
     support_evidence_stances: dict[str, dict[str, str]]
     support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]]
     support_evidence_quality: dict[str, dict[str, dict[str, float]]]
+    support_evidence_provenance: dict[str, dict[str, str]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -204,6 +205,10 @@ class ActionDecision:
                 for evidence_id, metrics in value.items()
             }
             for key, value in self.support_evidence_quality.items()
+        }
+        payload["support_evidence_provenance"] = {
+            key: dict(value)
+            for key, value in self.support_evidence_provenance.items()
         }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
@@ -245,6 +250,7 @@ class UncertaintyActionGate:
         support_evidence_stances: dict[str, dict[str, str]] = {}
         support_evidence_tag_matches: dict[str, dict[str, tuple[str, ...]]] = {}
         support_evidence_quality: dict[str, dict[str, dict[str, float]]] = {}
+        support_evidence_provenance: dict[str, dict[str, str]] = {}
 
         snapshot_items = (
             evidence.context.get("evidence", [])
@@ -264,6 +270,11 @@ class UncertaintyActionGate:
             )
             for item in snapshot_items
             if str(item.get("evidence_id", "")).strip()
+        }
+        support_source_by_id = {
+            str(item.get("evidence_id", "")).strip(): str(item["source"]).strip()
+            for item in snapshot_items
+            if str(item.get("evidence_id", "")).strip() and "source" in item
         }
         support_relevance_by_id = {
             str(item.get("evidence_id", "")).strip(): float(item["relevance"])
@@ -311,6 +322,12 @@ class UncertaintyActionGate:
                 for evidence_id in support_ids
                 if evidence_id in support_relevance_by_id
                 and evidence_id in support_reliability_by_id
+            }
+
+            support_evidence_provenance[action.action_id] = {
+                evidence_id: support_source_by_id[evidence_id]
+                for evidence_id in support_ids
+                if evidence_id in support_source_by_id
             }
 
             if evidence is not None and missing:
