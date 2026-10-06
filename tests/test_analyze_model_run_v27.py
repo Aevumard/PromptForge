@@ -16,7 +16,7 @@ class ExperimentAnalysisTests(TestCase):
 
         self.assertEqual(
             analysis.schema_version,
-            "promptforge-v27.11-operational-telemetry.v1",
+            "promptforge-v27.12-provider-telemetry.v1",
         )
         names = {item.name for item in analysis.slices}
         self.assertEqual(
@@ -37,6 +37,10 @@ class ExperimentAnalysisTests(TestCase):
         self.assertGreaterEqual(analysis.total_elapsed_ms, 0.0)
         self.assertGreaterEqual(analysis.latency_p50_ms, 0.0)
         self.assertGreaterEqual(analysis.latency_p95_ms, analysis.latency_p50_ms)
+        self.assertGreaterEqual(analysis.provider_elapsed_ms, 0.0)
+        self.assertGreaterEqual(analysis.provider_latency_p95_ms, analysis.provider_latency_p50_ms)
+        self.assertGreaterEqual(analysis.provider_attempts, 0)
+        self.assertGreaterEqual(analysis.provider_total_tokens, 0)
 
     def test_guard_reduces_unsafe_rate_in_human_slice(self) -> None:
         report = demo_baseline_report(count=16, seed=271).to_dict()
