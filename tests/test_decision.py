@@ -377,7 +377,7 @@ class UncertaintyActionGateTests(unittest.TestCase):
         self.assertEqual(decision.selected_action_id, "fallback")
         self.assertIn("stance_required", decision.blocked_action_ids)
         self.assertIn(
-            "support stance boundary was not supplied",
+            "support stance unavailable",
             decision.reasons["stance_required"],
         )
 
