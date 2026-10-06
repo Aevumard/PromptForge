@@ -404,6 +404,22 @@ historical labeled outcomes -> family scope -> temporal gate -> supported bins -
 
 Family scope is an evidence-admissibility control, not a claim that family labels are causally meaningful.
 
+## Action evidence anchoring
+
+The uncertainty action gate can require explicit evidence anchors for caller-supplied action support scores.
+
+1. `ActionCandidate.support_evidence_ids` records the evidence ids claimed to support the action.
+2. `ActionPolicy.require_support_anchors=True` fails closed when an action has no support anchors, when the evidence boundary is absent, or when any declared support id is outside the current evidence snapshot.
+3. `min_support_anchors` can require multiple retained anchors without interpreting their count as statistical independence.
+4. The resulting `ActionDecision` preserves the support ids for auditability.
+5. The default policy remains backward compatible: unanchored `evidence_support` scores remain allowed unless the explicit guard is enabled.
+
+The strengthened boundary is:
+
+`epistemic evidence -> explicit action support anchors -> feasibility/safety gates -> action ranking`
+
+This is an evidence-admissibility safeguard, not a truth score or causal inference mechanism.
+
 ## Hypothesis evidence corroboration
 
 Hypothesis assessment can optionally cap contribution from the same declared evidence source.
