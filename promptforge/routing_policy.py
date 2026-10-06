@@ -41,6 +41,14 @@ class ContextRoutingPolicyEvidence:
     scores: tuple[ContextRoutingModeScore, ...]
     selected_mode: str
 
+    def __post_init__(self) -> None:
+        if self.version < 0:
+            raise ValueError("version must be non-negative")
+        if self.selected_mode not in ("nearest", "credit"):
+            raise ValueError(
+                "selected_mode must be one of: nearest, credit"
+            )
+
     def to_dict(self) -> dict:
         payload = asdict(self)
         payload["scores"] = [score.to_dict() for score in self.scores]
