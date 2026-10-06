@@ -219,22 +219,21 @@ class ToolOutputTrimmer:
     def _trim_item(self, item: ToolOutputItem) -> ToolOutputTrimmed | None:
         original = item.content
         keep = self.policy.preview_chars
-        marker = (
-            "\n…[PromptForge omitted "
-            + str(len(original))
-            + " chars total]…\n"
+        omitted_chars = max(0, len(original) - keep)
+        marker = f"\n…[{omitted_chars}c omitted]…\n"
+        if len(marker) > keep:
+            marker = f"…[{omitted_chars}c]…"
+        if len(marker) > keep:
+            marker = ""
+
+        available = max(0, keep - len(marker))
+        head = ceil(available / 2)
+        tail = available - head
+        preview = (
+            original[:head]
+            + marker
+            + (original[-tail:] if tail > 0 else "")
         )
-        if len(marker) >= keep:
-            preview = original[:keep]
-        else:
-            available = keep - len(marker)
-            head = ceil(available / 2)
-            tail = available - head
-            preview = (
-                original[:head]
-                + marker
-                + (original[-tail:] if tail > 0 else "")
-            )
 
         if len(preview) >= len(original):
             return None
