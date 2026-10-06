@@ -121,6 +121,45 @@ The intended sequence is:
 
 `evidence -> temporal gate -> contradiction/kind preservation -> ranking -> budget -> audited context`
 
+## Uncertainty-aware action boundary
+
+`promptforge.decision` is an opt-in action-selection aid layered above explicit evidence boundaries.
+
+1. Action scores are caller-supplied descriptive metadata; do not infer them from prose and do not call them truth.
+2. An action that requires unavailable evidence must fail closed.
+3. Reversibility and downside can be hard gates, not only soft preferences.
+4. Causal dependence is a caution signal only. It must never become an automatic causal conclusion.
+5. Preserve the complete ranking, blocked set, numeric scores, and reasons for auditability.
+6. Keep action choice separate from hypothesis identification: a reversible action can be preferred even while causal attribution remains unresolved.
+
+Intended sequence:
+
+`epistemic boundary -> feasibility -> reversibility/downside -> ranking -> action decision`
+
+## Hypothesis and experiment boundary
+
+`promptforge.hypothesis` is an explicit evidence bookkeeping layer.
+
+1. Hypothesis/evidence relationships must be supplied by the integration.
+2. `insufficient_evidence` and `unresolved` must not be treated as disproof.
+3. Support and contradiction must remain separately visible.
+4. Future or unavailable evidence cannot support a hypothesis inside the current epistemic boundary.
+5. Experiment priority is a transparent design heuristic, not statistical power or a causal guarantee.
+6. Keep hypothesis state separate from operational action choice; an action can be preferred while the causal hypothesis remains contested.
+
+Intended sequence:
+
+`temporal evidence -> support/contradiction ledger -> competing hypotheses -> discriminating experiment priority`
+
+## Memory corroboration boundary
+
+`ContextMemoryAwareRouter` may use `min_family_count` and `min_strategy_evidence` as explicit admissibility gates.
+
+1. Do not let a single structurally similar episode become decisive solely because it is recent or highly credited.
+2. Corroboration thresholds are operational safeguards, not truth estimates.
+3. When no strategy satisfies the thresholds, retain the transparent scored fallback rather than inventing a winner.
+4. Preserve the frozen snapshot boundary; corroboration counts must come only from the fitted training snapshot.
+
 ## Cognitive loop
 
 `ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.

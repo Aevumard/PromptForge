@@ -29,6 +29,14 @@ from .exploration import (
 )
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
+from .epistemic import (
+    EpistemicContextCompiler,
+    EpistemicContextPolicy,
+    EpistemicContextResult,
+    EvidenceRecord,
+)
+from .decision import ActionCandidate, ActionDecision, UncertaintyActionGate
+from .hypothesis import HypothesisAssessment, HypothesisLedger, HypothesisRecord
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
 
 
@@ -63,6 +71,8 @@ class ContextCognitiveProposal:
     memory_routing_mode: str = "nearest"
     memory_routing_selected_mode: str = "nearest"
     memory_top_k: int = 5
+    memory_min_family_count: int = 1
+    memory_min_strategy_evidence: int = 1
     memory_policy_version: int | None = None
     memory_policy_history_version: int | None = None
     memory_policy_stability_rate: float | None = None
@@ -78,6 +88,9 @@ class ContextCognitiveProposal:
     exploration_count: int | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
+    epistemic_context: EpistemicContextResult | None = None
+    hypothesis_assessments: tuple[HypothesisAssessment, ...] = ()
+    action_decision: ActionDecision | None = None
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -90,6 +103,19 @@ class ContextCognitiveProposal:
             self.trajectory.to_dict() if self.trajectory is not None else None
         )
         payload["candidate_order"] = list(self.candidate_order)
+        payload["epistemic_context"] = (
+            self.epistemic_context.to_dict()
+            if self.epistemic_context is not None
+            else None
+        )
+        payload["hypothesis_assessments"] = [
+            item.to_dict() for item in self.hypothesis_assessments
+        ]
+        payload["action_decision"] = (
+            self.action_decision.to_dict()
+            if self.action_decision is not None
+            else None
+        )
         return payload
 
 
@@ -119,6 +145,8 @@ class ContextCognitiveLoop:
         memory_routing_mode: str = "nearest",
         memory_top_k: int = 5,
         memory_credit_policy: ContextMemoryCreditPolicy | None = None,
+        memory_min_family_count: int = 1,
+        memory_min_strategy_evidence: int = 1,
         memory_routing_policy_evidence: ContextRoutingPolicyEvidence | None = None,
         memory_routing_policy_history: ContextRoutingPolicyHistory | None = None,
         memory_policy_history_window: int | None = None,
@@ -128,6 +156,9 @@ class ContextCognitiveLoop:
         memory_policy_refresh_controller: ContextRoutingPolicyRefreshController | None = None,
         exploration_controller: ContextExplorationController | None = None,
         exploration_adjudicator: ContextExplorationAdjudicator | None = None,
+        epistemic_compiler: EpistemicContextCompiler | None = None,
+        hypothesis_ledger: HypothesisLedger | None = None,
+        action_gate: UncertaintyActionGate | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -145,6 +176,10 @@ class ContextCognitiveLoop:
             )
         if memory_top_k < 1:
             raise ValueError("memory_top_k must be at least 1")
+        if memory_min_family_count < 1:
+            raise ValueError("memory_min_family_count must be at least 1")
+        if memory_min_strategy_evidence < 1:
+            raise ValueError("memory_min_strategy_evidence must be at least 1")
         if memory_credit_policy is not None and not isinstance(
             memory_credit_policy, ContextMemoryCreditPolicy
         ):
@@ -154,6 +189,8 @@ class ContextCognitiveLoop:
         self.scale_mode = scale_mode
         self.memory_routing_mode = memory_routing_mode
         self.memory_top_k = int(memory_top_k)
+        self.memory_min_family_count = int(memory_min_family_count)
+        self.memory_min_strategy_evidence = int(memory_min_strategy_evidence)
         if memory_routing_policy_evidence is not None and not isinstance(
             memory_routing_policy_evidence,
             ContextRoutingPolicyEvidence,
@@ -237,6 +274,9 @@ class ContextCognitiveLoop:
             if exploration_adjudicator is not None
             else ContextExplorationAdjudicator()
         )
+        self.epistemic_compiler = epistemic_compiler or EpistemicContextCompiler()
+        self.hypothesis_ledger = hypothesis_ledger or HypothesisLedger()
+        self.action_gate = action_gate or UncertaintyActionGate()
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -256,9 +296,35 @@ class ContextCognitiveLoop:
         probe_scores: Mapping[str, float] | None = None,
         remaining_budget_fraction: float = 1.0,
         budget_tokens: int | None = None,
+        evidence: Sequence[EvidenceRecord | Mapping[str, Any]] = (),
+        epistemic_policy: EpistemicContextPolicy | None = None,
+        hypotheses: Sequence[HypothesisRecord] = (),
+        action_candidates: Sequence[ActionCandidate] = (),
     ) -> ContextCognitiveProposal:
         if not cycle_id:
             raise ValueError("cycle_id must not be empty")
+
+        epistemic_context = (
+            self.epistemic_compiler.compile(evidence, policy=epistemic_policy)
+            if evidence
+            else None
+        )
+        hypothesis_assessments = (
+            self.hypothesis_ledger.assess(
+                hypotheses,
+                evidence=epistemic_context,
+            )
+            if hypotheses
+            else ()
+        )
+        action_decision = (
+            self.action_gate.decide(
+                action_candidates,
+                evidence=epistemic_context,
+            )
+            if action_candidates
+            else None
+        )
 
         profile = self.profiler.profile(data, required)
         relational_profile = self.relation_profiler.profile(relations)
@@ -341,6 +407,8 @@ class ContextCognitiveLoop:
                     scale_mode=self.scale_mode,
                     top_k=self.memory_top_k,
                     policy=self.memory_credit_policy,
+                    min_family_count=self.memory_min_family_count,
+                    min_strategy_evidence=self.memory_min_strategy_evidence,
                 )
             else:
                 memory_route = evidence.route(
@@ -411,6 +479,8 @@ class ContextCognitiveLoop:
             memory_routing_mode=self.memory_routing_mode,
             memory_routing_selected_mode=selected_mode,
             memory_top_k=self.memory_top_k,
+            memory_min_family_count=self.memory_min_family_count,
+            memory_min_strategy_evidence=self.memory_min_strategy_evidence,
             memory_policy_version=policy_version,
             memory_policy_history_version=policy_history_version,
             memory_policy_stability_rate=policy_stability_rate,
@@ -426,6 +496,9 @@ class ContextCognitiveLoop:
             exploration_count=exploration_count,
             trajectory=trajectory,
             candidate_order=candidate_order,
+            epistemic_context=epistemic_context,
+            hypothesis_assessments=tuple(hypothesis_assessments),
+            action_decision=action_decision,
         )
 
     def evaluate_memory_routing_policy(
@@ -563,6 +636,10 @@ class ContextCognitiveLoop:
         current_cost: float | None = None,
         probe_scores: Mapping[str, float] | None = None,
         remaining_budget_fraction: float = 1.0,
+        evidence: Sequence[EvidenceRecord | Mapping[str, Any]] = (),
+        epistemic_policy: EpistemicContextPolicy | None = None,
+        hypotheses: Sequence[HypothesisRecord] = (),
+        action_candidates: Sequence[ActionCandidate] = (),
     ) -> ContextCognitiveResult:
         """Plan and materialize the selected context preparation in one call."""
         if candidates is None:
@@ -588,6 +665,10 @@ class ContextCognitiveLoop:
             probe_scores=probe_scores,
             remaining_budget_fraction=remaining_budget_fraction,
             budget_tokens=budget_tokens,
+            evidence=evidence,
+            epistemic_policy=epistemic_policy,
+            hypotheses=hypotheses,
+            action_candidates=action_candidates,
         )
         if proposal.decision.action == "stop":
             raise ValueError(
@@ -603,6 +684,14 @@ class ContextCognitiveLoop:
             arm_id=proposal.decision.strategy,
             budget_tokens=budget_tokens,
         )
+        if proposal.epistemic_context is not None:
+            prepared["epistemic_context"] = proposal.epistemic_context.to_dict()
+        if proposal.hypothesis_assessments:
+            prepared["hypothesis_assessments"] = [
+                item.to_dict() for item in proposal.hypothesis_assessments
+            ]
+        if proposal.action_decision is not None:
+            prepared["action_decision"] = proposal.action_decision.to_dict()
         return ContextCognitiveResult(proposal=proposal, prepared=prepared)
 
     def observe(

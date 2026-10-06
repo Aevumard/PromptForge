@@ -54,6 +54,8 @@ class ContextExperienceSnapshot:
         scale_mode: str = "iqr",
         top_k: int = 5,
         policy: ContextMemoryCreditPolicy | None = None,
+        min_family_count: int = 1,
+        min_strategy_evidence: int = 1,
     ) -> ContextMemoryAwareRoute:
         """Route using credit-weighted nearby evidence inside this snapshot."""
         router = ContextMemoryAwareRouter(
@@ -61,6 +63,8 @@ class ContextExperienceSnapshot:
             scale_mode=scale_mode,
             top_k=top_k,
             credit_policy=policy,
+            min_family_count=min_family_count,
+            min_strategy_evidence=min_strategy_evidence,
         ).fit(self.episodes)
         return router.route(topology)
 
@@ -137,6 +141,8 @@ class ContextExperienceStore:
         scale_mode: str = "iqr",
         top_k: int = 5,
         policy: ContextMemoryCreditPolicy | None = None,
+        min_family_count: int = 1,
+        min_strategy_evidence: int = 1,
     ) -> ContextMemoryAwareRoute:
         """Route current memory using an immutable evidence boundary."""
         return self.snapshot().memory_aware_route(
@@ -145,6 +151,8 @@ class ContextExperienceStore:
             scale_mode=scale_mode,
             top_k=top_k,
             policy=policy,
+            min_family_count=min_family_count,
+            min_strategy_evidence=min_strategy_evidence,
         )
 
     def credit(

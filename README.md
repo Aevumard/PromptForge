@@ -307,6 +307,46 @@ The handoff is:
 
 Use it as an additive evidence-control layer above the existing structural, memory, trajectory, and cognitive orchestration surfaces.
 
+## Uncertainty-aware action control
+
+`UncertaintyActionGate` adds an opt-in decision boundary for tasks where the best operational action should not be equated with the strongest causal hypothesis.
+
+`ActionCandidate` carries caller-supplied evidence support, reversibility, downside, operational cost, required evidence ids, and an explicit causal-dependence flag.
+
+`UncertaintyActionGate` then:
+
+- fails closed when an action requires evidence outside the current epistemic boundary;
+- can require reversibility and cap downside;
+- trades evidence support against reversibility, downside, and operational cost with transparent deterministic weights;
+- applies only a configurable caution penalty to actions that explicitly depend on an unresolved causal claim;
+- returns the full ranking, blocked actions, scores, and reasons for audit.
+
+The gate is a decision aid, not a causal oracle. Action attributes and support values remain caller-supplied.
+
+The intended sequence is:
+
+`evidence boundary -> action feasibility -> risk/reversibility gate -> deterministic ranking -> audited action decision`
+
+### Memory corroboration gate
+
+`ContextMemoryAwareRouter` also supports an opt-in corroboration gate through `min_family_count` and `min_strategy_evidence`. This prevents one isolated episode or one-family cluster from dominating a memory-aware route solely because it is structurally close or recent.
+
+The gate does not discard the nearest-case baseline. When no strategy satisfies the thresholds, the router deterministically falls back to the scored candidate set. The selected thresholds and resulting route remain explicit configuration rather than hidden trust.
+
+## Explicit hypothesis ledger
+
+`HypothesisLedger` keeps hypothesis state separate from the evidence that currently supports or contradicts it.
+
+`HypothesisRecord` requires the integration to declare support, contradiction, and required-evidence relationships. The ledger then reports only descriptive states such as `unresolved`, `supported_by_available_evidence`, `challenged_by_available_evidence`, `contested`, and `insufficient_evidence`.
+
+`DiscriminatingExperiment` provides caller-supplied design attributes and a deterministic prioritization score based on hypothesis coverage, isolation, controls, measurement quality, cost, and operational risk. The score is explicitly a prioritization heuristic, not statistical power and not proof of causal identification.
+
+The important boundary is:
+
+`evidence boundary -> hypothesis state -> competing-explanation visibility -> experiment prioritization`
+
+No hypothesis is treated as disproved merely because supporting evidence is absent from the current boundary.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
