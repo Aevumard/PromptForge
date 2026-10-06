@@ -171,7 +171,7 @@ class ContextCognitiveLoop:
         )
 
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v1",
+            schema_version="context-cognitive-proposal.v2",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
