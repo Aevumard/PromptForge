@@ -153,6 +153,100 @@ class ConfidenceCalibrationTests(unittest.TestCase):
                 ),
             )
 
+    def test_target_family_isolated_from_dominant_other_family(self):
+        observations = [
+            *[
+                ConfidenceObservation(
+                    f"a-{i}",
+                    0.8,
+                    outcome=False,
+                    family="family-a",
+                )
+                for i in range(20)
+            ],
+            *[
+                ConfidenceObservation(
+                    f"b-{i}",
+                    0.8,
+                    outcome=True,
+                    family="family-b",
+                )
+                for i in range(4)
+            ],
+        ]
+
+        pooled = ConfidenceCalibrator().fit(
+            observations,
+            policy=ConfidenceCalibrationPolicy(
+                bins=5,
+                min_bin_observations=2,
+                min_total_observations=2,
+            ),
+        )
+        scoped = ConfidenceCalibrator().fit(
+            observations,
+            policy=ConfidenceCalibrationPolicy(
+                bins=5,
+                min_bin_observations=2,
+                min_total_observations=2,
+                target_family="family-b",
+                min_family_observations=4,
+            ),
+        )
+
+        self.assertLess(
+            pooled.assess(0.8).calibrated_confidence,
+            scoped.assess(0.8).calibrated_confidence,
+        )
+        self.assertEqual(scoped.metrics.observation_count, 4)
+        self.assertEqual(len(scoped.family_excluded_ids), 20)
+        self.assertEqual(scoped.policy.target_family, "family-b")
+
+    def test_target_family_requires_enough_observations(self):
+        observations = [
+            ConfidenceObservation(
+                "a-1",
+                0.8,
+                outcome=True,
+                family="family-a",
+            )
+        ]
+
+        with self.assertRaises(ValueError):
+            ConfidenceCalibrator().fit(
+                observations,
+                policy=ConfidenceCalibrationPolicy(
+                    target_family="family-a",
+                    min_family_observations=2,
+                    min_total_observations=1,
+                ),
+            )
+
+    def test_required_observation_crossing_family_scope_fails_closed(self):
+        observations = [
+            ConfidenceObservation(
+                "target",
+                0.8,
+                outcome=True,
+                family="family-a",
+            ),
+            ConfidenceObservation(
+                "other",
+                0.8,
+                outcome=False,
+                family="family-b",
+            ),
+        ]
+
+        with self.assertRaises(ValueError):
+            ConfidenceCalibrator().fit(
+                observations,
+                policy=ConfidenceCalibrationPolicy(
+                    target_family="family-b",
+                    required_observation_ids=("target",),
+                ),
+            )
+
     def test_unknown_time_is_excluded_by_default_under_cutoff(self):
         model = ConfidenceCalibrator().fit(
             [
