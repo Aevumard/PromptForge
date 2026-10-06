@@ -575,3 +575,21 @@ The reviewed evidence snapshot must match the triage state's evidence snapshot. 
 A review record does not establish factual truth, causal validity, or statistical independence. It records an intervention at a workflow boundary and makes that intervention replayable and auditable.
 
 Schema: `schemas/human-review.v1.json`.
+
+## External action execution boundary
+
+`promptforge.execution` handles the boundary around side effects without executing them.
+
+`ActionExecutionGuard` requires an integration-owned idempotency key by default and classifies a proposed attempt as:
+- `execute` when the key has no prior record;
+- `retry` when prior attempts failed and the explicit retry budget allows another attempt;
+- `duplicate` when the same key already succeeded or is in flight;
+- `blocked` when the key is missing or the retry budget is exhausted.
+
+`ActionExecutionRecord` is the immutable external receipt. A `TriageState` cannot enter `executed`, `observed`, or `closed` without a successful execution receipt whose `action_id` matches the selected action.
+
+This prevents the workflow from claiming that a side effect happened merely because an action was selected. PromptForge still does not execute the side effect; the integration owns the real-world operation and receipt.
+
+Idempotency keys are operational duplicate-action controls, not proofs of business correctness or delivery semantics.
+
+Schema: `schemas/action-execution.v1.json`.
