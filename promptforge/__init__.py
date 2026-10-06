@@ -135,6 +135,13 @@ from .temporal import (
     ContextMemoryTemporalResult,
 )
 
+from .triage import (
+    TRIAGE_STAGES,
+    PriorityAssessment,
+    TriageEnvelope,
+    TriageState,
+)
+
 from .hypothesis import (
     HYPOTHESIS_STATUSES,
     HypothesisEvidencePolicy,
@@ -227,6 +234,10 @@ __all__ = [
     "HypothesisAssessment",
     "DiscriminatingExperiment",
     "HypothesisLedger",    "ConfidenceObservation",
+    "TRIAGE_STAGES",
+    "PriorityAssessment",
+    "TriageEnvelope",
+    "TriageState",
     "ConfidenceCalibrationPolicy",
     "ConfidenceCalibrationMetrics",
     "ConfidenceAssessment",
