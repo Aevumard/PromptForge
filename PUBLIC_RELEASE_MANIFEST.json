@@ -9,7 +9,7 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:17:55.492Z",
+  "generated_utc": "2026-10-06T09:18:47.246Z",
   "file_count": 134,
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 35890,
-      "sha256": "04175fe6bc675ae0844f0a781f47ce331071bae6d9b1f84bf9461cd0c5e6f8b9"
+      "size_bytes": 35982,
+      "sha256": "da8d3d9540e8e874f340f420311eae29145274cc108cabfb464325bd4e92932c"
     },
     {
       "path": "docs/agent_corpus_external_patterns.md",
@@ -484,8 +484,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 45854,
-      "sha256": "83bb01fdcd51c633ce404b9a87a7908842d65cf3ad2dc92844f241bbb9a48b6e"
+      "size_bytes": 45952,
+      "sha256": "53bb75b122278e3ae8e76b51d083b74cf7d245dcab89ad54346ef520a84d5e0d"
     },
     {
       "path": "schemas/action-execution.v1.json",
