@@ -164,6 +164,7 @@ def run_resumable_model_loop(
                 continue
 
         started = time.perf_counter()
+        adapter_telemetry = None
         try:
             model_input = build_model_input(
                 case,
