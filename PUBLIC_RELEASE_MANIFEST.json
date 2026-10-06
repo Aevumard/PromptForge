@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:45:10.875Z",
-  "file_count": 143,
+  "generated_utc": "2026-10-06T09:45:25.364Z",
+  "file_count": 145,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -593,6 +593,11 @@
       "sha256": "38c3e7e882a320b74dc84373b7bee7c445e321513b69f78b0cf5d6448c6421bf"
     },
     {
+      "path": "tests/test_deferred.py",
+      "size_bytes": 4270,
+      "sha256": "a635ca1341c40f21239fbef09e93e9860a5407bd1cea8312dbff6db2276c2066"
+    },
+    {
       "path": "tests/test_epistemic.py",
       "size_bytes": 5554,
       "sha256": "A5957D60ACF1E1599A81FDCC837F1A33F114E7EA7B9E7CB5BCEDA037D5C080D3"
@@ -631,6 +636,11 @@
       "path": "tests/test_temporal.py",
       "size_bytes": 5552,
       "sha256": "C4A7DD2A697B778E1FE96B1D77AE01EE1289E0F4AA479E37A6ED5B98F208FB40"
+    },
+    {
+      "path": "tests/test_tool_output.py",
+      "size_bytes": 2386,
+      "sha256": "9da77a779977d0a91f69ecd540ab88b26a1219f6ebe3e592b52317e0885a32c5"
     },
     {
       "path": "tests/test_triage.py",
