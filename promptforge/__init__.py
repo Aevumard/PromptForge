@@ -104,6 +104,15 @@ from .relational import (
     ContextRelationProfiler,
 )
 
+from .epistemic import (
+    EVIDENCE_KINDS,
+    EVIDENCE_STANCES,
+    EpistemicContextCompiler,
+    EpistemicContextPolicy,
+    EpistemicContextResult,
+    EvidenceRecord,
+)
+
 __all__ = [
     "POLICY_BUDGET_CONSTRAINED",
     "POLICY_MINIMAL",
@@ -171,4 +180,10 @@ __all__ = [
     "ContextRelation",
     "ContextRelationalProfile",
     "ContextRelationProfiler",
+    "EVIDENCE_KINDS",
+    "EVIDENCE_STANCES",
+    "EvidenceRecord",
+    "EpistemicContextPolicy",
+    "EpistemicContextResult",
+    "EpistemicContextCompiler",
 ]
