@@ -519,3 +519,20 @@ When an integration asks PromptForge to solve a prioritization problem, first co
 The intended ordering is:
 
 what can be used -> how urgent/important is the case -> can we safely act -> what action -> why
+
+## External architecture pattern corpus
+
+Before extending agent-facing orchestration rules, consult `docs/agent_corpus_external_patterns.md`.
+
+The corpus is informed by current public architecture patterns from LangGraph, DSPy, Pydantic AI/pydantic-graph, Guardrails, and LlamaIndex. The adopted principles are deliberately generic:
+
+- explicit state and checkpoint boundaries for resumable workflows;
+- contract-first interfaces and metric-first optimization;
+- typed, serializable stage state and output validation;
+- bounded repair/retry behavior with preserved failures;
+- retrieval as candidate generation followed by explicit evidence admission;
+- deterministic rules separated from model-generated interpretation;
+- human review represented as a durable state transition;
+- replayable lineage and leakage-safe learning.
+
+External frameworks are references for architecture patterns, not dependencies and not sources of truth. Do not copy framework-specific claims into PromptForge without verifying their actual semantics.
