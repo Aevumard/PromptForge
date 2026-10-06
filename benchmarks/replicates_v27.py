@@ -14,7 +14,7 @@ from benchmarks.analyze_bootstrap_v27 import (
     analyze_bootstrap,
     render_markdown as render_bootstrap_markdown,
 )
-from benchmarks.analyze_model_run_v27 import analyze_report, render_markdown
+from benchmarks.analyze_model_run_v27 import analyze_report, render_markdown as render_model_analysis_markdown
 from benchmarks.model_loop_v27 import AgentAdapter, ModelLoopReport, Prediction
 from benchmarks.providers.openai_compatible import (
     OpenAICompatibleAgentAdapter,
@@ -423,7 +423,7 @@ def run_replicate_experiment(
             encoding="utf-8",
         )
         (run_dir / "experiment_analysis.md").write_text(
-            render_markdown(analysis),
+            render_model_analysis_markdown(analysis),
             encoding="utf-8",
         )
         (run_dir / "bootstrap_analysis.json").write_text(
