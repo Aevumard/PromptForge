@@ -320,6 +320,9 @@ class ContextExplorationAdjudicator:
                 min_win_rate=self.min_win_rate,
                 min_relative_gain=self.min_relative_gain,
                 reason="challenger_meets_evidence_gate",
+                unique_episodes=selected.unique_episodes,
+                ties=selected.ties,
+                baseline_strategies=selected.baseline_strategies,
             )
 
         best = (
