@@ -1,3 +1,5 @@
-# V27.5 — provider adapter
+"""Provider adapters for the PromptForge model-in-loop benchmark."""
 
-This branch adds an optional OpenAI-compatible model adapter and hardens prediction parsing before live 1,200-ticket evaluation.
+from .openai_compatible import OpenAICompatibleAgentAdapter, OpenAICompatibleConfig
+
+__all__ = ["OpenAICompatibleAgentAdapter", "OpenAICompatibleConfig"]
