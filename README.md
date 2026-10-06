@@ -209,7 +209,7 @@ The current case never contributes its outcome to the policy used for that same 
 
 `ContextRoutingPolicyHistory` stores previously evaluated policy evidence separately from ordinary task episodes. Its history version is an internal meta-memory clock; each evidence item retains the episodic snapshot version on which it was computed.
 
-The history is bounded and immutable through `ContextRoutingPolicyHistorySnapshot`. A deterministic consensus selector can use the full history or a recent window, with `nearest` as the conservative fallback when observations are insufficient. `ContextRoutingPolicyStability` reports mode switches and a descriptive stability rate; it is not a confidence score or a model-quality estimate.
+The history is bounded and immutable through `ContextRoutingPolicyHistorySnapshot`. A deterministic consensus selector can use the full history or a recent window, with `nearest` as the conservative fallback when observations are insufficient. `ContextRoutingPolicyStability` reports mode switches and a descriptive stability rate; `ContextRoutingPolicyHealth` can turn that history into an explicit stability gate. The health state is not a confidence score or a model-quality estimate.
 
 An adaptive cognitive loop can consume this meta-memory directly:
 
@@ -230,6 +230,8 @@ This creates the explicit control chain:
 `episodes -> policy evaluation -> frozen policy evidence -> policy history -> adaptive routing -> proposal -> execution -> observation`
 
 The history is operational meta-memory, not a learned model and not a causal oracle.
+
+An adaptive loop can optionally require a minimum policy stability before honoring historical consensus. When the gate is enabled and the recent history is unstable or too short, the loop falls back to the conservative `nearest` mode and records `memory_policy_refresh_recommended=True` in proposal v5.
 
 ## Public core boundary
 
