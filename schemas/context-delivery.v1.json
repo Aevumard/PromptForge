@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Aevumard/PromptForge/blob/main/schemas/context-delivery.v1.json",
+  "title": "PromptForge Context Delivery v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "context",
+    "context_tokens",
+    "budget_tokens",
+    "tokens_saved",
+    "deferred_catalog"
+  ],
+  "properties": {
+    "schema_version": {"const": "context-delivery.v1"},
+    "context": {"type": "object"},
+    "context_tokens": {"type": "integer", "minimum": 0},
+    "budget_tokens": {"type": "integer", "minimum": 1},
+    "tokens_saved": {"type": "integer", "minimum": 0},
+    "deferred_catalog": {
+      "$ref": "context-catalog.v1.json"
+    }
+  },
+  "additionalProperties": false
+}
