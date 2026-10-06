@@ -151,6 +151,15 @@ Intended sequence:
 
 `temporal evidence -> support/contradiction ledger -> competing hypotheses -> discriminating experiment priority`
 
+## Memory corroboration boundary
+
+`ContextMemoryAwareRouter` may use `min_family_count` and `min_strategy_evidence` as explicit admissibility gates.
+
+1. Do not let a single structurally similar episode become decisive solely because it is recent or highly credited.
+2. Corroboration thresholds are operational safeguards, not truth estimates.
+3. When no strategy satisfies the thresholds, retain the transparent scored fallback rather than inventing a winner.
+4. Preserve the frozen snapshot boundary; corroboration counts must come only from the fitted training snapshot.
+
 ## Cognitive loop
 
 `ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.
