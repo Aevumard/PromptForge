@@ -1,9 +1,13 @@
 import unittest
 
 from promptforge import (
+    ActionCandidate,
     ContextCognitiveLoop,
     ContextRoutingModeScore,
     ContextRoutingPolicyEvidence,
+    EvidenceRecord,
+    EpistemicContextPolicy,
+    HypothesisRecord,
 )
 
 
@@ -27,6 +31,61 @@ class CognitiveLoopTests(unittest.TestCase):
                 "required_values_preserved": True,
             },
         ]
+
+    def test_cognitive_loop_carries_epistemic_hypothesis_and_action_state(self):
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-epistemic-action",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+            evidence=[
+                EvidenceRecord("past", "observed queue growth", timestamp=10),
+                EvidenceRecord("late", "late dashboard", timestamp=30),
+            ],
+            epistemic_policy=EpistemicContextPolicy(cutoff=20),
+            hypotheses=[
+                HypothesisRecord(
+                    "h1",
+                    "mixed mechanism",
+                    support_evidence_ids=("past",),
+                )
+            ],
+            action_candidates=[
+                ActionCandidate(
+                    "safe",
+                    "reversible intervention",
+                    evidence_support=0.8,
+                    reversibility=0.95,
+                    downside=0.1,
+                    required_evidence_ids=("past",),
+                ),
+                ActionCandidate(
+                    "future",
+                    "depends on late evidence",
+                    evidence_support=0.95,
+                    reversibility=0.9,
+                    downside=0.1,
+                    required_evidence_ids=("late",),
+                ),
+            ],
+        )
+
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v8")
+        self.assertIsNotNone(proposal.epistemic_context)
+        self.assertEqual(proposal.epistemic_context.included_ids, ("past",))
+        self.assertEqual(
+            proposal.hypothesis_assessments[0].status,
+            "supported_by_available_evidence",
+        )
+        self.assertEqual(
+            proposal.action_decision.selected_action_id,
+            "safe",
+        )
+        self.assertIn(
+            "future",
+            proposal.action_decision.blocked_action_ids,
+        )
 
     def test_adaptive_mode_without_policy_falls_back_to_nearest(self):
         loop = ContextCognitiveLoop(memory_routing_mode="adaptive")
