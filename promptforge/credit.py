@@ -333,10 +333,27 @@ class ContextMemoryAwareRouter:
             )
 
         vector = topology_vector(topology, self.features)
-        credit_by_index = {
-            item.sequence_index: item
-            for item in self._credits
-        }
+        if temporal_result is not None:
+            eligible_episodes = [
+                episode
+                for index, episode in enumerate(self._episodes)
+                if index in eligible_indices
+            ]
+            scoring_policy = self.credit_policy or ContextMemoryCreditPolicy()
+            eligible_credits = scoring_policy.assess(eligible_episodes)
+            credit_by_index = {
+                original_index: eligible_credits[position]
+                for position, original_index in enumerate(
+                    index
+                    for index in range(len(self._episodes))
+                    if index in eligible_indices
+                )
+            }
+        else:
+            credit_by_index = {
+                item.sequence_index: item
+                for item in self._credits
+            }
         rows = []
         for index, episode in enumerate(self._episodes):
             if index not in eligible_indices:
