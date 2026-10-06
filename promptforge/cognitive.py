@@ -36,6 +36,8 @@ class ContextCognitiveProposal:
     relational_profile: ContextRelationalProfile
     decision: ContextAdaptiveDecision
     memory_route: ContextRoute | None
+    trajectory: ContextTrajectoryState | None = None
+    candidate_order: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -44,6 +46,10 @@ class ContextCognitiveProposal:
         payload["memory_route"] = (
             self.memory_route.to_dict() if self.memory_route is not None else None
         )
+        payload["trajectory"] = (
+            self.trajectory.to_dict() if self.trajectory is not None else None
+        )
+        payload["candidate_order"] = list(self.candidate_order)
         return payload
 
 
@@ -139,6 +145,12 @@ class ContextCognitiveLoop:
             relational_profile=relational_profile,
             decision=decision,
             memory_route=memory_route,
+            trajectory=trajectory,
+            candidate_order=tuple(
+                ranked
+                for ranked in self.controller.regime_selector.recommend(profile).preferred_arms
+                if ranked in {str(candidate.get("arm_id", "")) for candidate in candidates}
+            ),
         )
 
     def prepare(
@@ -206,6 +218,7 @@ class ContextCognitiveLoop:
         family_id: str,
         cost: float,
         strategy: str | None = None,
+        outcome: Mapping[str, Any] | None = None,
     ) -> int:
         """Record the externally measured outcome of a prior proposal."""
         if not isinstance(proposal, ContextCognitiveProposal):
@@ -221,6 +234,16 @@ class ContextCognitiveLoop:
                     **proposal.profile.to_dict(),
                     **proposal.relational_profile.to_dict(),
                 },
+                action=proposal.decision.action,
+                source=proposal.decision.source,
+                regime=proposal.decision.regime,
+                novelty_distance=proposal.decision.novelty_distance,
+                trajectory_state=(
+                    proposal.trajectory.state
+                    if proposal.trajectory is not None
+                    else None
+                ),
+                outcome=dict(outcome or {}),
             )
         )
 
