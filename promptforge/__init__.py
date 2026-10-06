@@ -129,6 +129,12 @@ from .confidence import (
     ConfidenceObservation,
 )
 
+from .temporal import (
+    ContextMemoryTemporalEligibility,
+    ContextMemoryTemporalPolicy,
+    ContextMemoryTemporalResult,
+)
+
 from .hypothesis import (
     HYPOTHESIS_STATUSES,
     DiscriminatingExperiment,
@@ -224,4 +230,7 @@ __all__ = [
     "ConfidenceAssessment",
     "ConfidenceCalibrationModel",
     "ConfidenceCalibrator",
+    "ContextMemoryTemporalEligibility",
+    "ContextMemoryTemporalPolicy",
+    "ContextMemoryTemporalResult",
 ]

@@ -12,6 +12,7 @@ from .credit import (
     ContextMemoryCreditPolicy,
 )
 from .memory import ContextEpisode, ContextRoute, NearestEpisodeRouter
+from .temporal import ContextMemoryTemporalPolicy
 
 
 @dataclass(frozen=True)
@@ -56,6 +57,8 @@ class ContextExperienceSnapshot:
         policy: ContextMemoryCreditPolicy | None = None,
         min_family_count: int = 1,
         min_strategy_evidence: int = 1,
+        temporal_policy: ContextMemoryTemporalPolicy | None = None,
+        as_of_index: int | None = None,
     ) -> ContextMemoryAwareRoute:
         """Route using credit-weighted nearby evidence inside this snapshot."""
         router = ContextMemoryAwareRouter(
@@ -65,8 +68,9 @@ class ContextExperienceSnapshot:
             credit_policy=policy,
             min_family_count=min_family_count,
             min_strategy_evidence=min_strategy_evidence,
+            temporal_policy=temporal_policy,
         ).fit(self.episodes)
-        return router.route(topology)
+        return router.route(topology, as_of_index=as_of_index)
 
     def credit(
         self,
@@ -143,6 +147,8 @@ class ContextExperienceStore:
         policy: ContextMemoryCreditPolicy | None = None,
         min_family_count: int = 1,
         min_strategy_evidence: int = 1,
+        temporal_policy: ContextMemoryTemporalPolicy | None = None,
+        as_of_index: int | None = None,
     ) -> ContextMemoryAwareRoute:
         """Route current memory using an immutable evidence boundary."""
         return self.snapshot().memory_aware_route(
@@ -153,6 +159,8 @@ class ContextExperienceStore:
             policy=policy,
             min_family_count=min_family_count,
             min_strategy_evidence=min_strategy_evidence,
+            temporal_policy=temporal_policy,
+            as_of_index=as_of_index,
         )
 
     def credit(

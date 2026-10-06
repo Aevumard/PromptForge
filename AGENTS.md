@@ -160,6 +160,30 @@ Intended sequence:
 3. When no strategy satisfies the thresholds, retain the transparent scored fallback rather than inventing a winner.
 4. Preserve the frozen snapshot boundary; corroboration counts must come only from the fitted training snapshot.
 
+## Temporal memory guard
+
+`ContextMemoryTemporalPolicy` is an opt-in admissibility boundary for episodic memory.
+
+It adds a second, explicit clock on top of ordinary snapshot immutability:
+
+- the experience sequence is the temporal clock;
+- `as_of_index` provides an inclusive point-in-time boundary for historical evaluation;
+- entries after that boundary are excluded as future memory;
+- `max_age` can hard-exclude stale memory;
+- `min_freshness_weight` can require a minimum recency signal;
+- allowed and blocked sources are caller-supplied trust boundaries;
+- the full exclusion audit is retained in `ContextMemoryAwareRoute`.
+
+When enabled, eligible memory receives an additional deterministic freshness weight in the memory-aware score. When nothing passes the temporal gate, routing fails closed rather than silently falling back to future or stale evidence.
+
+The default router remains unchanged when no temporal policy is supplied.
+
+The intended boundary is:
+
+`frozen memory -> temporal/source gate -> freshness weighting -> corroboration -> routing`
+
+This is a temporal contamination defense, not a truth score or source-trust oracle.
+
 ## Cognitive loop
 
 `ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.

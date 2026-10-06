@@ -13,6 +13,7 @@ from .memory import (
     resolve_routing_features,
     topology_vector,
 )
+from .temporal import ContextMemoryTemporalPolicy, ContextMemoryTemporalResult
 
 
 @dataclass(frozen=True)
@@ -203,6 +204,11 @@ class ContextMemoryAwareRoute(ContextRoute):
     candidate_count: int
     top_k: int
     strategy_scores: tuple[tuple[str, float], ...]
+    temporal_policy_applied: bool = False
+    temporal_as_of_index: int | None = None
+    temporal_future_excluded_ids: tuple[str, ...] = ()
+    temporal_stale_excluded_ids: tuple[str, ...] = ()
+    temporal_source_excluded_ids: tuple[str, ...] = ()
 
     def to_dict(self) -> dict:
         payload = asdict(self)
@@ -230,6 +236,7 @@ class ContextMemoryAwareRouter:
         credit_policy: ContextMemoryCreditPolicy | None = None,
         min_family_count: int = 1,
         min_strategy_evidence: int = 1,
+        temporal_policy: ContextMemoryTemporalPolicy | None = None,
     ) -> None:
         if top_k < 1:
             raise ValueError("top_k must be at least 1")
@@ -251,6 +258,13 @@ class ContextMemoryAwareRouter:
                 "credit_policy must be a ContextMemoryCreditPolicy or None"
             )
         self.credit_policy = credit_policy
+        if temporal_policy is not None and not isinstance(
+            temporal_policy, ContextMemoryTemporalPolicy
+        ):
+            raise TypeError(
+                "temporal_policy must be a ContextMemoryTemporalPolicy or None"
+            )
+        self.temporal_policy = temporal_policy
         self._episodes: tuple[ContextEpisode, ...] = ()
         self._credits: tuple[ContextMemoryCredit, ...] = ()
         self._scale: tuple[float, ...] = ()
@@ -280,17 +294,70 @@ class ContextMemoryAwareRouter:
     def route(
         self,
         topology: Mapping[str, object],
+        *,
+        as_of_index: int | None = None,
     ) -> ContextMemoryAwareRoute:
         if not self._episodes:
             raise RuntimeError("router must be fitted before route()")
 
+        if as_of_index is not None and self.temporal_policy is None:
+            raise ValueError(
+                "as_of_index requires an explicit temporal_policy"
+            )
+
+        temporal_result: ContextMemoryTemporalResult | None = None
+        if self.temporal_policy is not None:
+            temporal_result = self.temporal_policy.assess(
+                self._episodes,
+                as_of_index=as_of_index,
+            )
+            eligible_indices = {
+                item.sequence_index
+                for item in temporal_result.eligibilities
+                if item.eligible
+            }
+            freshness_by_index = {
+                item.sequence_index: item.freshness_weight
+                for item in temporal_result.eligibilities
+                if item.eligible
+            }
+        else:
+            eligible_indices = set(range(len(self._episodes)))
+            freshness_by_index = {
+                index: 1.0 for index in eligible_indices
+            }
+
+        if not eligible_indices:
+            raise ValueError(
+                "no memory episode passed the temporal admissibility gate"
+            )
+
         vector = topology_vector(topology, self.features)
-        credit_by_index = {
-            item.sequence_index: item
-            for item in self._credits
-        }
+        if temporal_result is not None:
+            eligible_episodes = [
+                episode
+                for index, episode in enumerate(self._episodes)
+                if index in eligible_indices
+            ]
+            scoring_policy = self.credit_policy or ContextMemoryCreditPolicy()
+            eligible_credits = scoring_policy.assess(eligible_episodes)
+            credit_by_index = {
+                original_index: eligible_credits[position]
+                for position, original_index in enumerate(
+                    index
+                    for index in range(len(self._episodes))
+                    if index in eligible_indices
+                )
+            }
+        else:
+            credit_by_index = {
+                item.sequence_index: item
+                for item in self._credits
+            }
         rows = []
         for index, episode in enumerate(self._episodes):
+            if index not in eligible_indices:
+                continue
             distance = _distance(
                 vector,
                 topology_vector(episode.topology, self.features),
@@ -298,7 +365,16 @@ class ContextMemoryAwareRouter:
             )
             credit = credit_by_index[index].credit
             similarity = 1.0 / (1.0 + distance)
-            rows.append((index, episode, distance, credit, similarity))
+            rows.append(
+                (
+                    index,
+                    episode,
+                    distance,
+                    credit,
+                    similarity,
+                    freshness_by_index[index],
+                )
+            )
 
         rows.sort(
             key=lambda row: (
@@ -315,8 +391,15 @@ class ContextMemoryAwareRouter:
         weighted_scores: dict[str, float] = {}
         family_sets: dict[str, set[str]] = {}
         evidence_counts: dict[str, int] = {}
-        for _index, episode, _distance_value, credit, similarity in candidate_rows:
-            weight = credit * similarity
+        for (
+            _index,
+            episode,
+            _distance_value,
+            credit,
+            similarity,
+            freshness_weight,
+        ) in candidate_rows:
+            weight = credit * similarity * freshness_weight
             weighted_scores[episode.strategy] = (
                 weighted_scores.get(episode.strategy, 0.0) + weight
             )
@@ -347,13 +430,36 @@ class ContextMemoryAwareRouter:
             nearest_distance=nearest[2],
             nearest_episode_id=nearest[1].episode_id,
             evidence_count=sum(
-                episode.strategy == strategy for episode in self._episodes
+                episode.strategy == strategy
+                for index, episode in enumerate(self._episodes)
+                if index in eligible_indices
             ),
             selected_credit=selected_credit,
             candidate_count=len(candidate_rows),
             top_k=self.top_k,
             strategy_scores=tuple(
                 (name, weighted_scores[name]) for name in ranked_strategies
+            ),
+            temporal_policy_applied=temporal_result is not None,
+            temporal_as_of_index=(
+                temporal_result.as_of_index
+                if temporal_result is not None
+                else None
+            ),
+            temporal_future_excluded_ids=(
+                temporal_result.future_excluded_ids
+                if temporal_result is not None
+                else ()
+            ),
+            temporal_stale_excluded_ids=(
+                temporal_result.stale_excluded_ids
+                if temporal_result is not None
+                else ()
+            ),
+            temporal_source_excluded_ids=(
+                temporal_result.source_excluded_ids
+                if temporal_result is not None
+                else ()
             ),
         )
 
