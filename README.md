@@ -327,6 +327,12 @@ The intended sequence is:
 
 `evidence boundary -> action feasibility -> risk/reversibility gate -> deterministic ranking -> audited action decision`
 
+### Memory corroboration gate
+
+`ContextMemoryAwareRouter` also supports an opt-in corroboration gate through `min_family_count` and `min_strategy_evidence`. This prevents one isolated episode or one-family cluster from dominating a memory-aware route solely because it is structurally close or recent.
+
+The gate does not discard the nearest-case baseline. When no strategy satisfies the thresholds, the router deterministically falls back to the scored candidate set. The selected thresholds and resulting route remain explicit configuration rather than hidden trust.
+
 ## Explicit hypothesis ledger
 
 `HypothesisLedger` keeps hypothesis state separate from the evidence that currently supports or contradicts it.
