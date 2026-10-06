@@ -40,7 +40,10 @@ class AblationVariant:
     @property
     def checkpoint_name(self) -> str:
         slug = re.sub(r"[^A-Za-z0-9._-]+", "-", self.name.strip()).strip("-")
-        return slug or "variant"
+        slug = slug or "variant"
+        epistemic = "e1" if self.include_epistemic else "e0"
+        guard = "g1" if self.apply_guard else "g0"
+        return f"{slug}.b{self.budget_tokens}.r{self.reserve_tokens}.{epistemic}.{guard}"
 
 
 @dataclass(frozen=True)
@@ -96,6 +99,7 @@ def run_ablation_suite(
     *,
     variants: Sequence[AblationVariant] = DEFAULT_VARIANTS,
     checkpoint_dir: str | Path = "ablation_checkpoints",
+    seed: int = -1,
     retry_failed: bool = True,
     fsync_each_record: bool = True,
 ) -> AblationReport:
@@ -138,7 +142,7 @@ def run_ablation_suite(
     return AblationReport(
         schema_version="promptforge-v27.10-ablation-suite.v1",
         count=len(cases),
-        seed=-1,
+        seed=seed,
         results=tuple(results),
     )
 
@@ -230,6 +234,7 @@ def main() -> int:
         cases,
         adapter,
         checkpoint_dir=args.checkpoint_dir,
+        seed=args.seed,
         retry_failed=not args.no_retry_failed,
         fsync_each_record=not args.no_fsync,
     )
