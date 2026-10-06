@@ -146,6 +146,14 @@ from .execution import (
     ExecutionPolicy,
 )
 
+from .budget import (
+    ContextBlock,
+    ContextBudgetPlan,
+    ContextBudgetPlanner,
+    ContextBudgetPolicy,
+    plan_context,
+)
+
 from .triage import (
     TRIAGE_STAGES,
     PriorityAssessment,
@@ -253,6 +261,11 @@ __all__ = [
     "ActionExecutionRecord",
     "ExecutionDecision",
     "ExecutionPolicy",
+    "ContextBlock",
+    "ContextBudgetPlan",
+    "ContextBudgetPlanner",
+    "ContextBudgetPolicy",
+    "plan_context",
     "TRIAGE_STAGES",
     "PriorityAssessment",
     "TriageEnvelope",
