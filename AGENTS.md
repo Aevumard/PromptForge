@@ -404,6 +404,14 @@ These fields are admissibility metadata only. PromptForge does not independently
 
 Boundary: epistemic evidence -> support anchors -> stance admissibility -> explicit relevance tags -> quality floors -> feasibility and safety gates -> action ranking
 
+## Action support provenance diversity
+
+`ActionPolicy.require_support_provenance_diversity=True` adds an optional provenance-structure gate for action support anchors. `min_distinct_support_sources` defaults to 2 and requires that the current support set contains at least that many explicitly declared, non-unknown source labels. `max_support_anchors_per_source` can additionally cap concentration from any one declared source. Missing source metadata fails closed, while `unknown` does not count toward distinct-source diversity.
+
+`ActionDecision.support_evidence_provenance` preserves the caller-supplied source labels for auditability. These labels are provenance metadata only: different source labels do not establish statistical independence, truth, causal sufficiency, or absence of shared upstream dependencies. The guard is opt-in and remains backward compatible when disabled.
+
+Boundary: epistemic evidence -> support anchors -> stance admissibility -> relevance tags -> quality floors -> provenance diversity -> feasibility and safety gates -> action ranking
+
 ## Hypothesis source cap
 
 HypothesisEvidencePolicy can limit how many support or contradiction records from one declared source contribute to an assessment. Selected and excluded evidence ids remain auditable. Unknown sources can remain isolated per evidence id. This is an operational corroboration safeguard, not a truth claim.
