@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T08:55:23.172Z",
-  "file_count": 127,
+  "generated_utc": "2026-10-06T09:01:40.862Z",
+  "file_count": 129,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -24,8 +24,8 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 32237,
-      "sha256": "0aafbd09b2ff7339c508da67a311b28458a8323f0057b042a96a076afe22c947"
+      "size_bytes": 33324,
+      "sha256": "02da01642fa20698b81296417474b5830368fc2ca0d9c7fe933ccf6f95205e5f"
     },
     {
       "path": "docs/agent_corpus_external_patterns.md",
@@ -404,8 +404,8 @@
     },
     {
       "path": "promptforge/__init__.py",
-      "size_bytes": 5966,
-      "sha256": "413CF37E4EF37467A61ED8EDBD674CF5F83964D4A678E20F9142761BC4DF6BFB"
+      "size_bytes": 6283,
+      "sha256": "12442c7c9e0f8ac4f9c2d64e2afe559337eeefa3c1f4994064a05afd1ba02eda"
     },
     {
       "path": "promptforge/cognitive.py",
@@ -443,6 +443,11 @@
       "sha256": "CAA15542A5A0BB451383F12A815CECC025280817E0EC908464D965D9F0C51F17"
     },
     {
+      "path": "promptforge/human_review.py",
+      "size_bytes": 2297,
+      "sha256": "892af6f47c34ad0210b15c6d8a43d434070498df98a29d975e647f9b1992c3a4"
+    },
+    {
       "path": "promptforge/hypothesis.py",
       "size_bytes": 11880,
       "sha256": "7CAA987B87640229CEAD0F7DDF0C179BE29144F165A394142910413B0F667343"
@@ -454,8 +459,8 @@
     },
     {
       "path": "promptforge/triage.py",
-      "size_bytes": 6589,
-      "sha256": "8675fc224684f2036e0681d5e57c13053c78ce1267a46b5dfe52c272fd4431a9"
+      "size_bytes": 8886,
+      "sha256": "f3fde57d15ab62d9f248f895391bb644f2162ec6e2549f670a0975a1313ae6d7"
     },
     {
       "path": "PUBLIC_RELEASE_SCOPE.md",
@@ -469,8 +474,13 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 43137,
-      "sha256": "dcefa620a362f2e52fabacccc9452f48db57624bb8a8338012175275ae33b11e"
+      "size_bytes": 43793,
+      "sha256": "a8d266bb79d90e4e43ae267a515a760200cf82e6f6710d23a59a4ccf62061a20"
+    },
+    {
+      "path": "schemas/human-review.v1.json",
+      "size_bytes": 1202,
+      "sha256": "17d8dba1a2d8c59c63e9c737e89e9aa3f67c9ae0c4f68c2b178e3b9ef7bf6470"
     },
     {
       "path": "schemas/run.schema.json",
@@ -479,8 +489,8 @@
     },
     {
       "path": "schemas/triage-state.v1.json",
-      "size_bytes": 1727,
-      "sha256": "8ccac1771997767e6c57a97840ab5427a2f0b6efcefdec14671c5a9d5010cac4"
+      "size_bytes": 2800,
+      "sha256": "cb3cfa29f8d161c0deb75bd0d0b88547bf172ee0410fa2187be1bde46e3ac317"
     },
     {
       "path": "tasks/suite.json",
@@ -554,8 +564,8 @@
     },
     {
       "path": "tests/test_triage.py",
-      "size_bytes": 3375,
-      "sha256": "d93d7a5395fc12d947d792fbf776c3c7b5af22bc6cb9c6328aa4cb7ba9a8a758"
+      "size_bytes": 6082,
+      "sha256": "9eaf373413851892b73c0b0c9313620e8289ad5742116ed071e50db8e0cc3885"
     },
     {
       "path": "tests/test_v03.py",
