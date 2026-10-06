@@ -303,6 +303,62 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(second.exploration_reason, "exploration_cooldown")
         self.assertFalse(second.exploration_eligible)
 
+    def test_cognitive_loop_exposes_exploration_adoption_gate(self):
+        from promptforge import ContextEpisode
+
+        loop = ContextCognitiveLoop(
+            routing_features=("node_count", "max_depth"),
+        )
+        topology = {"node_count": 4.0, "max_depth": 2.0}
+        loop.experience.record(
+            ContextEpisode(
+                episode_id="adopt-1",
+                family_id="family-a",
+                strategy="incumbent",
+                cost=10.0,
+                topology=topology,
+            )
+        )
+        loop.experience.record(
+            ContextEpisode(
+                episode_id="adopt-1",
+                family_id="family-a",
+                strategy="challenger",
+                cost=8.0,
+                topology=topology,
+                action="probe",
+                source="bounded_exploration",
+            )
+        )
+        loop.experience.record(
+            ContextEpisode(
+                episode_id="adopt-2",
+                family_id="family-b",
+                strategy="incumbent",
+                cost=11.0,
+                topology=topology,
+            )
+        )
+        loop.experience.record(
+            ContextEpisode(
+                episode_id="adopt-2",
+                family_id="family-b",
+                strategy="challenger",
+                cost=9.0,
+                topology=topology,
+                action="probe",
+                source="bounded_exploration",
+            )
+        )
+
+        decision = loop.exploration_adoption_decision()
+
+        self.assertTrue(decision.eligible)
+        self.assertEqual(decision.strategy, "challenger")
+        self.assertEqual(decision.baseline_strategy, "incumbent")
+        self.assertEqual(decision.comparisons, 2)
+        self.assertEqual(decision.families, 2)
+
     def test_invalid_memory_routing_mode_is_rejected(self):
         with self.assertRaises(ValueError):
             ContextCognitiveLoop(memory_routing_mode="unknown")

@@ -21,8 +21,11 @@ from .routing_refresh import (
     ContextRoutingPolicyRefreshDecision,
 )
 from .exploration import (
+    ContextExplorationAdjudicator,
     ContextExplorationController,
     ContextExplorationDecision,
+    ContextExplorationAdoptionDecision,
+    ContextExplorationStrategyEvidence,
 )
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
@@ -124,6 +127,7 @@ class ContextCognitiveLoop:
         memory_policy_max_age: int | None = None,
         memory_policy_refresh_controller: ContextRoutingPolicyRefreshController | None = None,
         exploration_controller: ContextExplorationController | None = None,
+        exploration_adjudicator: ContextExplorationAdjudicator | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -221,6 +225,18 @@ class ContextCognitiveLoop:
                 "exploration_controller must be a ContextExplorationController or None"
             )
         self.exploration_controller = exploration_controller
+        if exploration_adjudicator is not None and not isinstance(
+            exploration_adjudicator,
+            ContextExplorationAdjudicator,
+        ):
+            raise TypeError(
+                "exploration_adjudicator must be a ContextExplorationAdjudicator or None"
+            )
+        self.exploration_adjudicator = (
+            exploration_adjudicator
+            if exploration_adjudicator is not None
+            else ContextExplorationAdjudicator()
+        )
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -468,6 +484,25 @@ class ContextCognitiveLoop:
         )
         self.record_memory_routing_policy(evidence)
         return evidence
+
+    def exploration_evidence(
+        self,
+    ) -> tuple[ContextExplorationStrategyEvidence, ...]:
+        """Assess comparable exploration outcomes on the current frozen snapshot."""
+        snapshot = self.experience.snapshot()
+        return self.exploration_adjudicator.assess(snapshot.episodes)
+
+    def exploration_adoption_decision(
+        self,
+        *,
+        preferred_strategy: str | None = None,
+    ) -> ContextExplorationAdoptionDecision:
+        """Return the conservative challenger-adoption gate for current evidence."""
+        snapshot = self.experience.snapshot()
+        return self.exploration_adjudicator.decide(
+            snapshot.episodes,
+            preferred_strategy=preferred_strategy,
+        )
 
     def policy_refresh_decision(
         self,
