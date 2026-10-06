@@ -181,6 +181,28 @@ loop = ContextCognitiveLoop(
 
 This is still provider-agnostic and observational: the credit-aware mode changes how already-observed evidence is aggregated; it does not fabricate outcomes or execute a model.
 
+## Routing-policy learning
+
+PromptForge can compare its routing modes before allowing a future cycle to choose between them.
+
+\`ContextRoutingPolicyEvaluator\` evaluates \`nearest\` and \`credit\` using whole-family holdout folds. Each training fold constructs routing evidence only from the non-held-out families; the held-out family is evaluated afterward.
+
+\`ContextRoutingPolicyEvidence\` freezes those results. \`ContextRoutingPolicySelector\` chooses the mode from observed relative regret, with a deterministic fallback to \`nearest\` when evidence is insufficient.
+
+The cognitive loop accepts \`memory_routing_mode="adaptive"\` plus optional previously evaluated policy evidence:
+
+\`\`\`python
+from promptforge import ContextCognitiveLoop
+
+policy = loop.evaluate_memory_routing_policy()
+adaptive_loop = ContextCognitiveLoop(
+    memory_routing_mode="adaptive",
+    memory_routing_policy_evidence=policy,
+)
+\`\`\`
+
+The current case never contributes its outcome to the policy used for that same proposal. This keeps policy learning temporally separated from decision evidence.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -356,8 +378,8 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path, frozen snapshots, and memory credit assessment | Online experience boundary |
 | `promptforge/consolidation.py` | Deterministic replay, bounded retention, and optional credit-aware selection | Memory lifecycle control |
-| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |
-| `promptforge/cognitive.py` | Unified observe-decide-learn cycle with explicit memory-routing modes | End-to-end adaptive orchestration |
+| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |\n| `promptforge/routing_policy.py` | Leakage-safe comparison and selection of routing modes | Routing policy learning |
+| `promptforge/cognitive.py` | Unified observe-decide-learn cycle with explicit memory-routing modes and policy learning | End-to-end adaptive orchestration |
 | `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
