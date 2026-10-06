@@ -89,6 +89,8 @@ class ConfidenceCalibrationPolicy:
     cutoff: float | None = None
     allow_unknown_time: bool = False
     required_observation_ids: tuple[str, ...] = ()
+    target_family: str | None = None
+    min_family_observations: int = 1
 
     def __post_init__(self) -> None:
         if not isinstance(self.bins, int) or isinstance(self.bins, bool) or self.bins < 2:
@@ -126,6 +128,14 @@ class ConfidenceCalibrationPolicy:
             raise ValueError("cutoff must be a finite number or None")
         if len(set(self.required_observation_ids)) != len(self.required_observation_ids):
             raise ValueError("required_observation_ids must be unique")
+        if self.target_family is not None and not self.target_family.strip():
+            raise ValueError("target_family must not be empty")
+        if (
+            not isinstance(self.min_family_observations, int)
+            or isinstance(self.min_family_observations, bool)
+            or self.min_family_observations < 1
+        ):
+            raise ValueError("min_family_observations must be an integer >= 1")
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -177,6 +187,7 @@ class ConfidenceCalibrationModel:
     included_observation_ids: tuple[str, ...]
     future_excluded_ids: tuple[str, ...]
     unknown_time_excluded_ids: tuple[str, ...]
+    family_excluded_ids: tuple[str, ...]
     bin_counts: tuple[int, ...]
     bin_successes: tuple[int, ...]
     calibrated_bin_rates: tuple[float | None, ...]
@@ -262,6 +273,7 @@ class ConfidenceCalibrationModel:
             "included_observation_ids": list(self.included_observation_ids),
             "future_excluded_ids": list(self.future_excluded_ids),
             "unknown_time_excluded_ids": list(self.unknown_time_excluded_ids),
+            "family_excluded_ids": list(self.family_excluded_ids),
             "bin_counts": list(self.bin_counts),
             "bin_successes": list(self.bin_successes),
             "calibrated_bin_rates": list(self.calibrated_bin_rates),
@@ -298,11 +310,16 @@ class ConfidenceCalibrator:
         included: list[ConfidenceObservation] = []
         future_excluded: list[str] = []
         unknown_excluded: list[str] = []
+        family_excluded: list[str] = []
 
         for item in normalized:
             if item.observation_id in seen:
                 raise ValueError("duplicate observation_id: " + item.observation_id)
             seen.add(item.observation_id)
+
+            if active_policy.target_family is not None and item.family != active_policy.target_family:
+                family_excluded.append(item.observation_id)
+                continue
 
             if active_policy.cutoff is not None:
                 if item.timestamp is None:
@@ -316,6 +333,14 @@ class ConfidenceCalibrator:
             included.append(item)
 
         included_ids = {item.observation_id for item in included}
+        if (
+            len(included) < active_policy.min_family_observations
+            and active_policy.target_family is not None
+        ):
+            raise ValueError(
+                "target family does not have enough calibration observations: "
+                + active_policy.target_family
+            )
         missing_required = sorted(
             set(active_policy.required_observation_ids) - seen
         )
@@ -444,6 +469,7 @@ class ConfidenceCalibrator:
             included_observation_ids=tuple(item.observation_id for item in ordered),
             future_excluded_ids=tuple(sorted(future_excluded)),
             unknown_time_excluded_ids=tuple(sorted(unknown_excluded)),
+            family_excluded_ids=tuple(sorted(family_excluded)),
             bin_counts=tuple(counts),
             bin_successes=tuple(successes),
             calibrated_bin_rates=tuple(calibrated),
