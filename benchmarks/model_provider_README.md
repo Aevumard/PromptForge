@@ -26,12 +26,20 @@ Optional:
 
 From the repository root:
 
-    python -m benchmarks.providers.openai_compatible --output predictions.jsonl --report model_report.json
+    python -m benchmarks.providers.openai_compatible \
+      --output predictions.jsonl \
+      --report model_report.json \
+      --checkpoint model_run.checkpoint.jsonl
 
 The command sends only the PromptForge-prepared model packet. It writes:
 
 - predictions.jsonl: successfully parsed raw model predictions
 - model_report.json: raw vs guarded metrics and per-ticket records
+- model_run.checkpoint.jsonl: append-only per-ticket execution state
+
+The checkpoint is active by default. Re-running the same command resumes
+successful tickets and retries failed ones. Use --no-retry-failed to preserve
+failed records without retrying them.
 
 The live adapter is intentionally not part of CI. CI tests the HTTP contract
 offline with a fake response, while real provider execution happens explicitly
