@@ -156,7 +156,7 @@ def render_ablation_markdown(report: AblationReport) -> str:
             "differ only in the PromptForge layer being ablated."
         ),
         "",
-        "| Variant | Epistemic | Guard | Budget | Coverage | Raw action accuracy | Guarded action accuracy | Raw unsafe rate | Guarded unsafe rate | Context tokens | Tokens saved |",
+        "| Variant | Epistemic | Guard | Budget | Coverage | Raw action accuracy | Guarded action accuracy | Raw unsafe rate | Guarded unsafe rate | p50 ms | p95 ms | Context tokens | Tokens saved |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
 
@@ -176,6 +176,8 @@ def render_ablation_markdown(report: AblationReport) -> str:
                 guarded_action=guarded.action_accuracy,
                 raw_unsafe=metrics.unsafe_action_rate,
                 guarded_unsafe=guarded.unsafe_action_rate,
+                p50=result.analysis.latency_p50_ms,
+                p95=result.analysis.latency_p95_ms,
                 tokens=result.report.total_context_tokens,
                 saved=result.report.total_tokens_saved,
             )
