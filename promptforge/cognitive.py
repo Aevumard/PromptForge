@@ -243,6 +243,14 @@ class ContextCognitiveLoop:
                     if proposal.trajectory is not None
                     else None
                 ),
+                trajectory=(
+                    proposal.trajectory.to_dict()
+                    if proposal.trajectory is not None
+                    else {}
+                ),
+                regime_flags=proposal.decision.regime_flags,
+                decision_reason=proposal.decision.reason,
+                candidate_order=proposal.candidate_order,
                 outcome=dict(outcome or {}),
             )
         )
