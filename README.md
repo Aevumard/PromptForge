@@ -137,6 +137,16 @@ The richer metadata is descriptive evidence. It is not automatically treated as 
 
 experience_summary() provides a descriptive summary of accumulated episodes: counts by family, strategy, action, decision source, regime, and trajectory state, plus observed mean cost and mean novelty distance. It is an inspection surface only; it does not infer causal effects.
 
+## Memory consolidation and replay
+
+`ContextMemoryConsolidator` provides deterministic bounded replay and retention. Recent episodes are retained first; remaining capacity is allocated to increase observed family and strategy coverage. This is a retention policy, not a learned truth about which memories are important.
+
+`ContextExperienceStore.consolidate()` applies the policy to mutable memory and returns the retained replay batch. Existing `ContextExperienceSnapshot` objects remain unchanged, so operational forgetting cannot rewrite a previously frozen evidence boundary.
+
+This gives PromptForge an explicit memory lifecycle:
+
+`observe -> store -> consolidate/replay -> route -> decide`
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -311,7 +321,9 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/adaptive.py` | Complexity-aware structure, local refinement, trajectory, and control | Complex-system orchestration |
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path and frozen evidence snapshots | Online experience boundary |
-| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |\n| `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
+| `promptforge/consolidation.py` | Deterministic replay and bounded retention | Memory lifecycle control |
+| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |
+| `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |

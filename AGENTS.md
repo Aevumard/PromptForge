@@ -72,6 +72,12 @@ Its contract is intentionally separated into seven concerns:
 
 This is a control architecture, not a model-quality oracle. Do not infer language-model quality, universal optimality, or SOTA transfer from the topology heuristics. Keep task-level evaluation signals external and explicit.
 
+## Memory consolidation
+
+`ContextMemoryConsolidator` provides deterministic replay and bounded retention. Recent episodes are retained first, and remaining capacity favors coverage of observed families and strategies.
+
+`ContextExperienceStore.consolidate()` updates only mutable memory. Existing snapshots remain unchanged and continue to represent their original evidence boundary.
+
 ## Cognitive experience records
 
 `ContextEpisode` may retain decision metadata and externally supplied outcome fields in addition to routing topology.

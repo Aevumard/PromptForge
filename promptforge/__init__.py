@@ -45,6 +45,8 @@ from .memory import (
 
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
 
+from .consolidation import ContextMemoryConsolidator, ContextReplayBatch
+
 from .orchestration import (
     ComplexContextController,
     ContextAdaptiveDecision,
@@ -99,6 +101,8 @@ __all__ = [
     "ContextAdaptiveDecision",
     "ContextExperienceSnapshot",
     "ContextExperienceStore",
+    "ContextMemoryConsolidator",
+    "ContextReplayBatch",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
     "ContextCognitiveResult",
