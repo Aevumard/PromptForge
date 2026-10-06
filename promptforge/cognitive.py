@@ -57,6 +57,7 @@ class ContextCognitiveProposal:
     memory_policy_history_version: int | None = None
     memory_policy_stability_rate: float | None = None
     memory_policy_refresh_recommended: bool | None = None
+    memory_policy_freshness_age: int | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -105,6 +106,7 @@ class ContextCognitiveLoop:
         memory_policy_history_window: int | None = None,
         memory_policy_history_min_observations: int = 1,
         memory_policy_min_stability: float | None = None,
+        memory_policy_max_age: int | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -156,6 +158,8 @@ class ContextCognitiveLoop:
             raise ValueError(
                 "memory_policy_history_min_observations must be at least 1"
             )
+        if memory_policy_max_age is not None and memory_policy_max_age < 0:
+            raise ValueError("memory_policy_max_age must be non-negative")
         if (
             memory_policy_min_stability is not None
             and not 0.0 <= memory_policy_min_stability <= 1.0
@@ -171,6 +175,7 @@ class ContextCognitiveLoop:
             memory_policy_history_min_observations
         )
         self.memory_policy_min_stability = memory_policy_min_stability
+        self.memory_policy_max_age = memory_policy_max_age
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -204,6 +209,7 @@ class ContextCognitiveLoop:
         policy_history_version = None
         policy_stability_rate = None
         policy_refresh_recommended = None
+        policy_freshness_age = None
         if selected_mode == "adaptive":
             if self.memory_routing_policy_evidence is not None:
                 policy_version = self.memory_routing_policy_evidence.version
@@ -222,10 +228,13 @@ class ContextCognitiveLoop:
                         window=self.memory_policy_history_window,
                         min_observations=self.memory_policy_history_min_observations,
                         min_stability=self.memory_policy_min_stability,
+                        current_experience_version=evidence.version,
+                        max_age=self.memory_policy_max_age,
                     )
                     policy_stability_rate = health.stability_rate
+                    policy_freshness_age = health.freshness_age
                     policy_refresh_recommended = health.refresh_recommended
-                    if not health.stable:
+                    if not health.healthy:
                         selected_mode = "nearest"
             else:
                 selected_mode = "nearest"
@@ -261,7 +270,7 @@ class ContextCognitiveLoop:
         )
 
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v5",
+            schema_version="context-cognitive-proposal.v6",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
@@ -275,6 +284,7 @@ class ContextCognitiveLoop:
             memory_policy_history_version=policy_history_version,
             memory_policy_stability_rate=policy_stability_rate,
             memory_policy_refresh_recommended=policy_refresh_recommended,
+            memory_policy_freshness_age=policy_freshness_age,
             trajectory=trajectory,
             candidate_order=tuple(
                 ranked
