@@ -37,6 +37,7 @@ from .epistemic import (
 )
 from .decision import ActionCandidate, ActionDecision, UncertaintyActionGate
 from .hypothesis import HypothesisAssessment, HypothesisLedger, HypothesisRecord
+from .temporal import ContextMemoryTemporalPolicy
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
 
 
@@ -147,6 +148,7 @@ class ContextCognitiveLoop:
         memory_credit_policy: ContextMemoryCreditPolicy | None = None,
         memory_min_family_count: int = 1,
         memory_min_strategy_evidence: int = 1,
+        memory_temporal_policy: ContextMemoryTemporalPolicy | None = None,
         memory_routing_policy_evidence: ContextRoutingPolicyEvidence | None = None,
         memory_routing_policy_history: ContextRoutingPolicyHistory | None = None,
         memory_policy_history_window: int | None = None,
@@ -191,6 +193,14 @@ class ContextCognitiveLoop:
         self.memory_top_k = int(memory_top_k)
         self.memory_min_family_count = int(memory_min_family_count)
         self.memory_min_strategy_evidence = int(memory_min_strategy_evidence)
+        if memory_temporal_policy is not None and not isinstance(
+            memory_temporal_policy,
+            ContextMemoryTemporalPolicy,
+        ):
+            raise TypeError(
+                "memory_temporal_policy must be a ContextMemoryTemporalPolicy or None"
+            )
+        self.memory_temporal_policy = memory_temporal_policy
         if memory_routing_policy_evidence is not None and not isinstance(
             memory_routing_policy_evidence,
             ContextRoutingPolicyEvidence,
@@ -409,6 +419,7 @@ class ContextCognitiveLoop:
                     policy=self.memory_credit_policy,
                     min_family_count=self.memory_min_family_count,
                     min_strategy_evidence=self.memory_min_strategy_evidence,
+                    temporal_policy=self.memory_temporal_policy,
                 )
             else:
                 memory_route = evidence.route(
