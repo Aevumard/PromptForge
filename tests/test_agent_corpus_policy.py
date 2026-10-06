@@ -46,6 +46,9 @@ class AgentCorpusPolicyTests(unittest.TestCase):
             "HumanReviewRecord",
             "fresh `ActionDecision`",
             "human-review.v1",
+            "ActionExecutionGuard",
+            "idempotency key",
+            "action-execution.v1",
         ):
             self.assertIn(token, self.agents + "\n" + self.readme)
 
