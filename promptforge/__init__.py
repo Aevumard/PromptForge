@@ -46,7 +46,12 @@ from .memory import (
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
 
 from .consolidation import ContextMemoryConsolidator, ContextReplayBatch
-from .credit import ContextMemoryCredit, ContextMemoryCreditPolicy
+from .credit import (
+    ContextMemoryAwareRoute,
+    ContextMemoryAwareRouter,
+    ContextMemoryCredit,
+    ContextMemoryCreditPolicy,
+)
 
 from .orchestration import (
     ComplexContextController,
@@ -106,6 +111,8 @@ __all__ = [
     "ContextReplayBatch",
     "ContextMemoryCredit",
     "ContextMemoryCreditPolicy",
+    "ContextMemoryAwareRoute",
+    "ContextMemoryAwareRouter",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
     "ContextCognitiveResult",
