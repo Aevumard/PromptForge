@@ -37,6 +37,7 @@ class ModelLoopBenchmarkTests(unittest.TestCase):
         )
         self.assertIn(contradiction_id, epistemic["contradiction_ids"])
         self.assertEqual(epistemic["schema_version"], "epistemic-context.v1")
+        self.assertEqual(epistemic["representation"], "metadata_only")
         self.assertTrue(epistemic["audit"]["included_count"] >= 1)
 
     def test_prediction_parser_is_strict_about_enums(self) -> None:
