@@ -7,6 +7,7 @@ from benchmarks.model_loop_v27 import parse_prediction
 from benchmarks.providers.openai_compatible import (
     OpenAICompatibleAgentAdapter,
     OpenAICompatibleConfig,
+    ProviderCallTelemetry,
     _extract_prediction,
     main,
 )
@@ -83,7 +84,14 @@ class ProviderAdapterTests(TestCase):
             "requires_human": False,
             "contradiction_detected": False,
         }
-        response = {"choices": [{"message": {"content": json.dumps(inner)}}]}
+        response = {
+            "choices": [{"message": {"content": json.dumps(inner)}}],
+            "usage": {
+                "prompt_tokens": 111,
+                "completion_tokens": 17,
+                "total_tokens": 128,
+            },
+        }
 
         captured = {}
 
@@ -97,6 +105,12 @@ class ProviderAdapterTests(TestCase):
 
         self.assertEqual(result["action"], "refund")
         self.assertEqual(captured["timeout"], 60.0)
+        self.assertIsInstance(adapter.last_call_telemetry, ProviderCallTelemetry)
+        self.assertEqual(adapter.last_call_telemetry.attempts, 1)
+        self.assertEqual(adapter.last_call_telemetry.prompt_tokens, 111)
+        self.assertEqual(adapter.last_call_telemetry.completion_tokens, 17)
+        self.assertEqual(adapter.last_call_telemetry.total_tokens, 128)
+        self.assertGreaterEqual(adapter.last_call_telemetry.elapsed_ms, 0.0)
         self.assertEqual(
             captured["request"].headers["Authorization"],
             "Bearer secret",
