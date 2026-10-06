@@ -9,7 +9,7 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:02:26.587Z",
+  "generated_utc": "2026-10-06T09:03:58.943Z",
   "file_count": 129,
   "files": [
     {
@@ -504,8 +504,8 @@
     },
     {
       "path": "tests/test_agent_corpus_policy.py",
-      "size_bytes": 1684,
-      "sha256": "7a67d085bc15b3e2860e253e51fea07cfea164bcb5b69574eef78beea7aeabe5"
+      "size_bytes": 1845,
+      "sha256": "36566983bd6c088d1c2837c5058d9418f299fdbeddb32e0c0a18db75f5116c2c"
     },
     {
       "path": "tests/test_agent.py",
