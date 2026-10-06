@@ -261,3 +261,22 @@ This is progressive disclosure, not autonomous retrieval. PromptForge does not g
 The efficient agent handoff is:
 
 `budget/admission -> current context -> deferred catalog -> explicit load request -> bounded context expansion`
+
+## 15. Tool-output trimming before model calls
+
+Reference pattern: OpenAI Agents Python (`ToolOutputTrimmer`, current public repository inspected 2026-10-06). The implementation applies a model-input filter immediately before model calls, protects recent turns, trims oversized older tool outputs, and preserves tool-call identity.
+
+PromptForge adoption:
+1. `ToolOutputItem` gives provider-neutral identity, tool name, content, and turn age.
+2. `ToolOutputTrimPolicy` defines a sliding recent-turn protection window and explicit size threshold.
+3. Only explicitly eligible tools can be trimmed when the integration supplies an allowlist.
+4. The default deterministic transformation preserves both the head and tail of old output, because errors/results often occur at either boundary.
+5. `ToolOutputTrimmed` retains original/retained size, estimated token savings, turn metadata, and a SHA-256 digest of the original content.
+6. The trimmer never invents a semantic summary and never claims that truncated content was irrelevant.
+7. The model-facing representation marks trimmed items explicitly so downstream reasoning knows that a preview replaced the original payload.
+
+The efficient model-call boundary is:
+
+`tool result -> recent-turn protection -> size/tool eligibility gate -> deterministic preview -> digest/audit -> model input`
+
+This complements progressive disclosure: a trimmed result can be re-fetched from the integration using its item/call identity and digest when the full payload is actually needed.
