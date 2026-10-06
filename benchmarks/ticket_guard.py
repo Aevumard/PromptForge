@@ -8,11 +8,10 @@ from promptforge import (
     ActionPolicy,
     EpistemicContextCompiler,
     EvidenceRecord,
-    Prediction,
     UncertaintyActionGate,
 )
 
-from .tickets_v27 import TicketCase
+from .tickets_v27 import Prediction, TicketCase
 
 
 @dataclass(frozen=True)
