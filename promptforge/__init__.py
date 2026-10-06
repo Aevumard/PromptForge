@@ -154,6 +154,15 @@ from .budget import (
     plan_context,
 )
 
+from .tool_output import (
+    ToolOutputItem,
+    ToolOutputTrimPolicy,
+    ToolOutputTrimmed,
+    ToolOutputTrimResult,
+    ToolOutputTrimmer,
+    trim_tool_outputs,
+)
+
 from .deferred import (
     ContextDeliveryPacket,
     ContextLoadResult,
@@ -274,6 +283,12 @@ __all__ = [
     "ContextBudgetPlanner",
     "ContextBudgetPolicy",
     "plan_context",
+    "ToolOutputItem",
+    "ToolOutputTrimPolicy",
+    "ToolOutputTrimmed",
+    "ToolOutputTrimResult",
+    "ToolOutputTrimmer",
+    "trim_tool_outputs",
     "ContextDeliveryPacket",
     "ContextLoadResult",
     "DeferredContextCatalog",
