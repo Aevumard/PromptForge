@@ -23,7 +23,7 @@ from benchmarks.tickets_v27 import (
 )
 
 CHECKPOINT_SCHEMA = "promptforge-v27.6-checkpoint.v1"
-REPORT_SCHEMA = "promptforge-v27.6-resumable-run.v1"
+REPORT_SCHEMA = "promptforge-v27.12-provider-telemetry-resumable.v1"
 
 
 @dataclass(frozen=True)
