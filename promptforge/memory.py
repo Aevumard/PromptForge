@@ -21,6 +21,14 @@ ROUTING_FEATURES = (
     "required_leaf_ratio",
     "active_root_ratio",
     "boundary_pressure",
+    "relation_count",
+    "relation_nodes",
+    "relation_density",
+    "relation_max_degree",
+    "relation_avg_degree",
+    "relation_hub_ratio",
+    "relation_components",
+    "relation_kind_count",
     "estimated_tokens",
 )
 
