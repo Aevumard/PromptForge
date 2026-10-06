@@ -243,3 +243,21 @@ The efficient boundary is:
 `inspect -> identify required/pinned blocks -> reserve headroom -> utility-aware packing -> compact omission manifest -> model request`
 
 Token reduction must remain an operational optimization, not a claim that fewer tokens always improves model quality.
+
+## 14. Progressive disclosure for model context
+
+Additional external pattern basis: Pydantic AI's on-demand capabilities and deferred tool loading. Mature agent systems can expose a compact catalog first and reveal the full capability only after the model explicitly requests it.
+
+PromptForge adoption:
+- deferred context is represented by stable ids plus compact metadata, not by eagerly sending its values;
+- descriptions are caller-supplied and may remain empty;
+- the model-facing catalog exposes token cost, kind, path, and description but never the deferred payload;
+- an explicit load request returns only the requested blocks, subject to a token/item budget;
+- unknown ids and budget omissions remain auditable;
+- a single `ContextDeliveryPacket` combines current context with the deferred catalog so an agent can operate without reconstructing internal planning state.
+
+This is progressive disclosure, not autonomous retrieval. PromptForge does not guess what the model wants to load and does not treat catalog descriptions as evidence.
+
+The efficient agent handoff is:
+
+`budget/admission -> current context -> deferred catalog -> explicit load request -> bounded context expansion`
