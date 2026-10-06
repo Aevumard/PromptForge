@@ -9,8 +9,8 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-09-18T20:48:50.449Z",
-    "file_count": 105,
+    "generated_utc": "2026-10-06T06:46:00.000Z",
+    "file_count": 113,
     "files": [
         {
             "path": ".github/workflows/ci.yml",
@@ -24,8 +24,8 @@
         },
         {
             "path": "AGENTS.md",
-            "size_bytes": 5038,
-            "sha256": "C30BE9AFB93E483BED439A62D5E8388443768898582E11A67250D0559360CED0"
+            "size_bytes": 17227,
+            "sha256": "224099E8F433E9F199916400B174B4F30FF2AE82C9D2D60C094BBE46865CFA8F"
         },
         {
             "path": "harness/agent_context.py",
@@ -399,8 +399,28 @@
         },
         {
             "path": "promptforge/__init__.py",
-            "size_bytes": 362,
-            "sha256": "F189CEF85060470BB46EA4EB52C964E7856F429EF46A23B9ECC7C7C7B8DCA166"
+            "size_bytes": 5267,
+            "sha256": "815E02DDF91C27F2BA638953FF4255F5088A96039F371AB4269F1C4E29F8EC7F"
+        },
+        {
+            "path": "promptforge/cognitive.py",
+            "size_bytes": 30741,
+            "sha256": "D72B211B0C24A48846EA09262725986A814D1806C0CFE1A38590C901683D93CD"
+        },
+        {
+            "path": "promptforge/decision.py",
+            "size_bytes": 8461,
+            "sha256": "6E2A8985B7A4225813FFE762544B25EB249BE3D09C4DFD479923A34BD64DA794"
+        },
+        {
+            "path": "promptforge/epistemic.py",
+            "size_bytes": 18717,
+            "sha256": "700F5E07D696628ECB5DE122B1B38191A804E6DC8E8CEF48426DE6C319AFB3CA"
+        },
+        {
+            "path": "promptforge/hypothesis.py",
+            "size_bytes": 8389,
+            "sha256": "E1B2C474611B78A48FEDCF62E407DA800325BCFFB37928C6B99A7051684297F9"
         },
         {
             "path": "PUBLIC_RELEASE_SCOPE.md",
@@ -414,8 +434,8 @@
         },
         {
             "path": "README.md",
-            "size_bytes": 7950,
-            "sha256": "DB8C5507BA4747CABAEFAB3BFB2763B2E170CAEEC3B3878E9BB644883E26F2AD"
+            "size_bytes": 28356,
+            "sha256": "49D3969B6E6472320C55C9221C27D6ACB688E47E706B1A2887E79418EA6C25A2"
         },
         {
             "path": "schemas/run.schema.json",
@@ -436,6 +456,26 @@
             "path": "tests/test_agent.py",
             "size_bytes": 10494,
             "sha256": "3A7E2B8DA8A4CC3C92E1798AEB7941BB451042574F015341AAA6D13B8598D867"
+        },
+        {
+            "path": "tests/test_cognitive_loop.py",
+            "size_bytes": 25064,
+            "sha256": "90AB004FA190D1B565E7A34E669D51A2888253F57596E9A5ACA6EC6A97CA6DE7"
+        },
+        {
+            "path": "tests/test_decision.py",
+            "size_bytes": 4391,
+            "sha256": "ECDB1E77CF73F34923C268A3E962C70AC9C9CD0C476D2C2AFE2C287DB6D2ED19"
+        },
+        {
+            "path": "tests/test_epistemic.py",
+            "size_bytes": 5554,
+            "sha256": "B74A0E1009ABBA6E2DDAA7970ED506C549CC9BE6838D9D133E0FDC56199002A8"
+        },
+        {
+            "path": "tests/test_hypothesis.py",
+            "size_bytes": 3913,
+            "sha256": "E314412E9FBAFE9DC7565AE2D7B7CB4DA7173A5589749814A3B5AB3ADC762754"
         },
         {
             "path": "tests/test_provider_adapters.py",
