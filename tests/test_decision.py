@@ -216,6 +216,12 @@ class UncertaintyActionGateTests(unittest.TestCase):
                     timestamp=11,
                     stance="contradicts",
                 ),
+                EvidenceRecord(
+                    "fallback_support",
+                    "supports the fallback",
+                    timestamp=12,
+                    stance="supports",
+                ),
             ]
         )
         actions = [
@@ -234,6 +240,14 @@ class UncertaintyActionGateTests(unittest.TestCase):
                 reversibility=0.9,
                 downside=0.1,
                 support_evidence_ids=("contradiction",),
+            ),
+            ActionCandidate(
+                "fallback",
+                "safe fallback",
+                evidence_support=0.70,
+                reversibility=1.0,
+                downside=0.2,
+                support_evidence_ids=("fallback_support",),
             ),
         ]
 
@@ -337,17 +351,28 @@ class UncertaintyActionGateTests(unittest.TestCase):
             downside=0.1,
             support_evidence_ids=("missing_snapshot",),
         )
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord(
+                    "fallback_support",
+                    "explicit fallback support",
+                    timestamp=10,
+                    stance="supports",
+                )
+            ]
+        )
         fallback = ActionCandidate(
             "fallback",
-            "unrestricted fallback",
+            "safe fallback",
             evidence_support=0.6,
             reversibility=1.0,
             downside=0.2,
+            support_evidence_ids=("fallback_support",),
         )
 
         decision = UncertaintyActionGate(
             ActionPolicy(require_support_stance=True)
-        ).decide([action, fallback])
+        ).decide([action, fallback], evidence=evidence)
 
         self.assertEqual(decision.selected_action_id, "fallback")
         self.assertIn("stance_required", decision.blocked_action_ids)
