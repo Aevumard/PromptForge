@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T08:49:00.000Z",
-  "file_count": 124,
+  "generated_utc": "2026-10-06T08:55:23.172Z",
+  "file_count": 127,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -24,13 +24,13 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 31383,
-      "sha256": "6ccebcc5c3613023f77f83888fced663399289450a1182c87f3ded1e63e79712"
+      "size_bytes": 32237,
+      "sha256": "0aafbd09b2ff7339c508da67a311b28458a8323f0057b042a96a076afe22c947"
     },
     {
       "path": "docs/agent_corpus_external_patterns.md",
       "size_bytes": 9819,
-      "sha256": "3d68e49a340e1b9be831c593f10a6a2da411ceb1b51c6fd9772e8f4c4b4edc59"
+      "sha256": "3b79a0af4aa460c627c567623235662c592c527ddb33a325bbc513d7a16ba4b8"
     },
     {
       "path": "harness/agent_context.py",
@@ -453,6 +453,11 @@
       "sha256": "FC928F69A9273F9C19EF92A3B05001864474BBFD3FB8715698C1F305E28D4DCC"
     },
     {
+      "path": "promptforge/triage.py",
+      "size_bytes": 6589,
+      "sha256": "8675fc224684f2036e0681d5e57c13053c78ce1267a46b5dfe52c272fd4431a9"
+    },
+    {
       "path": "PUBLIC_RELEASE_SCOPE.md",
       "size_bytes": 2124,
       "sha256": "9A71B06E92F9C385DECEDF31C73415EBA76FABD54C5CEC80E0E175616761BD2A"
@@ -464,13 +469,18 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 42444,
-      "sha256": "ecd3f509b12684a33379070eae2fee7bea11bdc00ca61a146415c3380b86f887"
+      "size_bytes": 43137,
+      "sha256": "dcefa620a362f2e52fabacccc9452f48db57624bb8a8338012175275ae33b11e"
     },
     {
       "path": "schemas/run.schema.json",
       "size_bytes": 1693,
       "sha256": "193BD7B3795546B127C90C2A5FA2D335E92BE930BABAA1B05B5A4A2F354F23E4"
+    },
+    {
+      "path": "schemas/triage-state.v1.json",
+      "size_bytes": 1727,
+      "sha256": "8ccac1771997767e6c57a97840ab5427a2f0b6efcefdec14671c5a9d5010cac4"
     },
     {
       "path": "tasks/suite.json",
@@ -485,7 +495,7 @@
     {
       "path": "tests/test_agent_corpus_policy.py",
       "size_bytes": 1582,
-      "sha256": "6d51f72a55e2533d4b04349a78927dece65f7c7cfb42c37182cf0c262db33cbf"
+      "sha256": "7cd1c3b38fb9909a646dccf7b96b29be815d12463bd8a850ebe0efdb8c3edf02"
     },
     {
       "path": "tests/test_agent.py",
@@ -541,6 +551,11 @@
       "path": "tests/test_temporal.py",
       "size_bytes": 5552,
       "sha256": "C4A7DD2A697B778E1FE96B1D77AE01EE1289E0F4AA479E37A6ED5B98F208FB40"
+    },
+    {
+      "path": "tests/test_triage.py",
+      "size_bytes": 3375,
+      "sha256": "d93d7a5395fc12d947d792fbf776c3c7b5af22bc6cb9c6328aa4cb7ba9a8a758"
     },
     {
       "path": "tests/test_v03.py",
