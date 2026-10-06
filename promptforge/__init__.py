@@ -120,6 +120,14 @@ from .decision import (
     UncertaintyActionGate,
 )
 
+from .hypothesis import (
+    HYPOTHESIS_STATUSES,
+    DiscriminatingExperiment,
+    HypothesisAssessment,
+    HypothesisLedger,
+    HypothesisRecord,
+)
+
 __all__ = [
     "POLICY_BUDGET_CONSTRAINED",
     "POLICY_MINIMAL",
@@ -197,4 +205,9 @@ __all__ = [
     "ActionDecision",
     "ActionPolicy",
     "UncertaintyActionGate",
+    "HYPOTHESIS_STATUSES",
+    "HypothesisRecord",
+    "HypothesisAssessment",
+    "DiscriminatingExperiment",
+    "HypothesisLedger",
 ]
