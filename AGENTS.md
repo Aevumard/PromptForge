@@ -127,6 +127,19 @@ Adaptive routing may use either explicit frozen policy evidence or a policy-hist
 
 The policy-history boundary must remain leakage-safe: the outcome of the current proposal cannot be used to create or select the policy for that same proposal.
 
+## Controlled policy refresh
+
+`ContextRoutingPolicyRefreshController` is the explicit execution gate for routing-policy reevaluation.
+
+Keep these boundaries intact:
+
+1. `ContextRoutingPolicyHealth` determines whether existing policy evidence is stable/fresh enough.
+2. `ContextRoutingPolicyRefreshController` decides whether reevaluation is eligible, considering evidence thresholds, cooldown, and optional refresh budget.
+3. `ContextCognitiveLoop.refresh_memory_routing_policy()` performs holdout evaluation and records the new evidence only after the gate permits it.
+4. `record_refresh()` is called only after successful evidence persistence.
+
+Do not turn the refresh controller into an automatic model-quality loop. It schedules an evidence refresh; it does not generate outcomes, causal claims, or hidden labels. Reasons such as `insufficient_evidence`, `unstable_policy`, `stale_policy`, `refresh_cooldown`, and `refresh_budget_exhausted` must remain explicit and auditable.
+
 ## Policies
 
 The default policy is `minimal`, implemented as deterministic `minimal_serialized_context`.
