@@ -13,7 +13,6 @@ from .routing_policy import (
     ContextRoutingPolicyEvaluator,
 )
 from .routing_history import (
-    ContextRoutingPolicyHealth,
     ContextRoutingPolicyHistory,
     ContextRoutingPolicyHistorySnapshot,
 )
@@ -214,6 +213,16 @@ class ContextCognitiveLoop:
             if self.memory_routing_policy_evidence is not None:
                 policy_version = self.memory_routing_policy_evidence.version
                 selected_mode = self.memory_routing_policy_evidence.selected_mode
+                if self.memory_policy_max_age is not None:
+                    policy_freshness_age = max(
+                        0,
+                        evidence.version - self.memory_routing_policy_evidence.version,
+                    )
+                    policy_refresh_recommended = (
+                        policy_freshness_age > self.memory_policy_max_age
+                    )
+                    if policy_refresh_recommended:
+                        selected_mode = "nearest"
             elif self.memory_routing_policy_history is not None:
                 history = self.memory_routing_policy_history.snapshot()
                 selected_mode = history.select_mode(
@@ -223,11 +232,18 @@ class ContextCognitiveLoop:
                 latest = history.latest
                 policy_version = latest.version if latest is not None else None
                 policy_history_version = history.version if history.evidences else None
-                if self.memory_policy_min_stability is not None:
+                if (
+                    self.memory_policy_min_stability is not None
+                    or self.memory_policy_max_age is not None
+                ):
                     health = history.health(
                         window=self.memory_policy_history_window,
                         min_observations=self.memory_policy_history_min_observations,
-                        min_stability=self.memory_policy_min_stability,
+                        min_stability=(
+                            0.0
+                            if self.memory_policy_min_stability is None
+                            else self.memory_policy_min_stability
+                        ),
                         current_experience_version=evidence.version,
                         max_age=self.memory_policy_max_age,
                     )
