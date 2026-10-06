@@ -6,6 +6,7 @@ from typing import Any, Mapping, Sequence
 from .adaptive import ContextTopologyProfile, ContextTopologyProfiler, ContextTrajectoryState
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
+from .relational import ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
 
 
@@ -17,6 +18,7 @@ class ContextCognitiveProposal:
     cycle_id: str
     experience_version: int
     profile: ContextTopologyProfile
+    relational_profile: ContextRelationalProfile
     decision: ContextAdaptiveDecision
     memory_route: ContextRoute | None
 
@@ -57,6 +59,7 @@ class ContextCognitiveLoop:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
         self.controller = controller or ComplexContextController()
+        self.relation_profiler = ContextRelationProfiler()
         self.routing_features = (
             tuple(routing_features)
             if routing_features is not None
@@ -75,6 +78,7 @@ class ContextCognitiveLoop:
         data: Mapping[str, Any],
         required: Sequence[str],
         candidates: Sequence[Mapping[str, Any]],
+        relations: Sequence[Mapping[str, Any] | Any] = (),
         trajectory: ContextTrajectoryState | None = None,
         current_strategy: str | None = None,
         current_cost: float | None = None,
@@ -86,10 +90,13 @@ class ContextCognitiveLoop:
             raise ValueError("cycle_id must not be empty")
 
         profile = self.profiler.profile(data, required)
+        relational_profile = self.relation_profiler.profile(relations)
         evidence = self.experience.snapshot()
+        routing_topology = profile.to_dict()
+        routing_topology.update(relational_profile.to_dict())
         memory_route = (
             evidence.route(
-                profile,
+                routing_topology,
                 features=self.routing_features,
                 scale_mode=self.scale_mode,
             )
@@ -114,6 +121,7 @@ class ContextCognitiveLoop:
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
+            relational_profile=relational_profile,
             decision=decision,
             memory_route=memory_route,
         )
@@ -136,7 +144,10 @@ class ContextCognitiveLoop:
                 family_id=family_id,
                 strategy=selected_strategy,
                 cost=cost,
-                topology=proposal.profile.to_dict(),
+                topology={
+                    **proposal.profile.to_dict(),
+                    **proposal.relational_profile.to_dict(),
+                },
             )
         )
 
