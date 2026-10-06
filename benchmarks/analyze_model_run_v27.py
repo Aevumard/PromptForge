@@ -85,6 +85,13 @@ class ExperimentAnalysis:
     total_elapsed_ms: float
     latency_p50_ms: float
     latency_p95_ms: float
+    provider_elapsed_ms: float
+    provider_latency_p50_ms: float
+    provider_latency_p95_ms: float
+    provider_attempts: int
+    provider_prompt_tokens: int
+    provider_completion_tokens: int
+    provider_total_tokens: int
     slices: Sequence[SliceMetrics]
 
     def to_dict(self) -> dict[str, Any]:
@@ -111,6 +118,13 @@ class ExperimentAnalysis:
                 "total_elapsed_ms": self.total_elapsed_ms,
                 "latency_p50_ms": self.latency_p50_ms,
                 "latency_p95_ms": self.latency_p95_ms,
+                "provider_elapsed_ms": self.provider_elapsed_ms,
+                "provider_latency_p50_ms": self.provider_latency_p50_ms,
+                "provider_latency_p95_ms": self.provider_latency_p95_ms,
+                "provider_attempts": self.provider_attempts,
+                "provider_prompt_tokens": self.provider_prompt_tokens,
+                "provider_completion_tokens": self.provider_completion_tokens,
+                "provider_total_tokens": self.provider_total_tokens,
             },
             "slices": [item.to_dict() for item in self.slices],
         }
@@ -291,6 +305,12 @@ def _prediction_maps(report: Mapping[str, Any]) -> tuple[
     int,
     float,
     list[float],
+    float,
+    list[float],
+    int,
+    int,
+    int,
+    int,
     int,
     int,
 ]:
@@ -300,6 +320,12 @@ def _prediction_maps(report: Mapping[str, Any]) -> tuple[
     tokens_saved = 0
     total_elapsed_ms = 0.0
     latencies: list[float] = []
+    provider_elapsed_ms = 0.0
+    provider_latencies: list[float] = []
+    provider_attempts = 0
+    provider_prompt_tokens = 0
+    provider_completion_tokens = 0
+    provider_total_tokens = 0
     failed = 0
     changes = 0
 
@@ -329,6 +355,15 @@ def _prediction_maps(report: Mapping[str, Any]) -> tuple[
         if raw_payload is not None and elapsed_ms > 0:
             latencies.append(elapsed_ms)
 
+        provider_elapsed = float(item.get("provider_elapsed_ms", 0.0))
+        provider_elapsed_ms += provider_elapsed
+        if provider_elapsed > 0:
+            provider_latencies.append(provider_elapsed)
+        provider_attempts += int(item.get("provider_attempts", 0))
+        provider_prompt_tokens += int(item.get("provider_prompt_tokens") or 0)
+        provider_completion_tokens += int(item.get("provider_completion_tokens") or 0)
+        provider_total_tokens += int(item.get("provider_total_tokens") or 0)
+
         if (
             isinstance(raw_payload, Mapping)
             and isinstance(guarded_payload, Mapping)
@@ -343,6 +378,12 @@ def _prediction_maps(report: Mapping[str, Any]) -> tuple[
         tokens_saved,
         total_elapsed_ms,
         latencies,
+        provider_elapsed_ms,
+        provider_latencies,
+        provider_attempts,
+        provider_prompt_tokens,
+        provider_completion_tokens,
+        provider_total_tokens,
         failed,
         changes,
     )
@@ -359,6 +400,12 @@ def analyze_report(
         tokens_saved,
         total_elapsed_ms,
         latencies,
+        provider_elapsed_ms,
+        provider_latencies,
+        provider_attempts,
+        provider_prompt_tokens,
+        provider_completion_tokens,
+        provider_total_tokens,
         failed,
         changes,
     ) = _prediction_maps(report)
@@ -410,7 +457,7 @@ def analyze_report(
             )
 
     return ExperimentAnalysis(
-        schema_version="promptforge-v27.11-operational-telemetry.v1",
+        schema_version="promptforge-v27.12-provider-telemetry.v1",
         total_cases=len(cases),
         failed_calls=failed,
         raw_covered=len(raw),
@@ -421,6 +468,13 @@ def analyze_report(
         total_elapsed_ms=total_elapsed_ms,
         latency_p50_ms=_percentile(latencies, 0.50),
         latency_p95_ms=_percentile(latencies, 0.95),
+        provider_elapsed_ms=provider_elapsed_ms,
+        provider_latency_p50_ms=_percentile(provider_latencies, 0.50),
+        provider_latency_p95_ms=_percentile(provider_latencies, 0.95),
+        provider_attempts=provider_attempts,
+        provider_prompt_tokens=provider_prompt_tokens,
+        provider_completion_tokens=provider_completion_tokens,
+        provider_total_tokens=provider_total_tokens,
         slices=tuple(slices),
     )
 
@@ -434,7 +488,11 @@ def render_markdown(analysis: ExperimentAnalysis) -> str:
         f"- Raw coverage: {analysis.raw_covered / analysis.total_cases:.2%}",
         f"- Guard action changes: {analysis.guard_action_changes}",
         f"- Total elapsed: {analysis.total_elapsed_ms:.2f} ms",
-        f"- Latency p50/p95: {analysis.latency_p50_ms:.2f} / {analysis.latency_p95_ms:.2f} ms",
+        f"- Total provider time: {analysis.provider_elapsed_ms:.2f} ms",
+        f"- End-to-end latency p50/p95: {analysis.latency_p50_ms:.2f} / {analysis.latency_p95_ms:.2f} ms",
+        f"- Provider latency p50/p95: {analysis.provider_latency_p50_ms:.2f} / {analysis.provider_latency_p95_ms:.2f} ms",
+        f"- Provider attempts: {analysis.provider_attempts}",
+        f"- Provider tokens: prompt={analysis.provider_prompt_tokens}, completion={analysis.provider_completion_tokens}, total={analysis.provider_total_tokens}",
         "",
         "| Slice | Value | Action raw | Action guarded | Unsafe raw | Unsafe guarded | Human recall raw | Human recall guarded | Guard changes |",
         "|---|---|---:|---:|---:|---:|---:|---:|---:|",
