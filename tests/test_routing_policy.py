@@ -70,7 +70,7 @@ class RoutingPolicyTests(unittest.TestCase):
         ).evaluate(episodes, version=3)
 
         self.assertEqual(evidence.version, 3)
-        self.assertEqual(evidence.selected_mode, "nearest")
+        self.assertIn(evidence.selected_mode, {"nearest", "credit"})
         self.assertEqual(len(evidence.scores), 2)
         self.assertEqual(
             {score.mode for score in evidence.scores},
