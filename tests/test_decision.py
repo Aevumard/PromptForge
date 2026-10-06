@@ -728,24 +728,11 @@ class UncertaintyActionGateTests(unittest.TestCase):
             downside=0.1,
             support_evidence_ids=("e1",),
         )
-        fallback = ActionCandidate(
-            "fallback",
-            "no quality gate metadata",
-            evidence_support=0.7,
-            reversibility=1.0,
-            downside=0.2,
-        )
 
-        decision = UncertaintyActionGate(
-            ActionPolicy(require_support_quality=True)
-        ).decide([action, fallback])
-
-        self.assertEqual(decision.selected_action_id, "fallback")
-        self.assertIn("quality_required", decision.blocked_action_ids)
-        self.assertIn(
-            "support quality boundary was not supplied",
-            decision.reasons["quality_required"],
-        )
+        with self.assertRaises(ValueError):
+            UncertaintyActionGate(
+                ActionPolicy(require_support_quality=True)
+            ).decide([action])
 
     def test_invalid_support_quality_policy_is_rejected(self):
         with self.assertRaises(ValueError):
