@@ -28,7 +28,7 @@ class ModelLoopBenchmarkTests(unittest.TestCase):
         case = next(item for item in cases if item.labels.contradiction)
         payload = build_model_input(case, budget_tokens=500, reserve_tokens=50)
 
-        epistemic = payload["promptforge"]["blocks"]["epistemic"]["content"]
+        epistemic = payload["promptforge"]["context"]["epistemic"]
         self.assertIn(case.evidence[0]["evidence_id"], epistemic["included_ids"])
         contradiction_id = next(
             item["evidence_id"]
