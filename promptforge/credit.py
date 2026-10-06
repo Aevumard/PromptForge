@@ -5,7 +5,14 @@ from dataclasses import asdict, dataclass
 from math import isfinite, sqrt
 from typing import Sequence
 
-from .memory import ContextEpisode
+from .memory import (
+    ContextEpisode,
+    ContextRoute,
+    _distance,
+    _feature_scales,
+    resolve_routing_features,
+    topology_vector,
+)
 
 
 @dataclass(frozen=True)
@@ -323,15 +330,13 @@ class ContextMemoryAwareRouter:
             nearest_distance=nearest[2],
             nearest_episode_id=nearest[1].episode_id,
             evidence_count=sum(
-                episode.strategy == strategy
-                for episode in self._episodes
+                episode.strategy == strategy for episode in self._episodes
             ),
             selected_credit=selected_credit,
             candidate_count=len(candidate_rows),
             top_k=self.top_k,
             strategy_scores=tuple(
-                (name, weighted_scores[name])
-                for name in ranked_strategies
+                (name, weighted_scores[name]) for name in ranked_strategies
             ),
         )
 
