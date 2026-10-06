@@ -23,7 +23,7 @@ class ReplicateRunnerTests(TestCase):
         self.assertEqual(summary.maximum, 3.0)
 
     def test_replicate_runner_creates_independent_checkpoints(self) -> None:
-        cases = generate_ticket_suite(count=6, seed=271)
+        cases = generate_ticket_suite(count=8, seed=271)
         factory_calls = {"count": 0}
 
         def factory():
@@ -63,7 +63,7 @@ class ReplicateRunnerTests(TestCase):
             self.assertEqual(len(checkpoints), 3)
             self.assertTrue(
                 all(
-                    len(path.read_text(encoding="utf-8").splitlines()) == 6
+                    len(path.read_text(encoding="utf-8").splitlines()) == 8
                     for path in checkpoints
                 )
             )
@@ -191,7 +191,7 @@ class ReplicateRunnerTests(TestCase):
             )
 
     def test_single_replicate_is_rejected(self) -> None:
-        cases = generate_ticket_suite(count=2)
+        cases = generate_ticket_suite(count=4)
         with self.assertRaises(ValueError):
             run_replicate_experiment(
                 cases,
