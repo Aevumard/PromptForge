@@ -82,7 +82,13 @@ Use credit as an operational retention/ranking signal only. Do not describe it a
 
 When credit is supplied to consolidation, it is only a secondary selection criterion after observed family/strategy coverage. The default consolidator remains unchanged unless a credit policy is explicitly provided.
 
-`ContextExperienceSnapshot.credit()` evaluates only its frozen evidence. `ContextExperienceStore.consolidate()` updates only mutable memory. Existing snapshots remain unchanged and continue to represent their original evidence boundary.
+`ContextExperienceSnapshot.credit()` evaluates only its frozen evidence. `ContextExperienceSnapshot.memory_aware_route()` uses credit-weighted nearby evidence within the same frozen snapshot. `ContextExperienceStore.consolidate()` and `memory_aware_route()` operate on current mutable memory through fresh immutable snapshots. Existing snapshots remain unchanged and continue to represent their original evidence boundary.
+
+## Credit-aware routing
+
+`ContextMemoryAwareRouter` is an explicit opt-in layer. It uses the same topology scaling contract as the nearest-case router, selects the closest `top_k` observed episodes, and aggregates each strategy's support from structural similarity multiplied by memory credit.
+
+This is an operational preference over observed evidence. Keep the default `NearestEpisodeRouter` behavior unchanged. For research transfer evaluation, fit the aware router only on the training partition and apply the same whole-family holdout boundary already used by `leave_one_family_out()`.
 
 ## Cognitive experience records
 
