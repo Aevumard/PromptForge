@@ -136,6 +136,21 @@ Intended sequence:
 
 `epistemic boundary -> feasibility -> reversibility/downside -> ranking -> action decision`
 
+## Hypothesis and experiment boundary
+
+`promptforge.hypothesis` is an explicit evidence bookkeeping layer.
+
+1. Hypothesis/evidence relationships must be supplied by the integration.
+2. `insufficient_evidence` and `unresolved` must not be treated as disproof.
+3. Support and contradiction must remain separately visible.
+4. Future or unavailable evidence cannot support a hypothesis inside the current epistemic boundary.
+5. Experiment priority is a transparent design heuristic, not statistical power or a causal guarantee.
+6. Keep hypothesis state separate from operational action choice; an action can be preferred while the causal hypothesis remains contested.
+
+Intended sequence:
+
+`temporal evidence -> support/contradiction ledger -> competing hypotheses -> discriminating experiment priority`
+
 ## Cognitive loop
 
 `ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.
