@@ -115,12 +115,16 @@ class ActionDecision:
     scores: dict[str, float]
     reasons: dict[str, tuple[str, ...]]
     evidence_ids_available: tuple[str, ...]
+    support_evidence_ids: dict[str, tuple[str, ...]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
         payload["ranked_action_ids"] = list(self.ranked_action_ids)
         payload["blocked_action_ids"] = list(self.blocked_action_ids)
         payload["evidence_ids_available"] = list(self.evidence_ids_available)
+        payload["support_evidence_ids"] = {
+            key: list(value) for key, value in self.support_evidence_ids.items()
+        }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
         }
@@ -157,6 +161,7 @@ class UncertaintyActionGate:
         scored: list[tuple[float, ActionCandidate]] = []
         blocked: list[str] = []
         reasons: dict[str, tuple[str, ...]] = {}
+        support_evidence_by_action: dict[str, tuple[str, ...]] = {}
 
         for action in actions:
             if action.action_id in seen:
@@ -169,6 +174,7 @@ class UncertaintyActionGate:
             required = set(action.required_evidence_ids)
             missing = sorted(required.difference(available))
             support_ids = tuple(action.support_evidence_ids)
+            support_evidence_by_action[action.action_id] = support_ids
             missing_support = sorted(set(support_ids).difference(available))
 
             if evidence is not None and missing:
@@ -268,6 +274,7 @@ class UncertaintyActionGate:
             scores=scores,
             reasons=reasons,
             evidence_ids_available=tuple(sorted(available)),
+            support_evidence_ids=support_evidence_by_action,
         )
 
 
