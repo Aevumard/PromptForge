@@ -69,6 +69,138 @@ class UncertaintyActionGateTests(unittest.TestCase):
         self.assertEqual(decision.selected_action_id, "past_based")
         self.assertIn("future_based", decision.blocked_action_ids)
 
+    def test_strict_mode_blocks_high_numeric_support_without_anchors(self):
+        evidence = EpistemicContextCompiler().compile(
+            [EvidenceRecord("past", "observed", timestamp=10)]
+        )
+        action = ActionCandidate(
+            "unanchored",
+            "highly rated but unanchored",
+            evidence_support=1.0,
+            reversibility=1.0,
+            downside=0.1,
+        )
+
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.70,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("past",),
+        )
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_anchors=True)
+        ).decide([action, fallback], evidence=evidence)
+
+        self.assertEqual(
+            decision.blocked_action_ids,
+            ("unanchored",),
+        )
+        self.assertIn("evidence support is unanchored", decision.reasons["unanchored"])
+
+    def test_strict_mode_blocks_future_support_anchor(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("past", "past", timestamp=10),
+                EvidenceRecord("future", "future", timestamp=30),
+            ],
+            policy=EpistemicContextPolicy(cutoff=20),
+        )
+        action = ActionCandidate(
+            "future_anchor",
+            "depends on future support",
+            evidence_support=0.99,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("future",),
+        )
+
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.70,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("past",),
+        )
+        decision = UncertaintyActionGate(
+            ActionPolicy(require_support_anchors=True)
+        ).decide([action, fallback], evidence=evidence)
+
+        self.assertIn("future_anchor", decision.blocked_action_ids)
+        self.assertIn("support evidence unavailable", decision.reasons["future_anchor"])
+
+    def test_anchored_support_passes_and_is_audited(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("e1", "support one", timestamp=10),
+                EvidenceRecord("e2", "support two", timestamp=11),
+            ]
+        )
+        action = ActionCandidate(
+            "anchored",
+            "supported action",
+            evidence_support=0.85,
+            reversibility=0.9,
+            downside=0.2,
+            support_evidence_ids=("e1", "e2"),
+        )
+
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_anchors=True,
+                min_support_anchors=2,
+            )
+        ).decide([action], evidence=evidence)
+
+        self.assertEqual(decision.selected_action_id, "anchored")
+        self.assertEqual(
+            decision.support_evidence_ids["anchored"],
+            ("e1", "e2"),
+        )
+        self.assertEqual(
+            decision.to_dict()["support_evidence_ids"]["anchored"],
+            ["e1", "e2"],
+        )
+
+    def test_strict_mode_enforces_minimum_anchor_count(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("e1", "one support", timestamp=10),
+                EvidenceRecord("e2", "second support", timestamp=11),
+            ]
+        )
+        action = ActionCandidate(
+            "thin",
+            "only one anchor",
+            evidence_support=0.95,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1",),
+        )
+
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.70,
+            reversibility=1.0,
+            downside=0.1,
+            support_evidence_ids=("e1", "e2"),
+        )
+        decision = UncertaintyActionGate(
+            ActionPolicy(
+                require_support_anchors=True,
+                min_support_anchors=2,
+            )
+        ).decide([action, fallback], evidence=evidence)
+
+        self.assertIn("thin", decision.blocked_action_ids)
+        self.assertIn(
+            "insufficient support evidence anchors",
+            decision.reasons["thin"],
+        )
+
     def test_causal_dependence_is_a_penalty_not_a_truth_claim(self):
         actions = [
             ActionCandidate(

@@ -22,6 +22,7 @@ class ActionCandidate:
     downside: float
     operational_cost: float = 0.0
     required_evidence_ids: tuple[str, ...] = ()
+    support_evidence_ids: tuple[str, ...] = ()
     depends_on_causal_claim: bool = False
 
     def __post_init__(self) -> None:
@@ -41,10 +42,13 @@ class ActionCandidate:
                 raise ValueError(f"{name} must be between 0.0 and 1.0")
         if len(set(self.required_evidence_ids)) != len(self.required_evidence_ids):
             raise ValueError("required_evidence_ids must be unique")
+        if len(set(self.support_evidence_ids)) != len(self.support_evidence_ids):
+            raise ValueError("support_evidence_ids must be unique")
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
         payload["required_evidence_ids"] = list(self.required_evidence_ids)
+        payload["support_evidence_ids"] = list(self.support_evidence_ids)
         return payload
 
 
@@ -60,6 +64,8 @@ class ActionPolicy:
     max_downside: float = 0.80
     require_reversible: bool = False
     causal_penalty: float = 0.10
+    require_support_anchors: bool = False
+    min_support_anchors: int = 1
 
     def __post_init__(self) -> None:
         weights = (
@@ -90,6 +96,14 @@ class ActionPolicy:
                 or not 0.0 <= float(value) <= 1.0
             ):
                 raise ValueError(f"{name} must be between 0.0 and 1.0")
+        if not isinstance(self.require_support_anchors, bool):
+            raise TypeError("require_support_anchors must be a bool")
+        if (
+            not isinstance(self.min_support_anchors, int)
+            or isinstance(self.min_support_anchors, bool)
+            or self.min_support_anchors < 1
+        ):
+            raise ValueError("min_support_anchors must be at least 1")
 
 
 @dataclass(frozen=True)
@@ -101,12 +115,16 @@ class ActionDecision:
     scores: dict[str, float]
     reasons: dict[str, tuple[str, ...]]
     evidence_ids_available: tuple[str, ...]
+    support_evidence_ids: dict[str, tuple[str, ...]]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
         payload["ranked_action_ids"] = list(self.ranked_action_ids)
         payload["blocked_action_ids"] = list(self.blocked_action_ids)
         payload["evidence_ids_available"] = list(self.evidence_ids_available)
+        payload["support_evidence_ids"] = {
+            key: list(value) for key, value in self.support_evidence_ids.items()
+        }
         payload["reasons"] = {
             key: list(value) for key, value in self.reasons.items()
         }
@@ -143,6 +161,7 @@ class UncertaintyActionGate:
         scored: list[tuple[float, ActionCandidate]] = []
         blocked: list[str] = []
         reasons: dict[str, tuple[str, ...]] = {}
+        support_evidence_by_action: dict[str, tuple[str, ...]] = {}
 
         for action in actions:
             if action.action_id in seen:
@@ -154,6 +173,9 @@ class UncertaintyActionGate:
             why: list[str] = []
             required = set(action.required_evidence_ids)
             missing = sorted(required.difference(available))
+            support_ids = tuple(action.support_evidence_ids)
+            support_evidence_by_action[action.action_id] = support_ids
+            missing_support = sorted(set(support_ids).difference(available))
 
             if evidence is not None and missing:
                 blocked.append(action.action_id)
@@ -169,6 +191,35 @@ class UncertaintyActionGate:
                     "required evidence boundary was not supplied",
                 )
                 continue
+
+            if self.policy.require_support_anchors:
+                if not support_ids:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "evidence support is unanchored",
+                        "support_evidence_ids required",
+                    )
+                    continue
+                if evidence is None:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "evidence support boundary was not supplied",
+                    )
+                    continue
+                if missing_support:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence unavailable",
+                        "missing_support_evidence:" + ",".join(missing_support),
+                    )
+                    continue
+                if len(support_ids) < self.policy.min_support_anchors:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "insufficient support evidence anchors",
+                        "support_anchor_count:" + str(len(support_ids)),
+                    )
+                    continue
 
             if action.evidence_support < self.policy.min_evidence_support:
                 blocked.append(action.action_id)
@@ -216,15 +267,14 @@ class UncertaintyActionGate:
         ranked = tuple(action.action_id for _, action in scored)
 
         return ActionDecision(
-            schema_version="uncertainty-action.v1",
+            schema_version="uncertainty-action.v2",
             selected_action_id=ranked[0],
             ranked_action_ids=ranked,
             blocked_action_ids=tuple(blocked),
             scores=scores,
             reasons=reasons,
-            evidence_ids_available=tuple(
-                sorted(available)
-            ),
+            evidence_ids_available=tuple(sorted(available)),
+            support_evidence_ids=support_evidence_by_action,
         )
 
 
