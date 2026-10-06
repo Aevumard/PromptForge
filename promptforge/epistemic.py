@@ -9,10 +9,6 @@ from .core import estimate_tokens, serialize_context
 
 EVIDENCE_KINDS = ("observation", "inference", "hypothesis")
 EVIDENCE_STANCES = ("supports", "contradicts", "neutral")
-_CAUSAL_TAGS = frozenset(
-    {"intervention", "multivariable", "confounded", "placebo_absent"}
-)
-
 
 def _normalize_tuple(values: Iterable[Any], *, field: str) -> tuple[str, ...]:
     result: list[str] = []
