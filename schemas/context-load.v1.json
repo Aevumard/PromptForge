@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Aevumard/PromptForge/blob/main/schemas/context-load.v1.json",
+  "title": "PromptForge Context Load v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "requested_ids",
+    "loaded_ids",
+    "unknown_ids",
+    "omitted_ids",
+    "selected_tokens",
+    "token_budget",
+    "materialized",
+    "reasons"
+  ],
+  "properties": {
+    "schema_version": {"const": "context-load.v1"},
+    "requested_ids": {"type": "array", "items": {"type": "string"}},
+    "loaded_ids": {"type": "array", "items": {"type": "string"}},
+    "unknown_ids": {"type": "array", "items": {"type": "string"}},
+    "omitted_ids": {"type": "array", "items": {"type": "string"}},
+    "selected_tokens": {"type": "integer", "minimum": 0},
+    "token_budget": {"type": ["integer", "null"], "minimum": 1},
+    "materialized": {"type": "object"},
+    "reasons": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {"type": "string"}
+      }
+    }
+  },
+  "additionalProperties": false
+}
