@@ -100,6 +100,26 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(result.prepared["task_family"], "agent_request")
         self.assertTrue(result.prepared["required_values_preserved"])
 
+    def test_episode_state_is_serializable_for_audit(self):
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-audit",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            proposal,
+            family_id="family-audit",
+            cost=1.25,
+            outcome={"status": "observed"},
+        )
+
+        episode = loop.snapshot().episodes[0]
+        payload = episode.to_dict()
+        self.assertEqual(payload["episode_id"], "cycle-audit")
+        self.assertEqual(payload["source"], proposal.decision.source)
+        self.assertEqual(payload["outcome"]["status"], "observed")
     def test_observation_persists_cognitive_state_and_outcome(self):
         loop = ContextCognitiveLoop()
         proposal = loop.propose(
