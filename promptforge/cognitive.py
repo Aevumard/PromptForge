@@ -4,10 +4,25 @@ from dataclasses import asdict, dataclass
 from typing import Any, Mapping, Sequence
 
 from .adaptive import ContextTopologyProfile, ContextTopologyProfiler, ContextTrajectoryState
+from .core import POLICY_MINIMAL, prepare_context
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
+
+
+@dataclass(frozen=True)
+class ContextCognitiveResult:
+    """Decision plus the concrete provider-agnostic prepared context."""
+
+    proposal: ContextCognitiveProposal
+    prepared: dict[str, Any]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "proposal": self.proposal.to_dict(),
+            "prepared": self.prepared,
+        }
 
 
 @dataclass(frozen=True)
@@ -126,6 +141,64 @@ class ContextCognitiveLoop:
             memory_route=memory_route,
         )
 
+    def prepare(
+        self,
+        *,
+        cycle_id: str,
+        data: Mapping[str, Any],
+        required: Sequence[str],
+        candidates: Sequence[Mapping[str, Any]] | None = None,
+        relations: Sequence[ContextRelation | Mapping[str, Any]] = (),
+        task_id: str = "adhoc",
+        task_family: str = "agent_request",
+        budget_tokens: int | None = None,
+        trajectory: ContextTrajectoryState | None = None,
+        current_strategy: str | None = None,
+        current_cost: float | None = None,
+        probe_scores: Mapping[str, float] | None = None,
+        remaining_budget_fraction: float = 1.0,
+    ) -> ContextCognitiveResult:
+        """Plan and materialize the selected context preparation in one call."""
+        if candidates is None:
+            probe = prepare_context(
+                data,
+                required,
+                task_id=task_id,
+                task_family=task_family,
+                policy=POLICY_MINIMAL,
+                budget_tokens=budget_tokens,
+            )
+            candidates = probe["candidates"]
+
+        proposal = self.propose(
+            cycle_id=cycle_id,
+            data=data,
+            required=required,
+            candidates=candidates,
+            relations=relations,
+            trajectory=trajectory,
+            current_strategy=current_strategy,
+            current_cost=current_cost,
+            probe_scores=probe_scores,
+            remaining_budget_fraction=remaining_budget_fraction,
+            budget_tokens=budget_tokens,
+        )
+        if proposal.decision.action == "stop":
+            raise ValueError(
+                "cognitive decision is stop; no preparation was materialized"
+            )
+
+        prepared = prepare_context(
+            data,
+            required,
+            task_id=task_id,
+            task_family=task_family,
+            policy=POLICY_MINIMAL,
+            arm_id=proposal.decision.strategy,
+            budget_tokens=budget_tokens,
+        )
+        return ContextCognitiveResult(proposal=proposal, prepared=prepared)
+
     def observe(
         self,
         proposal: ContextCognitiveProposal,
@@ -155,4 +228,5 @@ class ContextCognitiveLoop:
 __all__ = [
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
+    "ContextCognitiveResult",
 ]
