@@ -598,7 +598,7 @@ Schema: `schemas/action-execution.v1.json`.
 
 For long or noisy agent tasks, prefer the smallest context contract that preserves required information.
 
-`promptforge.budget` adds a provider-agnostic packing layer:
+`promptforge.budget` adds a provider-agnostic packing layer. `ContextBudgetPlanner` is the reusable planner; `plan_context()` is the fast one-call path.
 
 1. Create `ContextBlock` values for independently controllable context units.
 2. Mark load-bearing information with `required=True`.
