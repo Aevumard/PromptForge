@@ -162,15 +162,24 @@ class HypothesisLedger:
             required = set(hypothesis.required_evidence_ids)
             missing_required = tuple(sorted(required.difference(available)))
 
+            if evidence is None and (
+                hypothesis.support_evidence_ids
+                or hypothesis.contradiction_evidence_ids
+                or hypothesis.required_evidence_ids
+            ):
+                raise ValueError(
+                    "evidence snapshot is required when hypothesis evidence ids are supplied"
+                )
+
             support_ids = tuple(
                 item
                 for item in hypothesis.support_evidence_ids
-                if evidence is None or item in available
+                if item in available
             )
             contradiction_ids = tuple(
                 item
                 for item in hypothesis.contradiction_evidence_ids
-                if evidence is None or item in available
+                if item in available
             )
 
             if missing_required:
