@@ -341,7 +341,7 @@ class ContextExplorationAdjudicator:
         if best is None:
             reason = "no_comparable_probe_evidence"
         elif best.unique_episodes < self.min_comparisons:
-            reason = "insufficient_unique_episodes"
+            reason = "insufficient_comparisons"
         elif best.families < self.min_families:
             reason = "insufficient_families"
         elif best.baseline_strategy is None:
