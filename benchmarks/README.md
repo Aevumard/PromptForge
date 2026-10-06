@@ -1,23 +1,29 @@
-# V27.1 adversarial benchmark
+# V27.2 — 1,200-ticket benchmark
 
-This benchmark is a deterministic red-team suite for the V27 AI-native control layer.
+This benchmark turns the V27 control layer into a reproducible support-ticket evaluation surface.
 
-It does not call an LLM, external provider, or live tool. It tests the boundaries that PromptForge is responsible for enforcing:
+The default suite contains exactly **1,200 synthetic tickets**, balanced across:
 
-- priority remains separate from actionability;
-- future evidence cannot cross an epistemic cutoff;
-- provenance diversity can block concentrated support;
-- required context survives hard budgets while low-value context is omitted;
-- deferred context stays out of the model-facing payload until explicitly loaded;
-- old tool outputs preserve head/tail material and a replay digest;
-- external execution is idempotency-aware;
-- human review requires a fresh action decision before resuming.
+- payments
+- access
+- technical errors
+- general queries
 
-Run it from the repository root:
+Every case has deterministic gold labels for category, SLA, priority, safe action, human-review requirement, contradiction, redundancy, irrelevant content, and historical context.
+
+The benchmark deliberately keeps gold labels out of `TicketCase.model_input()`.
+
+## Run
 
 ```bash
-python benchmarks/v27_adversarial.py
-python -m unittest tests/test_v27_adversarial.py
+python benchmarks/tickets_v27.py
+python -m unittest tests/test_tickets_v27.py
 ```
 
-The benchmark is intentionally separate from the frozen historical research harness. A future version can add model-in-the-loop A/B evaluation on top of these deterministic control checks without changing the historical harness semantics.
+The built-in naive baseline deliberately ignores contradiction semantics. Its purpose is to establish a safety/error floor before adding a real model adapter.
+
+## Model-in-the-loop next step
+
+An external runner can consume `TicketCase.model_input()`, return `Prediction` records, and pass them into `evaluate_predictions()`.
+
+This keeps dataset generation, scoring, and PromptForge's deterministic control surface separate from the provider/model integration.
