@@ -118,7 +118,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v5")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
         self.assertEqual(proposal.memory_routing_mode, "adaptive")
         self.assertEqual(proposal.memory_routing_selected_mode, "credit")
         self.assertEqual(proposal.memory_policy_version, 11)
@@ -210,9 +210,65 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v5")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
         self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
         self.assertEqual(proposal.memory_policy_stability_rate, 0.0)
+        self.assertTrue(proposal.memory_policy_refresh_recommended)
+
+
+    def test_adaptive_mode_falls_back_when_policy_history_is_stale(self):
+        from promptforge import ContextExperienceStore, ContextRoutingPolicyHistory
+
+        experience = ContextExperienceStore()
+        setup = ContextCognitiveLoop(
+            experience=experience,
+            routing_features=("node_count", "max_depth", "boundary_pressure"),
+        )
+        for index, family_id in enumerate(("family-1", "family-2", "family-3"), start=1):
+            proposal = setup.propose(
+                cycle_id=f"cycle-stale-{index}",
+                data=self.data,
+                required=["task.id"],
+                candidates=self.candidates,
+            )
+            setup.observe(
+                proposal,
+                family_id=family_id,
+                cost=float(index),
+                strategy="selection_only",
+            )
+
+        history = ContextRoutingPolicyHistory()
+        history.record(
+            ContextRoutingPolicyEvidence(
+                version=1,
+                scores=(
+                    ContextRoutingModeScore("nearest", 3, 3, 0.5, 1.0, 0.5),
+                    ContextRoutingModeScore("credit", 3, 3, 0.8, 0.5, 0.2),
+                ),
+                selected_mode="credit",
+            )
+        )
+
+        loop = ContextCognitiveLoop(
+            experience=experience,
+            memory_routing_mode="adaptive",
+            memory_routing_policy_history=history,
+            memory_policy_max_age=1,
+            routing_features=("node_count", "max_depth", "boundary_pressure"),
+        )
+        proposal = loop.propose(
+            cycle_id="cycle-stale-current",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
+        self.assertEqual(proposal.experience_version, 3)
+        self.assertEqual(proposal.memory_policy_version, 1)
+        self.assertEqual(proposal.memory_policy_freshness_age, 2)
+        self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
         self.assertTrue(proposal.memory_policy_refresh_recommended)
 
     def test_invalid_memory_routing_mode_is_rejected(self):
@@ -242,7 +298,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v4")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v6")
         self.assertEqual(proposal.experience_version, 0)
         self.assertIsNone(proposal.memory_route)
         self.assertEqual(proposal.decision.source, "structural_regime")
