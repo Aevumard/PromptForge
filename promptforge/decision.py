@@ -513,6 +513,70 @@ class UncertaintyActionGate:
                     )
                     continue
 
+            if self.policy.require_support_provenance_diversity:
+                if not support_ids:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support provenance diversity cannot be checked without support anchors",
+                    )
+                    continue
+                if evidence is None:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support provenance diversity boundary was not supplied",
+                    )
+                    continue
+                missing_provenance = sorted(
+                    evidence_id
+                    for evidence_id in support_ids
+                    if evidence_id not in support_source_by_id
+                    or not support_source_by_id[evidence_id]
+                )
+                if missing_provenance:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "support evidence provenance metadata unavailable",
+                        "missing_support_provenance:" + ",".join(
+                            missing_provenance
+                        ),
+                    )
+                    continue
+                distinct_sources = sorted(
+                    {
+                        support_source_by_id[evidence_id]
+                        for evidence_id in support_ids
+                        if support_source_by_id[evidence_id].casefold() != "unknown"
+                    }
+                )
+                if len(distinct_sources) < self.policy.min_distinct_support_sources:
+                    blocked.append(action.action_id)
+                    reasons[action.action_id] = (
+                        "insufficient distinct support sources",
+                        "distinct_support_source_count:" + str(len(distinct_sources)),
+                    )
+                    continue
+                if self.policy.max_support_anchors_per_source is not None:
+                    source_counts: dict[str, int] = {}
+                    for evidence_id in support_ids:
+                        source = support_source_by_id[evidence_id]
+                        source_counts[source] = source_counts.get(source, 0) + 1
+                    over_limit = sorted(
+                        (source, count)
+                        for source, count in source_counts.items()
+                        if count > self.policy.max_support_anchors_per_source
+                    )
+                    if over_limit:
+                        blocked.append(action.action_id)
+                        reasons[action.action_id] = (
+                            "support source concentration exceeds threshold",
+                            "support_source_anchor_count:"
+                            + ",".join(
+                                f"{source}={count}"
+                                for source, count in over_limit
+                            ),
+                        )
+                        continue
+
             if action.evidence_support < self.policy.min_evidence_support:
                 blocked.append(action.action_id)
                 reasons[action.action_id] = ("evidence support below threshold",)
