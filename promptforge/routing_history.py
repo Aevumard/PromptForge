@@ -32,6 +32,23 @@ class ContextRoutingPolicyStability:
 
 
 @dataclass(frozen=True)
+class ContextRoutingPolicyHealth:
+    """Descriptive health state for a bounded routing-policy history."""
+
+    history_version: int
+    observations: int
+    mode: str
+    stability_rate: float
+    switch_count: int
+    min_stability: float
+    stable: bool
+    refresh_recommended: bool
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class ContextRoutingPolicyHistorySnapshot:
     """Immutable view of previously recorded routing-policy evidence."""
 
@@ -134,6 +151,40 @@ class ContextRoutingPolicyHistorySnapshot:
             stability_rate=stability_rate,
         )
 
+    def health(
+        self,
+        *,
+        window: int | None = None,
+        min_observations: int = 2,
+        min_stability: float = 1.0,
+    ) -> ContextRoutingPolicyHealth:
+        """Assess whether historical policy selection is stable enough to use."""
+        if min_observations < 1:
+            raise ValueError("min_observations must be at least 1")
+        if not 0.0 <= min_stability <= 1.0:
+            raise ValueError("min_stability must be between 0.0 and 1.0")
+
+        values = self._window(window)
+        stability = self.stability(window=window)
+        stable = (
+            len(values) >= min_observations
+            and stability.stability_rate >= min_stability
+        )
+        selected_mode = self.select_mode(
+            window=window,
+            min_observations=min_observations,
+        )
+        return ContextRoutingPolicyHealth(
+            history_version=self.version,
+            observations=len(values),
+            mode=selected_mode,
+            stability_rate=stability.stability_rate,
+            switch_count=stability.switch_count,
+            min_stability=min_stability,
+            stable=stable,
+            refresh_recommended=not stable,
+        )
+
     def to_dict(self) -> dict:
         return {
             "version": self.version,
@@ -206,15 +257,30 @@ class ContextRoutingPolicyHistory:
     ) -> ContextRoutingPolicyStability:
         return self.snapshot().stability(window=window)
 
+    def health(
+        self,
+        *,
+        window: int | None = None,
+        min_observations: int = 2,
+        min_stability: float = 1.0,
+    ) -> ContextRoutingPolicyHealth:
+        return self.snapshot().health(
+            window=window,
+            min_observations=min_observations,
+            min_stability=min_stability,
+        )
+
     def to_dict(self) -> dict:
         snapshot = self.snapshot()
         payload = snapshot.to_dict()
         payload["max_entries"] = self.max_entries
         payload["stability"] = snapshot.stability().to_dict()
+        payload["health"] = snapshot.health().to_dict()
         return payload
 
 
 __all__ = [
+    "ContextRoutingPolicyHealth",
     "ContextRoutingPolicyStability",
     "ContextRoutingPolicyHistorySnapshot",
     "ContextRoutingPolicyHistory",
