@@ -24,6 +24,22 @@ class CognitiveLoopTests(unittest.TestCase):
             },
         ]
 
+    def test_invalid_memory_routing_mode_is_rejected(self):
+        with self.assertRaises(ValueError):
+            ContextCognitiveLoop(memory_routing_mode="unknown")
+
+    def test_default_memory_routing_mode_is_nearest(self):
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-default-mode",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(proposal.memory_routing_mode, "nearest")
+        self.assertEqual(proposal.memory_top_k, 5)
+
     def test_first_cycle_uses_structural_policy_when_memory_is_empty(self):
         loop = ContextCognitiveLoop(
             routing_features=("node_count", "max_depth", "boundary_pressure"),
@@ -82,6 +98,55 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(proposal.experience_version, 0)
         self.assertEqual(loop.snapshot().version, 1)
         self.assertEqual(len(proposal.to_dict()["profile"]["required_missing"]), 0)
+
+    def test_credit_memory_mode_uses_comparative_evidence(self):
+        from promptforge import ContextMemoryCreditPolicy
+
+        loop = ContextCognitiveLoop(
+            memory_routing_mode="credit",
+            memory_top_k=4,
+            memory_credit_policy=ContextMemoryCreditPolicy(half_life=100.0),
+            routing_features=("node_count", "max_depth", "boundary_pressure"),
+        )
+        first = loop.propose(
+            cycle_id="cycle-credit",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+
+        loop.observe(
+            first,
+            family_id="family-credit",
+            cost=3.0,
+            strategy="selection_only",
+        )
+        loop.observe(
+            first,
+            family_id="family-credit",
+            cost=1.0,
+            strategy="selection_representation_B",
+        )
+
+        second = loop.propose(
+            cycle_id="cycle-credit-2",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(second.memory_routing_mode, "credit")
+        self.assertIsNotNone(second.memory_route)
+        self.assertEqual(second.memory_route.strategy, "selection_representation_B")
+        self.assertEqual(second.decision.source, "episodic_memory")
+        self.assertEqual(
+            second.decision.strategy,
+            "selection_representation_B",
+        )
+        payload = second.memory_route.to_dict()
+        self.assertGreater(payload["selected_credit"], 0.0)
+        self.assertEqual(payload["top_k"], 4)
+        self.assertTrue(payload["strategy_scores"])
 
     def test_prepare_materializes_controller_choice_in_one_call(self):
         loop = ContextCognitiveLoop(
