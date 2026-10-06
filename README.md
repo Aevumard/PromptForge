@@ -161,6 +161,26 @@ This lets repeated, recent, and stable observations influence a routing decision
 
 The aware router must be fitted only on the intended training snapshot. For transfer evaluation, preserve the existing whole-family holdout boundary; never calculate credit from held-out outcomes.
 
+## Cognitive memory mode
+
+\`ContextCognitiveLoop\` now exposes two explicit memory-routing modes:
+
+- \`nearest\` — the original \`NearestEpisodeRouter\` behavior and the default.
+- \`credit\` — the opt-in \`ContextMemoryAwareRouter\`, with a bounded \`top_k\` neighborhood and explicit memory credit.
+
+The selected mode and \`top_k\` are recorded in \`ContextCognitiveProposal\`. The proposal schema is versioned because the audit envelope now includes routing-mode state.
+
+\`\`\`python
+from promptforge import ContextCognitiveLoop
+
+loop = ContextCognitiveLoop(
+    memory_routing_mode="credit",
+    memory_top_k=5,
+)
+\`\`\`
+
+This is still provider-agnostic and observational: the credit-aware mode changes how already-observed evidence is aggregated; it does not fabricate outcomes or execute a model.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -337,7 +357,7 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/experience.py` | Mutable write path, frozen snapshots, and memory credit assessment | Online experience boundary |
 | `promptforge/consolidation.py` | Deterministic replay, bounded retention, and optional credit-aware selection | Memory lifecycle control |
 | `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |
-| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |
+| `promptforge/cognitive.py` | Unified observe-decide-learn cycle with explicit memory-routing modes | End-to-end adaptive orchestration |
 | `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
