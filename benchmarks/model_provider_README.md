@@ -65,3 +65,31 @@ process does not lose completed calls:
 
 The checkpoint is append-only. Successful tickets are skipped on resume and
 failed tickets are retried by default.
+
+## Local Ollama auto-detection
+
+You do not need to create an OpenAI endpoint manually when Ollama is running
+locally. Ollama exposes an OpenAI-compatible /v1/chat/completions endpoint
+through its local server, and its /api/tags endpoint lists installed models.
+
+With no PROMPTFORGE_MODEL_URL or PROMPTFORGE_MODEL_NAME, PromptForge now:
+
+1. connects to http://localhost:11434
+2. discovers an installed model through /api/tags
+3. selects the first model name in deterministic lexical order
+4. sends requests to http://localhost:11434/v1/chat/completions
+
+The local Ollama API key is not a real credential; PromptForge uses the value
+ollama, which Ollama ignores for local requests.
+
+So the simplest local run is just:
+
+    python -m benchmarks.providers.openai_compatible --count 1200
+
+For repeated runs:
+
+    python -m benchmarks.replicates_v27 --replicates 3 --count 1200
+
+Set PROMPTFORGE_MODEL_NAME when you want a specific installed Ollama model,
+without configuring an endpoint. Use PROMPTFORGE_MODEL_URL only when targeting
+a different OpenAI-compatible provider or endpoint.
