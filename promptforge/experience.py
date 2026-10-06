@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Mapping, Sequence, Any
+from typing import Any, Mapping, Sequence
 
 from .adaptive import ContextTopologyProfile
 from .consolidation import ContextMemoryConsolidator, ContextReplayBatch
+from .credit import ContextMemoryCredit, ContextMemoryCreditPolicy
 from .memory import ContextEpisode, ContextRoute, NearestEpisodeRouter
 
 
@@ -39,6 +40,15 @@ class ContextExperienceSnapshot:
             features=features,
             scale_mode=scale_mode,
         ).route(topology)
+
+    def credit(
+        self,
+        *,
+        policy: ContextMemoryCreditPolicy | None = None,
+    ) -> tuple[ContextMemoryCredit, ...]:
+        """Assess memory credit inside this frozen evidence boundary."""
+        assessor = policy or ContextMemoryCreditPolicy()
+        return assessor.assess(self.episodes)
 
 
 class ContextExperienceStore:
@@ -92,15 +102,30 @@ class ContextExperienceStore:
             scale_mode=scale_mode,
         )
 
+    def credit(
+        self,
+        *,
+        policy: ContextMemoryCreditPolicy | None = None,
+    ) -> tuple[ContextMemoryCredit, ...]:
+        """Assess current memory using a frozen snapshot boundary."""
+        return self.snapshot().credit(policy=policy)
+
     def consolidate(
         self,
         *,
         max_episodes: int,
         consolidator: ContextMemoryConsolidator | None = None,
+        credit_policy: ContextMemoryCreditPolicy | None = None,
     ) -> ContextReplayBatch:
-        """Retain a bounded replay set while preserving prior snapshots."""
-        policy = consolidator or ContextMemoryConsolidator()
-        batch = policy.replay(self._episodes, max_items=max_episodes)
+        """Retain bounded memory while preserving prior snapshots."""
+        policy = consolidator or ContextMemoryConsolidator(
+            credit_policy=credit_policy
+        )
+        batch = policy.replay(
+            self._episodes,
+            max_items=max_episodes,
+            credit_policy=credit_policy,
+        )
         if len(batch.episodes) != len(self._episodes):
             self._episodes = list(batch.episodes)
             self._version += 1
