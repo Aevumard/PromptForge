@@ -78,6 +78,23 @@ The returned decision records its source and novelty distance so downstream syst
 
 
 
+## Cognitive loop
+
+The public API now exposes an explicit observe-decide-learn cycle through ContextCognitiveLoop.
+
+A cycle is deliberately split into two operations:
+
+1. propose() profiles the current context, freezes the current experience snapshot, routes from prior observations when the case is sufficiently familiar, and delegates the final choice to ComplexContextController.
+2. observe() accepts the externally measured outcome and records it as a ContextEpisode for future cycles.
+
+The resulting state transition is:
+
+context -> topology -> regime -> memory -> control -> proposal -> external execution -> observed outcome -> memory
+
+The loop does not call a model or invent a quality score. Execution remains outside PromptForge, while the observed outcome is explicitly written back into experience memory. Every proposal records the experience version it was based on, making the online learning boundary auditable.
+
+ContextExperienceSnapshot is immutable. New observations can improve future routing without rewriting the evidence used by an earlier proposal or evaluation.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
@@ -251,6 +268,8 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/core.py` | Standalone provider-agnostic core | Core behavior |
 | `promptforge/adaptive.py` | Complexity-aware structure, local refinement, trajectory, and control | Complex-system orchestration |
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
+| `promptforge/experience.py` | Mutable write path and frozen evidence snapshots | Online experience boundary |
+| `promptforge/cognitive.py` | Unified observe-decide-learn cycle | End-to-end adaptive orchestration |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |
