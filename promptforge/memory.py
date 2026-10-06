@@ -49,6 +49,10 @@ class ContextEpisode:
     regime: str = "unknown"
     novelty_distance: float | None = None
     trajectory_state: str | None = None
+    trajectory: Mapping[str, Any] = field(default_factory=dict)
+    regime_flags: tuple[str, ...] = ()
+    decision_reason: str = ""
+    candidate_order: tuple[str, ...] = ()
     outcome: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -71,8 +75,14 @@ class ContextEpisode:
             novelty = float(self.novelty_distance)
             if not isfinite(novelty) or novelty < 0.0:
                 raise ValueError("novelty_distance must be finite and non-negative")
+        if not isinstance(self.trajectory, Mapping):
+            raise TypeError("trajectory must be a mapping")
         if not isinstance(self.outcome, Mapping):
             raise TypeError("outcome must be a mapping")
+        if not isinstance(self.regime_flags, tuple):
+            raise TypeError("regime_flags must be a tuple")
+        if not isinstance(self.candidate_order, tuple):
+            raise TypeError("candidate_order must be a tuple")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
