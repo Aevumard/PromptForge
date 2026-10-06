@@ -79,6 +79,9 @@ class ActionPolicy:
     require_support_quality: bool = False
     min_support_relevance: float = 0.50
     min_support_reliability: float = 0.50
+    require_support_provenance_diversity: bool = False
+    min_distinct_support_sources: int = 2
+    max_support_anchors_per_source: int | None = None
 
     def __post_init__(self) -> None:
         weights = (
@@ -134,6 +137,25 @@ class ActionPolicy:
             raise TypeError("require_support_tag_match must be a bool")
         if not isinstance(self.require_support_quality, bool):
             raise TypeError("require_support_quality must be a bool")
+        if not isinstance(self.require_support_provenance_diversity, bool):
+            raise TypeError("require_support_provenance_diversity must be a bool")
+        if (
+            not isinstance(self.min_distinct_support_sources, int)
+            or isinstance(self.min_distinct_support_sources, bool)
+            or self.min_distinct_support_sources < 2
+        ):
+            raise ValueError("min_distinct_support_sources must be at least 2")
+        if (
+            self.max_support_anchors_per_source is not None
+            and (
+                not isinstance(self.max_support_anchors_per_source, int)
+                or isinstance(self.max_support_anchors_per_source, bool)
+                or self.max_support_anchors_per_source < 1
+            )
+        ):
+            raise ValueError(
+                "max_support_anchors_per_source must be at least 1 or None"
+            )
         for name, value in (
             ("min_support_relevance", self.min_support_relevance),
             ("min_support_reliability", self.min_support_reliability),
