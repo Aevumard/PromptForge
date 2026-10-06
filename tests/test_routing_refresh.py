@@ -204,7 +204,7 @@ class TestPolicyRefreshController(unittest.TestCase):
         refreshed = loop.refresh_memory_routing_policy()
         self.assertIsNotNone(refreshed)
         self.assertEqual(refreshed.version, 4)
-        self.assertEqual(history.latest.version, 2)
+        self.assertEqual(history.latest.version, 4)
         self.assertEqual(controller.refresh_count, 1)
 
         blocked = loop.policy_refresh_decision()
