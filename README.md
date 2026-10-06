@@ -272,6 +272,21 @@ The resulting control chain is:
 
 Exploration is an operational data-collection mechanism. It is not a quality oracle, confidence estimate, causal attribution, or automatic provider executor.
 
+## Exploration evidence integrity
+
+The exploration adjudicator now adds an explicit evidence-integrity boundary before a challenger can pass the adoption gate.
+
+1. Multiple probe outcomes for the same challenger within one episode are aggregated into one episode-level comparison instead of inflating the sample size.
+2. Repeated probe costs are averaged within that episode; the adjudicator does not cherry-pick the best repeated outcome.
+3. Strict gains are required for wins. Exact ties are recorded separately and reduce the win rate rather than counting as victories.
+4. Adoption requires a consistent observed baseline strategy across the retained comparison set. Mixed baselines are surfaced as a mismatch and block adoption.
+5. Unique episode coverage is retained separately from raw comparison count for auditability.
+6. The adjudicator remains descriptive: it does not mutate policy, memory, or strategy preference.
+
+The strengthened boundary is:
+
+`probe -> episode-level aggregation -> strict win/tie accounting -> baseline consistency -> family/coverage gates -> adoption gate`
+
 ## Exploration adjudication
 
 Exploration now has a separate evidence-adjudication step. `ContextExplorationAdjudicator` groups observations by episode, identifies probe outcomes, and compares each challenger against the best observed incumbent from the same episode.

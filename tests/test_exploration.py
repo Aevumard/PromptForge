@@ -100,6 +100,125 @@ class TestExplorationController(unittest.TestCase):
         self.assertFalse(decision.eligible)
         self.assertEqual(decision.reason, "no_comparable_probe_evidence")
 
+    def test_duplicate_probes_within_one_episode_are_one_comparison(self):
+        from promptforge import ContextEpisode, ContextExplorationAdjudicator
+
+        episodes = [
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="incumbent",
+                cost=10.0,
+                topology={"node_count": 1.0},
+            ),
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="challenger",
+                cost=8.0,
+                topology={"node_count": 1.0},
+                action="probe",
+                source="bounded_exploration",
+            ),
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="challenger",
+                cost=6.0,
+                topology={"node_count": 1.0},
+                action="probe",
+                source="bounded_exploration",
+            ),
+        ]
+
+        evidence = ContextExplorationAdjudicator(
+            min_comparisons=1,
+            min_families=1,
+            min_win_rate=1.0,
+            min_relative_gain=0.1,
+        ).assess(episodes)[0]
+
+        self.assertEqual(evidence.comparisons, 1)
+        self.assertEqual(evidence.unique_episodes, 1)
+        self.assertEqual(evidence.wins, 1)
+        self.assertEqual(evidence.ties, 0)
+        self.assertAlmostEqual(evidence.mean_relative_gain, 0.3)
+
+    def test_tie_is_not_counted_as_a_win(self):
+        from promptforge import ContextEpisode, ContextExplorationAdjudicator
+
+        episodes = [
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="incumbent",
+                cost=10.0,
+                topology={"node_count": 1.0},
+            ),
+            ContextEpisode(
+                episode_id="episode-1",
+                family_id="family-a",
+                strategy="challenger",
+                cost=10.0,
+                topology={"node_count": 1.0},
+                action="probe",
+                source="bounded_exploration",
+            ),
+        ]
+
+        decision = ContextExplorationAdjudicator(
+            min_comparisons=1,
+            min_families=1,
+            min_win_rate=1.0,
+            min_relative_gain=0.0,
+        ).decide(episodes)
+
+        self.assertFalse(decision.eligible)
+        self.assertEqual(decision.win_rate, 0.0)
+        self.assertEqual(decision.ties, 1)
+        self.assertEqual(decision.reason, "win_rate_below_threshold")
+
+    def test_mixed_baselines_block_adoption(self):
+        from promptforge import ContextEpisode, ContextExplorationAdjudicator
+
+        episodes = []
+        for index, baseline in enumerate(("incumbent-a", "incumbent-b"), start=1):
+            episodes.extend(
+                (
+                    ContextEpisode(
+                        episode_id=f"episode-{index}",
+                        family_id=f"family-{index}",
+                        strategy=baseline,
+                        cost=10.0,
+                        topology={"node_count": float(index)},
+                    ),
+                    ContextEpisode(
+                        episode_id=f"episode-{index}",
+                        family_id=f"family-{index}",
+                        strategy="challenger",
+                        cost=8.0,
+                        topology={"node_count": float(index)},
+                        action="probe",
+                        source="bounded_exploration",
+                    ),
+                )
+            )
+
+        decision = ContextExplorationAdjudicator(
+            min_comparisons=2,
+            min_families=2,
+            min_win_rate=1.0,
+            min_relative_gain=0.1,
+        ).decide(episodes)
+
+        self.assertFalse(decision.eligible)
+        self.assertEqual(decision.reason, "baseline_strategy_mismatch")
+        self.assertIsNone(decision.baseline_strategy)
+        self.assertEqual(
+            decision.baseline_strategies,
+            ("incumbent-a", "incumbent-b"),
+        )
+
     def test_coverage_gap_selects_unobserved_alternative(self):
         controller = ContextExplorationController(
             novelty_threshold=3.0,

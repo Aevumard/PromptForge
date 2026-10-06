@@ -42,6 +42,9 @@ class ContextExplorationStrategyEvidence:
     losses: int
     mean_relative_gain: float
     mean_absolute_gain: float
+    unique_episodes: int
+    ties: int
+    baseline_strategies: tuple[str, ...] = ()
 
     @property
     def win_rate(self) -> float:
@@ -72,9 +75,14 @@ class ContextExplorationAdoptionDecision:
     min_win_rate: float
     min_relative_gain: float
     reason: str
+    unique_episodes: int = 0
+    ties: int = 0
+    baseline_strategies: tuple[str, ...] = ()
 
     def to_dict(self) -> dict:
-        return asdict(self)
+        payload = asdict(self)
+        payload["baseline_strategies"] = list(self.baseline_strategies)
+        return payload
 
 
 class ContextExplorationAdjudicator:
@@ -122,18 +130,29 @@ class ContextExplorationAdjudicator:
         self,
         episodes: Sequence["ContextEpisode"],
     ) -> tuple[ContextExplorationStrategyEvidence, ...]:
-        """Aggregate comparable probe outcomes from an immutable episode set."""
+        """Aggregate conservative probe evidence from an immutable episode set.
+
+        Repeated probes for the same challenger inside one episode are averaged
+        into one comparison. This prevents repeated measurements from inflating
+        the effective sample size or allowing a best-of-many observation to win
+        by cherry-picking. Ties remain ties rather than wins.
+        """
         grouped = self._group(episodes)
-        evidence: dict[str, list[tuple[str, float, float, bool]]] = {}
+        evidence: dict[str, list[tuple[str, str, float, float, int]]] = {}
 
         for group in grouped.values():
-            explored = [
-                episode
-                for episode in group
-                if episode.action == "probe"
-                or episode.source == "bounded_exploration"
-            ]
-            if not explored:
+            explored_by_strategy: dict[str, list[float]] = {}
+            for episode in group:
+                if (
+                    episode.action == "probe"
+                    or episode.source == "bounded_exploration"
+                ):
+                    explored_by_strategy.setdefault(
+                        episode.strategy,
+                        [],
+                    ).append(float(episode.cost))
+
+            if not explored_by_strategy:
                 continue
 
             incumbents = [
@@ -152,63 +171,84 @@ class ContextExplorationAdjudicator:
                 key=lambda episode: (float(episode.cost), episode.strategy),
             )
             baseline_cost = float(baseline.cost)
-
-            for challenger in explored:
-                challenger_cost = float(challenger.cost)
+            baseline_strategies = tuple(
+                sorted(
+                    {
+                        episode.strategy
+                        for episode in incumbents
+                        if float(episode.cost) == baseline_cost
+                    }
+                )
+            )
+            for strategy, costs in sorted(explored_by_strategy.items()):
+                challenger_cost = sum(costs) / len(costs)
                 absolute_gain = baseline_cost - challenger_cost
                 relative_gain = (
                     absolute_gain / baseline_cost
                     if baseline_cost > 0.0
                     else 0.0
                 )
-                evidence.setdefault(challenger.strategy, []).append(
+                if absolute_gain > 0.0:
+                    outcome = 1
+                elif absolute_gain < 0.0:
+                    outcome = -1
+                else:
+                    outcome = 0
+                evidence.setdefault(strategy, []).append(
                     (
-                        challenger.family_id,
+                        group[0].family_id,
+                        group[0].episode_id,
                         absolute_gain,
                         relative_gain,
-                        absolute_gain >= 0.0,
+                        outcome,
                     )
                 )
+                # The family/episode identifiers above are descriptive only;
+                # the row remains exactly one comparison for this episode.
 
         results: list[ContextExplorationStrategyEvidence] = []
         for strategy, rows in sorted(evidence.items()):
             families = {row[0] for row in rows}
-            wins = sum(row[3] for row in rows)
-            losses = len(rows) - wins
-            baseline_by_row = []
-            for family_id, absolute_gain, relative_gain, _ in rows:
-                baseline_by_row.append((family_id, absolute_gain))
+            episodes = {row[1] for row in rows}
+            wins = sum(row[4] > 0 for row in rows)
+            losses = sum(row[4] < 0 for row in rows)
+            ties = sum(row[4] == 0 for row in rows)
+            baseline_strategies: set[str] = set()
 
-            baseline_strategy = None
+            # Reconstruct the baseline strategy for each retained comparison.
             for group in grouped.values():
-                for challenger in group:
-                    if (
-                        challenger.strategy == strategy
-                        and (
-                            challenger.action == "probe"
-                            or challenger.source == "bounded_exploration"
-                        )
-                    ):
-                        incumbents = [
-                            episode
-                            for episode in group
-                            if not (
-                                episode.action == "probe"
-                                or episode.source == "bounded_exploration"
-                            )
-                        ]
-                        if incumbents:
-                            baseline_strategy = min(
-                                incumbents,
-                                key=lambda episode: (
-                                    float(episode.cost),
-                                    episode.strategy,
-                                ),
-                            ).strategy
-                            break
-                if baseline_strategy is not None:
-                    break
+                if not any(
+                    challenger.strategy == strategy
+                    and (
+                        challenger.action == "probe"
+                        or challenger.source == "bounded_exploration"
+                    )
+                    for challenger in group
+                ):
+                    continue
+                incumbents = [
+                    episode
+                    for episode in group
+                    if not (
+                        episode.action == "probe"
+                        or episode.source == "bounded_exploration"
+                    )
+                ]
+                if not incumbents:
+                    continue
+                baseline_cost = min(float(item.cost) for item in incumbents)
+                baseline_strategies.update(
+                    item.strategy
+                    for item in incumbents
+                    if float(item.cost) == baseline_cost
+                )
 
+            ordered_baselines = tuple(sorted(baseline_strategies))
+            baseline_strategy = (
+                ordered_baselines[0]
+                if len(ordered_baselines) == 1
+                else None
+            )
             results.append(
                 ContextExplorationStrategyEvidence(
                     strategy=strategy,
@@ -218,15 +258,18 @@ class ContextExplorationAdjudicator:
                     wins=wins,
                     losses=losses,
                     mean_relative_gain=(
-                        sum(row[2] for row in rows) / len(rows)
+                        sum(row[3] for row in rows) / len(rows)
                         if rows
                         else 0.0
                     ),
                     mean_absolute_gain=(
-                        sum(row[1] for row in rows) / len(rows)
+                        sum(row[2] for row in rows) / len(rows)
                         if rows
                         else 0.0
                     ),
+                    unique_episodes=len(episodes),
+                    ties=ties,
+                    baseline_strategies=ordered_baselines,
                 )
             )
 
@@ -242,8 +285,9 @@ class ContextExplorationAdjudicator:
         eligible = [
             item
             for item in evidence
-            if item.comparisons >= self.min_comparisons
+            if item.unique_episodes >= self.min_comparisons
             and item.families >= self.min_families
+            and item.baseline_strategy is not None
             and item.win_rate >= self.min_win_rate
             and item.mean_relative_gain >= self.min_relative_gain
             and (
@@ -276,6 +320,9 @@ class ContextExplorationAdjudicator:
                 min_win_rate=self.min_win_rate,
                 min_relative_gain=self.min_relative_gain,
                 reason="challenger_meets_evidence_gate",
+                unique_episodes=selected.unique_episodes,
+                ties=selected.ties,
+                baseline_strategies=selected.baseline_strategies,
             )
 
         best = (
@@ -293,10 +340,12 @@ class ContextExplorationAdjudicator:
         )
         if best is None:
             reason = "no_comparable_probe_evidence"
-        elif best.comparisons < self.min_comparisons:
+        elif best.unique_episodes < self.min_comparisons:
             reason = "insufficient_comparisons"
         elif best.families < self.min_families:
             reason = "insufficient_families"
+        elif best.baseline_strategy is None:
+            reason = "baseline_strategy_mismatch"
         elif best.win_rate < self.min_win_rate:
             reason = "win_rate_below_threshold"
         else:
@@ -320,6 +369,11 @@ class ContextExplorationAdjudicator:
             min_win_rate=self.min_win_rate,
             min_relative_gain=self.min_relative_gain,
             reason=reason,
+            unique_episodes=(best.unique_episodes if best is not None else 0),
+            ties=(best.ties if best is not None else 0),
+            baseline_strategies=(
+                best.baseline_strategies if best is not None else ()
+            ),
         )
 
 
