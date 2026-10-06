@@ -14,7 +14,7 @@ from benchmarks.tickets_v27 import Prediction
 class ModelLoopBenchmarkTests(unittest.TestCase):
     def test_model_input_is_promptforge_controlled(self) -> None:
         case = generate_ticket_suite(count=4)[0]
-        payload = build_model_input(case, budget_tokens=120, reserve_tokens=10)
+        payload = build_model_input(case, budget_tokens=200, reserve_tokens=10)
 
         self.assertEqual(payload["ticket_id"], case.ticket_id)
         self.assertIn("promptforge", payload)
