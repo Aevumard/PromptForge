@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T08:20:00.000Z",
-  "file_count": 122,
+  "generated_utc": "2026-10-06T08:49:00.000Z",
+  "file_count": 124,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -24,8 +24,13 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 30352,
-      "sha256": "562da13725b921d673e340f5f9fcef1aba14c9ccf9a90b06daae41309d594ab0"
+      "size_bytes": 31383,
+      "sha256": "6ccebcc5c3613023f77f83888fced663399289450a1182c87f3ded1e63e79712"
+    },
+    {
+      "path": "docs/agent_corpus_external_patterns.md",
+      "size_bytes": 9819,
+      "sha256": "3d68e49a340e1b9be831c593f10a6a2da411ceb1b51c6fd9772e8f4c4b4edc59"
     },
     {
       "path": "harness/agent_context.py",
@@ -459,8 +464,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 41687,
-      "sha256": "4d31c9bf7e744372b6419d01cbbe1350ef534fa6595113320c01ad41837fa728"
+      "size_bytes": 42444,
+      "sha256": "ecd3f509b12684a33379070eae2fee7bea11bdc00ca61a146415c3380b86f887"
     },
     {
       "path": "schemas/run.schema.json",
@@ -476,6 +481,11 @@
       "path": "tests/test_agent_context.py",
       "size_bytes": 3657,
       "sha256": "859C07D09B9EB8240B7DC84E18B436B9D5AA433ED01288BB49F50A2A5348F0B3"
+    },
+    {
+      "path": "tests/test_agent_corpus_policy.py",
+      "size_bytes": 1582,
+      "sha256": "6d51f72a55e2533d4b04349a78927dece65f7c7cfb42c37182cf0c262db33cbf"
     },
     {
       "path": "tests/test_agent.py",
