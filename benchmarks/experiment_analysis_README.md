@@ -1,4 +1,4 @@
-# V27.9 — sliced experiment analysis
+# V27.11 — sliced experiment analysis + operational telemetry
 
 The model-loop report contains global raw-vs-guarded metrics. V27.9 adds a
 deterministic analysis layer that slices those same results by:
@@ -11,7 +11,7 @@ deterministic analysis layer that slices those same results by:
 - irrelevant content
 - historical context
 
-The analysis reports classification quality separately from action safety.
+The analysis reports classification quality separately from action safety, and now includes total elapsed time plus latency p50/p95 for covered model calls.
 
 Run:
 
@@ -29,5 +29,6 @@ Important interpretation:
 - guard_action_change_rate measures how often the guard altered the model's
   proposed action.
 - A safer action does not imply better category/SLA/priority classification.
+- latency p50/p95 describes observed wall-clock run time per covered ticket; it is not token billing.
 
 This keeps safety gains and predictive gains analytically separate.

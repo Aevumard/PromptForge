@@ -82,6 +82,9 @@ class ExperimentAnalysis:
     guard_action_changes: int
     total_context_tokens: int
     total_tokens_saved: int
+    total_elapsed_ms: float
+    latency_p50_ms: float
+    latency_p95_ms: float
     slices: Sequence[SliceMetrics]
 
     def to_dict(self) -> dict[str, Any]:
@@ -105,13 +108,24 @@ class ExperimentAnalysis:
                 ),
                 "total_context_tokens": self.total_context_tokens,
                 "total_tokens_saved": self.total_tokens_saved,
+                "total_elapsed_ms": self.total_elapsed_ms,
+                "latency_p50_ms": self.latency_p50_ms,
+                "latency_p95_ms": self.latency_p95_ms,
             },
             "slices": [item.to_dict() for item in self.slices],
         }
 
 
-def _mean(numerator: int, denominator: int) -> float:
-    return numerator / denominator if denominator else 1.0
+def _mean(numerator: float, denominator: int) -> float:
+    return numerator / denominator if denominator else 0.0
+
+
+def _percentile(values: Sequence[float], percentile: float) -> float:
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    rank = max(1, min(len(ordered), int(round(percentile * len(ordered) + 0.4999))))
+    return ordered[rank - 1]
 
 
 def _metrics(
@@ -270,11 +284,22 @@ def _metrics(
     )
 
 
-def _prediction_maps(report: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any], int, int, int, int]:
+def _prediction_maps(report: Mapping[str, Any]) -> tuple[
+    dict[str, Any],
+    dict[str, Any],
+    int,
+    int,
+    float,
+    list[float],
+    int,
+    int,
+]:
     raw: dict[str, Any] = {}
     guarded: dict[str, Any] = {}
     context_tokens = 0
     tokens_saved = 0
+    total_elapsed_ms = 0.0
+    latencies: list[float] = []
     failed = 0
     changes = 0
 
@@ -299,6 +324,10 @@ def _prediction_maps(report: Mapping[str, Any]) -> tuple[dict[str, Any], dict[st
 
         context_tokens += int(item.get("context_tokens", 0))
         tokens_saved += int(item.get("tokens_saved", 0))
+        elapsed_ms = float(item.get("elapsed_ms", 0.0))
+        total_elapsed_ms += elapsed_ms
+        if raw_payload is not None and elapsed_ms > 0:
+            latencies.append(elapsed_ms)
 
         if (
             isinstance(raw_payload, Mapping)
@@ -307,16 +336,32 @@ def _prediction_maps(report: Mapping[str, Any]) -> tuple[dict[str, Any], dict[st
         ):
             changes += 1
 
-    return raw, guarded, context_tokens, tokens_saved, failed, changes
+    return (
+        raw,
+        guarded,
+        context_tokens,
+        tokens_saved,
+        total_elapsed_ms,
+        latencies,
+        failed,
+        changes,
+    )
 
 
 def analyze_report(
     report: Mapping[str, Any],
     cases: Sequence[TicketCase],
 ) -> ExperimentAnalysis:
-    raw, guarded, context_tokens, tokens_saved, failed, changes = _prediction_maps(
-        report
-    )
+    (
+        raw,
+        guarded,
+        context_tokens,
+        tokens_saved,
+        total_elapsed_ms,
+        latencies,
+        failed,
+        changes,
+    ) = _prediction_maps(report)
 
     slices: list[SliceMetrics] = []
 
@@ -365,7 +410,7 @@ def analyze_report(
             )
 
     return ExperimentAnalysis(
-        schema_version="promptforge-v27.9-experiment-analysis.v1",
+        schema_version="promptforge-v27.11-operational-telemetry.v1",
         total_cases=len(cases),
         failed_calls=failed,
         raw_covered=len(raw),
@@ -373,6 +418,9 @@ def analyze_report(
         guard_action_changes=changes,
         total_context_tokens=context_tokens,
         total_tokens_saved=tokens_saved,
+        total_elapsed_ms=total_elapsed_ms,
+        latency_p50_ms=_percentile(latencies, 0.50),
+        latency_p95_ms=_percentile(latencies, 0.95),
         slices=tuple(slices),
     )
 
@@ -385,6 +433,8 @@ def render_markdown(analysis: ExperimentAnalysis) -> str:
         f"- Failed calls: {analysis.failed_calls}",
         f"- Raw coverage: {analysis.raw_covered / analysis.total_cases:.2%}",
         f"- Guard action changes: {analysis.guard_action_changes}",
+        f"- Total elapsed: {analysis.total_elapsed_ms:.2f} ms",
+        f"- Latency p50/p95: {analysis.latency_p50_ms:.2f} / {analysis.latency_p95_ms:.2f} ms",
         "",
         "| Slice | Value | Action raw | Action guarded | Unsafe raw | Unsafe guarded | Human recall raw | Human recall guarded | Guard changes |",
         "|---|---|---:|---:|---:|---:|---:|---:|---:|",

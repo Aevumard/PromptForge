@@ -74,7 +74,7 @@ class AblationSuiteTests(TestCase):
                 fsync_each_record=False,
             )
 
-            self.assertEqual(report.schema_version, "promptforge-v27.10-ablation-suite.v1")
+            self.assertEqual(report.schema_version, "promptforge-v27.11-ablation-suite.v1")
             self.assertEqual(len(report.results), 3)
             self.assertEqual(len(calls), 12)
 
@@ -113,6 +113,8 @@ class AblationSuiteTests(TestCase):
             self.assertIn("baseline_budget_only", markdown)
             self.assertIn("epistemic_budget_guarded", markdown)
             self.assertIn("unsafe rate", markdown.lower())
+            self.assertIn("p50 ms", markdown.lower())
+            self.assertIn("p95 ms", markdown.lower())
 
     def test_variant_rejects_invalid_budget(self) -> None:
         with self.assertRaises(ValueError):

@@ -45,6 +45,7 @@ class ResumableModelLoopTests(TestCase):
 
             persisted = checkpoint.read_text(encoding="utf-8").splitlines()
             self.assertEqual(len(persisted), 4)
+            self.assertTrue(all("elapsed_ms" in json.loads(line) for line in persisted))
             self.assertTrue(
                 all(
                     json.loads(line)["schema_version"] == CHECKPOINT_SCHEMA
