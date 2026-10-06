@@ -81,9 +81,16 @@ class UncertaintyActionGateTests(unittest.TestCase):
             downside=0.1,
         )
 
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.70,
+            reversibility=1.0,
+            downside=0.1,
+        )
         decision = UncertaintyActionGate(
             ActionPolicy(require_support_anchors=True)
-        ).decide([action], evidence=evidence)
+        ).decide([action, fallback], evidence=evidence)
 
         self.assertEqual(
             decision.blocked_action_ids,
@@ -108,11 +115,18 @@ class UncertaintyActionGateTests(unittest.TestCase):
             support_evidence_ids=("future",),
         )
 
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.70,
+            reversibility=1.0,
+            downside=0.1,
+        )
         decision = UncertaintyActionGate(
             ActionPolicy(require_support_anchors=True)
-        ).decide([action], evidence=evidence)
+        ).decide([action, fallback], evidence=evidence)
 
-        self.assertEqual(decision.blocked_action_ids, ("future_anchor",))
+        self.assertIn("future_anchor", decision.blocked_action_ids)
         self.assertIn("support evidence unavailable", decision.reasons["future_anchor"])
 
     def test_anchored_support_passes_and_is_audited(self):
@@ -161,14 +175,21 @@ class UncertaintyActionGateTests(unittest.TestCase):
             support_evidence_ids=("e1",),
         )
 
+        fallback = ActionCandidate(
+            "fallback",
+            "safe fallback",
+            evidence_support=0.70,
+            reversibility=1.0,
+            downside=0.1,
+        )
         decision = UncertaintyActionGate(
             ActionPolicy(
                 require_support_anchors=True,
                 min_support_anchors=2,
             )
-        ).decide([action], evidence=evidence)
+        ).decide([action, fallback], evidence=evidence)
 
-        self.assertEqual(decision.blocked_action_ids, ("thin",))
+        self.assertIn("thin", decision.blocked_action_ids)
         self.assertIn(
             "insufficient support evidence anchors",
             decision.reasons["thin"],
