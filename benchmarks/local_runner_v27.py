@@ -12,9 +12,9 @@ from benchmarks.preflight_v27 import (
 from benchmarks.providers.openai_compatible import (
     OpenAICompatibleAgentAdapter,
     OpenAICompatibleConfig,
-    _provider_metadata,
 )
 from benchmarks.replicates_v27 import (
+    _provider_metadata,
     run_replicate_experiment,
     write_experiment,
 )
