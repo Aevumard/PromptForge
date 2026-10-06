@@ -161,6 +161,12 @@ def _validate_choice(name: str, value: Any, choices: Sequence[str]) -> str:
     return normalized
 
 
+def _validate_bool(name: str, value: Any) -> bool:
+    if not isinstance(value, bool):
+        raise ValueError(f"{name} must be a boolean")
+    return value
+
+
 def parse_prediction(payload: Mapping[str, Any], *, ticket_id: str) -> Prediction:
     returned_id = str(payload.get("ticket_id", ticket_id)).strip()
     if returned_id != ticket_id:
@@ -173,9 +179,13 @@ def parse_prediction(payload: Mapping[str, Any], *, ticket_id: str) -> Predictio
         sla=_validate_choice("sla", payload.get("sla"), SLAS),
         priority=_validate_choice("priority", payload.get("priority"), PRIORITIES),
         action=_validate_choice("action", payload.get("action"), ACTIONS),
-        requires_human=bool(payload.get("requires_human", False)),
-        contradiction_detected=bool(
-            payload.get("contradiction_detected", False)
+        requires_human=_validate_bool(
+            "requires_human",
+            payload.get("requires_human"),
+        ),
+        contradiction_detected=_validate_bool(
+            "contradiction_detected",
+            payload.get("contradiction_detected"),
         ),
     )
 
