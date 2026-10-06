@@ -113,6 +113,13 @@ from .epistemic import (
     EvidenceRecord,
 )
 
+from .decision import (
+    ActionCandidate,
+    ActionDecision,
+    ActionPolicy,
+    UncertaintyActionGate,
+)
+
 __all__ = [
     "POLICY_BUDGET_CONSTRAINED",
     "POLICY_MINIMAL",
@@ -186,4 +193,8 @@ __all__ = [
     "EpistemicContextPolicy",
     "EpistemicContextResult",
     "EpistemicContextCompiler",
+    "ActionCandidate",
+    "ActionDecision",
+    "ActionPolicy",
+    "UncertaintyActionGate",
 ]
