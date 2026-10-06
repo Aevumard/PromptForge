@@ -121,6 +121,21 @@ The intended sequence is:
 
 `evidence -> temporal gate -> contradiction/kind preservation -> ranking -> budget -> audited context`
 
+## Uncertainty-aware action boundary
+
+`promptforge.decision` is an opt-in action-selection aid layered above explicit evidence boundaries.
+
+1. Action scores are caller-supplied descriptive metadata; do not infer them from prose and do not call them truth.
+2. An action that requires unavailable evidence must fail closed.
+3. Reversibility and downside can be hard gates, not only soft preferences.
+4. Causal dependence is a caution signal only. It must never become an automatic causal conclusion.
+5. Preserve the complete ranking, blocked set, numeric scores, and reasons for auditability.
+6. Keep action choice separate from hypothesis identification: a reversible action can be preferred even while causal attribution remains unresolved.
+
+Intended sequence:
+
+`epistemic boundary -> feasibility -> reversibility/downside -> ranking -> action decision`
+
 ## Cognitive loop
 
 `ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.
