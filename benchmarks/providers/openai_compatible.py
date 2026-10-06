@@ -144,6 +144,10 @@ class OpenAICompatibleAgentAdapter:
             method="POST",
         )
         started = time.perf_counter()
+        self.last_call_telemetry = ProviderCallTelemetry(
+            elapsed_ms=0.0,
+            attempts=0,
+        )
         for attempt in range(1, self.config.max_attempts + 1):
             try:
                 with urllib.request.urlopen(
@@ -167,6 +171,10 @@ class OpenAICompatibleAgentAdapter:
                         f"model endpoint returned HTTP {exc.code}: {details[:1000]}"
                     ) from exc
                 if attempt >= self.config.max_attempts:
+                    self.last_call_telemetry = ProviderCallTelemetry(
+                        elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                        attempts=attempt,
+                    )
                     details = exc.read().decode("utf-8", errors="replace")
                     raise RuntimeError(
                         f"model endpoint returned HTTP {exc.code} after "
@@ -175,11 +183,19 @@ class OpenAICompatibleAgentAdapter:
                 time.sleep(_retry_delay(exc, self.config.retry_backoff_seconds, attempt))
             except urllib.error.URLError as exc:
                 if attempt >= self.config.max_attempts:
+                    self.last_call_telemetry = ProviderCallTelemetry(
+                        elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                        attempts=attempt,
+                    )
                     raise RuntimeError(
                         f"model endpoint request failed after {attempt} attempts: {exc}"
                     ) from exc
                 time.sleep(self.config.retry_backoff_seconds * (2 ** (attempt - 1)))
 
+        self.last_call_telemetry = ProviderCallTelemetry(
+            elapsed_ms=(time.perf_counter() - started) * 1000.0,
+            attempts=self.config.max_attempts,
+        )
         raise RuntimeError("model endpoint request exhausted retry loop")
 
 
