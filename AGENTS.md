@@ -452,3 +452,70 @@ calibration -> bounded adjustment -> audited confidence
 The calibration model does not consume the outcome of the current confidence
 being assessed. This prevents the calibration layer from silently self-
 validating on the same decision it is supposed to regulate.
+
+
+## Decision and triage separation boundary
+
+For tasks that require triage, prioritization, escalation, or operational action, keep context admissibility, priority, and actionability as distinct decision layers.
+
+The required control boundary is:
+
+evidence -> temporal/admissibility gate -> priority decision -> actionability/safety gate -> action -> audit
+
+### Priority is not evidence confidence
+
+1. Priority answers how much the case should be advanced, not whether the requested action is safe.
+2. Keep urgency (deadline/SLA pressure and time-to-breach), importance (impact, scope, severity, or cost of delay), and actionability (whether the available evidence is sufficient to execute a concrete action) as separate dimensions.
+3. Evidence relevance/reliability/confidence must not be used as an automatic penalty on priority merely because evidence is weak.
+4. Weak evidence can coexist with extreme urgency. A high-priority case can legitimately be blocked for action.
+5. An unresolved contradiction can block an action without demoting the case's priority.
+6. If the caller supplies an explicit priority formula that intentionally uses evidence quality, preserve that as caller policy and label it as such. Do not invent that coupling as a PromptForge rule.
+7. Do not invent numeric weights, thresholds, or SLA bands merely to make an example look precise. When the task does not supply them, use qualitative ordering or explicitly label proposed numbers as illustrative policy.
+
+### Source precedence is not truth
+
+Do not create a universal source-of-truth hierarchy such as system log > database > user and silently discard the lower-ranked claim.
+
+Instead, preserve materially conflicting evidence, retain provenance and timestamps, use source type as caller-supplied context rather than a truth oracle, resolve contradictions only when the task supplies an explicit adjudication policy or additional evidence, and let the action gate block only the actions that depend on the unresolved fact.
+
+Different sources or source labels do not by themselves prove correctness, independence, or causality.
+
+### Priority and action gates must stay separate
+
+The UncertaintyActionGate in promptforge.decision is an action-selection boundary. It must not be repurposed as a ticket-priority scorer.
+
+For a triage system, produce separate audit objects such as:
+
+priority = {
+    urgency,
+    importance,
+    priority_band,
+    rationale
+}
+
+actionability = {
+    allowed,
+    blocked,
+    reasons,
+    required_evidence
+}
+
+A valid outcome is therefore:
+
+priority = P0, actionability = BLOCKED
+
+Do not lower priority merely because an automatic action is blocked.
+
+### Temporal evidence belongs to admissibility
+
+Future or unknown-time evidence under a hard cutoff is excluded from the historical decision context. Its exclusion does not imply that the underlying case was low priority.
+
+The original decision must be reproducible from the admissible evidence available at the decision time.
+
+### Model-facing rule
+
+When an integration asks PromptForge to solve a prioritization problem, first compile the admissible context, then decide priority, and only afterward evaluate whether an action is safe and supported. Never collapse those layers into one generic confidence score.
+
+The intended ordering is:
+
+what can be used -> how urgent/important is the case -> can we safely act -> what action -> why
