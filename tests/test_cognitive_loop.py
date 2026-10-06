@@ -100,6 +100,32 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(result.prepared["task_family"], "agent_request")
         self.assertTrue(result.prepared["required_values_preserved"])
 
+    def test_observation_persists_cognitive_state_and_outcome(self):
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-state",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            proposal,
+            family_id="family-state",
+            cost=0.75,
+            outcome={"status": "success", "quality": 0.91},
+        )
+
+        episode = loop.snapshot().episodes[0]
+        self.assertEqual(episode.action, proposal.decision.action)
+        self.assertEqual(episode.source, proposal.decision.source)
+        self.assertEqual(episode.regime, proposal.decision.regime)
+        self.assertEqual(
+            episode.novelty_distance,
+            proposal.decision.novelty_distance,
+        )
+        self.assertIsNone(episode.trajectory_state)
+        self.assertEqual(episode.outcome["status"], "success")
+        self.assertEqual(episode.cost, 0.75)
     def test_relational_topology_is_carried_into_future_experience(self):
         from promptforge import ContextRelation
 
