@@ -82,6 +82,41 @@ class TemporalMemoryGuardTests(unittest.TestCase):
         self.assertTrue(route.temporal_policy_applied)
         self.assertEqual(route.evidence_count, 1)
 
+    def test_blocked_memory_cannot_inflate_allowed_memory_credit(self):
+        base = [
+            self.episode("trusted", "family-a", "safe", 1.0, source="trusted"),
+            self.episode("current", "family-b", "safe", 1.0, source="trusted"),
+        ]
+        poisoned = [
+            self.episode(
+                "poisoned",
+                "family-a",
+                "safe",
+                0.01,
+                source="untrusted",
+            ),
+            *base,
+        ]
+        policy = ContextMemoryTemporalPolicy(blocked_sources=("untrusted",))
+
+        baseline = ContextMemoryAwareRouter(
+            features=("node_count", "max_depth"),
+            top_k=2,
+            temporal_policy=policy,
+        ).fit(base).route(self.profile)
+
+        guarded = ContextMemoryAwareRouter(
+            features=("node_count", "max_depth"),
+            top_k=3,
+            temporal_policy=policy,
+        ).fit(poisoned).route(self.profile)
+
+        self.assertEqual(guarded.strategy, baseline.strategy)
+        self.assertAlmostEqual(
+            guarded.selected_credit,
+            baseline.selected_credit,
+        )
+
     def test_router_fails_closed_when_no_memory_is_temporally_admissible(self):
         episodes = [
             self.episode("old-1", "family-a", "legacy", 0.1),
