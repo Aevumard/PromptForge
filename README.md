@@ -194,6 +194,7 @@ The cognitive loop accepts \`memory_routing_mode="adaptive"\` plus optional prev
 \`\`\`python
 from promptforge import ContextCognitiveLoop
 
+loop = ContextCognitiveLoop()
 policy = loop.evaluate_memory_routing_policy()
 adaptive_loop = ContextCognitiveLoop(
     memory_routing_mode="adaptive",
