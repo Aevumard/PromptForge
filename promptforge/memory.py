@@ -26,6 +26,7 @@ ROUTING_FEATURES = (
     "relation_density",
     "relation_max_degree",
     "relation_avg_degree",
+    "relation_degree_std",
     "relation_hub_ratio",
     "relation_components",
     "relation_kind_count",
