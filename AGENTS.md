@@ -552,3 +552,26 @@ Use `TriageState.transition()` to create immutable successor states. Each succes
 A high-priority case may legitimately transition to `waiting_human` while retaining its priority. Later observations are stored on successor states and must not mutate the earlier evidence boundary.
 
 The JSON contract is `schemas/triage-state.v1.json`.
+
+## Durable human review boundary
+
+When an operational action pauses for human intervention, the review must be represented as data rather than an out-of-band edit.
+
+`promptforge.human_review.HumanReviewRecord` captures:
+- reviewer identity;
+- review timestamp;
+- the exact evidence snapshot reviewed;
+- the review decision;
+- reviewer rationale;
+- declared changes;
+- the resulting policy version.
+
+`TriageState` enforces two additional replay invariants:
+1. a `waiting_human -> action_gated` transition must carry a completed `HumanReviewRecord`;
+2. resumption must provide a fresh `ActionDecision`, so an old action decision is never silently reused after human intervention.
+
+The reviewed evidence snapshot must match the triage state's evidence snapshot. A human review therefore cannot silently adjudicate one snapshot and resume another.
+
+A review record does not establish factual truth, causal validity, or statistical independence. It records an intervention at a workflow boundary and makes that intervention replayable and auditable.
+
+Schema: `schemas/human-review.v1.json`.
