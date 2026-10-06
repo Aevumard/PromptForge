@@ -48,6 +48,26 @@ class MemoryCreditTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             ContextMemoryConsolidator(credit_policy=object())
 
+    def test_snapshot_credit_rejects_invalid_policy(self):
+        store = ContextExperienceStore(
+            [self.episode("A", "A", "s1", 1.0)]
+        )
+        with self.assertRaises(TypeError):
+            store.snapshot().credit(policy=object())
+
+    def test_equal_observed_costs_are_ties(self):
+        episodes = [
+            self.episode("X", "A", "s1", 2.0),
+            self.episode("X", "A", "s2", 2.0),
+        ]
+        credits = ContextMemoryCreditPolicy(half_life=100.0).assess(episodes)
+
+        for item in credits:
+            self.assertEqual(item.win_count, 0)
+            self.assertEqual(item.loss_count, 0)
+            self.assertEqual(item.tie_count, 1)
+            self.assertEqual(item.observed_win_rate, 0.5)
+
     def test_comparable_observations_reward_lower_observed_cost(self):
         episodes = [
             self.episode("X", "A", "slow", 5.0),
