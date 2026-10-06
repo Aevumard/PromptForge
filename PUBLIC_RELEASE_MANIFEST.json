@@ -9,7 +9,7 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-10-06T06:53:17.191Z",
+    "generated_utc": "2026-10-06T06:55:23.259Z",
     "file_count": 118,
     "files": [
         {
@@ -24,8 +24,8 @@
         },
         {
             "path": "AGENTS.md",
-            "size_bytes": 19530,
-            "sha256": "1E910079751AFFD92EA4CEDDB1E70319993108D01CC2D882122C833623547A97"
+            "size_bytes": 19529,
+            "sha256": "D022AB74567E3204A6D22628CDFC441BCE43AFF9DD740204F5465F398B79EF71"
         },
         {
             "path": "harness/agent_context.py",
@@ -399,8 +399,8 @@
         },
         {
             "path": "promptforge/__init__.py",
-            "size_bytes": 5483,
-            "sha256": "C0A160BE9477233EB6717FC570F9EB5DEC3754E5A235F1649559913DF699C9DC"
+            "size_bytes": 5663,
+            "sha256": "A12D13386B1CCE4DF2676C72055D760FEDEB07AFCCBE1E1D511DC05D11F038F3"
         },
         {
             "path": "promptforge/cognitive.py",
@@ -409,8 +409,8 @@
         },
         {
             "path": "promptforge/confidence.py",
-            "size_bytes": 17551,
-            "sha256": "31D7268D0B546AC5AF54E63C29DA56FDFD423BC4819269D4735F9C47D38CDE4D"
+            "size_bytes": 17550,
+            "sha256": "43850B8BCD103E1349FC0C00FB906AED9C4646186097379254C0F5B7418B6063"
         },
         {
             "path": "promptforge/credit.py",
@@ -449,8 +449,8 @@
         },
         {
             "path": "README.md",
-            "size_bytes": 30655,
-            "sha256": "A5D94BB5273464996F0A20BD0724D24A4B760C95AEC9FA57B025D71BD74D9EA7"
+            "size_bytes": 30652,
+            "sha256": "03978B73B90C2C2788FB46CCF456ABB86D262AA6BE208834A86A3C211FDBA86C"
         },
         {
             "path": "schemas/run.schema.json",
@@ -479,8 +479,8 @@
         },
         {
             "path": "tests/test_confidence.py",
-            "size_bytes": 5458,
-            "sha256": "009E174D72497F0E3F0201660FC0ABD8C66D870A6F4238535C9C6EC0A898A05D"
+            "size_bytes": 5457,
+            "sha256": "C68A90337A3B49F6D00421D2BEA94EF83AC9BF9FB7931859A3CC50E48475B0D5"
         },
         {
             "path": "tests/test_decision.py",
