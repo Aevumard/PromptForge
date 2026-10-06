@@ -381,7 +381,9 @@ calibration -> bounded adjustment -> audited confidence
 
 The calibration model does not consume the outcome of the current confidence
 being assessed. This prevents the calibration layer from silently self-
-validating on the same decision it is supposed to regulate.\n\n## Public core boundary
+validating on the same decision it is supposed to regulate.
+
+## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
 
@@ -556,7 +558,8 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | `promptforge/memory.py` | Episodic case memory and topology routing | Learned-from-experience orchestration |
 | `promptforge/experience.py` | Mutable write path, frozen snapshots, and memory credit assessment | Online experience boundary |
 | `promptforge/consolidation.py` | Deterministic replay, bounded retention, and optional credit-aware selection | Memory lifecycle control |
-| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |\n| `promptforge/routing_policy.py` | Leakage-safe comparison and selection of routing modes | Routing policy learning |
+| `promptforge/credit.py` | Credit/decay bookkeeping and optional credit-aware memory routing | Active memory scoring |
+| `promptforge/routing_policy.py` | Leakage-safe comparison and selection of routing modes | Routing policy learning |
 | `promptforge/cognitive.py` | Unified observe-decide-learn cycle with explicit memory-routing modes and policy learning | End-to-end adaptive orchestration |
 | `promptforge/relational.py` | Explicit cross-link topology and relational descriptors | Relational context structure |
 | `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
