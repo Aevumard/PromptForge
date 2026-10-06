@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Aevumard/PromptForge/blob/main/schemas/tool-output-trim.v1.json",
+  "title": "PromptForge Tool Output Trim v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "trimmed_ids",
+    "chars_saved",
+    "estimated_tokens_saved",
+    "reasons",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {"const": "tool-output-trim.v1"},
+    "trimmed_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "chars_saved": {"type": "integer", "minimum": 0},
+    "estimated_tokens_saved": {"type": "integer", "minimum": 0},
+    "reasons": {"type": "object"},
+    "items": {"type": "array"}
+  },
+  "additionalProperties": false
+}

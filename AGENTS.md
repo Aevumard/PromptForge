@@ -452,3 +452,247 @@ calibration -> bounded adjustment -> audited confidence
 The calibration model does not consume the outcome of the current confidence
 being assessed. This prevents the calibration layer from silently self-
 validating on the same decision it is supposed to regulate.
+
+
+## Decision and triage separation boundary
+
+For tasks that require triage, prioritization, escalation, or operational action, keep context admissibility, priority, and actionability as distinct decision layers.
+
+The required control boundary is:
+
+evidence -> temporal/admissibility gate -> priority decision -> actionability/safety gate -> action -> audit
+
+### Priority is not evidence confidence
+
+1. Priority answers how much the case should be advanced, not whether the requested action is safe.
+2. Keep urgency (deadline/SLA pressure and time-to-breach), importance (impact, scope, severity, or cost of delay), and actionability (whether the available evidence is sufficient to execute a concrete action) as separate dimensions.
+3. Evidence relevance/reliability/confidence must not be used as an automatic penalty on priority merely because evidence is weak.
+4. Weak evidence can coexist with extreme urgency. A high-priority case can legitimately be blocked for action.
+5. An unresolved contradiction can block an action without demoting the case's priority.
+6. If the caller supplies an explicit priority formula that intentionally uses evidence quality, preserve that as caller policy and label it as such. Do not invent that coupling as a PromptForge rule.
+7. Do not invent numeric weights, thresholds, or SLA bands merely to make an example look precise. When the task does not supply them, use qualitative ordering or explicitly label proposed numbers as illustrative policy.
+
+### Source precedence is not truth
+
+Do not create a universal source-of-truth hierarchy such as system log > database > user and silently discard the lower-ranked claim.
+
+Instead, preserve materially conflicting evidence, retain provenance and timestamps, use source type as caller-supplied context rather than a truth oracle, resolve contradictions only when the task supplies an explicit adjudication policy or additional evidence, and let the action gate block only the actions that depend on the unresolved fact.
+
+Different sources or source labels do not by themselves prove correctness, independence, or causality.
+
+### Priority and action gates must stay separate
+
+The UncertaintyActionGate in promptforge.decision is an action-selection boundary. It must not be repurposed as a ticket-priority scorer.
+
+For a triage system, produce separate audit objects such as:
+
+priority = {
+    urgency,
+    importance,
+    priority_band,
+    rationale
+}
+
+actionability = {
+    allowed,
+    blocked,
+    reasons,
+    required_evidence
+}
+
+A valid outcome is therefore:
+
+priority = P0, actionability = BLOCKED
+
+Do not lower priority merely because an automatic action is blocked.
+
+### Temporal evidence belongs to admissibility
+
+Future or unknown-time evidence under a hard cutoff is excluded from the historical decision context. Its exclusion does not imply that the underlying case was low priority.
+
+The original decision must be reproducible from the admissible evidence available at the decision time.
+
+### Model-facing rule
+
+When an integration asks PromptForge to solve a prioritization problem, first compile the admissible context, then decide priority, and only afterward evaluate whether an action is safe and supported. Never collapse those layers into one generic confidence score.
+
+The intended ordering is:
+
+what can be used -> how urgent/important is the case -> can we safely act -> what action -> why
+
+## External architecture pattern corpus
+
+Before extending agent-facing orchestration rules, consult `docs/agent_corpus_external_patterns.md`.
+
+The corpus is informed by current public architecture patterns from LangGraph, DSPy, Pydantic AI/pydantic-graph, Guardrails, and LlamaIndex. The adopted principles are deliberately generic:
+
+- explicit state and checkpoint boundaries for resumable workflows;
+- contract-first interfaces and metric-first optimization;
+- typed, serializable stage state and output validation;
+- bounded repair/retry behavior with preserved failures;
+- retrieval as candidate generation followed by explicit evidence admission;
+- deterministic rules separated from model-generated interpretation;
+- human review represented as a durable state transition;
+- replayable lineage and leakage-safe learning.
+
+External frameworks are references for architecture patterns, not dependencies and not sources of truth. Do not copy framework-specific claims into PromptForge without verifying their actual semantics.
+
+## Typed triage state boundary
+
+For operational triage, use `promptforge.triage` when the workflow needs explicit lifecycle state.
+
+The public boundary is:
+
+`admitted -> prioritized -> action_gated -> waiting_human/executed -> observed -> closed`
+
+Use `PriorityAssessment` for urgency, importance, priority band, and rationale. Use `ActionDecision` for action feasibility and safety. Do not merge these objects into a single confidence score.
+
+Use `TriageState.transition()` to create immutable successor states. Each successor records the parent decision id so historical states remain replayable.
+
+A high-priority case may legitimately transition to `waiting_human` while retaining its priority. Later observations are stored on successor states and must not mutate the earlier evidence boundary.
+
+The JSON contract is `schemas/triage-state.v1.json`.
+
+## Durable human review boundary
+
+When an operational action pauses for human intervention, the review must be represented as data rather than an out-of-band edit.
+
+`promptforge.human_review.HumanReviewRecord` captures:
+- reviewer identity;
+- review timestamp;
+- the exact evidence snapshot reviewed;
+- the review decision;
+- reviewer rationale;
+- declared changes;
+- the resulting policy version.
+
+`TriageState` enforces two additional replay invariants:
+1. a `waiting_human -> action_gated` transition must carry a completed `HumanReviewRecord`;
+2. resumption must provide a fresh `ActionDecision`, so an old action decision is never silently reused after human intervention.
+
+The reviewed evidence snapshot must match the triage state's evidence snapshot. A human review therefore cannot silently adjudicate one snapshot and resume another.
+
+A review record does not establish factual truth, causal validity, or statistical independence. It records an intervention at a workflow boundary and makes that intervention replayable and auditable.
+
+Schema: `schemas/human-review.v1.json`.
+
+## External action execution boundary
+
+`promptforge.execution` handles the boundary around side effects without executing them.
+
+`ActionExecutionGuard` requires an integration-owned idempotency key by default and classifies a proposed attempt as:
+- `execute` when the key has no prior record;
+- `retry` when prior attempts failed and the explicit retry budget allows another attempt;
+- `duplicate` when the same key already succeeded or is in flight;
+- `blocked` when the key is missing or the retry budget is exhausted.
+
+`ActionExecutionRecord` is the immutable external receipt. A `TriageState` cannot enter `executed`, `observed`, or `closed` without a successful execution receipt whose `action_id` matches the selected action.
+
+This prevents the workflow from claiming that a side effect happened merely because an action was selected. PromptForge still does not execute the side effect; the integration owns the real-world operation and receipt.
+
+Idempotency keys are operational duplicate-action controls, not proofs of business correctness or delivery semantics.
+
+Schema: `schemas/action-execution.v1.json`.
+
+## Token-efficient context path
+
+For long or noisy agent tasks, prefer the smallest context contract that preserves required information.
+
+`promptforge.budget` adds a provider-agnostic packing layer. `ContextBudgetPlanner` is the reusable planner; `plan_context()` is the fast one-call path.
+
+1. Create `ContextBlock` values for independently controllable context units.
+2. Mark load-bearing information with `required=True`.
+3. Give optional blocks caller-supplied `utility`; PromptForge does not infer semantic importance.
+4. Use `plan_context(..., budget_tokens=...)` to reserve headroom and pack optional blocks deterministically.
+5. Use `plan.compact_manifest(blocks)` as the small model-facing receipt of what was included and omitted.
+6. Use `plan.materialize(blocks)` to construct the selected nested context.
+
+Example:
+
+```python
+from promptforge import ContextBlock, plan_context
+
+blocks = (
+    ContextBlock("ticket", ticket, required=True, path="ticket"),
+    ContextBlock("customer_history", history, utility=0.7, path="history"),
+    ContextBlock("old_notes", old_notes, utility=0.1, path="old_notes"),
+)
+plan = plan_context(blocks, budget_tokens=1800, reserve_ratio=0.10)
+context = plan.materialize(blocks)
+manifest = plan.compact_manifest(blocks)
+```
+
+Use an exact provider tokenizer through `estimator=` when available. The default byte-based estimate is only a planning heuristic.
+
+Never drop required information silently to make a budget fit. Never claim that token reduction is itself evidence of better model quality.
+
+## Progressive-disclosure agent handoff
+
+For long or heterogeneous tasks, do not force the model to receive every available context block up front.
+
+Use `build_context_packet(plan, blocks, descriptions=...)` when the downstream agent should receive:
+- already-selected context immediately;
+- a compact token/accounting summary;
+- a metadata-only catalog of omitted context;
+- stable ids that can be explicitly loaded later.
+
+`DeferredContextCatalog.load()` is bounded and deterministic. It never loads unknown ids and never silently exceeds the requested token/item budget.
+
+Descriptions are caller-supplied discovery metadata, not evidence. Deferred values are not part of the initial model-facing packet.
+
+Preferred AI path:
+
+`prepare/admit -> budget -> delivery packet -> model reasons over compact context -> explicit deferred load only when needed`
+
+Do not equate progressive disclosure with autonomous retrieval or factual validation.
+
+## AI-native tool-output trimming
+
+Tool results are part of context and can dominate token usage during long agent runs. Before forwarding historical tool output into another model call, use `promptforge.tool_output`.
+
+Fast path:
+
+```python
+from promptforge import trim_tool_outputs
+
+trimmed = trim_tool_outputs(
+    items,
+    recent_turns=2,
+    max_output_chars=2000,
+    preview_chars=600,
+    eligible_tools={"search", "execute"},
+)
+```
+
+Rules:
+- recent turns are protected;
+- tools can be explicitly allowlisted;
+- old oversized results are replaced by deterministic head/tail previews;
+- the original content is never semantically rewritten by PromptForge;
+- every trimmed result carries an original-content digest for integration-side re-fetch/replay;
+- the audit records characters and estimated tokens saved.
+
+Use this at the model-input boundary, after retrieval/admission and before sending context to the provider. Do not use trimming as evidence admission: a trimmed item can still be important, it is merely represented more cheaply.
+
+## One-call AI fast path
+
+For a normal agent integration, prefer `prepare_agent_input()` over manually composing separate budget/deferred/tool-output calls.
+
+```python
+from promptforge import prepare_agent_input
+
+prepared = prepare_agent_input(
+    blocks,
+    budget_tokens=4000,
+    reserve_ratio=0.10,
+    descriptions=descriptions,
+    tool_outputs=tool_outputs,
+)
+
+agent_packet = prepared.packet.to_dict()
+audit = prepared.to_dict()
+```
+
+The returned `AgentInputPacket` is the model-facing object. `AgentPreparation` keeps the full deterministic audit state.
+
+Use the lower-level APIs when an integration needs custom orchestration. The high-level helper exists to minimize integration code and reduce the chance that an AI caller bypasses one of the deterministic safeguards.

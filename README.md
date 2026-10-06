@@ -744,3 +744,185 @@ PromptForge makes context transformations explicit, testable, reproducible, and 
 PromptForge is not a provider-specific SDK, a universal prompt optimizer, or a claim that one representation is always superior.
 
 The public core product is a provider-agnostic context-engineering layer. The research harness exists to make hypotheses, transformations, execution conditions, and historical evidence inspectable and reproducible.
+
+
+## Decision and triage separation
+
+For triage and operational decision tasks, PromptForge keeps three different questions separate:
+
+1. What evidence is admissible?
+2. How should the case be prioritized?
+3. What action is safe and sufficiently supported?
+
+The intended control boundary is:
+
+evidence -> temporal/admissibility gate -> priority -> actionability/safety gate -> action -> audit
+
+Priority should distinguish urgency from importance. Evidence quality belongs primarily to the actionability/evidence gate, not as an automatic downward adjustment to urgency or importance. A ticket can therefore be high priority and action-blocked at the same time.
+
+PromptForge also does not define a universal source hierarchy such as system log always wins. Source labels are caller-supplied provenance metadata; contradictions should remain visible until an explicit policy or additional evidence resolves them.
+
+Do not invent precise priority weights or SLA thresholds unless the task or integration supplies them. When illustrative numbers are useful, mark them as proposed policy rather than PromptForge semantics.
+
+For model-facing integrations, keep separate audit objects for priority and actionability. The UncertaintyActionGate belongs to the latter: it is not a ticket-priority scorer.
+
+This boundary is deliberate because collapsing priority and actionability can produce the wrong operational behavior: uncertain evidence may justify blocking an automatic action without making an urgent incident less urgent.
+
+## External architecture patterns
+
+The agent corpus also distills reusable patterns from mature open-source systems: LangGraph for explicit state, checkpoints, interruption, replay, and deterministic/agentic boundaries; DSPy for declarative contracts, composable modules, and metric-driven optimization; Pydantic AI and pydantic-graph for typed state and graph control; Guardrails for bounded validation and corrective actions; and LlamaIndex for separating retrieval/context augmentation from downstream decision logic.
+
+See `docs/agent_corpus_external_patterns.md` for the adopted principles and their boundaries.
+
+These references do not become PromptForge dependencies, and their framework-specific semantics are not treated as PromptForge guarantees.
+
+## Typed triage state
+
+The public core now exposes `promptforge.triage` for workflows that need explicit lifecycle state.
+
+The state machine is:
+
+`admitted -> prioritized -> action_gated -> waiting_human/executed -> observed -> closed`
+
+`PriorityAssessment` contains only urgency, importance, priority band, and rationale. `ActionDecision` remains a separate actionability/safety result.
+
+This makes the intended boundary executable rather than merely documented: a case can remain high priority while an action is blocked or sent to human review. `TriageState.transition()` returns immutable successor states with parent decision lineage for replay.
+
+Schema: `schemas/triage-state.v1.json`.
+
+## Durable human review
+
+Human intervention is a first-class, serializable boundary rather than a free-form note.
+
+`HumanReviewRecord` stores the reviewer, review time, evidence snapshot reviewed, review decision, rationale, declared changes, and resulting policy version.
+
+When a `TriageState` is `waiting_human`, returning to `action_gated` requires both:
+- a completed human review tied to the same evidence snapshot;
+- a new `ActionDecision`.
+
+This prevents a reviewer intervention from being lost in prose and prevents an action decision computed before the intervention from being silently reused afterward.
+
+Schema: `schemas/human-review.v1.json`.
+
+## External action execution boundary
+
+PromptForge does not execute side effects. The public core can, however, make the execution boundary explicit and retry-safe.
+
+`ActionExecutionGuard` uses an integration-owned idempotency key and prior immutable execution receipts to distinguish `execute`, `retry`, `duplicate`, and `blocked` outcomes.
+
+`TriageState` requires a successful `ActionExecutionRecord` before a workflow can claim `executed`, `observed`, or `closed`. The receipt must reference the same selected action.
+
+This keeps action selection separate from the fact that an external side effect actually occurred, and it prevents a replay/retry from silently duplicating a successful action.
+
+Schema: `schemas/action-execution.v1.json`.
+
+## Token-efficient context planning
+
+For large or noisy inputs, the public core now includes `promptforge.budget` for deterministic context packing before a model request. `ContextBudgetPlanner` is the reusable planner, while `plan_context()` is the fast one-call path.
+
+`ContextBudgetPolicy` separates three quantities:
+- total input budget;
+- reserved headroom;
+- usable context budget.
+
+`ContextBlock(required=True)` pins load-bearing data. Optional blocks compete for the remaining budget using caller-supplied utility per token cost. `ContextBudgetPlan` reports selected tokens, tokens saved, excluded blocks, and reasons.
+
+The fast path is:
+
+```python
+from promptforge import ContextBlock, plan_context
+
+blocks = [
+    ContextBlock("case", case, required=True, path="case"),
+    ContextBlock("history", history, utility=0.6, path="history"),
+    ContextBlock("noise", noise, utility=0.05, path="noise"),
+]
+plan = plan_context(
+    blocks,
+    budget_tokens=2000,
+    reserve_ratio=0.10,
+)
+
+context = plan.materialize(blocks)
+```
+
+Use `plan.compact_manifest(blocks)` when the downstream agent needs to know what was omitted without paying to send the omitted content again.
+
+This layer performs selection, not semantic summarization. Required context overflow fails closed. An exact provider tokenizer can be supplied via `estimator=` when available; otherwise the existing dependency-free estimate is used.
+
+## AI-first progressive disclosure
+
+Large contexts should not be dumped into every model request. PromptForge can now send a single `ContextDeliveryPacket` containing the selected context and a compact catalog of deferred context.
+
+```python
+from promptforge import ContextBlock, build_context_packet, plan_context
+
+blocks = [
+    ContextBlock("case", case, required=True, path="case", token_estimate=120),
+    ContextBlock("history", history, utility=0.7, path="history", token_estimate=600),
+    ContextBlock("logs", logs, utility=0.5, path="logs", token_estimate=900),
+]
+
+plan = plan_context(blocks, budget_tokens=500)
+packet = build_context_packet(
+    plan,
+    blocks,
+    descriptions={
+        "history": "relevant customer history",
+        "logs": "recent incident logs",
+    },
+)
+```
+
+The model-facing packet contains the current context immediately and metadata-only entries for deferred material. The deferred content itself is loaded only through an explicit id request.
+
+This makes the core AI-oriented: **small first response, explicit expansion, deterministic token control, no hidden context injection**.
+
+## AI-native tool-output trimming
+
+Long agent runs often accumulate huge tool results that are no longer worth replaying at full fidelity.
+
+`ToolOutputTrimmer` applies a provider-agnostic sliding-window policy before the next model call:
+
+```python
+from promptforge import trim_tool_outputs
+
+result = trim_tool_outputs(
+    tool_items,
+    recent_turns=2,
+    max_output_chars=2000,
+    preview_chars=600,
+)
+```
+
+Recent outputs stay untouched. Older oversized results are replaced by deterministic head/tail previews. The result records `chars_saved`, `estimated_tokens_saved`, and a SHA-256 digest of every original payload that was trimmed.
+
+This is intentionally not semantic summarization. The agent can see that content was trimmed and an integration can use the item identity/digest to fetch the full result when necessary.
+
+## One-call AI preparation
+
+For integrations that want the common path without wiring each layer manually, use `prepare_agent_input()`.
+
+```python
+from promptforge import prepare_agent_input
+
+prepared = prepare_agent_input(
+    blocks,
+    budget_tokens=4000,
+    reserve_ratio=0.10,
+    descriptions=descriptions,
+    tool_outputs=tool_outputs,
+)
+
+packet = prepared.packet.to_dict()
+```
+
+The resulting `AgentInputPacket` combines:
+- selected context inside the token budget;
+- a deferred catalog for context not loaded yet;
+- trimmed historical tool outputs;
+- token savings and omitted-context ids.
+
+`AgentPreparation` remains available when the integration needs the complete audit object behind the packet.
+
+Schema: `schemas/agent-input.v1.json`.

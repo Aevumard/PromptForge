@@ -135,6 +135,51 @@ from .temporal import (
     ContextMemoryTemporalResult,
 )
 
+from .human_review import HUMAN_REVIEW_DECISIONS, HumanReviewRecord
+
+from .execution import (
+    EXECUTION_DECISIONS,
+    EXECUTION_STATUSES,
+    ActionExecutionGuard,
+    ActionExecutionRecord,
+    ExecutionDecision,
+    ExecutionPolicy,
+)
+
+from .budget import (
+    ContextBlock,
+    ContextBudgetPlan,
+    ContextBudgetPlanner,
+    ContextBudgetPolicy,
+    plan_context,
+)
+
+from .tool_output import (
+    ToolOutputItem,
+    ToolOutputTrimPolicy,
+    ToolOutputTrimmed,
+    ToolOutputTrimResult,
+    ToolOutputTrimmer,
+    trim_tool_outputs,
+)
+
+from .agent import AgentInputPacket, AgentPreparation, prepare_agent_input
+
+from .deferred import (
+    ContextDeliveryPacket,
+    ContextLoadResult,
+    DeferredContextCatalog,
+    DeferredContextItem,
+    build_context_packet,
+)
+
+from .triage import (
+    TRIAGE_STAGES,
+    PriorityAssessment,
+    TriageEnvelope,
+    TriageState,
+)
+
 from .hypothesis import (
     HYPOTHESIS_STATUSES,
     HypothesisEvidencePolicy,
@@ -227,6 +272,37 @@ __all__ = [
     "HypothesisAssessment",
     "DiscriminatingExperiment",
     "HypothesisLedger",    "ConfidenceObservation",
+    "HUMAN_REVIEW_DECISIONS",
+    "HumanReviewRecord",
+    "EXECUTION_DECISIONS",
+    "EXECUTION_STATUSES",
+    "ActionExecutionGuard",
+    "ActionExecutionRecord",
+    "ExecutionDecision",
+    "ExecutionPolicy",
+    "ContextBlock",
+    "ContextBudgetPlan",
+    "ContextBudgetPlanner",
+    "ContextBudgetPolicy",
+    "plan_context",
+    "ToolOutputItem",
+    "ToolOutputTrimPolicy",
+    "ToolOutputTrimmed",
+    "ToolOutputTrimResult",
+    "ToolOutputTrimmer",
+    "trim_tool_outputs",
+    "AgentInputPacket",
+    "AgentPreparation",
+    "prepare_agent_input",
+    "ContextDeliveryPacket",
+    "ContextLoadResult",
+    "DeferredContextCatalog",
+    "DeferredContextItem",
+    "build_context_packet",
+    "TRIAGE_STAGES",
+    "PriorityAssessment",
+    "TriageEnvelope",
+    "TriageState",
     "ConfidenceCalibrationPolicy",
     "ConfidenceCalibrationMetrics",
     "ConfidenceAssessment",

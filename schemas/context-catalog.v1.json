@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Aevumard/PromptForge/blob/main/schemas/context-catalog.v1.json",
+  "title": "PromptForge Context Catalog v1",
+  "type": "object",
+  "required": ["schema_version", "count", "estimated_total_tokens", "items"],
+  "properties": {
+    "schema_version": {"const": "context-catalog.v1"},
+    "count": {"type": "integer", "minimum": 0},
+    "estimated_total_tokens": {"type": "integer", "minimum": 0},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "block_id",
+          "path",
+          "kind",
+          "description",
+          "token_estimate",
+          "required"
+        ],
+        "properties": {
+          "block_id": {"type": "string", "minLength": 1},
+          "path": {"type": ["string", "null"]},
+          "kind": {"type": "string", "minLength": 1},
+          "description": {"type": "string"},
+          "token_estimate": {"type": "integer", "minimum": 1},
+          "required": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

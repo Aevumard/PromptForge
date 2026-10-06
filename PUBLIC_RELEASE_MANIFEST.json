@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T08:08:57.616Z",
-  "file_count": 122,
+  "generated_utc": "2026-10-06T09:46:15.725Z",
+  "file_count": 145,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -24,8 +24,13 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 26950,
-      "sha256": "b27ff76884b9680710cd845e5ef3d324f79e5edf237785cefd348b57aff31b7b"
+      "size_bytes": 38757,
+      "sha256": "8868826cb7f4bc9e274577bcc56d58806252a4d903bd3897cb7a722f3cadd500"
+    },
+    {
+      "path": "docs/agent_corpus_external_patterns.md",
+      "size_bytes": 15742,
+      "sha256": "c007c886379f45894e2062d9f045dd534213c425668609d9465a18221286def1"
     },
     {
       "path": "harness/agent_context.py",
@@ -399,8 +404,18 @@
     },
     {
       "path": "promptforge/__init__.py",
-      "size_bytes": 5966,
-      "sha256": "413CF37E4EF37467A61ED8EDBD674CF5F83964D4A678E20F9142761BC4DF6BFB"
+      "size_bytes": 7640,
+      "sha256": "11c7ad221194b62072bb30e25d06b1481ff82827e3e4129235ea96dcec8c2ae8"
+    },
+    {
+      "path": "promptforge/agent.py",
+      "size_bytes": 5589,
+      "sha256": "1297027b922b3eb134166044443e2744160e51dace6a8e0bfc02c45ac7d80078"
+    },
+    {
+      "path": "promptforge/budget.py",
+      "size_bytes": 15018,
+      "sha256": "b5ef4e01f41c1d0c05d0078531caf2204e56cc7662a0edb49cd38844e4918f5a"
     },
     {
       "path": "promptforge/cognitive.py",
@@ -423,9 +438,19 @@
       "sha256": "ca20c33f59fc20f7e6553bb490b08ff84b1e74f838c49e895171dcbec089e35f"
     },
     {
+      "path": "promptforge/deferred.py",
+      "size_bytes": 10585,
+      "sha256": "c37e11c9d79f2a2c3cbae39ba45f28f5649e97f7aaed9cb15fea51d15448c257"
+    },
+    {
       "path": "promptforge/epistemic.py",
       "size_bytes": 18717,
       "sha256": "D6EC1483C8B0B0C3A17B83D878D6A66D618C43BA91AAAD45B92DFA62796957A5"
+    },
+    {
+      "path": "promptforge/execution.py",
+      "size_bytes": 7793,
+      "sha256": "0d3ee6014461e00c388e0529f24b8a806478aab10578d3c3838536e4be6ebedf"
     },
     {
       "path": "promptforge/experience.py",
@@ -438,6 +463,11 @@
       "sha256": "CAA15542A5A0BB451383F12A815CECC025280817E0EC908464D965D9F0C51F17"
     },
     {
+      "path": "promptforge/human_review.py",
+      "size_bytes": 2297,
+      "sha256": "892af6f47c34ad0210b15c6d8a43d434070498df98a29d975e647f9b1992c3a4"
+    },
+    {
       "path": "promptforge/hypothesis.py",
       "size_bytes": 11880,
       "sha256": "7CAA987B87640229CEAD0F7DDF0C179BE29144F165A394142910413B0F667343"
@@ -446,6 +476,16 @@
       "path": "promptforge/temporal.py",
       "size_bytes": 8313,
       "sha256": "FC928F69A9273F9C19EF92A3B05001864474BBFD3FB8715698C1F305E28D4DCC"
+    },
+    {
+      "path": "promptforge/tool_output.py",
+      "size_bytes": 9732,
+      "sha256": "a386b52d61a4267cc818fa74ae5dcec342d3b37e2c7fb557cba4c6018d673773"
+    },
+    {
+      "path": "promptforge/triage.py",
+      "size_bytes": 10713,
+      "sha256": "a67cb213df119faf7dca482a4687ba2d44c347aabeaca36d84d4241fa931c77e"
     },
     {
       "path": "PUBLIC_RELEASE_SCOPE.md",
@@ -459,13 +499,53 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 40167,
-      "sha256": "75b1732647579d70df73ac892d4c2e6866d27292e846a90f2932ad4f04d7994b"
+      "size_bytes": 48659,
+      "sha256": "13a934697dd1111732a45c894e5449aa1c0215debac2d407cc2ca893c37a9b12"
+    },
+    {
+      "path": "schemas/action-execution.v1.json",
+      "size_bytes": 934,
+      "sha256": "c79b3df722e7b00f54e6ab94a7e41a4154f87e630ca42c54d23cc2a944e32bd4"
+    },
+    {
+      "path": "schemas/agent-input.v1.json",
+      "size_bytes": 1200,
+      "sha256": "59fe5db849c81d641c4ff1370df969250c60aaf4db7b928f9dd50ec38986619d"
+    },
+    {
+      "path": "schemas/context-catalog.v1.json",
+      "size_bytes": 1168,
+      "sha256": "9de7f11574948e8f1e2fc326bc14d49cd1703780fb38dbf258dec499f5b98685"
+    },
+    {
+      "path": "schemas/context-delivery.v1.json",
+      "size_bytes": 756,
+      "sha256": "a20a2a82f14d2d0dacfc985e7c5e4d22bc4527bf1e3f532bbdc8f20aa811775c"
+    },
+    {
+      "path": "schemas/context-load.v1.json",
+      "size_bytes": 1102,
+      "sha256": "5a9f96dd4356361eb509f89ca3513d726fa4061c5a83baddb19fc04f4d4cc6c8"
+    },
+    {
+      "path": "schemas/human-review.v1.json",
+      "size_bytes": 1202,
+      "sha256": "17d8dba1a2d8c59c63e9c737e89e9aa3f67c9ae0c4f68c2b178e3b9ef7bf6470"
     },
     {
       "path": "schemas/run.schema.json",
       "size_bytes": 1693,
       "sha256": "193BD7B3795546B127C90C2A5FA2D335E92BE930BABAA1B05B5A4A2F354F23E4"
+    },
+    {
+      "path": "schemas/tool-output-trim.v1.json",
+      "size_bytes": 761,
+      "sha256": "7fb3d88fb8c40ee4feeec8bc7f421c9ffa9fe17ead834907035da19208caad90"
+    },
+    {
+      "path": "schemas/triage-state.v1.json",
+      "size_bytes": 4760,
+      "sha256": "e8c603fea885968ddf587b7882993e16372bda6ed448e80cf6e98960b68018eb"
     },
     {
       "path": "tasks/suite.json",
@@ -478,9 +558,24 @@
       "sha256": "859C07D09B9EB8240B7DC84E18B436B9D5AA433ED01288BB49F50A2A5348F0B3"
     },
     {
+      "path": "tests/test_agent_corpus_policy.py",
+      "size_bytes": 2239,
+      "sha256": "09ae11a03204357c32a7a93878d905b880a6f294e5e22b752a772e4f6f303c45"
+    },
+    {
+      "path": "tests/test_agent_input.py",
+      "size_bytes": 2355,
+      "sha256": "f919153197710330bf6c50ed5b98949cb1bd78acefc9a7a731da9330947383a5"
+    },
+    {
       "path": "tests/test_agent.py",
       "size_bytes": 10494,
       "sha256": "3A7E2B8DA8A4CC3C92E1798AEB7941BB451042574F015341AAA6D13B8598D867"
+    },
+    {
+      "path": "tests/test_budget.py",
+      "size_bytes": 2769,
+      "sha256": "b6adb4d9d0fe2939477a7bae556f42ec7ba02f730a43e96af08be922d2b4ccb1"
     },
     {
       "path": "tests/test_cognitive_loop.py",
@@ -498,9 +593,19 @@
       "sha256": "38c3e7e882a320b74dc84373b7bee7c445e321513b69f78b0cf5d6448c6421bf"
     },
     {
+      "path": "tests/test_deferred.py",
+      "size_bytes": 4270,
+      "sha256": "a635ca1341c40f21239fbef09e93e9860a5407bd1cea8312dbff6db2276c2066"
+    },
+    {
       "path": "tests/test_epistemic.py",
       "size_bytes": 5554,
       "sha256": "A5957D60ACF1E1599A81FDCC837F1A33F114E7EA7B9E7CB5BCEDA037D5C080D3"
+    },
+    {
+      "path": "tests/test_execution.py",
+      "size_bytes": 1865,
+      "sha256": "2af3dda37fe9c5bc7d5fc7b2b60d307b1492df2eadbb40565e6d94d133fc3a71"
     },
     {
       "path": "tests/test_exploration.py",
@@ -531,6 +636,16 @@
       "path": "tests/test_temporal.py",
       "size_bytes": 5552,
       "sha256": "C4A7DD2A697B778E1FE96B1D77AE01EE1289E0F4AA479E37A6ED5B98F208FB40"
+    },
+    {
+      "path": "tests/test_tool_output.py",
+      "size_bytes": 2386,
+      "sha256": "9da77a779977d0a91f69ecd540ab88b26a1219f6ebe3e592b52317e0885a32c5"
+    },
+    {
+      "path": "tests/test_triage.py",
+      "size_bytes": 7445,
+      "sha256": "0697a678dbe72fa69180180ccc85273929d8727c855a58fdb21b7fecf93b1cc2"
     },
     {
       "path": "tests/test_v03.py",
