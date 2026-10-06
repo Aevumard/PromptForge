@@ -7,6 +7,34 @@ from typing import Any, Mapping, Sequence
 from .epistemic import EpistemicContextResult
 
 
+@dataclass(frozen=True)
+class HypothesisEvidencePolicy:
+    """Operational guard against source-correlated evidence inflation.
+
+    The source field is caller-supplied provenance metadata. This policy does
+    not establish statistical independence; it only caps how many support or
+    contradiction records from the same declared source may contribute to a
+    hypothesis assessment. Unknown sources can remain individually isolated.
+    """
+
+    max_per_source: int | None = 1
+    isolate_unknown_source: bool = True
+
+    def __post_init__(self) -> None:
+        if self.max_per_source is not None and (
+            not isinstance(self.max_per_source, int)
+            or isinstance(self.max_per_source, bool)
+            or self.max_per_source < 1
+        ):
+            raise ValueError("max_per_source must be a positive integer or None")
+        if not isinstance(self.isolate_unknown_source, bool):
+            raise TypeError("isolate_unknown_source must be a bool")
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+
 HYPOTHESIS_STATUSES = (
     "unresolved",
     "supported_by_available_evidence",
@@ -62,6 +90,7 @@ class HypothesisAssessment:
     available_contradiction_ids: tuple[str, ...]
     missing_required_ids: tuple[str, ...]
     support_ratio: float | None
+    source_excluded_ids: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -70,6 +99,7 @@ class HypothesisAssessment:
             self.available_contradiction_ids
         )
         payload["missing_required_ids"] = list(self.missing_required_ids)
+        payload["source_excluded_ids"] = list(self.source_excluded_ids)
         return payload
 
 
@@ -140,6 +170,7 @@ class HypothesisLedger:
         hypotheses: Sequence[HypothesisRecord],
         *,
         evidence: EpistemicContextResult | None = None,
+        evidence_policy: HypothesisEvidencePolicy | None = None,
     ) -> tuple[HypothesisAssessment, ...]:
         if not hypotheses:
             raise ValueError("hypotheses must contain at least one item")
@@ -149,6 +180,45 @@ class HypothesisLedger:
             if evidence is not None
             else set()
         )
+        effective_policy = evidence_policy
+        source_by_id: dict[str, str] = {}
+        ordered_ids = tuple(evidence.included_ids) if evidence is not None else ()
+        if evidence is not None:
+            raw_records = evidence.context.get("evidence", [])
+            for raw in raw_records:
+                evidence_id = str(raw.get("evidence_id", "")).strip()
+                if evidence_id and evidence_id in available:
+                    source = str(raw.get("source", "")).strip()
+                    if effective_policy is not None and (
+                        effective_policy.isolate_unknown_source
+                        and source.lower() in {"", "unknown"}
+                    ):
+                        source = f"__unknown__:{evidence_id}"
+                    source_by_id[evidence_id] = source or "__unknown__"
+
+        def apply_source_cap(
+            evidence_ids: Sequence[str],
+        ) -> tuple[tuple[str, ...], tuple[str, ...]]:
+            if effective_policy is None or effective_policy.max_per_source is None:
+                return tuple(evidence_ids), ()
+            selected: list[str] = []
+            excluded: list[str] = []
+            source_counts: dict[str, int] = {}
+            for evidence_id in ordered_ids:
+                if evidence_id not in evidence_ids:
+                    continue
+                source = source_by_id.get(
+                    evidence_id,
+                    f"__unknown__:{evidence_id}",
+                )
+                count = source_counts.get(source, 0)
+                if count >= effective_policy.max_per_source:
+                    excluded.append(evidence_id)
+                    continue
+                selected.append(evidence_id)
+                source_counts[source] = count + 1
+            return tuple(selected), tuple(excluded)
+
         seen: set[str] = set()
         results: list[HypothesisAssessment] = []
 
@@ -171,15 +241,22 @@ class HypothesisLedger:
                     "evidence snapshot is required when hypothesis evidence ids are supplied"
                 )
 
-            support_ids = tuple(
+            raw_support_ids = tuple(
                 item
                 for item in hypothesis.support_evidence_ids
                 if item in available
             )
-            contradiction_ids = tuple(
+            raw_contradiction_ids = tuple(
                 item
                 for item in hypothesis.contradiction_evidence_ids
                 if item in available
+            )
+            support_ids, support_excluded = apply_source_cap(raw_support_ids)
+            contradiction_ids, contradiction_excluded = apply_source_cap(
+                raw_contradiction_ids
+            )
+            source_excluded_ids = tuple(
+                dict.fromkeys((*support_excluded, *contradiction_excluded))
             )
 
             if missing_required:
@@ -210,6 +287,7 @@ class HypothesisLedger:
                     available_contradiction_ids=contradiction_ids,
                     missing_required_ids=missing_required,
                     support_ratio=support_ratio,
+                    source_excluded_ids=source_excluded_ids,
                 )
             )
 
@@ -242,6 +320,7 @@ class HypothesisLedger:
 
 __all__ = [
     "HYPOTHESIS_STATUSES",
+    "HypothesisEvidencePolicy",
     "HypothesisRecord",
     "HypothesisAssessment",
     "DiscriminatingExperiment",

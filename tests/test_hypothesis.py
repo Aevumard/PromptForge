@@ -5,6 +5,7 @@ from promptforge import (
     EvidenceRecord,
     EpistemicContextCompiler,
     EpistemicContextPolicy,
+    HypothesisEvidencePolicy,
     HypothesisLedger,
     HypothesisRecord,
 )
@@ -68,6 +69,86 @@ class HypothesisLedgerTests(unittest.TestCase):
 
         self.assertEqual(result[0].status, "insufficient_evidence")
         self.assertEqual(result[0].missing_required_ids, ("missing",))
+
+    def test_source_correlated_support_is_capped_and_audited(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("s1", "support 1", timestamp=10, source="sensor-a", stance="supports"),
+                EvidenceRecord("s2", "support 2", timestamp=11, source="sensor-a", stance="supports"),
+                EvidenceRecord("s3", "support 3", timestamp=12, source="sensor-a", stance="supports"),
+                EvidenceRecord("s4", "independent support", timestamp=13, source="sensor-b", stance="supports"),
+            ]
+        )
+
+        result = HypothesisLedger().assess(
+            [
+                HypothesisRecord(
+                    "h1",
+                    "source-capped hypothesis",
+                    support_evidence_ids=("s1", "s2", "s3", "s4"),
+                )
+            ],
+            evidence=evidence,
+            evidence_policy=HypothesisEvidencePolicy(max_per_source=1),
+        )
+
+        self.assertEqual(result[0].support_count, 2)
+        self.assertEqual(result[0].available_support_ids, ("s4", "s3"))
+        self.assertEqual(
+            result[0].source_excluded_ids,
+            ("s2", "s1"),
+        )
+
+    def test_support_and_contradiction_each_get_their_own_source_budget(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("s1", "support", timestamp=10, source="lab-a", stance="supports"),
+                EvidenceRecord("s2", "support repeat", timestamp=11, source="lab-a", stance="supports"),
+                EvidenceRecord("c1", "contradiction", timestamp=12, source="lab-a", stance="contradicts"),
+                EvidenceRecord("c2", "contradiction repeat", timestamp=13, source="lab-a", stance="contradicts"),
+            ]
+        )
+
+        result = HypothesisLedger().assess(
+            [
+                HypothesisRecord(
+                    "h1",
+                    "conflicted evidence",
+                    support_evidence_ids=("s1", "s2"),
+                    contradiction_evidence_ids=("c1", "c2"),
+                )
+            ],
+            evidence=evidence,
+            evidence_policy=HypothesisEvidencePolicy(max_per_source=1),
+        )
+
+        self.assertEqual(result[0].status, "contested")
+        self.assertEqual(result[0].support_count, 1)
+        self.assertEqual(result[0].contradiction_count, 1)
+        self.assertEqual(len(result[0].source_excluded_ids), 2)
+
+    def test_unknown_sources_can_remain_isolated(self):
+        evidence = EpistemicContextCompiler().compile(
+            [
+                EvidenceRecord("u1", "unknown 1", timestamp=10, stance="supports"),
+                EvidenceRecord("u2", "unknown 2", timestamp=11, stance="supports"),
+            ]
+        )
+
+        result = HypothesisLedger().assess(
+            [
+                HypothesisRecord(
+                    "h1",
+                    "unknown-source evidence",
+                    support_evidence_ids=("u1", "u2"),
+                )
+            ],
+            evidence=evidence,
+            evidence_policy=HypothesisEvidencePolicy(max_per_source=1),
+        )
+
+        self.assertEqual(result[0].support_count, 2)
+        self.assertEqual(result[0].source_excluded_ids, ())
 
     def test_experiment_ranking_is_deterministic_and_not_called_statistical_power(self):
         experiments = [

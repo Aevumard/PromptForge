@@ -376,6 +376,12 @@ historical labeled outcomes -> family scope -> temporal gate -> supported bins -
 
 Family scope is an evidence-admissibility control, not a claim that family labels are causally meaningful.
 
+## Hypothesis source cap
+
+HypothesisEvidencePolicy can limit how many support or contradiction records from one declared source contribute to an assessment. Selected and excluded evidence ids remain auditable. Unknown sources can remain isolated per evidence id. This is an operational corroboration safeguard, not a truth claim.
+
+Boundary: explicit hypothesis mapping -> optional source cap -> support/contradiction state -> experiment priority
+
 ## Confidence calibration boundary
 
 The public core now includes an opt-in confidence calibration layer in
