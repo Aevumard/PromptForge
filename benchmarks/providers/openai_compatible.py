@@ -10,6 +10,7 @@ from typing import Any, Mapping
 import urllib.error
 import urllib.request
 
+from benchmarks.analyze_model_run_v27 import analyze_report, render_markdown
 from benchmarks.model_loop_v27 import ModelLoopReport
 from benchmarks.resumable_model_loop_v27 import run_resumable_model_loop
 from benchmarks.tickets_v27 import generate_ticket_suite
@@ -278,6 +279,8 @@ def main() -> int:
     )
     parser.add_argument("--output", default="predictions.jsonl")
     parser.add_argument("--report", default="model_report.json")
+    parser.add_argument("--analysis-json", default="experiment_analysis.json")
+    parser.add_argument("--analysis-markdown", default="experiment_analysis.md")
     parser.add_argument(
         "--checkpoint",
         default="model_run.checkpoint.jsonl",
@@ -317,6 +320,20 @@ def main() -> int:
     )
     write_prediction_jsonl(report, args.output)
     write_report(report, args.report)
+
+    analysis = analyze_report(
+        report.to_dict(),
+        cases,
+    )
+    Path(args.analysis_json).write_text(
+        json.dumps(analysis.to_dict(), indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    Path(args.analysis_markdown).write_text(
+        render_markdown(analysis),
+        encoding="utf-8",
+    )
+
     print(json.dumps(report.to_dict()["summary"], indent=2, sort_keys=True))
     print(json.dumps({"raw": report.raw_metrics.to_dict(), "guarded": report.guarded_metrics.to_dict()}, indent=2, sort_keys=True))
     return 0
