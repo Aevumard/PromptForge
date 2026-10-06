@@ -272,6 +272,20 @@ The resulting control chain is:
 
 Exploration is an operational data-collection mechanism. It is not a quality oracle, confidence estimate, causal attribution, or automatic provider executor.
 
+## Exploration adjudication
+
+Exploration now has a separate evidence-adjudication step. `ContextExplorationAdjudicator` groups observations by episode, identifies probe outcomes, and compares each challenger against the best observed incumbent from the same episode.
+
+An explored strategy is eligible for operational consideration only when the configured evidence gate is met: minimum comparable episodes, minimum family coverage, minimum win rate, and minimum mean relative gain.
+
+`ContextCognitiveLoop.exploration_evidence()` exposes the descriptive challenger evidence, while `exploration_adoption_decision()` exposes the conservative gate. Neither method mutates policy or automatically replaces the incumbent.
+
+This preserves the distinction between:
+
+`probe -> observed outcome -> comparative evidence -> adoption gate`
+
+rather than treating one successful probe as a learned rule.
+
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
