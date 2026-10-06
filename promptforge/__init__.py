@@ -74,6 +74,14 @@ from .routing_refresh import (
 )
 
 from .exploration import (
+    ContextExplorationAdjudicator,
+    ContextExplorationAdoptionDecision,
+    ContextExplorationController,
+    ContextExplorationDecision,
+    ContextExplorationStrategyEvidence,
+)
+
+from .exploration import (
     ContextExplorationController,
     ContextExplorationDecision,
 )
@@ -151,6 +159,10 @@ __all__ = [
     "ContextRoutingPolicyRefreshController",
     "ContextRoutingPolicyRefreshDecision",
     "ContextExplorationController",
+    "ContextExplorationDecision",
+    "ContextExplorationStrategyEvidence",
+    "ContextExplorationAdoptionDecision",
+    "ContextExplorationAdjudicator",
     "ContextExplorationDecision",
     "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
