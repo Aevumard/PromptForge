@@ -40,14 +40,6 @@ class ActionCandidate:
                 raise ValueError(f"{name} must be numeric")
             if not isfinite(float(value)) or not 0.0 <= float(value) <= 1.0:
                 raise ValueError(f"{name} must be between 0.0 and 1.0")
-        if not isinstance(self.require_support_anchors, bool):
-            raise TypeError("require_support_anchors must be a bool")
-        if (
-            not isinstance(self.min_support_anchors, int)
-            or isinstance(self.min_support_anchors, bool)
-            or self.min_support_anchors < 1
-        ):
-            raise ValueError("min_support_anchors must be at least 1")
         if len(set(self.required_evidence_ids)) != len(self.required_evidence_ids):
             raise ValueError("required_evidence_ids must be unique")
         if len(set(self.support_evidence_ids)) != len(self.support_evidence_ids):
@@ -104,6 +96,14 @@ class ActionPolicy:
                 or not 0.0 <= float(value) <= 1.0
             ):
                 raise ValueError(f"{name} must be between 0.0 and 1.0")
+        if not isinstance(self.require_support_anchors, bool):
+            raise TypeError("require_support_anchors must be a bool")
+        if (
+            not isinstance(self.min_support_anchors, int)
+            or isinstance(self.min_support_anchors, bool)
+            or self.min_support_anchors < 1
+        ):
+            raise ValueError("min_support_anchors must be at least 1")
 
 
 @dataclass(frozen=True)
