@@ -178,6 +178,8 @@ class ContextCognitiveLoop:
             relational_profile=relational_profile,
             decision=decision,
             memory_route=memory_route,
+            memory_routing_mode=self.memory_routing_mode,
+            memory_top_k=self.memory_top_k,
             trajectory=trajectory,
             candidate_order=tuple(
                 ranked
