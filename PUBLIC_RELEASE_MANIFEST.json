@@ -9,8 +9,8 @@
   "source_branch": "experiment/v0.9.3-size-matched-control",
   "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
   "manifest_policy": "All tracked public files except this manifest itself",
-  "generated_utc": "2026-10-06T09:19:32.211Z",
-  "file_count": 134,
+  "generated_utc": "2026-10-06T09:44:39.728Z",
+  "file_count": 136,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -24,13 +24,13 @@
     },
     {
       "path": "AGENTS.md",
-      "size_bytes": 35982,
-      "sha256": "da8d3d9540e8e874f340f420311eae29145274cc108cabfb464325bd4e92932c"
+      "size_bytes": 38757,
+      "sha256": "8868826cb7f4bc9e274577bcc56d58806252a4d903bd3897cb7a722f3cadd500"
     },
     {
       "path": "docs/agent_corpus_external_patterns.md",
-      "size_bytes": 11906,
-      "sha256": "5114d8a85a9e404b7d6b351ccf1d14ad3258e19ece2bb4d1f8b54a7d9333d396"
+      "size_bytes": 15742,
+      "sha256": "c007c886379f45894e2062d9f045dd534213c425668609d9465a18221286def1"
     },
     {
       "path": "harness/agent_context.py",
@@ -404,8 +404,13 @@
     },
     {
       "path": "promptforge/__init__.py",
-      "size_bytes": 6870,
-      "sha256": "749106e3485a68555e069cb25d403c08f25e5d9e48f3d0be15716b95553fadd8"
+      "size_bytes": 7640,
+      "sha256": "11c7ad221194b62072bb30e25d06b1481ff82827e3e4129235ea96dcec8c2ae8"
+    },
+    {
+      "path": "promptforge/agent.py",
+      "size_bytes": 5589,
+      "sha256": "1297027b922b3eb134166044443e2744160e51dace6a8e0bfc02c45ac7d80078"
     },
     {
       "path": "promptforge/budget.py",
@@ -431,6 +436,11 @@
       "path": "promptforge/decision.py",
       "size_bytes": 27904,
       "sha256": "ca20c33f59fc20f7e6553bb490b08ff84b1e74f838c49e895171dcbec089e35f"
+    },
+    {
+      "path": "promptforge/deferred.py",
+      "size_bytes": 10585,
+      "sha256": "c37e11c9d79f2a2c3cbae39ba45f28f5649e97f7aaed9cb15fea51d15448c257"
     },
     {
       "path": "promptforge/epistemic.py",
@@ -484,8 +494,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 45952,
-      "sha256": "53bb75b122278e3ae8e76b51d083b74cf7d245dcab89ad54346ef520a84d5e0d"
+      "size_bytes": 48659,
+      "sha256": "13a934697dd1111732a45c894e5449aa1c0215debac2d407cc2ca893c37a9b12"
     },
     {
       "path": "schemas/action-execution.v1.json",
