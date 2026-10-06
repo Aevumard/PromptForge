@@ -9,8 +9,8 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-10-06T06:46:00.000Z",
-    "file_count": 113,
+    "generated_utc": "2026-10-06T06:48:00.000Z",
+    "file_count": 116,
     "files": [
         {
             "path": ".github/workflows/ci.yml",
@@ -24,8 +24,8 @@
         },
         {
             "path": "AGENTS.md",
-            "size_bytes": 17227,
-            "sha256": "7CD25B5E469CF87F6ED6C34DF543ED7F43ACA6017F32AB5023E9C08401805842"
+            "size_bytes": 17801,
+            "sha256": "DF6F05EA21F56EF20AD3C1C71C6945DED38EBB88BAB3896695252CFC70685FF7"
         },
         {
             "path": "harness/agent_context.py",
@@ -404,8 +404,13 @@
         },
         {
             "path": "promptforge/cognitive.py",
-            "size_bytes": 30741,
-            "sha256": "7008DD868DE65DF975B3B2E2C649C8F751E20B1076A334D1686DA1C24529483B"
+            "size_bytes": 31581,
+            "sha256": "3AB1D420808EEB03741893EBCB5212B7DAD6BFEF523733B91026D3E406E090E6"
+        },
+        {
+            "path": "promptforge/credit.py",
+            "size_bytes": 13235,
+            "sha256": "768430DCB3E99761220739CBA616CD1B94AF7F0CE5E6ABBF61ACFC5FFAF905C5"
         },
         {
             "path": "promptforge/decision.py",
@@ -416,6 +421,11 @@
             "path": "promptforge/epistemic.py",
             "size_bytes": 18717,
             "sha256": "D6EC1483C8B0B0C3A17B83D878D6A66D618C43BA91AAAD45B92DFA62796957A5"
+        },
+        {
+            "path": "promptforge/experience.py",
+            "size_bytes": 6170,
+            "sha256": "6FBF6DD2B00366DE1FA9F66F1257E87D72133984D7B6B7C7FD89D99C3070A1C2"
         },
         {
             "path": "promptforge/hypothesis.py",
@@ -434,8 +444,8 @@
         },
         {
             "path": "README.md",
-            "size_bytes": 28356,
-            "sha256": "86E7FE8DB26B5C3255711B583D2FAEAD3087E34D6FD1020718A5F51D2608A702"
+            "size_bytes": 28925,
+            "sha256": "0AA23DB0DAC8D50EC417E5312AEB4877C1566D7E08659813F571241D2C3288AE"
         },
         {
             "path": "schemas/run.schema.json",
@@ -476,6 +486,11 @@
             "path": "tests/test_hypothesis.py",
             "size_bytes": 3913,
             "sha256": "3BE7F2B33722B532F59428DDCB326C9C07C5F98C39E6FF88BE962B0B70EE65F9"
+        },
+        {
+            "path": "tests/test_memory_aware.py",
+            "size_bytes": 3644,
+            "sha256": "507D63C122F228D165C93DDAD1D1D21395F7568950118A3033B08048ECE9F1C2"
         },
         {
             "path": "tests/test_provider_adapters.py",
