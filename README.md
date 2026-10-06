@@ -877,3 +877,24 @@ packet = build_context_packet(
 The model-facing packet contains the current context immediately and metadata-only entries for deferred material. The deferred content itself is loaded only through an explicit id request.
 
 This makes the core AI-oriented: **small first response, explicit expansion, deterministic token control, no hidden context injection**.
+
+## AI-native tool-output trimming
+
+Long agent runs often accumulate huge tool results that are no longer worth replaying at full fidelity.
+
+`ToolOutputTrimmer` applies a provider-agnostic sliding-window policy before the next model call:
+
+```python
+from promptforge import trim_tool_outputs
+
+result = trim_tool_outputs(
+    tool_items,
+    recent_turns=2,
+    max_output_chars=2000,
+    preview_chars=600,
+)
+```
+
+Recent outputs stay untouched. Older oversized results are replaced by deterministic head/tail previews. The result records `chars_saved`, `estimated_tokens_saved`, and a SHA-256 digest of every original payload that was trimmed.
+
+This is intentionally not semantic summarization. The agent can see that content was trimmed and an integration can use the item identity/digest to fetch the full result when necessary.
