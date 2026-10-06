@@ -87,6 +87,7 @@ class UncertaintyActionGateTests(unittest.TestCase):
             evidence_support=0.70,
             reversibility=1.0,
             downside=0.1,
+            support_evidence_ids=("past",),
         )
         decision = UncertaintyActionGate(
             ActionPolicy(require_support_anchors=True)
@@ -121,6 +122,7 @@ class UncertaintyActionGateTests(unittest.TestCase):
             evidence_support=0.70,
             reversibility=1.0,
             downside=0.1,
+            support_evidence_ids=("past",),
         )
         decision = UncertaintyActionGate(
             ActionPolicy(require_support_anchors=True)
@@ -164,7 +166,10 @@ class UncertaintyActionGateTests(unittest.TestCase):
 
     def test_strict_mode_enforces_minimum_anchor_count(self):
         evidence = EpistemicContextCompiler().compile(
-            [EvidenceRecord("e1", "one support", timestamp=10)]
+            [
+                EvidenceRecord("e1", "one support", timestamp=10),
+                EvidenceRecord("e2", "second support", timestamp=11),
+            ]
         )
         action = ActionCandidate(
             "thin",
@@ -181,6 +186,7 @@ class UncertaintyActionGateTests(unittest.TestCase):
             evidence_support=0.70,
             reversibility=1.0,
             downside=0.1,
+            support_evidence_ids=("e1", "e2"),
         )
         decision = UncertaintyActionGate(
             ActionPolicy(
