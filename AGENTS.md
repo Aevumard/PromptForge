@@ -593,3 +593,35 @@ This prevents the workflow from claiming that a side effect happened merely beca
 Idempotency keys are operational duplicate-action controls, not proofs of business correctness or delivery semantics.
 
 Schema: `schemas/action-execution.v1.json`.
+
+## Token-efficient context path
+
+For long or noisy agent tasks, prefer the smallest context contract that preserves required information.
+
+`promptforge.budget` adds a provider-agnostic packing layer:
+
+1. Create `ContextBlock` values for independently controllable context units.
+2. Mark load-bearing information with `required=True`.
+3. Give optional blocks caller-supplied `utility`; PromptForge does not infer semantic importance.
+4. Use `plan_context(..., budget_tokens=...)` to reserve headroom and pack optional blocks deterministically.
+5. Use `plan.compact_manifest(blocks)` as the small model-facing receipt of what was included and omitted.
+6. Use `plan.materialize(blocks)` to construct the selected nested context.
+
+Example:
+
+```python
+from promptforge import ContextBlock, plan_context
+
+blocks = (
+    ContextBlock("ticket", ticket, required=True, path="ticket"),
+    ContextBlock("customer_history", history, utility=0.7, path="history"),
+    ContextBlock("old_notes", old_notes, utility=0.1, path="old_notes"),
+)
+plan = plan_context(blocks, budget_tokens=1800, reserve_ratio=0.10)
+context = plan.materialize(blocks)
+manifest = plan.compact_manifest(blocks)
+```
+
+Use an exact provider tokenizer through `estimator=` when available. The default byte-based estimate is only a planning heuristic.
+
+Never drop required information silently to make a budget fit. Never claim that token reduction is itself evidence of better model quality.
