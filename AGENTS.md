@@ -625,3 +625,23 @@ manifest = plan.compact_manifest(blocks)
 Use an exact provider tokenizer through `estimator=` when available. The default byte-based estimate is only a planning heuristic.
 
 Never drop required information silently to make a budget fit. Never claim that token reduction is itself evidence of better model quality.
+
+## Progressive-disclosure agent handoff
+
+For long or heterogeneous tasks, do not force the model to receive every available context block up front.
+
+Use `build_context_packet(plan, blocks, descriptions=...)` when the downstream agent should receive:
+- already-selected context immediately;
+- a compact token/accounting summary;
+- a metadata-only catalog of omitted context;
+- stable ids that can be explicitly loaded later.
+
+`DeferredContextCatalog.load()` is bounded and deterministic. It never loads unknown ids and never silently exceeds the requested token/item budget.
+
+Descriptions are caller-supplied discovery metadata, not evidence. Deferred values are not part of the initial model-facing packet.
+
+Preferred AI path:
+
+`prepare/admit -> budget -> delivery packet -> model reasons over compact context -> explicit deferred load only when needed`
+
+Do not equate progressive disclosure with autonomous retrieval or factual validation.
