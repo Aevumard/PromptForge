@@ -105,7 +105,7 @@ Relations must be supplied by the integration. Do not infer or fabricate semanti
 
 ## Cognitive loop
 
-`ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle.
+`ContextCognitiveLoop` is the end-to-end public orchestration surface for an online adaptive cycle. It may optionally consume a separate routing-policy meta-memory store for adaptive mode selection.
 
 Its boundary is explicit:
 
@@ -113,9 +113,19 @@ Its boundary is explicit:
 2. The caller executes the selected strategy outside PromptForge.
 3. `observe()` writes the externally measured outcome back as a `ContextEpisode`.
 
-A proposal must retain the experience version it was based on. Do not let later observations mutate the evidence represented by an existing proposal. The loop must never invent model-quality outcomes, provider responses, or hidden labels.
+A proposal must retain the experience version it was based on. In adaptive mode it may also retain the policy-evidence version and policy-history version that selected the concrete routing mode. Do not let later observations mutate the evidence represented by an existing proposal. The loop must never invent model-quality outcomes, provider responses, or hidden labels.
 
-Use the cognitive loop when an integration needs the complete adaptive lifecycle. Use the lower-level adaptive, memory, and orchestration APIs when an experiment needs finer control over individual stages.
+Use the cognitive loop when an integration needs the complete adaptive lifecycle. Use the lower-level adaptive, memory, routing-policy, routing-history, and orchestration APIs when an experiment needs finer control over individual stages.
+
+## Routing-policy meta-memory
+
+`ContextRoutingPolicyHistory` is a bounded operational meta-memory layer over completed routing-policy evaluations. It is separate from `ContextExperienceStore`: ordinary episodes record task outcomes, while policy history records prior policy evaluations.
+
+Keep the evidence clocks separate. A policy-evidence `version` refers to the frozen episodic snapshot used by that evaluation; the policy-history `version` refers to the number of policy-evidence records stored in meta-memory.
+
+Adaptive routing may use either explicit frozen policy evidence or a policy-history snapshot. When history is used, consensus is deterministic and falls back to `nearest` when the configured evidence threshold is not met. Stability is descriptive only.
+
+The policy-history boundary must remain leakage-safe: the outcome of the current proposal cannot be used to create or select the policy for that same proposal.
 
 ## Policies
 
