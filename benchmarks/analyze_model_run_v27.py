@@ -405,9 +405,7 @@ def render_markdown(analysis: ExperimentAnalysis) -> str:
                 changes=item.guard_action_change_rate,
             )
         )
-    return "
-".join(lines) + "
-"
+    return "\n".join(lines) + "\n"
 
 
 def load_report(path: str | Path) -> dict[str, Any]:
