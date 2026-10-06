@@ -6,9 +6,13 @@ from typing import Any, Mapping, Sequence
 from .adaptive import ContextTopologyProfile, ContextTopologyProfiler, ContextTrajectoryState
 from .core import POLICY_MINIMAL, prepare_context
 from .experience import ContextExperienceSnapshot, ContextExperienceStore
+from .credit import ContextMemoryCreditPolicy
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
+
+
+MEMORY_ROUTING_MODES = ("nearest", "credit")
 
 
 @dataclass(frozen=True)
@@ -36,6 +40,8 @@ class ContextCognitiveProposal:
     relational_profile: ContextRelationalProfile
     decision: ContextAdaptiveDecision
     memory_route: ContextRoute | None
+    memory_routing_mode: str = "nearest"
+    memory_top_k: int = 5
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -76,6 +82,9 @@ class ContextCognitiveLoop:
         controller: ComplexContextController | None = None,
         routing_features: Sequence[str] | None = None,
         scale_mode: str = "iqr",
+        memory_routing_mode: str = "nearest",
+        memory_top_k: int = 5,
+        memory_credit_policy: ContextMemoryCreditPolicy | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -86,7 +95,23 @@ class ContextCognitiveLoop:
             if routing_features is not None
             else ROUTING_FEATURES
         )
+        if memory_routing_mode not in MEMORY_ROUTING_MODES:
+            raise ValueError(
+                "memory_routing_mode must be one of: "
+                + ", ".join(MEMORY_ROUTING_MODES)
+            )
+        if memory_top_k < 1:
+            raise ValueError("memory_top_k must be at least 1")
+        if memory_credit_policy is not None and not isinstance(
+            memory_credit_policy, ContextMemoryCreditPolicy
+        ):
+            raise TypeError(
+                "memory_credit_policy must be a ContextMemoryCreditPolicy or None"
+            )
         self.scale_mode = scale_mode
+        self.memory_routing_mode = memory_routing_mode
+        self.memory_top_k = int(memory_top_k)
+        self.memory_credit_policy = memory_credit_policy
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -115,20 +140,30 @@ class ContextCognitiveLoop:
         evidence = self.experience.snapshot()
         routing_topology = profile.to_dict()
         routing_topology.update(relational_profile.to_dict())
-        memory_route = (
-            evidence.route(
-                routing_topology,
-                features=self.routing_features,
-                scale_mode=self.scale_mode,
-            )
-            if evidence.episodes
-            else None
-        )
+        if evidence.episodes:
+            if self.memory_routing_mode == "credit":
+                memory_route = evidence.memory_aware_route(
+                    routing_topology,
+                    features=self.routing_features,
+                    scale_mode=self.scale_mode,
+                    top_k=self.memory_top_k,
+                    policy=self.memory_credit_policy,
+                )
+            else:
+                memory_route = evidence.route(
+                    routing_topology,
+                    features=self.routing_features,
+                    scale_mode=self.scale_mode,
+                )
+        else:
+            memory_route = None
 
         decision = self.controller.decide(
             profile=profile,
             candidates=candidates,
             memory_route=memory_route,
+            memory_routing_mode=self.memory_routing_mode,
+            memory_top_k=self.memory_top_k,
             trajectory=trajectory,
             current_strategy=current_strategy,
             current_cost=current_cost,
@@ -257,6 +292,7 @@ class ContextCognitiveLoop:
 
 
 __all__ = [
+    "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
     "ContextCognitiveResult",
