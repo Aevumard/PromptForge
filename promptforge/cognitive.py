@@ -12,7 +12,11 @@ from .routing_policy import (
     ContextRoutingPolicyEvidence,
     ContextRoutingPolicyEvaluator,
 )
-from .routing_history import ContextRoutingPolicyHistory, ContextRoutingPolicyHistorySnapshot
+from .routing_history import (
+    ContextRoutingPolicyHealth,
+    ContextRoutingPolicyHistory,
+    ContextRoutingPolicyHistorySnapshot,
+)
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
@@ -51,6 +55,8 @@ class ContextCognitiveProposal:
     memory_top_k: int = 5
     memory_policy_version: int | None = None
     memory_policy_history_version: int | None = None
+    memory_policy_stability_rate: float | None = None
+    memory_policy_refresh_recommended: bool | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -98,6 +104,7 @@ class ContextCognitiveLoop:
         memory_routing_policy_history: ContextRoutingPolicyHistory | None = None,
         memory_policy_history_window: int | None = None,
         memory_policy_history_min_observations: int = 1,
+        memory_policy_min_stability: float | None = None,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -149,6 +156,13 @@ class ContextCognitiveLoop:
             raise ValueError(
                 "memory_policy_history_min_observations must be at least 1"
             )
+        if (
+            memory_policy_min_stability is not None
+            and not 0.0 <= memory_policy_min_stability <= 1.0
+        ):
+            raise ValueError(
+                "memory_policy_min_stability must be between 0.0 and 1.0"
+            )
         self.memory_credit_policy = memory_credit_policy
         self.memory_routing_policy_evidence = memory_routing_policy_evidence
         self.memory_routing_policy_history = memory_routing_policy_history
@@ -156,6 +170,7 @@ class ContextCognitiveLoop:
         self.memory_policy_history_min_observations = int(
             memory_policy_history_min_observations
         )
+        self.memory_policy_min_stability = memory_policy_min_stability
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -187,6 +202,8 @@ class ContextCognitiveLoop:
         selected_mode = self.memory_routing_mode
         policy_version = None
         policy_history_version = None
+        policy_stability_rate = None
+        policy_refresh_recommended = None
         if selected_mode == "adaptive":
             if self.memory_routing_policy_evidence is not None:
                 policy_version = self.memory_routing_policy_evidence.version
@@ -200,6 +217,16 @@ class ContextCognitiveLoop:
                 latest = history.latest
                 policy_version = latest.version if latest is not None else None
                 policy_history_version = history.version if history.evidences else None
+                if self.memory_policy_min_stability is not None:
+                    health = history.health(
+                        window=self.memory_policy_history_window,
+                        min_observations=self.memory_policy_history_min_observations,
+                        min_stability=self.memory_policy_min_stability,
+                    )
+                    policy_stability_rate = health.stability_rate
+                    policy_refresh_recommended = health.refresh_recommended
+                    if not health.stable:
+                        selected_mode = "nearest"
             else:
                 selected_mode = "nearest"
 
@@ -234,7 +261,7 @@ class ContextCognitiveLoop:
         )
 
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v4",
+            schema_version="context-cognitive-proposal.v5",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
@@ -246,6 +273,8 @@ class ContextCognitiveLoop:
             memory_top_k=self.memory_top_k,
             memory_policy_version=policy_version,
             memory_policy_history_version=policy_history_version,
+            memory_policy_stability_rate=policy_stability_rate,
+            memory_policy_refresh_recommended=policy_refresh_recommended,
             trajectory=trajectory,
             candidate_order=tuple(
                 ranked
