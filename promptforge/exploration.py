@@ -180,12 +180,6 @@ class ContextExplorationAdjudicator:
                     }
                 )
             )
-            baseline_strategy = (
-                baseline_strategies[0]
-                if len(baseline_strategies) == 1
-                else ""
-            )
-
             for strategy, costs in sorted(explored_by_strategy.items()):
                 challenger_cost = sum(costs) / len(costs)
                 absolute_gain = baseline_cost - challenger_cost
@@ -202,8 +196,8 @@ class ContextExplorationAdjudicator:
                     outcome = 0
                 evidence.setdefault(strategy, []).append(
                     (
-                        group[next(iter(group))].family_id,
-                        group[next(iter(group))].episode_id,
+                        group[0].family_id,
+                        group[0].episode_id,
                         absolute_gain,
                         relative_gain,
                         outcome,
@@ -213,7 +207,6 @@ class ContextExplorationAdjudicator:
                 # the row remains exactly one comparison for this episode.
 
         results: list[ContextExplorationStrategyEvidence] = []
-        baseline_map: dict[str, set[str]] = {}
         for strategy, rows in sorted(evidence.items()):
             families = {row[0] for row in rows}
             episodes = {row[1] for row in rows}
@@ -250,7 +243,6 @@ class ContextExplorationAdjudicator:
                     if float(item.cost) == baseline_cost
                 )
 
-            baseline_map[strategy] = baseline_strategies
             ordered_baselines = tuple(sorted(baseline_strategies))
             baseline_strategy = (
                 ordered_baselines[0]
