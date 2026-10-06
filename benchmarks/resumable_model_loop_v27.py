@@ -102,6 +102,23 @@ def _record_from_dict(payload: Mapping[str, Any]) -> ModelLoopRecord:
         tokens_saved=int(payload.get("tokens_saved", 0)),
         omitted_context_ids=tuple(omitted),
         elapsed_ms=float(payload.get("elapsed_ms", 0.0)),
+        provider_elapsed_ms=float(payload.get("provider_elapsed_ms", 0.0)),
+        provider_attempts=int(payload.get("provider_attempts", 0)),
+        provider_prompt_tokens=(
+            int(payload["provider_prompt_tokens"])
+            if payload.get("provider_prompt_tokens") is not None
+            else None
+        ),
+        provider_completion_tokens=(
+            int(payload["provider_completion_tokens"])
+            if payload.get("provider_completion_tokens") is not None
+            else None
+        ),
+        provider_total_tokens=(
+            int(payload["provider_total_tokens"])
+            if payload.get("provider_total_tokens") is not None
+            else None
+        ),
         error=None if payload.get("error") is None else str(payload["error"]),
     )
 
@@ -156,6 +173,7 @@ def run_resumable_model_loop(
             )
             packet = model_input["promptforge"]
             payload = adapter.predict(model_input)
+            adapter_telemetry = getattr(adapter, "last_call_telemetry", None)
             prediction = parse_prediction(payload, ticket_id=case.ticket_id)
             guarded = (
                 guard_predictions(cases, (prediction,))[0]
@@ -171,8 +189,34 @@ def run_resumable_model_loop(
                 tokens_saved=int(packet["tokens_saved"]),
                 omitted_context_ids=tuple(packet["omitted_context_ids"]),
                 elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                provider_elapsed_ms=float(
+                    getattr(adapter_telemetry, "elapsed_ms", 0.0)
+                )
+                if adapter_telemetry is not None
+                else 0.0,
+                provider_attempts=int(
+                    getattr(adapter_telemetry, "attempts", 0)
+                )
+                if adapter_telemetry is not None
+                else 0,
+                provider_prompt_tokens=getattr(
+                    adapter_telemetry, "prompt_tokens", None
+                )
+                if adapter_telemetry is not None
+                else None,
+                provider_completion_tokens=getattr(
+                    adapter_telemetry, "completion_tokens", None
+                )
+                if adapter_telemetry is not None
+                else None,
+                provider_total_tokens=getattr(
+                    adapter_telemetry, "total_tokens", None
+                )
+                if adapter_telemetry is not None
+                else None,
             )
         except Exception as exc:
+            adapter_telemetry = getattr(adapter, "last_call_telemetry", None)
             record = ModelLoopRecord(
                 ticket_id=case.ticket_id,
                 raw_prediction=None,
@@ -182,6 +226,31 @@ def run_resumable_model_loop(
                 tokens_saved=0,
                 omitted_context_ids=(),
                 elapsed_ms=(time.perf_counter() - started) * 1000.0,
+                provider_elapsed_ms=float(
+                    getattr(adapter_telemetry, "elapsed_ms", 0.0)
+                )
+                if adapter_telemetry is not None
+                else 0.0,
+                provider_attempts=int(
+                    getattr(adapter_telemetry, "attempts", 0)
+                )
+                if adapter_telemetry is not None
+                else 0,
+                provider_prompt_tokens=getattr(
+                    adapter_telemetry, "prompt_tokens", None
+                )
+                if adapter_telemetry is not None
+                else None,
+                provider_completion_tokens=getattr(
+                    adapter_telemetry, "completion_tokens", None
+                )
+                if adapter_telemetry is not None
+                else None,
+                provider_total_tokens=getattr(
+                    adapter_telemetry, "total_tokens", None
+                )
+                if adapter_telemetry is not None
+                else None,
                 error=f"{type(exc).__name__}: {exc}",
             )
 
