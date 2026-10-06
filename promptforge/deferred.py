@@ -232,8 +232,75 @@ class DeferredContextCatalog:
         )
 
 
+@dataclass(frozen=True)
+class ContextDeliveryPacket:
+    """Single compact handoff designed for a downstream AI agent.
+
+    The packet contains already-admitted context plus a metadata-only catalog
+    of deferred material. Deferred values are intentionally absent until the
+    integration performs an explicit load.
+    """
+
+    schema_version: str
+    context: Mapping[str, Any]
+    context_tokens: int
+    budget_tokens: int
+    tokens_saved: int
+    deferred_catalog: Mapping[str, Any]
+
+    def __post_init__(self) -> None:
+        if self.schema_version != "context-delivery.v1":
+            raise ValueError("schema_version must be context-delivery.v1")
+        if self.context_tokens < 0:
+            raise ValueError("context_tokens must be non-negative")
+        if self.budget_tokens < 1:
+            raise ValueError("budget_tokens must be positive")
+        if self.tokens_saved < 0:
+            raise ValueError("tokens_saved must be non-negative")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": self.schema_version,
+            "context": dict(self.context),
+            "context_tokens": self.context_tokens,
+            "budget_tokens": self.budget_tokens,
+            "tokens_saved": self.tokens_saved,
+            "deferred_catalog": dict(self.deferred_catalog),
+        }
+
+
+def build_context_packet(
+    plan: ContextBudgetPlan,
+    blocks: Sequence[ContextBlock],
+    *,
+    descriptions: Mapping[str, str] | None = None,
+) -> ContextDeliveryPacket:
+    """Build the smallest useful model-facing handoff from a budget plan."""
+
+    if not isinstance(plan, ContextBudgetPlan):
+        raise TypeError("plan must be a ContextBudgetPlan")
+
+    blocks = tuple(blocks)
+    descriptions = descriptions or {}
+    deferred = DeferredContextCatalog.from_budget_plan(
+        plan,
+        blocks,
+        descriptions=descriptions,
+    )
+    return ContextDeliveryPacket(
+        schema_version="context-delivery.v1",
+        context=plan.materialize(blocks),
+        context_tokens=plan.selected_tokens,
+        budget_tokens=plan.budget_tokens,
+        tokens_saved=plan.tokens_saved,
+        deferred_catalog=deferred.catalog(),
+    )
+
+
 __all__ = [
     "DeferredContextItem",
     "ContextLoadResult",
     "DeferredContextCatalog",
+    "ContextDeliveryPacket",
+    "build_context_packet",
 ]
