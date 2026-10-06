@@ -134,11 +134,9 @@ class ProviderAdapterTests(TestCase):
             model="test-model",
         )
         fake_report = MagicMock()
-        fake_report.to_dict.return_value = {
-            "summary": {},
-            "raw_metrics": {},
-            "guarded_metrics": {},
-        }
+        fake_report.to_dict.return_value = {"summary": {}}
+        fake_report.raw_metrics.to_dict.return_value = {}
+        fake_report.guarded_metrics.to_dict.return_value = {}
 
         argv = [
             "openai_compatible",
