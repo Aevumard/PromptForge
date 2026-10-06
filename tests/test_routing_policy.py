@@ -95,6 +95,14 @@ class RoutingPolicyTests(unittest.TestCase):
             self.assertEqual(score.episodes, 3)
             self.assertEqual(score.families, 3)
 
+    def test_policy_evidence_rejects_adaptive_selected_mode(self):
+        with self.assertRaises(ValueError):
+            ContextRoutingPolicyEvidence(
+                version=1,
+                scores=(),
+                selected_mode="adaptive",
+            )
+
     def test_policy_evidence_is_serializable(self):
         evidence = ContextRoutingPolicyEvidence(
             version=2,
