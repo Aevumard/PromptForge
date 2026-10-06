@@ -2,6 +2,7 @@ import unittest
 
 from promptforge.decision import ActionDecision
 from promptforge.human_review import HumanReviewRecord
+from promptforge.execution import ActionExecutionRecord
 from promptforge.triage import (
     PriorityAssessment,
     TriageEnvelope,
@@ -43,6 +44,19 @@ def _human_review(
         rationale=("contradiction manually adjudicated",),
         changes_made=("require explicit gateway evidence",),
         resulting_policy_version=policy_version,
+    )
+
+
+def _execution() -> ActionExecutionRecord:
+    return ActionExecutionRecord(
+        schema_version="action-execution.v1",
+        execution_id="X-1",
+        action_id="act-1",
+        idempotency_key="case:T-1:act-1",
+        status="succeeded",
+        attempt=1,
+        recorded_at="2026-10-06T09:15:00Z",
+        external_reference="provider-17",
     )
 
 
@@ -153,6 +167,34 @@ class TriageTests(unittest.TestCase):
                 action_decision=_action_decision(),
                 decision_id="D-7",
             )
+
+    def test_executed_state_requires_successful_execution_receipt(self) -> None:
+        state = TriageState.admitted(
+            case_id="T-1",
+            decision_id="D-1",
+            policy_version="policy-v1",
+            evidence_snapshot_id="E-SNAP-1",
+        )
+        prioritized = state.transition(
+            "prioritized",
+            priority=self.priority,
+            decision_id="D-2",
+        )
+        gated = prioritized.transition(
+            "action_gated",
+            action_decision=_action_decision(),
+            decision_id="D-3",
+        )
+        executed = gated.transition(
+            "executed",
+            execution=_execution(),
+            decision_id="D-4",
+        )
+        self.assertEqual(executed.execution.status, "succeeded")
+        self.assertEqual(executed.execution.action_id, "act-1")
+
+        with self.assertRaises(ValueError):
+            gated.transition("executed", decision_id="D-5")
 
     def test_invalid_transition_is_rejected(self) -> None:
         state = TriageState.admitted(
