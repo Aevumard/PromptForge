@@ -450,6 +450,21 @@ The strengthened boundary is:
 
 This is an evidence-admissibility safeguard, not a truth score or causal inference mechanism.
 
+## Action support quality guard
+
+Action support anchors can optionally be required to meet explicit evidence-quality floors using the caller-supplied `EvidenceRecord.relevance` and `EvidenceRecord.reliability` metadata.
+
+1. `ActionPolicy.require_support_quality=True` fails closed unless every support anchor has available quality metadata.
+2. `min_support_relevance` and `min_support_reliability` set explicit per-anchor floors; defaults are `0.50` when the guard is enabled.
+3. An anchor below either floor is blocked even when its stance and relevance tags are otherwise compatible.
+4. `ActionDecision.support_evidence_quality` preserves the declared relevance/reliability values for auditability.
+5. These values are caller-supplied admissibility metadata, not independently verified truth, causal strength, or statistical power.
+6. The default remains backward compatible when the guard is disabled.
+
+The strengthened boundary is:
+
+`epistemic evidence -> support anchors -> stance -> relevance tags -> quality floors -> feasibility/safety gates -> action ranking`
+
 ## Hypothesis evidence corroboration
 
 Hypothesis assessment can optionally cap contribution from the same declared evidence source.
