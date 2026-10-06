@@ -419,6 +419,21 @@ The strengthened boundary is:
 
 `epistemic evidence -> support anchors -> stance admissibility -> feasibility/safety gates -> action ranking`
 
+## Action evidence relevance guard
+
+Action support anchors can optionally be checked for explicit, caller-supplied relevance tags.
+
+1. `ActionCandidate.support_evidence_tags` declares the tags expected on an action's support evidence.
+2. `ActionPolicy.require_support_tag_match=True` fails closed unless every support anchor has at least one matching tag in the current epistemic snapshot.
+3. A missing support scope, missing evidence boundary, or absent tag match is blocked rather than inferred from evidence prose.
+4. `ActionDecision.support_evidence_tag_matches` preserves the matched tags for auditability.
+5. Tag overlap is an explicit admissibility signal, not a semantic relevance oracle, and it does not establish causal sufficiency.
+6. The default remains backward compatible when the guard is disabled.
+
+The strengthened boundary is:
+
+`epistemic evidence -> support anchors -> stance admissibility -> explicit relevance-tag admissibility -> feasibility/safety gates -> action ranking`
+
 ## Action evidence anchoring
 
 The uncertainty action gate can require explicit evidence anchors for caller-supplied action support scores.

@@ -388,6 +388,14 @@ Action support can be made auditable by declaring support evidence ids on each a
 
 Boundary: epistemic evidence -> explicit action support anchors -> feasibility and safety gates -> action ranking
 
+## Action evidence relevance guard
+
+`ActionCandidate.support_evidence_tags` is an explicit caller-supplied relevance scope for support anchors. When `ActionPolicy.require_support_tag_match=True`, every support anchor must share at least one declared tag with that scope. Missing scope, missing boundary, or missing tag overlap fails closed. PromptForge does not infer relevance from evidence prose.
+
+`ActionDecision.support_evidence_tag_matches` preserves the observed tag overlap for auditability. Tag overlap is an admissibility control, not a semantic relevance or causal sufficiency claim.
+
+Boundary: epistemic evidence -> support anchors -> stance admissibility -> explicit relevance-tag admissibility -> feasibility and safety gates -> action ranking
+
 ## Hypothesis source cap
 
 HypothesisEvidencePolicy can limit how many support or contradiction records from one declared source contribute to an assessment. Selected and excluded evidence ids remain auditable. Unknown sources can remain isolated per evidence id. This is an operational corroboration safeguard, not a truth claim.
