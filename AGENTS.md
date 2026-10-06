@@ -13,7 +13,8 @@ An AI agent should use the smallest validated surface that solves the task. Do n
 2. Read this file.
 3. For real context work, use the installable `promptforge` API.
 4. For repository fixtures, use `harness.agent.prepare()`.
-5. Inspect `harness/runner/transforms.py` only when transformation semantics matter.
+5. Inspect `promptforge/core.py` when public core semantics matter.
+6. Inspect `harness/runner/transforms.py` only when historical transformation semantics matter.
 6. Inspect historical experiments, reports, and providers only when the request actually concerns research or provider execution.
 
 ## Public core contract
@@ -34,6 +35,8 @@ prepared = prepare_context(
     required=["case.id", "case.priority"],
 )
 ```
+
+The public core implementation lives in `promptforge/core.py`. It must remain importable without importing `harness` at all.
 
 It is provider-agnostic. It requires no API key, network access, or model configuration.
 

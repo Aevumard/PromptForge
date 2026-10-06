@@ -16,7 +16,10 @@ PromptForge is a Python layer for transforming, compiling, validating, and exper
 
 An agent can inspect the task and context, select relevant fields, compile a representation, validate invariants, and execute or evaluate the resulting prompt.
 
-Primary transformation surface:
+Primary public core:
+promptforge/core.py
+
+Primary research transformation surface:
 harness/runner/transforms.py
 
 Task definitions:
@@ -33,6 +36,14 @@ harness/reports/
 
 Regression tests:
 tests/
+
+## Public core boundary
+
+The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
+
+The research harness remains intentionally separate: `harness/` contains fixture APIs, historical runners, provider adapters, preregistration, schedules, reports, and experimental compatibility machinery.
+
+This separation lets the public core evolve without rewriting or importing the frozen research surface.
 
 Read AGENTS.md before making experimental or architectural changes.
 
@@ -51,7 +62,7 @@ harness/reports/v093_size_matched_control_deepseek.json
 
 ## Quick validation
 
-python -m compileall -q harness tests
+python -m compileall -q harness promptforge tests
 
 python -m unittest discover -s tests -p test_*.py
 
@@ -70,7 +81,7 @@ PromptForge has two public surfaces:
 When an agent enters the repository, start here:
 
 1. Read `README.md` and `AGENTS.md`.
-2. Use `harness.agent.prepare_context()` for arbitrary task data.
+2. Use `promptforge.prepare_context()` for arbitrary task data.
 3. Use `harness.agent.prepare()` only for the public deterministic fixtures.
 4. Read historical runners/reports/providers only when the task actually requires them.
 
@@ -196,7 +207,8 @@ T003 demonstrates a reduction from 85 to 48 serialized characters (43.5%) while 
 | Area | Purpose | Start here |
 | --- | --- | --- |
 | `promptforge/` | Installable public API | End-user integration |
-| `harness/agent.py` | Agent-facing facade | Agent integration |
+| `promptforge/core.py` | Standalone provider-agnostic core | Core behavior |
+| `harness/agent.py` | Research/fixture agent facade | Fixture reproduction |
 | `harness/context.py` | Generic paths, inspection, token estimation, schema checks | Core context utilities |
 | `harness/agent_context.py` | Fixture loading and validated compilation | Repository contract |
 | `harness/runner/transforms.py` | Transformation machinery | Transformation semantics |
@@ -229,4 +241,4 @@ PromptForge makes context transformations explicit, testable, reproducible, and 
 
 PromptForge is not a provider-specific SDK, a universal prompt optimizer, or a claim that one representation is always superior.
 
-The core product is a provider-agnostic context-engineering layer. The research harness exists to make hypotheses, transformations, execution conditions, and historical evidence inspectable and reproducible.
+The public core product is a provider-agnostic context-engineering layer. The research harness exists to make hypotheses, transformations, execution conditions, and historical evidence inspectable and reproducible.
