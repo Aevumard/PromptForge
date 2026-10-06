@@ -84,10 +84,22 @@ def guard_prediction(case: TicketCase, prediction: Prediction) -> GuardDecision:
         require_support_stance=True,
         require_support_quality=True,
     )
-    decision = UncertaintyActionGate(policy).decide(
-        [candidate],
-        evidence=evidence,
-    )
+    try:
+        decision = UncertaintyActionGate(policy).decide(
+            [candidate],
+            evidence=evidence,
+        )
+    except ValueError as exc:
+        if str(exc) != "no action candidate passed the decision gate":
+            raise
+        return GuardDecision(
+            ticket_id=case.ticket_id,
+            original_action=prediction.action,
+            guarded_action="human_review",
+            blocked=True,
+            reasons=("no action candidate passed the decision gate",),
+            decision_schema="uncertainty-action.v6",
+        )
 
     if prediction.action in decision.blocked_action_ids:
         return GuardDecision(
