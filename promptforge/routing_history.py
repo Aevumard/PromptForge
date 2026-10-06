@@ -41,7 +41,11 @@ class ContextRoutingPolicyHealth:
     stability_rate: float
     switch_count: int
     min_stability: float
+    freshness_age: int | None
+    max_age: int | None
     stable: bool
+    fresh: bool
+    healthy: bool
     refresh_recommended: bool
 
     def to_dict(self) -> dict:
@@ -157,12 +161,18 @@ class ContextRoutingPolicyHistorySnapshot:
         window: int | None = None,
         min_observations: int = 2,
         min_stability: float = 1.0,
+        current_experience_version: int | None = None,
+        max_age: int | None = None,
     ) -> ContextRoutingPolicyHealth:
         """Assess whether historical policy selection is stable enough to use."""
         if min_observations < 1:
             raise ValueError("min_observations must be at least 1")
         if not 0.0 <= min_stability <= 1.0:
             raise ValueError("min_stability must be between 0.0 and 1.0")
+        if current_experience_version is not None and current_experience_version < 0:
+            raise ValueError("current_experience_version must be non-negative")
+        if max_age is not None and max_age < 0:
+            raise ValueError("max_age must be non-negative")
 
         values = self._window(window)
         stability = self.stability(window=window)
@@ -170,6 +180,18 @@ class ContextRoutingPolicyHistorySnapshot:
             len(values) >= min_observations
             and stability.stability_rate >= min_stability
         )
+        latest = self.latest
+        freshness_age = (
+            None
+            if latest is None or current_experience_version is None
+            else max(0, current_experience_version - latest.version)
+        )
+        fresh = (
+            True
+            if max_age is None or freshness_age is None
+            else freshness_age <= max_age
+        )
+        healthy = stable and fresh
         selected_mode = self.select_mode(
             window=window,
             min_observations=min_observations,
@@ -181,8 +203,12 @@ class ContextRoutingPolicyHistorySnapshot:
             stability_rate=stability.stability_rate,
             switch_count=stability.switch_count,
             min_stability=min_stability,
+            freshness_age=freshness_age,
+            max_age=max_age,
             stable=stable,
-            refresh_recommended=not stable,
+            fresh=fresh,
+            healthy=healthy,
+            refresh_recommended=not healthy,
         )
 
     def to_dict(self) -> dict:
@@ -263,11 +289,15 @@ class ContextRoutingPolicyHistory:
         window: int | None = None,
         min_observations: int = 2,
         min_stability: float = 1.0,
+        current_experience_version: int | None = None,
+        max_age: int | None = None,
     ) -> ContextRoutingPolicyHealth:
         return self.snapshot().health(
             window=window,
             min_observations=min_observations,
             min_stability=min_stability,
+            current_experience_version=current_experience_version,
+            max_age=max_age,
         )
 
     def to_dict(self) -> dict:
