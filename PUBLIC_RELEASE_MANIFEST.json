@@ -9,7 +9,7 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-10-06T07:09:00.579Z",
+    "generated_utc": "2026-10-06T07:16:17.532Z",
     "file_count": 122,
     "files": [
         {
@@ -24,8 +24,8 @@
         },
         {
             "path": "AGENTS.md",
-            "size_bytes": 21766,
-            "sha256": "B9104F217BB345A5508ED2EDC238400C6C764EEE6BBD8D0647FBD8B0849FDC6F"
+            "size_bytes": 22845,
+            "sha256": "8037BEE09D99101E42030CC05D6A5CC4D4EAE7590D2C25961C30FA9F96471A25"
         },
         {
             "path": "harness/agent_context.py",
@@ -409,8 +409,8 @@
         },
         {
             "path": "promptforge/confidence.py",
-            "size_bytes": 17550,
-            "sha256": "43850B8BCD103E1349FC0C00FB906AED9C4646186097379254C0F5B7418B6063"
+            "size_bytes": 18759,
+            "sha256": "D0D47627ECCD254A9EA25F32816079046929BFCDFB87A995C9DDD1E3FD27F6C6"
         },
         {
             "path": "promptforge/credit.py",
@@ -459,8 +459,8 @@
         },
         {
             "path": "README.md",
-            "size_bytes": 32889,
-            "sha256": "F9BC1157B97E1D6D5620835DB26A2016A8C086A406B5621BFF1FB0EB7BECC708"
+            "size_bytes": 33968,
+            "sha256": "D5DF00B8BBD5AE7060AF780002C293E43BF2C768B35FF22ADB1991BED956B7A4"
         },
         {
             "path": "schemas/run.schema.json",
@@ -489,8 +489,8 @@
         },
         {
             "path": "tests/test_confidence.py",
-            "size_bytes": 5457,
-            "sha256": "C68A90337A3B49F6D00421D2BEA94EF83AC9BF9FB7931859A3CC50E48475B0D5"
+            "size_bytes": 8319,
+            "sha256": "85B0162E195C6DED30CFAFB4C3D418C6D4F33C050FA95AB28F513105C06891E1"
         },
         {
             "path": "tests/test_decision.py",

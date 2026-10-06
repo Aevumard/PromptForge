@@ -359,6 +359,23 @@ The manifest records SHA-256 values for every tracked public file except itself.
 Reuse validated machinery first. Change the smallest surface necessary. Keep the installable agent API, executable infrastructure, experimental design, empirical evidence, and interpretation clearly separated.
 
 
+## Calibration family scope
+
+Confidence calibration can now use an explicit family scope when historical confidence behavior is not transferable across task families.
+
+1. ConfidenceObservation.family is now an active optional boundary through ConfidenceCalibrationPolicy.target_family.
+2. When target_family is set, observations from other families are excluded before binning, smoothing, isotonic calibration, or metrics.
+3. min_family_observations can fail closed when the target family does not contain enough historical observations.
+4. Excluded family observations are retained in ConfidenceCalibrationModel.family_excluded_ids for auditability.
+5. Required observations that fall outside the target family remain a hard failure.
+6. When no target family is supplied, existing pooled behavior remains unchanged.
+
+The intended boundary is:
+
+historical labeled outcomes -> family scope -> temporal gate -> supported bins -> monotone calibration -> bounded adjustment
+
+Family scope is an evidence-admissibility control, not a claim that family labels are causally meaningful.
+
 ## Confidence calibration boundary
 
 The public core now includes an opt-in confidence calibration layer in
