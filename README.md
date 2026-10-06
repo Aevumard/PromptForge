@@ -163,12 +163,13 @@ The aware router must be fitted only on the intended training snapshot. For tran
 
 ## Cognitive memory mode
 
-`ContextCognitiveLoop` now exposes two explicit memory-routing modes:
+`ContextCognitiveLoop` exposes three explicit memory-routing modes:
 
 - `nearest` — the original `NearestEpisodeRouter` behavior and the default.
 - `credit` — the opt-in `ContextMemoryAwareRouter`, with a bounded `top_k` neighborhood and explicit memory credit.
+- `adaptive` — selects between the two concrete modes using policy evidence that was evaluated before the current proposal.
 
-The selected mode and `top_k` are recorded in `ContextCognitiveProposal`. The proposal schema is versioned because the audit envelope now includes routing-mode state.
+The selected requested mode, concrete mode, `top_k`, and policy provenance are recorded in `ContextCognitiveProposal`. The proposal schema is now `context-cognitive-proposal.v4`.
 
 ```python
 from promptforge import ContextCognitiveLoop
@@ -179,7 +180,7 @@ loop = ContextCognitiveLoop(
 )
 ```
 
-This is still provider-agnostic and observational: the credit-aware mode changes how already-observed evidence is aggregated; it does not fabricate outcomes or execute a model.
+This remains provider-agnostic and observational: routing changes how already-observed evidence is aggregated; it does not fabricate outcomes or execute a model.
 
 ## Routing-policy learning
 
@@ -203,6 +204,32 @@ adaptive_loop = ContextCognitiveLoop(
 \`\`\`
 
 The current case never contributes its outcome to the policy used for that same proposal. This keeps policy learning temporally separated from decision evidence.
+
+## Routing-policy meta-memory
+
+`ContextRoutingPolicyHistory` stores previously evaluated policy evidence separately from ordinary task episodes. Its history version is an internal meta-memory clock; each evidence item retains the episodic snapshot version on which it was computed.
+
+The history is bounded and immutable through `ContextRoutingPolicyHistorySnapshot`. A deterministic consensus selector can use the full history or a recent window, with `nearest` as the conservative fallback when observations are insufficient. `ContextRoutingPolicyStability` reports mode switches and a descriptive stability rate; it is not a confidence score or a model-quality estimate.
+
+An adaptive cognitive loop can consume this meta-memory directly:
+
+```python
+from promptforge import ContextCognitiveLoop, ContextRoutingPolicyHistory
+
+history = ContextRoutingPolicyHistory(max_entries=32)
+loop = ContextCognitiveLoop(
+    memory_routing_mode="adaptive",
+    memory_routing_policy_history=history,
+)
+
+evidence = loop.evaluate_and_record_memory_routing_policy()
+```
+
+This creates the explicit control chain:
+
+`episodes -> policy evaluation -> frozen policy evidence -> policy history -> adaptive routing -> proposal -> execution -> observation`
+
+The history is operational meta-memory, not a learned model and not a causal oracle.
 
 ## Public core boundary
 

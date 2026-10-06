@@ -12,6 +12,7 @@ from .routing_policy import (
     ContextRoutingPolicyEvidence,
     ContextRoutingPolicyEvaluator,
 )
+from .routing_history import ContextRoutingPolicyHistory, ContextRoutingPolicyHistorySnapshot
 from .memory import ContextEpisode, ContextRoute, ROUTING_FEATURES
 from .relational import ContextRelation, ContextRelationalProfile, ContextRelationProfiler
 from .orchestration import ComplexContextController, ContextAdaptiveDecision
@@ -49,6 +50,7 @@ class ContextCognitiveProposal:
     memory_routing_selected_mode: str = "nearest"
     memory_top_k: int = 5
     memory_policy_version: int | None = None
+    memory_policy_history_version: int | None = None
     trajectory: ContextTrajectoryState | None = None
     candidate_order: tuple[str, ...] = ()
 
@@ -93,6 +95,9 @@ class ContextCognitiveLoop:
         memory_top_k: int = 5,
         memory_credit_policy: ContextMemoryCreditPolicy | None = None,
         memory_routing_policy_evidence: ContextRoutingPolicyEvidence | None = None,
+        memory_routing_policy_history: ContextRoutingPolicyHistory | None = None,
+        memory_policy_history_window: int | None = None,
+        memory_policy_history_min_observations: int = 1,
     ) -> None:
         self.experience = experience or ContextExperienceStore()
         self.profiler = profiler or ContextTopologyProfiler()
@@ -127,8 +132,30 @@ class ContextCognitiveLoop:
                 "memory_routing_policy_evidence must be "
                 "a ContextRoutingPolicyEvidence or None"
             )
+        if memory_routing_policy_history is not None and not isinstance(
+            memory_routing_policy_history,
+            ContextRoutingPolicyHistory,
+        ):
+            raise TypeError(
+                "memory_routing_policy_history must be "
+                "a ContextRoutingPolicyHistory or None"
+            )
+        if (
+            memory_policy_history_window is not None
+            and memory_policy_history_window < 1
+        ):
+            raise ValueError("memory_policy_history_window must be at least 1")
+        if memory_policy_history_min_observations < 1:
+            raise ValueError(
+                "memory_policy_history_min_observations must be at least 1"
+            )
         self.memory_credit_policy = memory_credit_policy
         self.memory_routing_policy_evidence = memory_routing_policy_evidence
+        self.memory_routing_policy_history = memory_routing_policy_history
+        self.memory_policy_history_window = memory_policy_history_window
+        self.memory_policy_history_min_observations = int(
+            memory_policy_history_min_observations
+        )
 
     def snapshot(self) -> ContextExperienceSnapshot:
         """Return the current immutable evidence boundary."""
@@ -159,17 +186,22 @@ class ContextCognitiveLoop:
         routing_topology.update(relational_profile.to_dict())
         selected_mode = self.memory_routing_mode
         policy_version = None
+        policy_history_version = None
         if selected_mode == "adaptive":
-            policy_version = (
-                self.memory_routing_policy_evidence.version
-                if self.memory_routing_policy_evidence is not None
-                else None
-            )
-            selected_mode = (
-                self.memory_routing_policy_evidence.selected_mode
-                if self.memory_routing_policy_evidence is not None
-                else "nearest"
-            )
+            if self.memory_routing_policy_evidence is not None:
+                policy_version = self.memory_routing_policy_evidence.version
+                selected_mode = self.memory_routing_policy_evidence.selected_mode
+            elif self.memory_routing_policy_history is not None:
+                history = self.memory_routing_policy_history.snapshot()
+                selected_mode = history.select_mode(
+                    window=self.memory_policy_history_window,
+                    min_observations=self.memory_policy_history_min_observations,
+                )
+                latest = history.latest
+                policy_version = latest.version if latest is not None else None
+                policy_history_version = history.version if history.evidences else None
+            else:
+                selected_mode = "nearest"
 
         if evidence.episodes:
             if selected_mode == "credit":
@@ -202,7 +234,7 @@ class ContextCognitiveLoop:
         )
 
         return ContextCognitiveProposal(
-            schema_version="context-cognitive-proposal.v3",
+            schema_version="context-cognitive-proposal.v4",
             cycle_id=cycle_id,
             experience_version=evidence.version,
             profile=profile,
@@ -213,6 +245,7 @@ class ContextCognitiveLoop:
             memory_routing_selected_mode=selected_mode,
             memory_top_k=self.memory_top_k,
             memory_policy_version=policy_version,
+            memory_policy_history_version=policy_history_version,
             trajectory=trajectory,
             candidate_order=tuple(
                 ranked
@@ -243,6 +276,40 @@ class ContextCognitiveLoop:
             snapshot.episodes,
             version=version if version is not None else snapshot.version,
         )
+
+    def policy_history_snapshot(self) -> ContextRoutingPolicyHistorySnapshot:
+        """Return the current immutable routing-policy meta-memory snapshot."""
+        if self.memory_routing_policy_history is None:
+            return ContextRoutingPolicyHistorySnapshot(
+                version=0,
+                evidences=(),
+            )
+        return self.memory_routing_policy_history.snapshot()
+
+    def record_memory_routing_policy(
+        self,
+        evidence: ContextRoutingPolicyEvidence,
+    ) -> int:
+        """Persist policy evidence in the explicit meta-memory store."""
+        if self.memory_routing_policy_history is None:
+            raise ValueError(
+                "memory_routing_policy_history must be configured"
+            )
+        return self.memory_routing_policy_history.record(evidence)
+
+    def evaluate_and_record_memory_routing_policy(
+        self,
+        *,
+        version: int | None = None,
+        top_k: int | None = None,
+    ) -> ContextRoutingPolicyEvidence:
+        """Evaluate routing policy on a frozen snapshot and record the evidence."""
+        evidence = self.evaluate_memory_routing_policy(
+            version=version,
+            top_k=top_k,
+        )
+        self.record_memory_routing_policy(evidence)
+        return evidence
 
     def prepare(
         self,

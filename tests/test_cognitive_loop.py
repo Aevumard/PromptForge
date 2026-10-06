@@ -81,6 +81,101 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(second.memory_policy_version, 11)
         self.assertEqual(second.memory_route.strategy, "selection_representation_B")
 
+
+    def test_adaptive_mode_can_use_policy_meta_memory(self):
+        from promptforge import ContextRoutingPolicyHistory
+
+        history = ContextRoutingPolicyHistory()
+        history.record(
+            ContextRoutingPolicyEvidence(
+                version=10,
+                scores=(
+                    ContextRoutingModeScore("nearest", 5, 3, 0.4, 2.0, 0.8),
+                    ContextRoutingModeScore("credit", 5, 3, 0.8, 0.5, 0.2),
+                ),
+                selected_mode="nearest",
+            )
+        )
+        history.record(
+            ContextRoutingPolicyEvidence(
+                version=11,
+                scores=(
+                    ContextRoutingModeScore("nearest", 5, 3, 0.4, 2.0, 0.8),
+                    ContextRoutingModeScore("credit", 5, 3, 0.8, 0.5, 0.2),
+                ),
+                selected_mode="credit",
+            )
+        )
+
+        loop = ContextCognitiveLoop(
+            memory_routing_mode="adaptive",
+            memory_routing_policy_history=history,
+        )
+        proposal = loop.propose(
+            cycle_id="cycle-meta-memory",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v4")
+        self.assertEqual(proposal.memory_routing_mode, "adaptive")
+        self.assertEqual(proposal.memory_routing_selected_mode, "credit")
+        self.assertEqual(proposal.memory_policy_version, 11)
+        self.assertEqual(proposal.memory_policy_history_version, 2)
+
+    def test_policy_evidence_can_be_evaluated_and_recorded(self):
+        from promptforge import ContextRoutingPolicyHistory
+
+        loop = ContextCognitiveLoop(
+            memory_routing_policy_history=ContextRoutingPolicyHistory()
+        )
+        first = loop.propose(
+            cycle_id="cycle-meta-1",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            first,
+            family_id="family-a",
+            cost=1.0,
+            strategy="selection_only",
+        )
+        second = loop.propose(
+            cycle_id="cycle-meta-2",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            second,
+            family_id="family-b",
+            cost=2.0,
+            strategy="selection_representation_B",
+        )
+        third = loop.propose(
+            cycle_id="cycle-meta-3",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            third,
+            family_id="family-c",
+            cost=1.5,
+            strategy="selection_only",
+        )
+
+        evidence = loop.evaluate_and_record_memory_routing_policy()
+
+        self.assertEqual(evidence.version, 3)
+        self.assertEqual(loop.policy_history_snapshot().version, 1)
+        self.assertEqual(
+            loop.policy_history_snapshot().latest.version,
+            3,
+        )
+
     def test_invalid_memory_routing_mode_is_rejected(self):
         with self.assertRaises(ValueError):
             ContextCognitiveLoop(memory_routing_mode="unknown")
@@ -108,7 +203,7 @@ class CognitiveLoopTests(unittest.TestCase):
             candidates=self.candidates,
         )
 
-        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v3")
+        self.assertEqual(proposal.schema_version, "context-cognitive-proposal.v4")
         self.assertEqual(proposal.experience_version, 0)
         self.assertIsNone(proposal.memory_route)
         self.assertEqual(proposal.decision.source, "structural_regime")
