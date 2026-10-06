@@ -832,12 +832,13 @@ The fast path is:
 ```python
 from promptforge import ContextBlock, plan_context
 
+blocks = [
+    ContextBlock("case", case, required=True, path="case"),
+    ContextBlock("history", history, utility=0.6, path="history"),
+    ContextBlock("noise", noise, utility=0.05, path="noise"),
+]
 plan = plan_context(
-    [
-        ContextBlock("case", case, required=True, path="case"),
-        ContextBlock("history", history, utility=0.6, path="history"),
-        ContextBlock("noise", noise, utility=0.05, path="noise"),
-    ],
+    blocks,
     budget_tokens=2000,
     reserve_ratio=0.10,
 )
