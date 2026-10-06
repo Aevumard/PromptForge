@@ -162,8 +162,6 @@ class ContextCognitiveLoop:
             profile=profile,
             candidates=candidates,
             memory_route=memory_route,
-            memory_routing_mode=self.memory_routing_mode,
-            memory_top_k=self.memory_top_k,
             trajectory=trajectory,
             current_strategy=current_strategy,
             current_cost=current_cost,
