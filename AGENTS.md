@@ -673,3 +673,26 @@ Rules:
 - the audit records characters and estimated tokens saved.
 
 Use this at the model-input boundary, after retrieval/admission and before sending context to the provider. Do not use trimming as evidence admission: a trimmed item can still be important, it is merely represented more cheaply.
+
+## One-call AI fast path
+
+For a normal agent integration, prefer `prepare_agent_input()` over manually composing separate budget/deferred/tool-output calls.
+
+```python
+from promptforge import prepare_agent_input
+
+prepared = prepare_agent_input(
+    blocks,
+    budget_tokens=4000,
+    reserve_ratio=0.10,
+    descriptions=descriptions,
+    tool_outputs=tool_outputs,
+)
+
+agent_packet = prepared.packet.to_dict()
+audit = prepared.to_dict()
+```
+
+The returned `AgentInputPacket` is the model-facing object. `AgentPreparation` keeps the full deterministic audit state.
+
+Use the lower-level APIs when an integration needs custom orchestration. The high-level helper exists to minimize integration code and reduce the chance that an AI caller bypasses one of the deterministic safeguards.
