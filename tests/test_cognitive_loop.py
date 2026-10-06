@@ -1,6 +1,10 @@
 import unittest
 
-from promptforge import ContextCognitiveLoop
+from promptforge import (
+    ContextCognitiveLoop,
+    ContextRoutingModeScore,
+    ContextRoutingPolicyEvidence,
+)
 
 
 class CognitiveLoopTests(unittest.TestCase):
@@ -23,6 +27,59 @@ class CognitiveLoopTests(unittest.TestCase):
                 "required_values_preserved": True,
             },
         ]
+
+    def test_adaptive_mode_without_policy_falls_back_to_nearest(self):
+        loop = ContextCognitiveLoop(memory_routing_mode="adaptive")
+        proposal = loop.propose(
+            cycle_id="cycle-adaptive-fallback",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(proposal.memory_routing_mode, "adaptive")
+        self.assertEqual(proposal.memory_routing_selected_mode, "nearest")
+        self.assertIsNone(proposal.memory_policy_version)
+
+    def test_adaptive_mode_uses_frozen_policy_evidence(self):
+        evidence = ContextRoutingPolicyEvidence(
+            version=11,
+            scores=(
+                ContextRoutingModeScore("nearest", 5, 3, 0.4, 2.0, 0.8),
+                ContextRoutingModeScore("credit", 5, 3, 0.8, 0.5, 0.2),
+            ),
+            selected_mode="credit",
+        )
+        loop = ContextCognitiveLoop(
+            memory_routing_mode="adaptive",
+            memory_top_k=4,
+            memory_routing_policy_evidence=evidence,
+            routing_features=("node_count", "max_depth", "boundary_pressure"),
+        )
+        first = loop.propose(
+            cycle_id="cycle-adaptive",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+        loop.observe(
+            first,
+            family_id="family-adaptive",
+            cost=1.0,
+            strategy="selection_representation_B",
+        )
+
+        second = loop.propose(
+            cycle_id="cycle-adaptive-2",
+            data=self.data,
+            required=["task.id", "task.action"],
+            candidates=self.candidates,
+        )
+
+        self.assertEqual(second.memory_routing_mode, "adaptive")
+        self.assertEqual(second.memory_routing_selected_mode, "credit")
+        self.assertEqual(second.memory_policy_version, 11)
+        self.assertEqual(second.memory_route.strategy, "selection_representation_B")
 
     def test_invalid_memory_routing_mode_is_rejected(self):
         with self.assertRaises(ValueError):
