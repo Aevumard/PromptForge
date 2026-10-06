@@ -121,6 +121,18 @@ These descriptors are added to the routing feature space used by the cognitive l
 
 The relation graph is caller-supplied by design. PromptForge does not treat a guessed semantic relationship as ground truth; the integration must provide the relation evidence it wants the adaptive system to use.
 
+## Cognitive experience record
+
+Each observed episode now retains both the routing topology and the decision state that produced the outcome:
+
+`episode = (context topology, relational topology, regime, strategy, action, source, novelty, trajectory state, observed cost, outcome)`
+
+This separates two kinds of memory:
+
+- structural memory: what the context looked like and which relationships were present;
+- operational memory: what PromptForge decided, why it decided it, and what happened afterward.
+
+The richer metadata is descriptive evidence. It is not automatically treated as causal knowledge. Future research can analyze which states precede lower observed cost while keeping the outcome external and auditable.
 ## Public core boundary
 
 The installable `promptforge` API is provider-agnostic and self-contained. Its public import surface does not depend on `harness`, provider SDKs, API keys, or network access.
