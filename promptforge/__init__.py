@@ -59,6 +59,7 @@ from .orchestration import (
 )
 
 from .cognitive import (
+    MEMORY_ROUTING_MODES,
     ContextCognitiveLoop,
     ContextCognitiveProposal,
     ContextCognitiveResult,
@@ -113,6 +114,7 @@ __all__ = [
     "ContextMemoryCreditPolicy",
     "ContextMemoryAwareRoute",
     "ContextMemoryAwareRouter",
+    "MEMORY_ROUTING_MODES",
     "ContextCognitiveLoop",
     "ContextCognitiveProposal",
     "ContextCognitiveResult",

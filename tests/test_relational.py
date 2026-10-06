@@ -32,14 +32,14 @@ class RelationalTests(unittest.TestCase):
                 {"source": "c", "target": "d"},
             ]
         )
-        self.assertEqual(profile.node_count, 4)
-        self.assertEqual(profile.connected_components, 2)
+        self.assertEqual(profile.relation_nodes, 4)
+        self.assertEqual(profile.relation_components, 2)
 
     def test_duplicate_relations_are_not_double_counted(self):
         relation = ContextRelation("a", "b", "related")
         profile = ContextRelationProfiler().profile([relation, relation])
         self.assertEqual(profile.relation_count, 1)
-        self.assertEqual(profile.max_degree, 1)
+        self.assertEqual(profile.relation_max_degree, 1)
 
     def test_self_relation_is_rejected(self):
         with self.assertRaises(ValueError):
