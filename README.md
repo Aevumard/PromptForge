@@ -231,7 +231,7 @@ This creates the explicit control chain:
 
 The history is operational meta-memory, not a learned model and not a causal oracle.
 
-An adaptive loop can optionally require a minimum policy stability before honoring historical consensus. When the gate is enabled and the recent history is unstable or too short, the loop falls back to the conservative `nearest` mode and records `memory_policy_refresh_recommended=True` in proposal v5.
+An adaptive loop can optionally require minimum policy stability and maximum policy age before honoring historical consensus. When either gate fails, the loop falls back to the conservative `nearest` mode and records `memory_policy_refresh_recommended=True`, along with `memory_policy_freshness_age`, in proposal v6.
 
 ## Public core boundary
 

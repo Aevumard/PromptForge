@@ -113,7 +113,7 @@ Its boundary is explicit:
 2. The caller executes the selected strategy outside PromptForge.
 3. `observe()` writes the externally measured outcome back as a `ContextEpisode`.
 
-A proposal must retain the experience version it was based on. In adaptive mode it may also retain the policy-evidence version, policy-history version, stability rate, and refresh recommendation that governed the concrete routing mode. Do not let later observations mutate the evidence represented by an existing proposal. The loop must never invent model-quality outcomes, provider responses, or hidden labels.
+A proposal must retain the experience version it was based on. In adaptive mode it may also retain the policy-evidence version, policy-history version, stability rate, freshness age, and refresh recommendation that governed the concrete routing mode. Do not let later observations mutate the evidence represented by an existing proposal. The loop must never invent model-quality outcomes, provider responses, or hidden labels.
 
 Use the cognitive loop when an integration needs the complete adaptive lifecycle. Use the lower-level adaptive, memory, routing-policy, routing-history, and orchestration APIs when an experiment needs finer control over individual stages.
 
@@ -123,7 +123,7 @@ Use the cognitive loop when an integration needs the complete adaptive lifecycle
 
 Keep the evidence clocks separate. A policy-evidence `version` refers to the frozen episodic snapshot used by that evaluation; the policy-history `version` refers to the number of policy-evidence records stored in meta-memory.
 
-Adaptive routing may use either explicit frozen policy evidence or a policy-history snapshot. When history is used, consensus is deterministic and falls back to `nearest` when the configured evidence threshold is not met. An optional stability gate can also force `nearest` when recent policy selection is unstable, and the proposal records that refresh signal. Stability is descriptive only.
+Adaptive routing may use either explicit frozen policy evidence or a policy-history snapshot. When history is used, consensus is deterministic and falls back to `nearest` when the configured evidence threshold is not met. Optional stability and freshness gates can also force `nearest` when policy selection is unstable or stale relative to the current experience version, and the proposal records that refresh signal. These are operational controls, not quality estimates.
 
 The policy-history boundary must remain leakage-safe: the outcome of the current proposal cannot be used to create or select the policy for that same proposal.
 
