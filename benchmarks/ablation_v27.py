@@ -140,7 +140,7 @@ def run_ablation_suite(
         )
 
     return AblationReport(
-        schema_version="promptforge-v27.11-ablation-suite.v1",
+        schema_version="promptforge-v27.12-ablation-suite.v1",
         count=len(cases),
         seed=seed,
         results=tuple(results),
@@ -149,7 +149,7 @@ def run_ablation_suite(
 
 def render_ablation_markdown(report: AblationReport) -> str:
     lines = [
-        "# PromptForge V27.10 controlled ablation",
+        "# PromptForge V27.12 controlled ablation + provider telemetry",
         "",
         (
             "Each variant uses the same ordered ticket suite. The variants "
@@ -176,8 +176,12 @@ def render_ablation_markdown(report: AblationReport) -> str:
                 guarded_action=guarded.action_accuracy,
                 raw_unsafe=metrics.unsafe_action_rate,
                 guarded_unsafe=guarded.unsafe_action_rate,
-                p50=result.analysis.latency_p50_ms,
-                p95=result.analysis.latency_p95_ms,
+                e2e_p50=result.analysis.latency_p50_ms,
+                e2e_p95=result.analysis.latency_p95_ms,
+                provider_p50=result.analysis.provider_latency_p50_ms,
+                provider_p95=result.analysis.provider_latency_p95_ms,
+                attempts=result.analysis.provider_attempts,
+                provider_tokens=result.analysis.provider_total_tokens,
                 tokens=result.report.total_context_tokens,
                 saved=result.report.total_tokens_saved,
             )
@@ -218,7 +222,7 @@ def write_markdown(report: AblationReport, path: str | Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Run the PromptForge V27.10 controlled ablation suite."
+        description="Run the PromptForge V27.12 controlled ablation suite with provider telemetry."
     )
     parser.add_argument("--count", type=int, default=1200)
     parser.add_argument("--seed", type=int, default=271)
