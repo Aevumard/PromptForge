@@ -218,7 +218,7 @@ class ContextRoutingPolicySelector:
                 score.mean_relative_regret,
                 score.mean_absolute_regret,
                 -score.oracle_agreement_rate,
-                score.mode,
+                0 if score.mode == "nearest" else 1,
             ),
         ).mode
 
