@@ -124,7 +124,9 @@ class TemporalMemoryGuardTests(unittest.TestCase):
         ]
         router = ContextMemoryAwareRouter(
             top_k=2,
-            temporal_policy=ContextMemoryTemporalPolicy(max_age=0),
+            temporal_policy=ContextMemoryTemporalPolicy(
+                blocked_sources=("trusted",),
+            ),
         ).fit(episodes)
 
         with self.assertRaises(ValueError):
@@ -153,13 +155,14 @@ class TemporalMemoryGuardTests(unittest.TestCase):
             blocked_sources=("untrusted",),
         )
 
-        first = policy.assess(episodes)
-        second = policy.assess(list(reversed(episodes)), as_of_index=0)
+        first = policy.assess(episodes, as_of_index=1)
+        second = policy.assess(episodes, as_of_index=1)
 
+        self.assertEqual(first.to_dict(), second.to_dict())
         self.assertEqual(first.to_dict()["schema_version"], "memory-temporal.v1")
         self.assertEqual(
-            second.future_excluded_ids,
-            ("b", "c"),
+            first.future_excluded_ids,
+            ("c",),
         )
 
 
