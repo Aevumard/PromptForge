@@ -32,7 +32,6 @@ class ContextRoutingPolicyStability:
 
 
 @dataclass(frozen=True)
-@dataclass(frozen=True)
 class ContextRoutingPolicyHealth:
     """Descriptive health state for a bounded routing-policy history."""
 
@@ -49,6 +48,7 @@ class ContextRoutingPolicyHealth:
         return asdict(self)
 
 
+@dataclass(frozen=True)
 class ContextRoutingPolicyHistorySnapshot:
     """Immutable view of previously recorded routing-policy evidence."""
 
