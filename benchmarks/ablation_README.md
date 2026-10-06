@@ -27,7 +27,8 @@ Outputs:
 - `ablation_checkpoints/*.checkpoint.jsonl`
 
 The checkpoint directory allows an interrupted condition to resume without
-repeating successful tickets.
+repeating successful tickets. Provider telemetry includes observed provider latency,
+retry attempts, and token usage when the endpoint reports usage metadata.
 
 ## What this isolates
 
