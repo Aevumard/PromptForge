@@ -744,3 +744,26 @@ PromptForge makes context transformations explicit, testable, reproducible, and 
 PromptForge is not a provider-specific SDK, a universal prompt optimizer, or a claim that one representation is always superior.
 
 The public core product is a provider-agnostic context-engineering layer. The research harness exists to make hypotheses, transformations, execution conditions, and historical evidence inspectable and reproducible.
+
+
+## Decision and triage separation
+
+For triage and operational decision tasks, PromptForge keeps three different questions separate:
+
+1. What evidence is admissible?
+2. How should the case be prioritized?
+3. What action is safe and sufficiently supported?
+
+The intended control boundary is:
+
+evidence -> temporal/admissibility gate -> priority -> actionability/safety gate -> action -> audit
+
+Priority should distinguish urgency from importance. Evidence quality belongs primarily to the actionability/evidence gate, not as an automatic downward adjustment to urgency or importance. A ticket can therefore be high priority and action-blocked at the same time.
+
+PromptForge also does not define a universal source hierarchy such as system log always wins. Source labels are caller-supplied provenance metadata; contradictions should remain visible until an explicit policy or additional evidence resolves them.
+
+Do not invent precise priority weights or SLA thresholds unless the task or integration supplies them. When illustrative numbers are useful, mark them as proposed policy rather than PromptForge semantics.
+
+For model-facing integrations, keep separate audit objects for priority and actionability. The UncertaintyActionGate belongs to the latter: it is not a ticket-priority scorer.
+
+This boundary is deliberate because collapsing priority and actionability can produce the wrong operational behavior: uncertain evidence may justify blocking an automatic action without making an urgent incident less urgent.
