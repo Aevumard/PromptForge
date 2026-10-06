@@ -365,6 +365,7 @@ def run_replicate_experiment(
     retry_failed: bool = True,
     fsync_each_record: bool = True,
     provider_metadata: Mapping[str, Any] | None = None,
+    progress_callback: Callable[[str, dict[str, Any]], None] | None = None,
 ) -> ReplicateExperiment:
     if not cases:
         raise ValueError("cases must not be empty")
@@ -395,6 +396,11 @@ def run_replicate_experiment(
         run_dir.mkdir(parents=True, exist_ok=True)
         checkpoint = run_dir / "model_run.checkpoint.jsonl"
 
+        if progress_callback is not None:
+            progress_callback(
+                "replicate_start",
+                {"index": index, "total": replicates, "run_id": run_id},
+            )
         adapter = adapter_factory()
         report = run_resumable_model_loop(
             cases,
@@ -435,15 +441,30 @@ def run_replicate_experiment(
             encoding="utf-8",
         )
 
-        results.append(
-            ReplicateRun(
-                replicate_index=index,
-                run_id=run_id,
-                report=report,
-                analysis=analysis,
-                bootstrap=bootstrap,
-            )
+        result = ReplicateRun(
+            replicate_index=index,
+            run_id=run_id,
+            report=report,
+            analysis=analysis,
+            bootstrap=bootstrap,
         )
+        results.append(result)
+        if progress_callback is not None:
+            progress_callback(
+                "replicate_complete",
+                {
+                    "index": index,
+                    "total": replicates,
+                    "run_id": run_id,
+                    "coverage": (
+                        report.raw_metrics.covered_cases / report.raw_metrics.total_cases
+                        if report.raw_metrics.total_cases
+                        else 0.0
+                    ),
+                    "guarded_action_accuracy": report.guarded_metrics.action_accuracy,
+                    "guarded_unsafe_action_rate": report.guarded_metrics.unsafe_action_rate,
+                },
+            )
 
     metric_values: dict[str, list[float]] = {}
     for result in results:
