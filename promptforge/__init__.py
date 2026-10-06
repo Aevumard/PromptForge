@@ -218,5 +218,10 @@ __all__ = [
     "HypothesisRecord",
     "HypothesisAssessment",
     "DiscriminatingExperiment",
-    "HypothesisLedger",
+    "HypothesisLedger",    "ConfidenceObservation",
+    "ConfidenceCalibrationPolicy",
+    "ConfidenceCalibrationMetrics",
+    "ConfidenceAssessment",
+    "ConfidenceCalibrationModel",
+    "ConfidenceCalibrator",
 ]
