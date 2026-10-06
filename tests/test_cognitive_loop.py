@@ -83,6 +83,27 @@ class CognitiveLoopTests(unittest.TestCase):
         self.assertEqual(loop.snapshot().version, 1)
         self.assertEqual(len(proposal.to_dict()["profile"]["required_missing"]), 0)
 
+    def test_relational_topology_is_carried_into_future_experience(self):
+        from promptforge import ContextRelation
+
+        loop = ContextCognitiveLoop()
+        proposal = loop.propose(
+            cycle_id="cycle-rel",
+            data=self.data,
+            required=["task.id"],
+            candidates=self.candidates,
+            relations=[
+                ContextRelation("task", "user", "owned_by"),
+                ContextRelation("task", "goal", "targets"),
+            ],
+        )
+        loop.observe(proposal, family_id="family-R", cost=1.0)
+        stored = loop.snapshot().episodes[0].topology
+
+        self.assertEqual(proposal.relational_profile.relation_count, 2)
+        self.assertEqual(stored["relation_count"], 2)
+        self.assertEqual(stored["relation_components"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
