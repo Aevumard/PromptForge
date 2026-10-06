@@ -97,6 +97,18 @@ class HypothesisLedgerTests(unittest.TestCase):
         self.assertEqual(ranked[0].experiment_id, "e2")
         self.assertIn("priority_score", ranked[0].to_dict())
 
+    def test_declared_evidence_ids_require_a_snapshot(self):
+        with self.assertRaises(ValueError):
+            HypothesisLedger().assess(
+                [
+                    HypothesisRecord(
+                        "h1",
+                        "requires declared evidence",
+                        support_evidence_ids=("e1",),
+                    )
+                ]
+            )
+
     def test_no_evidence_is_unresolved_not_disproved(self):
         result = HypothesisLedger().assess(
             [HypothesisRecord("h1", "open hypothesis")]
