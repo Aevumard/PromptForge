@@ -318,7 +318,8 @@ The manifest records SHA-256 values for every tracked public file except itself.
 ## Core rule
 
 Reuse validated machinery first. Change the smallest surface necessary. Keep the installable agent API, executable infrastructure, experimental design, empirical evidence, and interpretation clearly separated.
-\n
+
+
 ## Confidence calibration boundary
 
 The public core now includes an opt-in confidence calibration layer in
