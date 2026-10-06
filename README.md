@@ -803,3 +803,15 @@ When a `TriageState` is `waiting_human`, returning to `action_gated` requires bo
 This prevents a reviewer intervention from being lost in prose and prevents an action decision computed before the intervention from being silently reused afterward.
 
 Schema: `schemas/human-review.v1.json`.
+
+## External action execution boundary
+
+PromptForge does not execute side effects. The public core can, however, make the execution boundary explicit and retry-safe.
+
+`ActionExecutionGuard` uses an integration-owned idempotency key and prior immutable execution receipts to distinguish `execute`, `retry`, `duplicate`, and `blocked` outcomes.
+
+`TriageState` requires a successful `ActionExecutionRecord` before a workflow can claim `executed`, `observed`, or `closed`. The receipt must reference the same selected action.
+
+This keeps action selection separate from the fact that an external side effect actually occurred, and it prevents a replay/retry from silently duplicating a successful action.
+
+Schema: `schemas/action-execution.v1.json`.
