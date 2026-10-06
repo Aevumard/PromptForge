@@ -5,7 +5,12 @@ from typing import Any, Mapping, Sequence
 
 from .adaptive import ContextTopologyProfile
 from .consolidation import ContextMemoryConsolidator, ContextReplayBatch
-from .credit import ContextMemoryCredit, ContextMemoryCreditPolicy
+from .credit import (
+    ContextMemoryAwareRoute,
+    ContextMemoryAwareRouter,
+    ContextMemoryCredit,
+    ContextMemoryCreditPolicy,
+)
 from .memory import ContextEpisode, ContextRoute, NearestEpisodeRouter
 
 
@@ -40,6 +45,24 @@ class ContextExperienceSnapshot:
             features=features,
             scale_mode=scale_mode,
         ).route(topology)
+
+    def memory_aware_route(
+        self,
+        topology: Mapping[str, Any] | ContextTopologyProfile,
+        *,
+        features: Sequence[str] | None = None,
+        scale_mode: str = "iqr",
+        top_k: int = 5,
+        policy: ContextMemoryCreditPolicy | None = None,
+    ) -> ContextMemoryAwareRoute:
+        """Route using credit-weighted nearby evidence inside this snapshot."""
+        router = ContextMemoryAwareRouter(
+            features=features,
+            scale_mode=scale_mode,
+            top_k=top_k,
+            credit_policy=policy,
+        ).fit(self.episodes)
+        return router.route(topology)
 
     def credit(
         self,
@@ -104,6 +127,24 @@ class ContextExperienceStore:
             topology,
             features=features,
             scale_mode=scale_mode,
+        )
+
+    def memory_aware_route(
+        self,
+        topology: Mapping[str, Any] | ContextTopologyProfile,
+        *,
+        features: Sequence[str] | None = None,
+        scale_mode: str = "iqr",
+        top_k: int = 5,
+        policy: ContextMemoryCreditPolicy | None = None,
+    ) -> ContextMemoryAwareRoute:
+        """Route current memory using an immutable evidence boundary."""
+        return self.snapshot().memory_aware_route(
+            topology,
+            features=features,
+            scale_mode=scale_mode,
+            top_k=top_k,
+            policy=policy,
         )
 
     def credit(
