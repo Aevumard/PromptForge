@@ -228,9 +228,17 @@ class ContextMemoryAwareRouter:
         scale_mode: str = "iqr",
         top_k: int = 5,
         credit_policy: ContextMemoryCreditPolicy | None = None,
+        min_family_count: int = 1,
+        min_strategy_evidence: int = 1,
     ) -> None:
         if top_k < 1:
             raise ValueError("top_k must be at least 1")
+        if min_family_count < 1:
+            raise ValueError("min_family_count must be at least 1")
+        if min_strategy_evidence < 1:
+            raise ValueError("min_strategy_evidence must be at least 1")
+        self.min_family_count = int(min_family_count)
+        self.min_strategy_evidence = int(min_strategy_evidence)
         self.features = resolve_routing_features(features)
         if scale_mode not in {"minmax", "std", "iqr"}:
             raise ValueError("scale_mode must be one of: minmax, std, iqr")
@@ -305,14 +313,26 @@ class ContextMemoryAwareRouter:
         candidate_rows = rows[: min(self.top_k, len(rows))]
 
         weighted_scores: dict[str, float] = {}
+        family_sets: dict[str, set[str]] = {}
+        evidence_counts: dict[str, int] = {}
         for _index, episode, _distance_value, credit, similarity in candidate_rows:
             weight = credit * similarity
             weighted_scores[episode.strategy] = (
                 weighted_scores.get(episode.strategy, 0.0) + weight
             )
+            family_sets.setdefault(episode.strategy, set()).add(episode.family_id)
+            evidence_counts[episode.strategy] = (
+                evidence_counts.get(episode.strategy, 0) + 1
+            )
 
+        admissible = {
+            strategy
+            for strategy in weighted_scores
+            if len(family_sets[strategy]) >= self.min_family_count
+            and evidence_counts[strategy] >= self.min_strategy_evidence
+        }
         ranked_strategies = sorted(
-            weighted_scores,
+            admissible or weighted_scores,
             key=lambda strategy: (-weighted_scores[strategy], strategy),
         )
         strategy = ranked_strategies[0]
