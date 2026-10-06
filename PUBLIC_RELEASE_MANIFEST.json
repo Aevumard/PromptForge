@@ -9,7 +9,7 @@
     "source_branch": "experiment/v0.9.3-size-matched-control",
     "source_commit_message": "fix(experiment): make v0.9.3 padding size matched per variant",
     "manifest_policy": "All tracked public files except this manifest itself",
-    "generated_utc": "2026-10-06T07:00:40.115Z",
+    "generated_utc": "2026-10-06T07:01:36.909Z",
     "file_count": 120,
     "files": [
         {
@@ -414,8 +414,8 @@
         },
         {
             "path": "promptforge/credit.py",
-            "size_bytes": 16370,
-            "sha256": "55FA37C8CEE71D136BBD14A3D2ED1955BC439BB285BD0961126CD7E98C9617F8"
+            "size_bytes": 17089,
+            "sha256": "7C250A64AF6A8B77FC55A07CE4FB15BD0BA5E5107C4A4B39165B60D900A49485"
         },
         {
             "path": "promptforge/decision.py",
@@ -519,8 +519,8 @@
         },
         {
             "path": "tests/test_temporal.py",
-            "size_bytes": 4313,
-            "sha256": "B5B241D5B3713202C0C1F69AA2850A3F58513FD260F2CB8AE35D0E8B844F3C95"
+            "size_bytes": 5448,
+            "sha256": "C7BAC5EFA2CC2B7687E31CF80E95BA5F765F1988F49FD3F9793451EA743FD9F4"
         },
         {
             "path": "tests/test_v03.py",
